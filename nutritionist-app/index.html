@@ -117,12 +117,49 @@
             document.getElementById('loading').classList.add('active');
             document.getElementById('result').classList.remove('active');
             document.getElementById('analyzeBtn').disabled = true;
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            const mockResult = { foods: ['炒飯', '雞翅', '蔬菜'] };
-            document.getElementById('foodList').innerHTML = mockResult.foods.map(f => `<li>🍽️ ${f}</li>`).join('');
-            document.getElementById('loading').classList.remove('active');
-            document.getElementById('result').classList.add('active');
-            document.getElementById('analyzeBtn').disabled = false;
+            
+            try {
+                // Convert file to base64
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    const imageData = e.target.result;
+                    
+                    // Call backend API
+                    const response = await fetch('/api/analyze', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ image: imageData })
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        // Display food recognition results
+                        document.getElementById('foodList').innerHTML = result.foods.map(f => `<li>🍽️ ${f}</li>`).join('');
+                        
+                        // Add nutrition analysis if available
+                        if (result.nutrition && result.nutrition.data) {
+                            const nutritionDiv = document.createElement('div');
+                            nutritionDiv.style.marginTop = '20px';
+                            nutritionDiv.innerHTML = '<h3>📊 營養分析</h3><pre style="white-space: pre-wrap; font-family: inherit;">' + 
+                                JSON.stringify(result.nutrition.data, null, 2) + '</pre>';
+                            document.getElementById('result').appendChild(nutritionDiv);
+                        }
+                    } else {
+                        document.getElementById('foodList').innerHTML = `<li style="color: red;">❌ ${result.error || '分析失敗'}</li>`;
+                    }
+                    
+                    document.getElementById('loading').classList.remove('active');
+                    document.getElementById('result').classList.add('active');
+                    document.getElementById('analyzeBtn').disabled = false;
+                };
+                reader.readAsDataURL(selectedFile);
+            } catch (error) {
+                document.getElementById('foodList').innerHTML = `<li style="color: red;">❌ 錯誤：${error.message}</li>`;
+                document.getElementById('loading').classList.remove('active');
+                document.getElementById('result').classList.add('active');
+                document.getElementById('analyzeBtn').disabled = false;
+            }
         }
     </script>
 </body>

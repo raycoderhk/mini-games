@@ -3,15 +3,6 @@
   "name": "nutritionist-app",
   "description": "AI 食物圖片識別 + 營養分析",
   "region": "hkg",
-  "services": [
-    {
-      "name": "nutritionist-web",
-      "type": "static",
-      "root": "nutritionist-app",
-      "include": [
-        "index.html",
-        "nutritionist_app.py"
-      ]
-    }
-  ]
+  "port": 8080,
+  "startCommand": "python3 server.py"
 }

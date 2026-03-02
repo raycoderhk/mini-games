@@ -57,5 +57,49 @@ If nothing needs attention, reply HEARTBEAT_OK.
 
 ## 通知偏好
 **Kanban Updates**
-• 每當 Kanban Board 有更新時，在此 Direct Channel 通知用戶
+• 每當 Kanban Board 有更新時，在此 Discord Channel (#kanban-updates) 通知用戶
 • 包括：新項目、狀態變更、項目完成
+
+## Heartbeat Tasks
+
+### Kanban Board Monitoring (每次 Heartbeat 檢查)
+**位置:** `workspace/kanban-board.json`
+**檢查項目:**
+1. 讀取 `kanban-board.json` 的 `meta.updated` 時間戳
+2. 與上次檢查的時間比較 (`memory/kanban-last-checked.json`)
+3. 如果有更新:
+   - 比較項目數量變化
+   - 識別新項目、狀態變更、完成的項目
+   - 發送更新通知到 #kanban-updates Discord 頻道
+   - 更新 `memory/kanban-last-checked.json`
+
+**通知格式範例:**
+```
+## 📊 Kanban Board Updated
+
+**Changes detected:**
+- ✅ New project completed: [Project Name]
+- 🔄 Status change: [Project] (todo → in_progress)
+- ➕ New project added: [Project Name]
+
+**Current Stats:**
+- Total: X projects
+- In Progress: Y
+- Done: Z
+```
+
+**不通知的情況:**
+- 沒有更新 (meta.updated 未變化)
+- 睡眠時間 (23:00-08:00 HKT)，除非緊急
+
+### Memory State File
+**位置:** `memory/kanban-last-checked.json`
+**格式:**
+```json
+{
+  "lastChecked": "2026-03-01T14:00:00Z",
+  "lastUpdated": "2026-03-01T09:30:00Z",
+  "projectCount": 19,
+  "lastChange": "proj-018 status changed to in_progress"
+}
+```
