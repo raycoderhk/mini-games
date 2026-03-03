@@ -794,21 +794,19 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ image: compressedDataUrl })
                 });
-                    
-                    const result = await response.json();
-                    
-                    if (result.success) {
-                        currentAnalysis = result.data;
-                        displayAnalysisResult();
-                        saveMeal(currentAnalysis);
-                    } else {
-                        alert('分析失敗：' + result.error);
-                    }
-                    
-                    document.getElementById('loading').classList.remove('active');
-                    document.getElementById('analyzeBtn').disabled = false;
-                };
-                reader.readAsDataURL(selectedFile);
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    currentAnalysis = result.data;
+                    displayAnalysisResult();
+                    saveMeal(currentAnalysis);
+                } else {
+                    alert('分析失敗：' + result.error);
+                }
+                
+                document.getElementById('loading').classList.remove('active');
+                document.getElementById('analyzeBtn').disabled = false;
             } catch (error) {
                 alert('錯誤：' + error.message);
                 document.getElementById('loading').classList.remove('active');
