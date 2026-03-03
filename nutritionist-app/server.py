@@ -190,6 +190,15 @@ def analyze_food_minimax(image_base64):
 def index():
     return send_from_directory('.', 'index.html')
 
+@app.route('/test')
+def test():
+    """Simple test endpoint to verify server is responding"""
+    return jsonify({
+        "status": "ok",
+        "message": "Server is running!",
+        "timestamp": "2026-03-03T09:20:00Z"
+    })
+
 # ============ 認證 API ============
 @app.route('/api/auth/send-otp', methods=['POST'])
 def send_otp():
