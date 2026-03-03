@@ -213,12 +213,20 @@ def add_meal(user_id: int, meal_type: str, food_items: List[Dict],
     
     today = date.today().isoformat()
     
-    # 計算總營養
-    total_calories = sum(f.get('calories', 0) for f in food_items)
-    total_protein = sum(f.get('protein', 0) for f in food_items)
-    total_carbs = sum(f.get('carbs', 0) for f in food_items)
-    total_fat = sum(f.get('fat', 0) for f in food_items)
-    total_fiber = sum(f.get('fiber', 0) for f in food_items)
+    # 計算總營養 (支援嵌套 nutrition 結構和扁平結構)
+    def get_nutrition_value(food, key):
+        """獲取營養值，支援嵌套和扁平結構"""
+        # 先嘗試嵌套結構 (AI API 返回的格式)
+        if 'nutrition' in food:
+            return food.get('nutrition', {}).get(key, 0)
+        # 再嘗試扁平結構 (向後兼容)
+        return food.get(key, 0)
+    
+    total_calories = sum(get_nutrition_value(f, 'calories') for f in food_items)
+    total_protein = sum(get_nutrition_value(f, 'protein') for f in food_items)
+    total_carbs = sum(get_nutrition_value(f, 'carbs') for f in food_items)
+    total_fat = sum(get_nutrition_value(f, 'fat') for f in food_items)
+    total_fiber = sum(get_nutrition_value(f, 'fiber') for f in food_items)
     
     food_items_json = json.dumps(food_items, ensure_ascii=False)
     

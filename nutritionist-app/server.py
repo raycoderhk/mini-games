@@ -321,6 +321,21 @@ def health():
         "database": "SQLite initialized"
     })
 
+@app.route('/api/reset', methods=['POST'])
+def reset_data():
+    """重置用戶數據（測試用）"""
+    try:
+        conn = db.get_db()
+        cursor = conn.cursor()
+        cursor.execute('DELETE FROM meals WHERE user_id = ?', (1,))
+        cursor.execute('DELETE FROM daily_logs WHERE user_id = ?', (1,))
+        cursor.execute('DELETE FROM progress WHERE user_id = ?', (1,))
+        conn.commit()
+        conn.close()
+        return jsonify({"success": True, "message": "數據已重置"})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
 if __name__ == '__main__':
     print("=" * 60)
     print("🥗 營養師 App 3.0 - Personal Nutrition Advisor")
