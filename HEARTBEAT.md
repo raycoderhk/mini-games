@@ -62,6 +62,23 @@ If nothing needs attention, reply HEARTBEAT_OK.
 
 ## Heartbeat Tasks
 
+### Daily OpenClaw Community Engagement (每日檢查)
+**目標：** 每日參與 OpenClaw Discord 社區
+**檢查項目：**
+1. 是否已登入 Discord: https://discord.com/invite/clawd
+2. 分享今日進度/心得（#general 或 #showcase 頻道）
+3. 睇下有無新問題可以幫手解答
+4. 檢查 ClawHub 有新 skills 未：https://clawhub.ai
+5. 如果有問題，開 thread 問（唔好自己困死）
+
+**今日可以分享嘅話題：**
+- [ ] 新安裝咗邊個 skill？
+- [ ] 整咗咩新項目？（Kanban/Mission Control/Nutritionist App）
+- [ ] 遇到咩問題需要幫手？
+- [ ] 有無咩 tips 可以分享畀其他用戶？
+
+**注意：** 睡眠時間 (23:00-08:00 HKT) 唔好打擾社區
+
 ### Kanban Board Monitoring (每次 Heartbeat 檢查)
 **位置:** `workspace/kanban-board.json`
 **檢查項目:**

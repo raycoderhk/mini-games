@@ -38,3 +38,21 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 ---
 
 Add whatever helps you do your job. This is your cheat sheet.
+
+## Gmail Configuration
+
+**Account:** [Gmail address for OpenClaw]
+**App Password:** Stored in `pass` (gmail/openclaw) or keyring
+**IMAP:** imap.gmail.com:993 (TLS)
+**SMTP:** smtp.gmail.com:587 (STARTTLS)
+
+### Setup Checklist
+- [ ] Create Gmail account
+- [ ] Enable 2FA on Google Account
+- [ ] Generate App Password: https://myaccount.google.com/apppasswords
+- [ ] Enable IMAP in Gmail settings
+- [ ] Run setup script: `skills/gmail/scripts/setup-gmail.sh`
+- [ ] Configure email forwarding from main email
+
+### Config Location
+`~/.config/himalaya/config.toml`

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>启示路 Revelation Road</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Microsoft YaHei', 'PingFang TC', sans-serif;
+      background: linear-gradient(135deg, #0c0c1e 0%, #1a1a3e 100%);
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid #4a9eff;
+    }
+
+    .header h1 {
+      color: #4a9eff;
+      font-size: 2.5em;
+      text-shadow: 0 0 20px rgba(74, 158, 255, 0.5);
+    }
+
+    .header p {
+      color: #888;
+      margin-top: 10px;
+    }
+
+    .game-container {
+      flex: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      width: 100%;
+    }
+
+    .scene-title {
+      background: rgba(74, 158, 255, 0.1);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border-left: 4px solid #4a9eff;
+    }
+
+    .scene-description {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      line-height: 1.8;
+      font-size: 1.1em;
+    }
+
+    .dialogue-box {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(74, 158, 255, 0.3);
+    }
+
+    .npc-avatar {
+      font-size: 2em;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    .npc-name {
+      color: #4a9eff;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+
+    .npc-text {
+      margin-top: 15px;
+      line-height: 1.8;
+      font-size: 1.1em;
+    }
+
+    .choices {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .choice-btn {
+      background: linear-gradient(135deg, rgba(74, 158, 255, 0.2) 0%, rgba(74, 158, 255, 0.05) 100%);
+      border: 1px solid rgba(74, 158, 255, 0.3);
+      color: #e0e0e0;
+      padding: 15px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      text-align: left;
+      transition: all 0.3s ease;
+    }
+
+    .choice-btn:hover {
+      background: linear-gradient(135deg, rgba(74, 158, 255, 0.4) 0%, rgba(74, 158, 255, 0.1) 100%);
+      border-color: #4a9eff;
+      transform: translateX(5px);
+    }
+
+    .relationship-bar {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid rgba(74, 158, 255, 0.3);
+    }
+
+    .relationship-item {
+      margin-bottom: 10px;
+    }
+
+    .relationship-label {
+      font-size: 0.9em;
+      color: #888;
+    }
+
+    .relationship-value {
+      color: #4a9eff;
+      font-weight: bold;
+    }
+
+    .start-screen {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .start-screen h2 {
+      color: #4a9eff;
+      font-size: 2em;
+      margin-bottom: 30px;
+    }
+
+    .name-input {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(74, 158, 255, 0.3);
+      color: #e0e0e0;
+      padding: 15px 20px;
+      font-size: 1.2em;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 20px;
+    }
+
+    .start-btn {
+      background: linear-gradient(135deg, #4a9eff 0%, #2563eb 100%);
+      border: none;
+      color: white;
+      padding: 15px 40px;
+      font-size: 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .start-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(74, 158, 255, 0.5);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .status-bar {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9em;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🚀 启示路</h1>
+    <p>Revelation Road - A Sci-Fi Interactive Story</p>
+  </div>
+
+  <div class="status-bar">
+    <span id="player-name">Player: --</span>
+    <span id="scene-name">Scene: --</span>
+    <span>v0.1.0 MVP</span>
+  </div>
+
+  <div class="game-container">
+    <!-- Start Screen -->
+    <div id="start-screen" class="start-screen">
+      <h2>歡迎來到启示路</h2>
+      <p style="margin-bottom: 30px; color: #888;">公元 2147 年，人類最遙遠的前哨站<br>你的選擇，將決定命運</p>
+      <input type="text" id="player-name-input" class="name-input" placeholder="輸入你的名字..." maxlength="20">
+      <br>
+      <button class="start-btn" onclick="startGame()">開始旅程</button>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="hidden">
+      <div class="scene-title">
+        <h2 id="scene-title">場景名稱</h2>
+      </div>
+
+      <div class="scene-description" id="scene-description">
+        場景描述...
+      </div>
+
+      <div class="dialogue-box">
+        <div class="npc-info">
+          <span class="npc-avatar" id="npc-avatar">👩‍💼</span>
+          <span class="npc-name" id="npc-name">NPC 名稱</span>
+        </div>
+        <div class="npc-text" id="npc-text">
+          對話內容...
+        </div>
+      </div>
+
+      <div class="choices" id="choices-container">
+        <!-- Choices will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <div class="relationship-bar hidden" id="relationship-bar">
+    <h3 style="color: #4a9eff; margin-bottom: 10px;">關係狀態</h3>
+    <div id="relationships-list"></div>
+  </div>
+
+  <script>
+    let gameState = null;
+    let currentDialogueIndex = 0;
+
+    function startGame() {
+      const playerName = document.getElementById('player-name-input').value.trim() || 'Seeker';
+      
+      // Initialize game state
+      gameState = {
+        playerName: playerName,
+        currentScene: 'arrival',
+        relationships: { lina: 0 },
+        currentDialogueIndex: 0
+      };
+
+      // Update UI
+      document.getElementById('player-name').textContent = `Player: ${playerName}`;
+      document.getElementById('start-screen').classList.add('hidden');
+      document.getElementById('game-screen').classList.remove('hidden');
+      document.getElementById('relationship-bar').classList.remove('hidden');
+
+      // Load first scene
+      loadScene('arrival');
+    }
+
+    function loadScene(sceneId) {
+      const scenes = {
+        arrival: {
+          title: '抵達启示路',
+          description: '你剛從冷凍艙醒來，透過舷窗看到启示路空間站 - 人類文明最遙遠的前哨站。巨大的環形結構在星空中緩緩旋轉，遠處的星雲散發著詭異的紫色光芒。',
+          dialogues: getArrivalDialogues()
+        }
+      };
+
+      const scene = scenes[sceneId];
+      if (!scene) return;
+
+      document.getElementById('scene-title').textContent = scene.title;
+      document.getElementById('scene-description').textContent = scene.description;
+      document.getElementById('scene-name').textContent = `Scene: ${scene.title}`;
+
+      gameState.currentDialogueIndex = 0;
+      showDialogue(scene.dialogues[0]);
+    }
+
+    function getArrivalDialogues() {
+      return [
+        {
+          id: 'welcome',
+          speaker: 'lina',
+          speakerName: '林娜',
+          avatar: '👩‍💼',
+          text: '歡迎來到启示路，Seeker。我是林娜，你的接待員。旅途還順利嗎？',
+          choices: [
+            { text: '還算順利，只是有點頭暈', next: 'headache', rel: { lina: 1 } },
+            { text: '比我預期的要好', next: 'good_trip', rel: { lina: 2 } },
+            { text: '我不想談這個', next: 'cold_response', rel: { lina: -1 } }
+          ]
+        },
+        {
+          id: 'headache',
+          speaker: 'lina',
+          speakerName: '林娜',
+          avatar: '👩‍💼',
+          text: '正常反應。冷凍睡眠後需要 2-3 小時適應。來，先喝點水。(遞給你一杯溫水) 說說吧，你來启示路是為了什麼？',
+          choices: [
+            { text: '尋找答案', next: 'seeking_answers', rel: { lina: 1 } },
+            { text: '重新開始', next: 'fresh_start', rel: { lina: 1 } },
+            { text: '這與你無關', next: 'cold_shoulder', rel: { lina: -2 } }
+          ]
+        },
+        {
+          id: 'good_trip',
+          speaker: 'lina',
+          speakerName: '林娜',
+          avatar: '👩‍💼',
+          text: '(微笑) 那就好。很多人第一次長途冷凍都會吐。說正事，你來启示路是為了什麼？',
+          choices: [
+            { text: '尋找答案', next: 'seeking_answers', rel: { lina: 2 } },
+            { text: '工作機會', next: 'job_opportunity', rel: { lina: 1 } },
+            { text: '逃避過去', next: 'escaping_past', rel: { lina: 3 } }
+          ]
+        },
+        {
+          id: 'cold_response',
+          speaker: 'lina',
+          speakerName: '林娜',
+          avatar: '👩‍💼',
+          text: '(挑眉) 好吧，保持神秘。不過在启示路，秘密通常會自己找上門。',
+          choices: [
+            { text: '什麼意思？', next: 'mysterious_warning', rel: { lina: 1 } },
+            { text: '我不怕秘密', next: 'brave_response', rel: { lina: 2 } }
+          ]
+        },
+        {
+          id: 'seeking_answers',
+          speaker: 'lina',
+          speakerName: '林娜',
+          avatar: '👩‍💼',
+          text: '(眼神閃爍) 答案... 启示路確實有很多答案。但有些問題，可能不該問。',
+          choices: [
+            { text: '你在暗示什麼？', next: 'hint_drop', rel: { lina: 2 } },
+            { text: '我會自己找出來', next: 'determined', rel: { lina: 1 } }
+          ]
+        },
+        {
+          id: 'fresh_start',
+          speaker: 'lina',
+          speakerName: '林娜',
+          avatar: '👩‍💼',
+          text: '很多人都是這麼來的。启示路不問過去，只看未來。歡迎加入。',
+          choices: [
+            { text: '謝謝，我需要去哪裡報到？', next: 'orientation', rel: { lina: 2 } },
+            { text: '這裡安全嗎？', next: 'safety_question', rel: { lina: 1 } }
+          ]
+        },
+        {
+          id: 'orientation',
+          speaker: 'lina',
+          speakerName: '林娜',
+          avatar: '👩‍💼',
+          text: '明天早上 9 點，C 區報到大廳。這是你的臨時通行證。(遞給你一張卡片) 今晚好好休息，別去禁止區域。',
+          choices: [
+            { text: '禁止區域？', next: 'restricted_area', rel: { lina: 1 } },
+            { text: '明白了，謝謝', next: 'scene_end', rel: { lina: 2 } }
+          ]
+        },
+        {
+          id: 'restricted_area',
+          speaker: 'lina',
+          speakerName: '林娜',
+          avatar: '👩‍💼',
+          text: '(壓低聲音) 第 7-9 區，科研專用。沒有許可證進去... 會消失。不是開玩笑。',
+          choices: [
+            { text: '消失？什麼意思？', next: 'disappear_hint', rel: { lina: 2 } },
+            { text: '我會記住的', next: 'scene_end', rel: { lina: 1 } }
+          ]
+        },
+        {
+          id: 'disappear_hint',
+          speaker: 'lina',
+          speakerName: '林娜',
+          avatar: '👩‍💼',
+          text: '(環顧四周) 過去三個月，已經有 12 個人... 官方說法是意外或自願離開。但你知道的，启示路只有一個出口。',
+          choices: [
+            { text: '你在調查嗎？', next: 'investigation', rel: { lina: 3 } },
+            { text: '為什麼告訴我這些？', next: 'why_tell', rel: { lina: 2 } }
+          ]
+        },
+        {
+          id: 'investigation',
+          speaker: 'lina',
+          speakerName: '林娜',
+          avatar: '👩‍💼',
+          text: '(苦笑) 我只是個接待員... 但我也失去了朋友。(看手錶) 好了，你該去休息了。記住，別去第 7-9 區。',
+          choices: [
+            { text: '【結束對話，前往艙房】', next: 'end', rel: { lina: 2 }, endScene: true }
+          ]
+        },
+        {
+          id: 'why_tell',
+          speaker: 'lina',
+          speakerName: '林娜',
+          avatar: '👩‍💼',
+          text: '因為你看起來... 不像其他人。不像來這裡逃避或發財的。(轉身) 去吧，你的艙房在 B 區 407。',
+          choices: [
+            { text: '【結束對話，前往艙房】', next: 'end', rel: { lina: 3 }, endScene: true }
+          ]
+        },
+        {
+          id: 'scene_end',
+          speaker: 'lina',
+          speakerName: '林娜',
+          avatar: '👩‍💼',
+          text: '好了，你的艙房在 B 區 407。好好休息，明天開始新生活。(轉身離開，又回頭) 對了... 如果聽到奇怪的聲音，別理會。這站... 有它的脾氣。',
+          choices: [
+            { text: '【結束對話，前往艙房】', next: 'end', rel: { lina: 2 }, endScene: true }
+          ]
+        }
+      ];
+    }
+
+    function showDialogue(dialogue) {
+      if (!dialogue) return;
+
+      document.getElementById('npc-avatar').textContent = dialogue.avatar;
+      document.getElementById('npc-name').textContent = dialogue.speakerName;
+      document.getElementById('npc-text').textContent = dialogue.text;
+
+      const choicesContainer = document.getElementById('choices-container');
+      choicesContainer.innerHTML = '';
+
+      dialogue.choices.forEach(choice => {
+        const btn = document.createElement('button');
+        btn.className = 'choice-btn';
+        btn.textContent = choice.text;
+        btn.onclick = () => makeChoice(choice);
+        choicesContainer.appendChild(btn);
+      });
+
+      updateRelationships();
+    }
+
+    function makeChoice(choice) {
+      // Update relationships
+      if (choice.rel) {
+        Object.entries(choice.rel).forEach(([npc, delta]) => {
+          gameState.relationships[npc] = (gameState.relationships[npc] || 0) + delta;
+        });
+      }
+
+      // Check if ending
+      if (choice.endScene) {
+        showEnding();
+        return;
+      }
+
+      // Find next dialogue
+      const dialogues = getArrivalDialogues();
+      const nextDialogue = dialogues.find(d => d.id === choice.next);
+      
+      if (nextDialogue) {
+        showDialogue(nextDialogue);
+      }
+    }
+
+    function updateRelationships() {
+      const list = document.getElementById('relationships-list');
+      list.innerHTML = '';
+
+      Object.entries(gameState.relationships).forEach(([npc, value]) => {
+        const item = document.createElement('div');
+        item.className = 'relationship-item';
+        
+        let status = '中立';
+        if (value > 2) status = '友好 💚';
+        else if (value > 0) status = '好感 💙';
+        else if (value < 0) status = '警惕 ⚠️';
+
+        item.innerHTML = `
+          <div class="relationship-label">${npc === 'lina' ? '林娜' : npc}</div>
+          <div class="relationship-value">${status} (${value})</div>
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    function showEnding() {
+      document.getElementById('npc-text').innerHTML = `
+        <strong style="color: #4a9eff; font-size: 1.3em;">🎮 第一章完</strong><br><br>
+        你來到了自己的艙房。狹小但整潔的房間裡，只有一張床、一個儲物櫃和一扇舷窗。<br><br>
+        透過舷窗，你看到启示路緩緩旋轉，遠處的星雲如同紫色的傷疤。<br><br>
+        <strong>關係狀態:</strong><br>
+        林娜：${gameState.relationships.lina >= 2 ? '對你有好感，願意分享信息' : gameState.relationships.lina >= 0 ? '保持專業態度' : '對你有戒心'}<br><br>
+        <em style="color: #888;">感謝試玩！完整版將包含更多章節、角色和結局。</em><br><br>
+        <button class="start-btn" onclick="location.reload()">重新開始</button>
+      `;
+      document.getElementById('choices-container').innerHTML = '';
+    }
+  </script>
+</body>
+</html>
