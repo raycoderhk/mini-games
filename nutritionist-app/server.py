@@ -20,9 +20,6 @@ import auth as auth_module
 
 app = Flask(__name__, static_folder='.')
 
-# 初始化認證系統
-auth_module.init_auth_db()
-
 # ============ 錯誤處理 ============
 @app.errorhandler(Exception)
 def handle_exception(e):
@@ -63,8 +60,11 @@ def load_env():
 
 load_env()
 
-# 初始化數據庫
+# 初始化數據庫 (必須在 auth 之前)
 db.init_db()
+
+# 初始化認證系統 (確保 users 表已存在)
+auth_module.init_auth_db()
 
 # ============ 圖片壓縮 ============
 def compress_image_base64(image_base64, max_size=800, quality=80):
