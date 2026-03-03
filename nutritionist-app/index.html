@@ -296,8 +296,8 @@
     </style>
 </head>
 <body>
-    <!-- Auth Screen -->
-    <div id="authScreen" class="auth-container" style="display: none;">
+    <!-- Auth Screen (visible by default, hidden by JS if logged in) -->
+    <div id="authScreen" class="auth-container">
         <div class="auth-card">
             <h1 class="auth-title">🥗 營養師 App</h1>
             <p class="auth-subtitle">電話號碼登入</p>
@@ -334,6 +334,7 @@
     
     <!-- Main App (hidden until logged in) -->
     <div id="mainApp" style="display: none;">
+        <!-- Debug: Remove this comment after testing -->
         <div class="container">
             <!-- Header -->
             <div class="header">
@@ -532,7 +533,10 @@
         
         // Check auth on load
         async function checkAuth() {
+            console.log('🔍 Checking auth...', { hasToken: !!authToken });
+            
             if (!authToken) {
+                console.log('ℹ️ No token, showing auth screen');
                 showAuthScreen();
                 return;
             }
@@ -542,28 +546,39 @@
                     headers: { 'Authorization': `Bearer ${authToken}` }
                 });
                 const result = await response.json();
+                console.log('📡 Auth response:', result);
                 
                 if (result.success) {
                     currentUser = result.user;
+                    userId = currentUser.id;
+                    console.log('✅ Logged in as:', currentUser.name);
                     showMainApp();
                 } else {
+                    console.log('❌ Auth failed, showing auth screen');
                     localStorage.removeItem('authToken');
                     authToken = null;
                     showAuthScreen();
                 }
             } catch (error) {
+                console.error('❌ Auth error:', error);
                 showAuthScreen();
             }
         }
         
         function showAuthScreen() {
-            document.getElementById('authScreen').style.display = 'block';
-            document.getElementById('mainApp').style.display = 'none';
+            console.log('🔓 Showing auth screen');
+            const authScreen = document.getElementById('authScreen');
+            const mainApp = document.getElementById('mainApp');
+            if (authScreen) authScreen.style.display = 'block';
+            if (mainApp) mainApp.style.display = 'none';
         }
         
         function showMainApp() {
-            document.getElementById('authScreen').style.display = 'none';
-            document.getElementById('mainApp').style.display = 'block';
+            console.log('🔒 Showing main app');
+            const authScreen = document.getElementById('authScreen');
+            const mainApp = document.getElementById('mainApp');
+            if (authScreen) authScreen.style.display = 'none';
+            if (mainApp) mainApp.style.display = 'block';
             updateUserDisplay();
             loadDashboard();
         }
