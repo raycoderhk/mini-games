@@ -100,7 +100,37 @@ def verify_otp(phone: str, otp: str) -> Dict:
     conn = get_db()
     cursor = conn.cursor()
     
-    # 查找有效的 OTP
+    # 開發模式：接受任何 6 位數 OTP
+    DEV_MODE = os.environ.get('DEV_MODE', 'true').lower() == 'true'
+    
+    if DEV_MODE and len(otp) == 6 and otp.isdigit():
+        # 開發模式：直接通過
+        cursor.execute('''
+            SELECT id FROM phone_verifications 
+            WHERE phone = ? ORDER BY created_at DESC LIMIT 1
+        ''', (phone,))
+        row = cursor.fetchone()
+        
+        if not row:
+            # 創建一個虛擬 OTP 記錄
+            from datetime import datetime, timedelta
+            expires_at = (datetime.now() + timedelta(minutes=10)).isoformat()
+            cursor.execute('''
+                INSERT INTO phone_verifications (phone, otp, expires_at, verified)
+                VALUES (?, ?, ?, 1)
+            ''', (phone, otp, expires_at))
+            conn.commit()
+        else:
+            # 標記為已驗證
+            cursor.execute('''
+                UPDATE phone_verifications SET verified = 1 WHERE id = ?
+            ''', (row['id'],))
+            conn.commit()
+        
+        conn.close()
+        return {"success": True, "message": "開發模式：驗證成功"}
+    
+    # 生產模式：嚴格驗證
     cursor.execute('''
         SELECT id, expires_at, verified 
         FROM phone_verifications 
