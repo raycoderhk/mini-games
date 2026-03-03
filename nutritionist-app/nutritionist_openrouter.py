@@ -64,6 +64,7 @@ def recognize_food_openrouter(image_path):
     # MiniMax-01 支援 vision
     payload = {
         "model": "minimax/minimax-01",
+        "max_tokens": 2048,  # 限制 token 用量避免 402 錯誤
         "messages": [
             {
                 "role": "user",
@@ -216,7 +217,12 @@ def display_result(recognition, nutrition):
     print(f"\n🍽️ 識別到的食物 ({len(foods)} 項):")
     for food in foods:
         name = food.get("name", "未知")
-        confidence = food.get("confidence", 0) * 100
+        confidence_raw = food.get("confidence", 0)
+        # 處理 confidence 可能是 string 或數字
+        try:
+            confidence = float(confidence_raw) * 100 if isinstance(confidence_raw, (int, float)) else float(confidence_raw.replace('%', '')) if isinstance(confidence_raw, str) else 0
+        except:
+            confidence = 0
         desc = food.get("description", "")
         print(f"  • {name} ({confidence:.0f}% 信心) - {desc}")
     

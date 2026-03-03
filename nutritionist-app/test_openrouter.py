@@ -50,6 +50,7 @@ def test_vision_api(image_path):
     
     payload = {
         "model": "minimax/minimax-01",
+        "max_tokens": 1024,  # 限制 token 用量
         "messages": [
             {
                 "role": "user",
