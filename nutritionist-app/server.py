@@ -48,7 +48,7 @@ db.init_db()
 
 # ============ 圖片壓縮 ============
 def compress_image_base64(image_base64, max_size=800, quality=80):
-    """壓縮圖片以減少 API 請求大小和時間"""
+    """壓縮圖片以減少 API 請求大小和時間 (可選 - 依賴 PIL)"""
     try:
         import base64
         from PIL import Image
@@ -73,8 +73,16 @@ def compress_image_base64(image_base64, max_size=800, quality=80):
         
         compressed_base64 = base64.b64encode(output.getvalue()).decode('utf-8')
         return compressed_base64
+    except ImportError:
+        # PIL 未安裝，跳過壓縮
+        print("⚠️ PIL 未安裝，跳過圖片壓縮")
+        if ',' in image_base64:
+            return image_base64.split(',')[1]
+        return image_base64
     except Exception as e:
         print(f"圖片壓縮失敗：{e}")
+        if ',' in image_base64:
+            return image_base64.split(',')[1]
         return image_base64  # 返回原圖
 
 # ============ AI 分析 ============
