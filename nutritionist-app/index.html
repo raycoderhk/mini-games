@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🥗 營養師 App</title>
+    <title>🥗 營養師 App - OpenRouter Vision</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -13,7 +13,7 @@
             padding: 40px 20px;
         }
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
@@ -23,6 +23,15 @@
         .header { text-align: center; margin-bottom: 40px; }
         .title { font-size: 2.5em; color: #667eea; margin-bottom: 10px; }
         .subtitle { color: #666; font-size: 1.1em; }
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-top: 10px;
+        }
         .upload-area {
             border: 3px dashed #667eea;
             border-radius: 15px;
@@ -36,7 +45,7 @@
         .upload-icon { font-size: 4em; margin-bottom: 20px; }
         .upload-text { font-size: 1.2em; color: #666; }
         #fileInput { display: none; }
-        .preview { max-width: 100%; max-height: 300px; border-radius: 10px; margin: 20px 0; display: none; }
+        .preview { max-width: 100%; max-height: 400px; border-radius: 10px; margin: 20px 0; display: none; }
         .preview.active { display: block; }
         .btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -50,14 +59,6 @@
         }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4); }
         .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .result {
-            margin-top: 40px;
-            padding: 30px;
-            background: #f8f9ff;
-            border-radius: 15px;
-            display: none;
-        }
-        .result.active { display: block; }
         .loading { text-align: center; padding: 40px; display: none; }
         .loading.active { display: block; }
         .spinner {
@@ -70,6 +71,109 @@
             margin: 0 auto 20px;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* Result Styles */
+        .result { margin-top: 40px; display: none; }
+        .result.active { display: block; }
+        .result-section {
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        .food-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .food-icon { font-size: 2em; margin-right: 15px; }
+        .food-info { flex: 1; }
+        .food-name { font-weight: bold; font-size: 1.1em; color: #333; }
+        .food-confidence { color: #667eea; font-size: 0.9em; }
+        .food-desc { color: #666; font-size: 0.9em; margin-top: 5px; }
+        
+        /* Nutrition Table */
+        .nutrition-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        .nutrition-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        .nutrition-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        .nutrition-table tr:last-child td { border-bottom: none; }
+        .nutrition-table tr:hover { background: #f8f9ff; }
+        
+        .total-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .total-title { font-size: 1.2em; margin-bottom: 15px; }
+        .total-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 15px;
+        }
+        .total-item { text-align: center; }
+        .total-value { font-size: 1.8em; font-weight: bold; }
+        .total-label { font-size: 0.9em; opacity: 0.9; }
+        
+        .rating-box {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+        .rating-stars { font-size: 3em; margin-bottom: 10px; }
+        .rating-text { font-size: 1.5em; color: #667eea; font-weight: bold; }
+        
+        .tips-list {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+        }
+        .tip-item {
+            padding: 12px;
+            margin-bottom: 10px;
+            background: #f8f9ff;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .error-box {
+            background: #fee;
+            border: 1px solid #fcc;
+            color: #c00;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -77,28 +181,66 @@
         <div class="header">
             <h1 class="title">🥗 營養師 App</h1>
             <p class="subtitle">AI 食物識別 + 營養分析</p>
+            <div class="badge">⚡ Powered by OpenRouter MiniMax-01</div>
         </div>
+        
         <div class="upload-area" onclick="document.getElementById('fileInput').click()">
             <div class="upload-icon">📸</div>
             <div class="upload-text">點擊上傳食物圖片</div>
             <div style="color: #999; margin-top: 10px;">支援 JPG, PNG, WebP</div>
             <input type="file" id="fileInput" accept="image/*" onchange="handleFileSelect(event)">
         </div>
+        
         <img id="preview" class="preview" alt="預覽">
+        
         <div style="text-align: center;">
             <button class="btn" id="analyzeBtn" onclick="analyzeImage()" disabled>🔍 開始分析</button>
         </div>
+        
         <div class="loading" id="loading">
             <div class="spinner"></div>
-            <div>正在分析食物...</div>
+            <div id="loadingText">正在分析食物...</div>
+            <div style="color: #999; margin-top: 10px; font-size: 0.9em;">使用 MiniMax-01 視覺模型</div>
         </div>
+        
         <div class="result" id="result">
-            <h3>🍽️ 識別結果</h3>
-            <ul id="foodList"></ul>
+            <!-- 識別結果 -->
+            <div class="result-section">
+                <h2 class="section-title">🍽️ 識別結果</h2>
+                <div id="foodList"></div>
+            </div>
+            
+            <!-- 營養含量 -->
+            <div class="result-section">
+                <h2 class="section-title">📊 營養成分</h2>
+                <div id="nutritionDetails"></div>
+                <div class="total-box" id="totalBox">
+                    <div class="total-title">📈 總營養含量</div>
+                    <div class="total-grid" id="totalGrid"></div>
+                </div>
+            </div>
+            
+            <!-- 評分 -->
+            <div class="rating-box" id="ratingBox">
+                <div class="rating-stars" id="ratingStars">⭐⭐⭐⭐⭐</div>
+                <div class="rating-text" id="ratingText">優秀</div>
+            </div>
+            
+            <!-- 健康建議 -->
+            <div class="result-section">
+                <h2 class="section-title">💡 健康建議</h2>
+                <div class="tips-list" id="tipsList"></div>
+            </div>
+        </div>
+        
+        <div class="error-box" id="errorBox" style="display: none;">
+            <div id="errorMessage"></div>
         </div>
     </div>
+    
     <script>
         let selectedFile = null;
+        
         function handleFileSelect(event) {
             const file = event.target.files[0];
             if (file) {
@@ -112,19 +254,23 @@
                 document.getElementById('analyzeBtn').disabled = false;
             }
         }
+        
         async function analyzeImage() {
             if (!selectedFile) return;
+            
             document.getElementById('loading').classList.add('active');
             document.getElementById('result').classList.remove('active');
+            document.getElementById('errorBox').style.display = 'none';
             document.getElementById('analyzeBtn').disabled = true;
+            document.getElementById('loadingText').textContent = '正在分析食物...';
             
             try {
-                // Convert file to base64
                 const reader = new FileReader();
                 reader.onload = async function(e) {
                     const imageData = e.target.result;
                     
-                    // Call backend API
+                    document.getElementById('loadingText').textContent = '正在識別食物...';
+                    
                     const response = await fetch('/api/analyze', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -134,32 +280,113 @@
                     const result = await response.json();
                     
                     if (result.success) {
-                        // Display food recognition results
-                        document.getElementById('foodList').innerHTML = result.foods.map(f => `<li>🍽️ ${f}</li>`).join('');
-                        
-                        // Add nutrition analysis if available
-                        if (result.nutrition && result.nutrition.data) {
-                            const nutritionDiv = document.createElement('div');
-                            nutritionDiv.style.marginTop = '20px';
-                            nutritionDiv.innerHTML = '<h3>📊 營養分析</h3><pre style="white-space: pre-wrap; font-family: inherit;">' + 
-                                JSON.stringify(result.nutrition.data, null, 2) + '</pre>';
-                            document.getElementById('result').appendChild(nutritionDiv);
-                        }
+                        displayResult(result.data);
                     } else {
-                        document.getElementById('foodList').innerHTML = `<li style="color: red;">❌ ${result.error || '分析失敗'}</li>`;
+                        showError(result.error || '分析失敗');
                     }
                     
                     document.getElementById('loading').classList.remove('active');
-                    document.getElementById('result').classList.add('active');
                     document.getElementById('analyzeBtn').disabled = false;
                 };
                 reader.readAsDataURL(selectedFile);
             } catch (error) {
-                document.getElementById('foodList').innerHTML = `<li style="color: red;">❌ 錯誤：${error.message}</li>`;
+                showError('錯誤：' + error.message);
                 document.getElementById('loading').classList.remove('active');
-                document.getElementById('result').classList.add('active');
                 document.getElementById('analyzeBtn').disabled = false;
             }
+        }
+        
+        function displayResult(data) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.classList.add('active');
+            
+            // 1. 顯示食物列表
+            const foodListDiv = document.getElementById('foodList');
+            const foods = data.foods || [];
+            foodListDiv.innerHTML = foods.map(food => `
+                <div class="food-item">
+                    <div class="food-icon">🍽️</div>
+                    <div class="food-info">
+                        <div class="food-name">${escapeHtml(food.name || '未知')}</div>
+                        <div class="food-confidence">${((food.confidence || 0) * 100).toFixed(0)}% 信心度</div>
+                        ${food.description ? `<div class="food-desc">${escapeHtml(food.description)}</div>` : ''}
+                    </div>
+                </div>
+            `).join('');
+            
+            // 2. 顯示每種食物營養
+            const nutritionDiv = document.getElementById('nutritionDetails');
+            nutritionDiv.innerHTML = '<table class="nutrition-table"><thead><tr><th>食物</th><th>🔥 卡路里</th><th>💪 蛋白質</th><th>🍚 碳水</th><th>🥑 脂肪</th><th>🌾 纖維</th></tr></thead><tbody>' +
+                foods.map(food => {
+                    const n = food.nutrition || {};
+                    return `<tr>
+                        <td><strong>${escapeHtml(food.name || '未知')}</strong></td>
+                        <td>${n.calories || 0} kcal</td>
+                        <td>${n.protein || 0}g</td>
+                        <td>${n.carbs || 0}g</td>
+                        <td>${n.fat || 0}g</td>
+                        <td>${n.fiber || 0}g</td>
+                    </tr>`;
+                }).join('') +
+                '</tbody></table>';
+            
+            // 3. 顯示總營養
+            const total = data.total_nutrition || {};
+            const totalGrid = document.getElementById('totalGrid');
+            totalGrid.innerHTML = `
+                <div class="total-item">
+                    <div class="total-value">🔥 ${total.calories || 0}</div>
+                    <div class="total-label">卡路里 (kcal)</div>
+                </div>
+                <div class="total-item">
+                    <div class="total-value">💪 ${total.protein || 0}</div>
+                    <div class="total-label">蛋白質 (g)</div>
+                </div>
+                <div class="total-item">
+                    <div class="total-value">🍚 ${total.carbs || 0}</div>
+                    <div class="total-label">碳水 (g)</div>
+                </div>
+                <div class="total-item">
+                    <div class="total-value">🥑 ${total.fat || 0}</div>
+                    <div class="total-label">脂肪 (g)</div>
+                </div>
+                <div class="total-item">
+                    <div class="total-value">🌾 ${total.fiber || 0}</div>
+                    <div class="total-label">纖維 (g)</div>
+                </div>
+            `;
+            
+            // 4. 顯示評分
+            const rating = data.meal_rating || '';
+            const ratingMap = {
+                '优秀': '⭐⭐⭐⭐⭐',
+                '良好': '⭐⭐⭐⭐',
+                '普通': '⭐⭐⭐',
+                '需注意': '⭐⭐'
+            };
+            document.getElementById('ratingStars').textContent = ratingMap[rating] || '⭐⭐⭐';
+            document.getElementById('ratingText').textContent = rating || '良好';
+            
+            // 5. 顯示健康建議
+            const tipsDiv = document.getElementById('tipsList');
+            const tips = data.health_tips || [];
+            tipsDiv.innerHTML = tips.map((tip, i) => `
+                <div class="tip-item">
+                    <strong>${i + 1}.</strong> ${escapeHtml(tip)}
+                </div>
+            `).join('');
+        }
+        
+        function showError(message) {
+            const errorBox = document.getElementById('errorBox');
+            errorBox.style.display = 'block';
+            document.getElementById('errorMessage').textContent = '❌ ' + message;
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
     </script>
 </body>
