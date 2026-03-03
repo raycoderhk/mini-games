@@ -236,6 +236,57 @@
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
+        /* Auth Screen */
+        .auth-container {
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 30px;
+        }
+        .auth-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .auth-title {
+            font-size: 2em;
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .auth-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .otp-input {
+            font-size: 2em;
+            text-align: center;
+            letter-spacing: 10px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .nav { flex-wrap: wrap; }
@@ -245,19 +296,67 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>🥗 營養師 App 3.0</h1>
-            <p>Personal Nutrition Advisor - 你的專屬營養顧問</p>
+    <!-- Auth Screen -->
+    <div id="authScreen" class="auth-container" style="display: none;">
+        <div class="auth-card">
+            <h1 class="auth-title">🥗 營養師 App</h1>
+            <p class="auth-subtitle">電話號碼登入</p>
+            
+            <!-- Step 1: Enter Phone -->
+            <div id="phoneStep">
+                <div class="form-group">
+                    <label class="form-label">電話號碼</label>
+                    <input type="tel" class="form-input" id="loginPhone" placeholder="+852 1234 5678" value="+852 ">
+                </div>
+                <button class="btn" onclick="sendOTP()" style="width: 100%;">📱 發送驗證碼</button>
+            </div>
+            
+            <!-- Step 2: Enter OTP -->
+            <div id="otpStep" style="display: none;">
+                <div style="text-align: center; color: #666; margin-bottom: 15px;">
+                    已發送驗證碼到 <span id="displayPhone"></span>
+                </div>
+                <input type="text" class="form-input otp-input" id="otpCode" placeholder="000000" maxlength="6" inputmode="numeric">
+                <div class="form-group">
+                    <label class="form-label">你的名字（可選）</label>
+                    <input type="text" class="form-input" id="loginName" placeholder="例如：Raymond">
+                </div>
+                <button class="btn" onclick="verifyOTP()" style="width: 100%;">✅ 驗證並登入</button>
+                <button class="btn btn-secondary" onclick="resetAuth()" style="width: 100%; margin-top: 10px;">🔙 返回</button>
+            </div>
+            
+            <div id="authLoading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <div>處理中...</div>
+            </div>
         </div>
-        
-        <!-- Navigation -->
+    </div>
+    
+    <!-- Main App (hidden until logged in) -->
+    <div id="mainApp" style="display: none;">
+        <div class="container">
+            <!-- Header -->
+            <div class="header">
+                <h1>🥗 營養師 App 3.0</h1>
+                <p>Personal Nutrition Advisor - 你的專屬營養顧問</p>
+            </div>
+            
+            <!-- Navigation -->
         <div class="nav">
             <button class="nav-btn active" onclick="showSection('dashboard')">📊 今日概覽</button>
             <button class="nav-btn" onclick="showSection('log-meal')">📝 記錄餐食</button>
             <button class="nav-btn" onclick="showSection('profile')">👤 個人檔案</button>
             <button class="nav-btn" onclick="showSection('progress')">📈 進度追蹤</button>
+        </div>
+        
+        <!-- User Info Bar -->
+        <div class="user-info" style="margin: 20px;">
+            <div class="user-avatar" id="userAvatar">R</div>
+            <div style="flex: 1;">
+                <div style="font-weight: bold;" id="userNameDisplay">Raymond</div>
+                <div style="color: #666; font-size: 0.9em;" id="userPhoneDisplay">+852 ****5678</div>
+            </div>
+            <button class="btn btn-secondary" onclick="logout()" style="padding: 8px 15px; font-size: 0.9em;">🚪 登出</button>
         </div>
         
         <!-- Dashboard Section -->
@@ -426,10 +525,157 @@
     </div>
     
     <script>
-        // State
+        // ============ Authentication ============
+        let authToken = localStorage.getItem('authToken');
+        let currentUser = null;
+        
+        // Check auth on load
+        async function checkAuth() {
+            if (!authToken) {
+                showAuthScreen();
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/auth/me', {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+                const result = await response.json();
+                
+                if (result.success) {
+                    currentUser = result.user;
+                    showMainApp();
+                } else {
+                    localStorage.removeItem('authToken');
+                    authToken = null;
+                    showAuthScreen();
+                }
+            } catch (error) {
+                showAuthScreen();
+            }
+        }
+        
+        function showAuthScreen() {
+            document.getElementById('authScreen').style.display = 'block';
+            document.getElementById('mainApp').style.display = 'none';
+        }
+        
+        function showMainApp() {
+            document.getElementById('authScreen').style.display = 'none';
+            document.getElementById('mainApp').style.display = 'block';
+            updateUserDisplay();
+            loadDashboard();
+        }
+        
+        function updateUserDisplay() {
+            if (!currentUser) return;
+            const name = currentUser.name || '用戶';
+            const phone = currentUser.phone || '';
+            
+            document.getElementById('userNameDisplay').textContent = name;
+            document.getElementById('userPhoneDisplay').textContent = phone;
+            document.getElementById('userAvatar').textContent = name.charAt(0).toUpperCase();
+        }
+        
+        async function sendOTP() {
+            const phone = document.getElementById('loginPhone').value.trim();
+            
+            if (!phone || phone.length < 8) {
+                alert('請輸入有效的電話號碼');
+                return;
+            }
+            
+            document.getElementById('authLoading').style.display = 'block';
+            document.getElementById('phoneStep').style.display = 'none';
+            
+            try {
+                const response = await fetch('/api/auth/send-otp', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    document.getElementById('displayPhone').textContent = phone;
+                    document.getElementById('otpStep').style.display = 'block';
+                } else {
+                    alert('發送失敗：' + result.error);
+                    document.getElementById('phoneStep').style.display = 'block';
+                }
+            } catch (error) {
+                alert('錯誤：' + error.message);
+                document.getElementById('phoneStep').style.display = 'block';
+            } finally {
+                document.getElementById('authLoading').style.display = 'none';
+            }
+        }
+        
+        async function verifyOTP() {
+            const phone = document.getElementById('loginPhone').value.trim();
+            const otp = document.getElementById('otpCode').value.trim();
+            const name = document.getElementById('loginName').value.trim();
+            
+            if (!otp || otp.length !== 6) {
+                alert('請輸入 6 位數驗證碼');
+                return;
+            }
+            
+            document.getElementById('authLoading').style.display = 'block';
+            
+            try {
+                const response = await fetch('/api/auth/verify-otp', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone, otp, name })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    authToken = result.token;
+                    currentUser = result.user;
+                    localStorage.setItem('authToken', authToken);
+                    showMainApp();
+                } else {
+                    alert('驗證失敗：' + result.error);
+                }
+            } catch (error) {
+                alert('錯誤：' + error.message);
+            } finally {
+                document.getElementById('authLoading').style.display = 'none';
+            }
+        }
+        
+        function resetAuth() {
+            document.getElementById('phoneStep').style.display = 'block';
+            document.getElementById('otpStep').style.display = 'none';
+            document.getElementById('otpCode').value = '';
+        }
+        
+        async function logout() {
+            if (!confirm('確定要登出嗎？')) return;
+            
+            try {
+                await fetch('/api/auth/logout', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+            } catch (error) {
+                console.error('Logout error:', error);
+            }
+            
+            authToken = null;
+            currentUser = null;
+            localStorage.removeItem('authToken');
+            showAuthScreen();
+        }
+        
+        // ============ App State ============
         let selectedFile = null;
         let currentAnalysis = null;
-        const userId = 1; // Default user
+        let userId = 1; // Will be updated after login
         
         // Navigation
         function showSection(sectionId) {
@@ -604,7 +850,10 @@
             
             await fetch('/api/meals', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authToken}`
+                },
                 body: JSON.stringify({
                     user_id: userId,
                     meal_type: mealType,
@@ -628,7 +877,9 @@
         // Dashboard
         async function loadDashboard() {
             try {
-                const response = await fetch(`/api/daily?user_id=${userId}`);
+                const response = await fetch(`/api/daily?user_id=${userId}`, {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
                 const data = await response.json();
                 
                 if (data.success) {
@@ -667,7 +918,9 @@
         
         async function loadMeals() {
             try {
-                const response = await fetch(`/api/meals?user_id=${userId}`);
+                const response = await fetch(`/api/meals?user_id=${userId}`, {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
                 const data = await response.json();
                 
                 if (data.success && data.meals.length > 0) {
@@ -701,7 +954,9 @@
         // Profile
         async function loadProfile() {
             try {
-                const response = await fetch(`/api/user?id=${userId}`);
+                const response = await fetch(`/api/user?id=${userId}`, {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
                 const data = await response.json();
                 
                 if (data.success && data.data) {
@@ -736,7 +991,10 @@
             try {
                 const response = await fetch('/api/user', {
                     method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
                     body: JSON.stringify(userData)
                 });
                 
@@ -756,7 +1014,9 @@
         // Progress
         async function loadProgress() {
             try {
-                const response = await fetch(`/api/progress?user_id=${userId}`);
+                const response = await fetch(`/api/progress?user_id=${userId}`, {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
                 const data = await response.json();
                 
                 if (data.success && data.progress.length > 0) {
@@ -789,7 +1049,10 @@
             try {
                 const response = await fetch('/api/progress', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
                     body: JSON.stringify({
                         user_id: userId,
                         weight_kg: weight
@@ -819,7 +1082,7 @@
         
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            loadDashboard();
+            checkAuth();
         });
     </script>
 </body>
