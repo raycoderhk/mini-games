@@ -222,6 +222,15 @@ def get_or_create_user_by_phone(phone: str, name: Optional[str] = None) -> Dict:
     conn = get_db()
     cursor = conn.cursor()
     
+    # 確保 phone 欄位存在 (安全檢查)
+    cursor.execute("PRAGMA table_info(users)")
+    columns = [row[1] for row in cursor.fetchall()]
+    
+    if 'phone' not in columns:
+        print("⚠️ phone column missing, adding now...")
+        cursor.execute('ALTER TABLE users ADD COLUMN phone TEXT')
+        conn.commit()
+    
     # 嘗試查找現有用戶
     cursor.execute('SELECT * FROM users WHERE phone = ?', (phone,))
     row = cursor.fetchone()
