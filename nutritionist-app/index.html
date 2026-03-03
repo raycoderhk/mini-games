@@ -356,6 +356,7 @@
                 <div style="font-weight: bold;" id="userNameDisplay">Raymond</div>
                 <div style="color: #666; font-size: 0.9em;" id="userPhoneDisplay">+852 ****5678</div>
             </div>
+            <button class="btn btn-secondary" onclick="resetData()" style="padding: 8px 15px; font-size: 0.9em; margin-right: 10px;">🗑️ 重置數據</button>
             <button class="btn btn-secondary" onclick="logout()" style="padding: 8px 15px; font-size: 0.9em;">🚪 登出</button>
         </div>
         
@@ -672,6 +673,28 @@
             showAuthScreen();
         }
         
+        async function resetData() {
+            if (!confirm('⚠️ 確定要重置所有數據嗎？\n\n這將刪除所有餐食記錄和進度數據（不可復原）')) return;
+            
+            try {
+                const response = await fetch('/api/reset', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('✅ 數據已重置！');
+                    loadDashboard();
+                } else {
+                    alert('重置失敗：' + result.error);
+                }
+            } catch (error) {
+                alert('錯誤：' + error.message);
+            }
+        }
+        
         // ============ App State ============
         let selectedFile = null;
         let currentAnalysis = null;
@@ -848,24 +871,49 @@
             const mealType = document.getElementById('mealType').value;
             const foods = analysis.foods || [];
             
-            await fetch('/api/meals', {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${authToken}`
-                },
-                body: JSON.stringify({
-                    user_id: userId,
-                    meal_type: mealType,
-                    food_items: foods,
-                    ai_analysis: JSON.stringify(analysis)
-                })
+            console.log('📝 Saving meal:', {
+                user_id: userId,
+                meal_type: mealType,
+                foods: foods.length,
+                total_nutrition: analysis.total_nutrition
             });
+            
+            try {
+                const response = await fetch('/api/meals', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        meal_type: mealType,
+                        food_items: foods,
+                        ai_analysis: JSON.stringify(analysis)
+                    })
+                });
+                
+                const result = await response.json();
+                console.log('💾 Save result:', result);
+                
+                if (!result.success) {
+                    console.error('❌ Save failed:', result.error);
+                }
+            } catch (error) {
+                console.error('❌ Save error:', error);
+            }
         }
         
-        function saveMealAndRedirect() {
+        async function saveMealAndRedirect() {
+            // Wait for save to complete
+            await saveMeal(currentAnalysis);
+            
+            // Show success message
+            alert('✅ 餐食已儲存！');
+            
             showSection('dashboard');
             loadDashboard();
+            
             // Reset
             document.getElementById('analysisResult').style.display = 'none';
             document.getElementById('preview').style.display = 'none';
