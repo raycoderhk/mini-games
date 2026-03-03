@@ -16,8 +16,12 @@ from flask import Flask, request, jsonify, send_from_directory
 
 # 導入數據庫模塊
 import database as db
+import auth as auth_module
 
 app = Flask(__name__, static_folder='.')
+
+# 初始化認證系統
+auth_module.init_auth_db()
 
 # ============ 配置 ============
 PORT = int(os.environ.get("PORT", 8080))
@@ -177,6 +181,100 @@ def analyze_food_minimax(image_base64):
 @app.route('/')
 def index():
     return send_from_directory('.', 'index.html')
+
+# ============ 認證 API ============
+@app.route('/api/auth/send-otp', methods=['POST'])
+def send_otp():
+    """發送 OTP 到電話號碼"""
+    data = request.get_json()
+    if not data or not data.get('phone'):
+        return jsonify({"success": False, "error": "缺少電話號碼"}), 400
+    
+    phone = data['phone']
+    
+    # 驗證電話格式（簡單驗證）
+    if len(phone) < 8 or not phone.replace('+', '').replace('-', '').replace(' ', '').isdigit():
+        return jsonify({"success": False, "error": "電話號碼格式無效"}), 400
+    
+    result = auth_module.send_otp(phone)
+    return jsonify(result)
+
+@app.route('/api/auth/verify-otp', methods=['POST'])
+def verify_otp():
+    """驗證 OTP 並登入"""
+    data = request.get_json()
+    if not data or not data.get('phone') or not data.get('otp'):
+        return jsonify({"success": False, "error": "缺少電話號碼或 OTP"}), 400
+    
+    phone = data['phone']
+    otp = data['otp']
+    name = data.get('name')
+    
+    # 驗證 OTP
+    verify_result = auth_module.verify_otp(phone, otp)
+    if not verify_result['success']:
+        return jsonify(verify_result), 400
+    
+    # 獲取或創建用戶
+    user = auth_module.get_or_create_user_by_phone(phone, name)
+    
+    # 創建會話
+    token = auth_module.create_session(user['id'])
+    
+    return jsonify({
+        "success": True,
+        "message": "登入成功",
+        "token": token,
+        "user": {
+            "id": user['id'],
+            "name": user['name'],
+            "phone": user['phone'],
+            "email": user.get('email')
+        }
+    })
+
+@app.route('/api/auth/me', methods=['GET'])
+def get_current_user():
+    """獲取當前登入用戶"""
+    token = request.headers.get('Authorization', '').replace('Bearer ', '')
+    
+    if not token:
+        return jsonify({"success": False, "error": "未登入"}), 401
+    
+    user = auth_module.validate_session(token)
+    if not user:
+        return jsonify({"success": False, "error": "會話無效或已過期"}), 401
+    
+    return jsonify({
+        "success": True,
+        "user": {
+            "id": user['id'],
+            "name": user['name'],
+            "phone": user.get('phone'),
+            "email": user.get('email'),
+            "age": user.get('age'),
+            "gender": user.get('gender'),
+            "height_cm": user.get('height_cm'),
+            "weight_kg": user.get('weight_kg'),
+            "activity_level": user.get('activity_level'),
+            "goal": user.get('goal'),
+            "daily_calories": user.get('daily_calories'),
+            "daily_protein_g": user.get('daily_protein_g'),
+            "daily_carbs_g": user.get('daily_carbs_g'),
+            "daily_fat_g": user.get('daily_fat_g')
+        }
+    })
+
+@app.route('/api/auth/logout', methods=['POST'])
+def logout():
+    """登出"""
+    token = request.headers.get('Authorization', '').replace('Bearer ', '')
+    
+    if not token:
+        return jsonify({"success": False, "error": "未登入"}), 401
+    
+    auth_module.revoke_session(token)
+    return jsonify({"success": True, "message": "已登出"})
 
 # 用戶管理
 @app.route('/api/user', methods=['GET'])
