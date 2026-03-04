@@ -1,31 +1,12 @@
 {
-  "lastChecked": "2026-03-03T02:00:00Z",
-  "lastUpdated": "2026-03-03T02:00:00Z",
-  "projectCount": 21,
+  "lastChecked": "2026-03-04T10:12:00Z",
+  "lastUpdated": "2026-03-04T10:00:00Z",
+  "projectCount": 24,
   "completedProjects": 13,
   "inProgressProjects": 6,
-  "todoProjects": 1,
+  "todoProjects": 4,
   "blockedProjects": 1,
-  "lastChange": "proj-021 MVP completed (启示路 Sci-Fi Game v0.1.0)",
-  "notes": "Game MVP built overnight: playable demo with 1 chapter, 11 dialogues, relationship system. Server running on :3000",
-  "tonightProgress": {
-    "proj-021": {
-      "status": "MVP Complete ✅",
-      "timeSpent": "3.5 hours",
-      "deliverables": [
-        "Playable web game (http://localhost:3000)",
-        "Dialogue engine with choices",
-        "Relationship tracking system",
-        "Sci-fi UI design",
-        "Story outline (5 chapters planned)",
-        "Full documentation"
-      ],
-      "nextSteps": [
-        "Add Chapter 2: Orientation",
-        "Integrate Qwen AI for NPC dialogue",
-        "Deploy to Zeabur",
-        "Add save/load system"
-      ]
-    }
-  }
+  "lastChange": "proj-024 added (🧪 阿里雲模型測試器 - Aliyun Model Tester)",
+  "notes": "New project added: proj-024 for testing Aliyun Qwen models (turbo/plus/max comparison). Kanban updated March 4th 10:00 UTC.",
+  "sleepTimeCheck": false
 }
