@@ -42,8 +42,9 @@ def server_error(e):
 
 # ============ 配置 ============
 PORT = int(os.environ.get("PORT", 8080))
-OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
-OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
+# 使用阿里雲 DashScope API (Coding Plan)
+DASHSCOPE_API_KEY = os.environ.get("DASHSCOPE_API_KEY", "")
+DASHSCOPE_API_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
 
 # 自動載入 .env 文件
 def load_env():
@@ -107,9 +108,9 @@ def compress_image_base64(image_base64, max_size=800, quality=80):
 
 # ============ AI 分析 ============
 def analyze_food_minimax(image_base64):
-    """使用 MiniMax-01 識別食物並分析營養"""
-    if not OPENROUTER_API_KEY:
-        return {"success": False, "error": "OPENROUTER_API_KEY 未設置"}
+    """使用阿里雲 Qwen-VL 識別食物並分析營養"""
+    if not DASHSCOPE_API_KEY:
+        return {"success": False, "error": "DASHSCOPE_API_KEY 未設置"}
     
     # 壓縮圖片
     image_base64 = compress_image_base64(image_base64)
@@ -155,14 +156,13 @@ def analyze_food_minimax(image_base64):
 只返回 JSON，不要其他文字。"""
 
     headers = {
-        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-        "Content-Type": "application/json",
-        "HTTP-Referer": "https://github.com/raycoderhk/2048-game",
-        "X-Title": "Nutritionist App 3.0"
+        "Authorization": f"Bearer {DASHSCOPE_API_KEY}",
+        "Content-Type": "application/json"
     }
     
+    # 使用 Qwen-VL-Max (阿里雲最強視覺模型)
     payload = {
-        "model": "minimax/minimax-01",
+        "model": "qwen-vl-max",
         "max_tokens": 2048,
         "messages": [
             {
@@ -180,7 +180,7 @@ def analyze_food_minimax(image_base64):
     
     try:
         req = urllib.request.Request(
-            OPENROUTER_API_URL,
+            DASHSCOPE_API_URL,
             data=json.dumps(payload).encode("utf-8"),
             headers=headers,
             method="POST"
@@ -500,8 +500,9 @@ def add_progress():
 def health():
     return jsonify({
         "status": "ok",
-        "openrouter_configured": bool(OPENROUTER_API_KEY),
-        "model": "minimax/minimax-01",
+        "dashscope_configured": bool(DASHSCOPE_API_KEY),
+        "model": "qwen-vl-max",
+        "provider": "Aliyun DashScope",
         "version": "3.0 - Personal Nutrition Advisor",
         "database": "SQLite initialized"
     })
