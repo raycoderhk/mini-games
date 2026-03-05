@@ -1,7 +1,7 @@
 {
   "meta": {
     "created": "2026-02-26T07:45:00Z",
-    "updated": "2026-03-04T10:00:00Z",
+    "updated": "2026-03-05T02:08:07.529Z",
     "version": "1.4"
   },
   "columns": {
@@ -41,7 +41,11 @@
       "created": "2026-02-26",
       "updated": "2026-02-26T07:40:00Z",
       "completed": "2026-02-26T07:40:00Z",
-      "tags": ["setup", "api", "configuration"],
+      "tags": [
+        "setup",
+        "api",
+        "configuration"
+      ],
       "notes": [
         "2026-02-26: 成功配置阿里雲 Coding Plan API",
         "使用模型：qwen3.5-plus",
@@ -57,7 +61,11 @@
       "created": "2026-02-26",
       "updated": "2026-02-26T08:20:00Z",
       "completed": "2026-02-26T08:20:00Z",
-      "tags": ["multi-agent", "configuration", "openclaw"],
+      "tags": [
+        "multi-agent",
+        "configuration",
+        "openclaw"
+      ],
       "notes": [
         "2026-02-26: 完成 4 個 agent 配置",
         "agents: main, coding, research, admin",
@@ -73,7 +81,12 @@
       "created": "2026-02-26",
       "updated": "2026-02-26T10:55:00Z",
       "completed": "2026-02-26T10:55:00Z",
-      "tags": ["gui", "web", "kanban", "zeabur"],
+      "tags": [
+        "gui",
+        "web",
+        "kanban",
+        "zeabur"
+      ],
       "notes": [
         "2026-02-26: 創建 3 個版本 (完整版、離線版、Zeabur 版)",
         "2026-02-26 10:55: ✅ Zeabur 部署完成",
@@ -88,7 +101,11 @@
       "priority": "medium",
       "created": "2026-02-26",
       "updated": "2026-02-27T08:00:00Z",
-      "tags": ["discord", "channels", "integration"],
+      "tags": [
+        "discord",
+        "channels",
+        "integration"
+      ],
       "notes": [
         "2026-02-26: 完成所有配置文件和文檔",
         "2026-02-27: ✅ Discord bot 和頻道已創建",
@@ -105,7 +122,11 @@
       "created": "2026-02-26",
       "updated": "2026-02-26T08:40:00Z",
       "completed": "2026-02-26T08:40:00Z",
-      "tags": ["tool", "python", "download"],
+      "tags": [
+        "tool",
+        "python",
+        "download"
+      ],
       "notes": [
         "2026-02-26: 創建 2 個版本 (完整版、快速版)",
         "需要安裝 requests 模塊",
@@ -121,7 +142,11 @@
       "created": "2026-02-26",
       "updated": "2026-02-26T08:30:00Z",
       "completed": "2026-02-26T08:30:00Z",
-      "tags": ["research", "hong kong", "budget"],
+      "tags": [
+        "research",
+        "hong kong",
+        "budget"
+      ],
       "notes": [
         "2026-02-26: 完成研究報告",
         "來源：香港 01、立法會會議記錄",
@@ -137,7 +162,12 @@
       "created": "2026-02-26",
       "updated": "2026-02-26T08:25:00Z",
       "completed": "2026-02-26T08:25:00Z",
-      "tags": ["research", "comparison", "api", "pricing"],
+      "tags": [
+        "research",
+        "comparison",
+        "api",
+        "pricing"
+      ],
       "notes": [
         "2026-02-26: 完成對比報告",
         "結論：阿里雲 Pro 年省 ¥2,400-4,800（重度用戶）",
@@ -153,7 +183,11 @@
       "created": "2026-02-26",
       "updated": "2026-02-26T10:55:00Z",
       "completed": "2026-02-26T10:55:00Z",
-      "tags": ["deployment", "zeabur", "kanban"],
+      "tags": [
+        "deployment",
+        "zeabur",
+        "kanban"
+      ],
       "notes": [
         "2026-02-26 10:50: GitHub repo created (raycoderhk/kanban-board)",
         "2026-02-26 10:51: Code pushed to GitHub",
@@ -166,11 +200,15 @@
       "id": "proj-009",
       "title": "Sub-agent 功能測試",
       "description": "測試 sub-agent spawn 功能，驗證多 agent 協作",
-      "status": "blocked",
+      "status": "backlog",
       "priority": "low",
       "created": "2026-02-26",
-      "updated": "2026-02-26T08:41:00Z",
-      "tags": ["testing", "sub-agent", "debug"],
+      "updated": "2026-03-05T01:56:32.536Z",
+      "tags": [
+        "testing",
+        "sub-agent",
+        "debug"
+      ],
       "notes": [
         "2026-02-26: 測試失敗",
         "原因：sessions_spawn 在當前環境受限",
@@ -186,7 +224,13 @@
       "created": "2026-02-26",
       "updated": "2026-02-26T12:10:00Z",
       "completed": "2026-02-26T12:10:00Z",
-      "tags": ["web", "gui", "recommendation", "vercel", "family"],
+      "tags": [
+        "web",
+        "gui",
+        "recommendation",
+        "vercel",
+        "family"
+      ],
       "notes": [
         "2026-02-26 12:10: ✅ 創建完成",
         "特色：雙語 (EN/ZH), 家庭為本, 個人化推薦",
@@ -203,7 +247,12 @@
       "priority": "medium",
       "created": "2026-02-26",
       "updated": "2026-02-26T12:10:00Z",
-      "tags": ["migration", "vercel", "supabase", "deployment"],
+      "tags": [
+        "migration",
+        "vercel",
+        "supabase",
+        "deployment"
+      ],
       "notes": [
         "2026-02-26: 用戶要求添加",
         "用戶在 Vercel/Supabase 有免費層項目經驗",
@@ -218,7 +267,13 @@
       "priority": "urgent",
       "created": "2026-02-26",
       "updated": "2026-02-27T11:00:00Z",
-      "tags": ["api", "configuration", "web-search", "brave", "urgent"],
+      "tags": [
+        "api",
+        "configuration",
+        "web-search",
+        "brave",
+        "urgent"
+      ],
       "notes": [
         "2026-02-26: 用戶發現 web_search 無法使用",
         "問題：缺少 Brave Search API 密钥",
@@ -238,7 +293,13 @@
       "created": "2026-02-26",
       "updated": "2026-02-27T00:05:00Z",
       "completed": "2026-02-27T00:05:00Z",
-      "tags": ["cli", "polymarket", "karpathy", "agent-first", "terminal"],
+      "tags": [
+        "cli",
+        "polymarket",
+        "karpathy",
+        "agent-first",
+        "terminal"
+      ],
       "notes": [
         "2026-02-27 00:00: 開始開發",
         "2026-02-27 00:03: ✅ 核心功能完成",
@@ -258,7 +319,12 @@
       "created": "2026-02-27",
       "updated": "2026-02-27T00:10:00Z",
       "completed": "2026-02-27T00:10:00Z",
-      "tags": ["cli", "monitoring", "status", "karpathy-inspired"],
+      "tags": [
+        "cli",
+        "monitoring",
+        "status",
+        "karpathy-inspired"
+      ],
       "notes": [
         "2026-02-27 00:10: ✅ 創建完成",
         "特色：Terminal Dashboard、無外部依賴",
@@ -274,8 +340,14 @@
       "status": "in_progress",
       "priority": "high",
       "created": "2026-02-27",
-      "updated": "2026-02-27T01:00:00Z",
-      "tags": ["goal", "sports", "pickleball", "coaching", "personal-development"],
+      "updated": "2026-03-05T08:00:00Z",
+      "tags": [
+        "goal",
+        "sports",
+        "pickleball",
+        "coaching",
+        "personal-development"
+      ],
       "notes": [
         "2026-02-27: 目標設定",
         "階段 1: 提升個人技術 (3-6 個月)",
@@ -283,7 +355,15 @@
         "階段 3: 教練認證 (12-18 個月)",
         "階段 4: 開設教練服務 (18-24 個月)",
         "每週訓練：Clubhouse + 其他場地",
-        "家庭參與：太太、仔、女一起參與"
+        "家庭參與：太太、仔、女一起參與",
+        "",
+        "📍 **新場地發現：**",
+        "2026-03-05: 荃灣新場試業活動",
+        "  - 時間：3/6(五) 2-4pm",
+        "  - 地點：荃灣聯薈會商場 3 樓",
+        "  - 特色：空曠超高樓底，輕鬆雙打",
+        "  - RSVP: https://reclub.co/m/7VN9W7",
+        "  - 狀態：⏳ 考慮是否參加"
       ]
     },
     {
@@ -295,7 +375,13 @@
       "created": "2026-02-27",
       "updated": "2026-02-27T07:35:00Z",
       "completed": "2026-02-27T07:35:00Z",
-      "tags": ["dashboard", "nextjs", "zeabur", "analytics", "productivity"],
+      "tags": [
+        "dashboard",
+        "nextjs",
+        "zeabur",
+        "analytics",
+        "productivity"
+      ],
       "notes": [
         "2026-02-27 05:30: 開始開發",
         "2026-02-27 06:00: ✅ 核心功能完成",
@@ -317,7 +403,12 @@
       "created": "2026-02-27",
       "updated": "2026-02-27T06:10:00Z",
       "completed": "2026-02-27T06:10:00Z",
-      "tags": ["discord", "friends", "social", "networking"],
+      "tags": [
+        "discord",
+        "friends",
+        "social",
+        "networking"
+      ],
       "notes": [
         "2026-02-27 06:07: ✅ 創建 Friends 分類",
         "2026-02-27 06:08: ✅ 創建 #elton 頻道",
@@ -338,7 +429,12 @@
       "created": "2026-02-27",
       "updated": "2026-02-27T06:12:00Z",
       "completed": "2026-02-27T06:12:00Z",
-      "tags": ["documentation", "blog", "technical-writing", "knowledge-base"],
+      "tags": [
+        "documentation",
+        "blog",
+        "technical-writing",
+        "knowledge-base"
+      ],
       "notes": [
         "2026-02-27 06:12: ✅ Mission Control Zeabur 部署故障排除指南",
         "主題：Combined Variables (All 3 in One!) Server Action 錯誤",
@@ -355,7 +451,14 @@
       "priority": "high",
       "created": "2026-03-01",
       "updated": "2026-03-01T11:00:00Z",
-      "tags": ["mobile-app", "ai", "nutrition", "qwen-vl", "health", "perplexity"],
+      "tags": [
+        "mobile-app",
+        "ai",
+        "nutrition",
+        "qwen-vl",
+        "health",
+        "perplexity"
+      ],
       "notes": [
         "2026-03-01: 可行性研究完成",
         "技術棧：React Native + Node.js + Supabase + Qwen-VL API",
@@ -375,7 +478,12 @@
       "priority": "high",
       "created": "2026-03-01",
       "updated": "2026-03-01T11:00:00Z",
-      "tags": ["perplexity", "browser-automation", "image-recognition", "nutrition"],
+      "tags": [
+        "perplexity",
+        "browser-automation",
+        "image-recognition",
+        "nutrition"
+      ],
       "notes": [
         "2026-03-01: 用戶提出使用 Perplexity Pro",
         "優勢：已有 Pro 賬戶、無需額外費用、識別準確（GPT-4V/Claude）",
@@ -393,7 +501,13 @@
       "priority": "high",
       "created": "2026-03-02",
       "updated": "2026-03-02T09:45:00Z",
-      "tags": ["goal", "openclaw", "learning", "expertise", "personal-development"],
+      "tags": [
+        "goal",
+        "openclaw",
+        "learning",
+        "expertise",
+        "personal-development"
+      ],
       "notes": [
         "2026-03-02: Goal added",
         "階段 1: Master core features (1-2 months)",
@@ -442,7 +556,14 @@
       "priority": "medium",
       "created": "2026-03-02",
       "updated": "2026-03-02T14:50:00Z",
-      "tags": ["game", "sci-fi", "interactive-fiction", "dialogue", "creative", "ai-powered"],
+      "tags": [
+        "game",
+        "sci-fi",
+        "interactive-fiction",
+        "dialogue",
+        "creative",
+        "ai-powered"
+      ],
       "notes": [
         "2026-03-02: Goal added",
         "🎮 **Game Concept:**",
@@ -488,7 +609,14 @@
       "priority": "high",
       "created": "2026-03-03",
       "updated": "2026-03-03T15:40:00Z",
-      "tags": ["product", "openclaw", "handbook", "saas", "passive-income", "community"],
+      "tags": [
+        "product",
+        "openclaw",
+        "handbook",
+        "saas",
+        "passive-income",
+        "community"
+      ],
       "notes": [
         "2026-03-03: 受 Judy 的 AI 指揮官手冊啟發 ($14.90 Gumroad)",
         "🎯 **產品定位：**",
@@ -552,7 +680,7 @@
       "status": "todo",
       "priority": "high",
       "created": "2026-03-03",
-      "updated": "2026-03-03T16:00:00Z",
+      "updated": "2026-03-03T16:00:00Z"
     },
     {
       "id": "proj-024",
@@ -562,7 +690,13 @@
       "priority": "medium",
       "created": "2026-03-04",
       "updated": "2026-03-04T10:00:00Z",
-      "tags": ["aliyun", "qwen", "testing", "comparison", "model-evaluation"],
+      "tags": [
+        "aliyun",
+        "qwen",
+        "testing",
+        "comparison",
+        "model-evaluation"
+      ],
       "notes": [
         "2026-03-04: 用戶提出需求 - 任務之前遺漏，現已添加",
         "🎯 **目標：**",
@@ -601,7 +735,13 @@
       "priority": "high",
       "created": "2026-03-04",
       "updated": "2026-03-04T15:05:00Z",
-      "tags": ["openclaw", "skills", "memory", "tavily", "improvement"],
+      "tags": [
+        "openclaw",
+        "skills",
+        "memory",
+        "tavily",
+        "improvement"
+      ],
       "notes": [
         "2026-03-04: 用戶提出問題 - AI 助手忘記使用 Tavily Search 技能，錯誤使用 Brave Search",
         "🎯 **問題：**",
@@ -631,13 +771,19 @@
     },
     {
       "id": "proj-026",
-      "title": "🚨 [URGENT] OpenRouter API Key 洩露 - 需立即更換",
+      "title": "📝 OpenRouter API Key - Replace (Free Tier, Low Risk)",
       "description": "OpenRouter API key 在 GitHub 公開倉庫洩露，已被自動禁用 - 需立即創建新 key 並更新配置",
-      "status": "todo",
-      "priority": "urgent",
+      "status": "backlog",
+      "priority": "low",
       "created": "2026-03-04",
-      "updated": "2026-03-04T23:45:00Z",
-      "tags": ["security", "urgent", "api-key", "openrouter", "github"],
+      "updated": "2026-03-05T01:56:32.536Z",
+      "tags": [
+        "security",
+        "urgent",
+        "api-key",
+        "openrouter",
+        "github"
+      ],
       "notes": [
         "2026-03-04 23:44: 🚨 收到 OpenRouter 安全警告郵件",
         "洩露位置：https://github.com/raycoderhk/2048-game/blob/a9ddaa9396b14effb6ff342e2dfd685f83479649/model-tester/.env",
@@ -652,18 +798,28 @@
         "🔐 **安全教訓：**",
         "  - 永遠不要將 .env 文件 commit 到 Git",
         "  - 使用環境變數管理敏感信息",
-        "  - 定期檢查 GitHub 是否有洩露的 secrets"
+        "  - 定期檢查 GitHub 是否有洩露的 secrets",
+        "🚨 Keys were accidentally posted in Discord - REVOKED and replaced",
+        "Updated: Keys are free tier, Discord is private server - low actual risk",
+        "Main value: practicing good security habits"
       ]
     },
     {
       "id": "proj-027",
-      "title": "🚨 [URGENT] HuggingFace Token 洩露 - 需立即更換",
+      "title": "📝 HuggingFace Token - Replace (Free Tier, Low Risk)",
       "description": "HuggingFace API token 在 GitHub 公開倉庫洩露，已被自動過期 - 需立即創建新 token 並更新營養師 App 配置",
-      "status": "todo",
-      "priority": "urgent",
+      "status": "backlog",
+      "priority": "low",
       "created": "2026-03-04",
-      "updated": "2026-03-04T23:45:00Z",
-      "tags": ["security", "urgent", "api-key", "huggingface", "github", "nutritionist-app"],
+      "updated": "2026-03-05T01:56:32.536Z",
+      "tags": [
+        "security",
+        "urgent",
+        "api-key",
+        "huggingface",
+        "github",
+        "nutritionist-app"
+      ],
       "notes": [
         "2026-03-04 23:44: 🚨 收到 HuggingFace 安全警告郵件",
         "洩露位置：https://github.com/raycoderhk/2048-game/blob/386da0cadc9ae9bb8495718c588786d148d4ac55/nutritionist-app/test_hf_api.py",
@@ -678,7 +834,10 @@
         "🔐 **安全教訓：**",
         "  - 永遠不要在代碼中硬編碼 API tokens",
         "  - 使用環境變數或 secrets 管理",
-        "  - 使用 HuggingFace Space secrets 注入 token"
+        "  - 使用 HuggingFace Space secrets 注入 token",
+        "🚨 Keys were accidentally posted in Discord - REVOKED and replaced",
+        "Updated: Keys are free tier, Discord is private server - low actual risk",
+        "Main value: practicing good security habits"
       ]
     },
     {
@@ -686,10 +845,16 @@
       "title": "🔒 GitHub 歷史清理 - 移除洩露的敏感文件",
       "description": "從 GitHub 歷史中徹底刪除洩露的 .env 和 API key 文件，防止通過 git history 恢復",
       "status": "todo",
-      "priority": "urgent",
+      "priority": "medium",
       "created": "2026-03-04",
       "updated": "2026-03-04T23:45:00Z",
-      "tags": ["security", "urgent", "github", "cleanup", "git-history"],
+      "tags": [
+        "security",
+        "urgent",
+        "github",
+        "cleanup",
+        "git-history"
+      ],
       "notes": [
         "2026-03-04 23:45: 🔒 需要清理 GitHub 歷史中的敏感文件",
         "📋 **洩露文件清單：**",
@@ -711,65 +876,129 @@
         "⚠️ **注意：**",
         "  - Force push 會影響其他協作者",
         "  - 建議先備份當前代碼",
-        "  - 清理後檢查 GitHub 是否還能訪問已刪除文件"
+        "  - 清理後檢查 GitHub 是否還能訪問已刪除文件",
+        "Still worthwhile: remove .env files from git history as good practice"
       ]
-    }
-  ],
-  "settings": {
-    "archiveDoneAfterDays": 30,
-    "defaultPriority": "medium",
-    "priorities": ["low", "medium", "high", "urgent"]
-  }
-}
-      "tags": ["gumroad", "sales", "passive-income", "marketing", "distribution"],
+    },
+    {
+      "id": "proj-030",
+      "title": "🔐 API Key Security Best Practices",
+      "description": "Document secure API key management practices - build good habits for production",
+      "status": "todo",
+      "priority": "medium",
+      "created": "2026-03-04",
+      "updated": "2026-03-05T01:42:11.413Z",
+      "tags": [
+        "security",
+        "api-keys",
+        "best-practices"
+      ],
       "notes": [
-        "2026-03-03: 從 proj-022 拆分出的獨立子任務",
-        "🎯 **Gumroad 設置清單：**",
-        "  ✅ 創建/登入 Gumroad 賬戶",
-        "  ✅ 創建產品頁面",
-        "  ✅ 上傳產品封面 (1280x720px)",
-        "  ✅ 撰寫產品描述 (中英雙語)",
-        "  ✅ 設置價格層級",
-        "  ✅ 上傳樣本章節 (免費預覽)",
-        "  ✅ 配置自動交付 (PDF + 模板)",
-        "  ✅ 整合 Discord 社區",
-        "  ✅ 設置 Affiliate 計劃",
-        "📊 **定價策略：**",
-        "  - Early Bird: $9.90 (首 100 名)",
-        "  - Regular: $14.90",
-        "  - Bundle (手冊 + SaaS Pro): $24.90/年",
-        "  - Team (5 licenses): $49.90",
-        "🎛️ **產品頁面要素：**",
-        "  - 吸引人的標題",
-        "  - 痛點描述 (3-5 個)",
-        "  - 解決方案/收益",
-        "  - 章節大綱",
-        "  - 作者介紹",
-        "  - 用戶評價 (測試用戶)",
-        "  - FAQ",
-        "  - CTA (立即購買)",
-        "📣 **Launch 推廣計劃：**",
-        "  - OpenClaw Discord (#announcements)",
-        "  - Twitter/X thread (開發過程 + Launch)",
-        "  - Reddit (r/opensource, r/nocode)",
-        "  - Product Hunt (準備 Launch)",
-        "  - 個人網絡 (LinkedIn, Facebook)",
-        "📈 **追蹤指標：**",
-        "  - 頁面瀏覽量",
-        "  - 轉換率 (目標：3-5%)",
-        "  - 銷售額",
-        "  - Affiliate 表現",
-        "  - 用戶反饋",
-        "🔗 **資源：**",
-        "  - Gumroad Docs: https://help.gumroad.com",
-        "  - Gumroad University: https://gumroad.com/university",
-        "  - 成功案例：Judy 的 AI 指揮官手冊 ($14.90)"
+        "Create .env.example templates for all projects",
+        "Add .env to .gitignore everywhere",
+        "Document key rotation procedures",
+        "Set up key expiration alerts",
+        "Never share keys in chat/email/screenshots"
+      ]
+    },
+    {
+      "id": "proj-031",
+      "title": "🚀 Kanban Board Enhancements (Phase 1)",
+      "description": "Improve Kanban board UX with time display, priority colors, stats dashboard, search, and task details modal",
+      "status": "in_progress",
+      "priority": "high",
+      "created": "2026-03-05",
+      "updated": "2026-03-05T02:08:07.529Z",
+      "tags": [
+        "kanban",
+        "ui",
+        "enhancement",
+        "phase-1"
+      ],
+      "notes": [
+        "📋 Sub-tasks: 5 enhancement items",
+        "⏱️  Total effort: ~7.5 hours",
+        "🎯 Goal: Make board more usable and informative",
+        "",
+        "Sub-tasks:",
+        "  1. 🎨 Priority Color Coding (30 min)",
+        "  2. ⏰ Show Created Time (HKT) (1 hour)",
+        "  3. 📊 Quick Stats Dashboard (1 hour)",
+        "  4. 🔍 Search & Filter (2 hours)",
+        "  5. 📋 Task Details Modal (3 hours)"
+      ],
+      "subtasks": [
+        {
+          "id": "proj-031-1",
+          "title": "🎨 Priority Color Coding",
+          "description": "Add visual priority indicators (red/orange/yellow/green borders)",
+          "status": "todo",
+          "priority": "high",
+          "effort": "30 min",
+          "tags": [
+            "ui",
+            "css"
+          ]
+        },
+        {
+          "id": "proj-031-2",
+          "title": "⏰ Show Created Time (HKT)",
+          "description": "Display task creation time in Hong Kong Time, not just date",
+          "status": "todo",
+          "priority": "high",
+          "effort": "1 hour",
+          "tags": [
+            "ui",
+            "timezone"
+          ]
+        },
+        {
+          "id": "proj-031-3",
+          "title": "📊 Quick Stats Dashboard",
+          "description": "Show overview stats at top (total, by status, by priority)",
+          "status": "todo",
+          "priority": "medium",
+          "effort": "1 hour",
+          "tags": [
+            "ui",
+            "dashboard"
+          ]
+        },
+        {
+          "id": "proj-031-4",
+          "title": "🔍 Search & Filter",
+          "description": "Search tasks by title/description, filter by priority/tags",
+          "status": "todo",
+          "priority": "medium",
+          "effort": "2 hours",
+          "tags": [
+            "ui",
+            "search"
+          ]
+        },
+        {
+          "id": "proj-031-5",
+          "title": "📋 Task Details Modal",
+          "description": "Click card to see full details, update history, and add notes",
+          "status": "todo",
+          "priority": "high",
+          "effort": "3 hours",
+          "tags": [
+            "ui",
+            "modal"
+          ]
+        }
       ]
     }
   ],
   "settings": {
     "archiveDoneAfterDays": 30,
     "defaultPriority": "medium",
-    "priorities": ["low", "medium", "high", "urgent"]
+    "priorities": [
+      "low",
+      "medium",
+      "high",
+      "urgent"
+    ]
   }
 }

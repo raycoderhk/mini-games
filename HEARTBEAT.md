@@ -10,9 +10,16 @@ If nothing needs attention, reply HEARTBEAT_OK.
 **恢復**: 08:00 HKT 恢復正常通知
 
 ## 即將到來的事件
-**今日 (3 月 1 日 星期日)**
+**今日 (3 月 5 日 星期四)**
 • 已完成：Hugging Face Token 申請
 • 已完成：營養師 App 配置 + 測試成功
+
+**明日 (3 月 6 日 星期五)** ⭐ NEW
+• 14:00-16:00 HKT - 匹克球新場試業 (荃灣)
+  - 地點：荃灣聯薈會商場 3 樓
+  - 特色：空曠超高樓底，輕鬆雙打
+  - RSVP: https://reclub.co/m/7VN9W7
+  - 狀態：⏳ 考慮是否參加
 
 **下星期六 (3 月 7 日)**
 • 兒子學校家長日 (時間未定，需確認)
@@ -78,6 +85,52 @@ If nothing needs attention, reply HEARTBEAT_OK.
 - [ ] 有無咩 tips 可以分享畀其他用戶？
 
 **注意：** 睡眠時間 (23:00-08:00 HKT) 唔好打擾社區
+
+### Email Monitoring (每 30 分鐘檢查 - 日間時段)
+**位置:** Gmail (raycoderhk.openclaw@gmail.com)  
+**檢查頻率:** 每 30 分鐘 (日間 08:00-23:00 HKT)  
+**睡眠時段:** 23:00-08:00 HKT (只記錄，不通知，除非緊急)  
+**檢查項目:**
+1. 新未讀電郵數量
+2. 識別緊急/重要電郵 (安全警告、付款通知、活動邀請等)
+3. 分析並總結新電郵內容
+4. 如有行動項目，自動加入 Kanban Board
+5. 發送通知到 #email Discord 頻道
+
+**通知規則:**
+- 🔴 **URGENT (紅色)** - 安全警告、API 洩露、賬戶風險 → 立即通知 + 加入 Kanban (urgent priority)
+- 🟠 **HIGH (橙色)** - 付款通知、賬單、<48 小時活動 → 通知 + 加入 Kanban (high priority)
+- 🟡 **MEDIUM (黃色)** - 一般查詢、會議邀請 → 通知 + 可選加入 Kanban
+- 🟢 **LOW (綠色)** - Newsletter、推廣、收據 → 只記錄，不加入 Kanban
+- 😴 **睡眠時段** - 除非 URGENT，否則累積到 08:00 HKT 一次過通知
+
+**Discord 通知格式:**
+```
+## 📬 Email Summary - [時間]
+
+**New Emails:** X unread
+
+### 🔴 URGENT (需立即處理)
+- [Email Subject](link) - Brief description
+  **Action:** [Kanban proj-XXX created]
+
+### 🟠 HIGH Priority
+- [Email Subject](link)
+
+### 🟡 Normal
+- [Email Subject](link)
+
+---
+**Next Check:** [時間]
+```
+
+**Kanban 自動創建:**
+- 檢測到 action items → 自動創建 Kanban task
+- 根據郵件類型設置 priority (urgent/high/medium)
+- 在 notes 中記錄郵件 ID 和內容摘要
+- 標籤：`email`, `auto-added`, `[類型]`
+
+---
 
 ### Kanban Board Monitoring (每次 Heartbeat 檢查)
 **位置:** `workspace/kanban-board.json`
