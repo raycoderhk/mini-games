@@ -433,6 +433,9 @@
     </div>
 
     <script>
+        // LocalStorage Key
+        const SAVE_KEY = 'pickleball_coach_save_v1';
+
         // Game State
         let gameState = {
             playerName: '',
@@ -447,6 +450,60 @@
                 bestScore: 0
             }
         };
+
+        // Load Saved Game
+        function loadGame() {
+            try {
+                const saved = localStorage.getItem(SAVE_KEY);
+                if (saved) {
+                    const loaded = JSON.parse(saved);
+                    gameState = { ...gameState, ...loaded };
+                    console.log('✅ 已載入存档', gameState);
+                    return true;
+                }
+            } catch (e) {
+                console.error('❌ 讀取存档失敗:', e);
+            }
+            return false;
+        }
+
+        // Save Game
+        function saveGame() {
+            try {
+                localStorage.setItem(SAVE_KEY, JSON.stringify(gameState));
+                console.log('✅ 已保存', gameState);
+            } catch (e) {
+                console.error('❌ 保存失敗:', e);
+            }
+        }
+
+        // Reset Progress
+        function resetProgress() {
+            if (confirm('⚠️ 確定要重置所有進度嗎？\n\n這將清除：\n- 玩家名字\n- 等級和積分\n- 所有統計數據\n\n此操作無法復原！')) {
+                localStorage.removeItem(SAVE_KEY);
+                gameState = {
+                    playerName: '',
+                    score: 0,
+                    level: 1,
+                    streak: 0,
+                    gamesPlayed: 0,
+                    title: '🌱 新手',
+                    quizStats: {
+                        total: 0,
+                        correct: 0,
+                        bestScore: 0
+                    }
+                };
+                updateStatus();
+                alert('✅ 進度已重置！');
+                location.reload();
+            }
+        }
+
+        // Auto-save helper
+        function autoSave() {
+            saveGame();
+        }
 
         // Coach Certification Questions (30 題)
         const coachQuestions = [
@@ -533,6 +590,7 @@
             document.getElementById('titleDisplay').textContent = gameState.title;
             document.getElementById('scoreDisplay').textContent = gameState.score;
             document.getElementById('streakDisplay').textContent = gameState.streak;
+            autoSave();
         }
 
         // Start Game
@@ -543,6 +601,31 @@
             document.getElementById('welcomeScreen').classList.add('hidden');
             document.getElementById('gameScreen').classList.remove('hidden');
             updateStatus();
+            saveGame();
+        }
+
+        // Initialize Game on Load
+        function initGame() {
+            const hasSave = loadGame();
+            if (hasSave && gameState.playerName) {
+                // Show welcome back message
+                const welcomeScreen = document.getElementById('welcomeScreen');
+                const inputGroup = welcomeScreen.querySelector('.input-group');
+                const startBtn = welcomeScreen.querySelector('button.btn');
+                
+                // Pre-fill name
+                document.getElementById('playerName').value = gameState.playerName;
+                
+                // Add welcome back message
+                const welcomeMsg = document.createElement('p');
+                welcomeMsg.style.color = '#48bb78';
+                welcomeMsg.style.fontWeight = 'bold';
+                welcomeMsg.style.marginTop = '15px';
+                welcomeMsg.innerHTML = `👋 歡迎回來，${gameState.playerName}！\n<br>Lv.${gameState.level} ${gameState.title} | ${gameState.score} 分`;
+                inputGroup.parentNode.insertBefore(welcomeMsg, startBtn);
+                
+                console.log('👋 歡迎回來:', gameState.playerName);
+            }
         }
 
         // Back to Menu
@@ -775,6 +858,7 @@
             
             const pct = Math.round(quizState.score / quizState.questions.length * 100);
             gameState.quizStats.bestScore = Math.max(gameState.quizStats.bestScore, pct);
+            saveGame();
             
             let msg, color;
             if (pct >= 90) { msg = '🏆 優秀！'; color = '#48bb78'; }
@@ -881,6 +965,7 @@
                 gameState.score += points;
                 gameState.gamesPlayed++;
                 updateLevel();
+                saveGame();
                 
                 result.innerHTML = `
                     <div style="color: ${color};">
@@ -979,6 +1064,7 @@
             const points = serveState.successful * 15;
             gameState.score += points;
             updateLevel();
+            saveGame();
             
             let msg;
             if (serveState.successful === 5) msg = '🏆 完美！5/5';
@@ -1054,10 +1140,24 @@
                         </div>
                     </div>
                     
+                    <div style="background: #fed7d7; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 5px solid #f56565;">
+                        <h3 style="margin-bottom: 10px; color: #742a2a;">⚠️ 危險區域</h3>
+                        <p style="color: #742a2a; margin-bottom: 15px;">重置將清除所有進度（等級、積分、統計）</p>
+                        <button class="btn" onclick="resetProgress()" style="background: #f56565;">🗑️ 重置進度</button>
+                    </div>
+                    
                     <button class="btn" onclick="backToMenu()">繼續挑戰 🚀</button>
                 </div>
             `;
         }
+
+        // Auto-save on page unload
+        window.addEventListener('beforeunload', () => {
+            saveGame();
+        });
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', initGame);
     </script>
 </body>
 </html>
