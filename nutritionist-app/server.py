@@ -110,7 +110,10 @@ def compress_image_base64(image_base64, max_size=800, quality=80):
 def analyze_food_minimax(image_base64):
     """使用 OpenRouter MiniMax-01 識別食物並分析營養"""
     if not OPENROUTER_API_KEY:
-        return {"success": False, "error": "OPENROUTER_API_KEY 未設置"}
+        print("❌ OPENROUTER_API_KEY is not set!")
+        return {"success": False, "error": "API 配置錯誤：缺少 API Key"}
+    
+    print(f"🔑 Using OpenRouter API key: {OPENROUTER_API_KEY[:10]}...")
     
     # 壓縮圖片
     image_base64 = compress_image_base64(image_base64)
@@ -199,12 +202,23 @@ def analyze_food_minimax(image_base64):
             return {"success": True, "data": json.loads(content[start:end])}
         return {"success": False, "error": "JSON 解析失敗"}
             
+    except urllib.error.HTTPError as e:
+        print(f"❌ HTTP Error {e.code}: {e.reason}")
+        if e.code == 401:
+            return {"success": False, "error": "API 認證失敗：請檢查 OpenRouter API Key 是否正確"}
+        elif e.code == 403:
+            return {"success": False, "error": "API 無權限：API Key 可能沒有 MiniMax-01 訪問權限"}
+        else:
+            return {"success": False, "error": f"HTTP 錯誤 {e.code}: {e.reason}"}
     except urllib.error.URLError as e:
         if "timed out" in str(e).lower():
             return {"success": False, "error": "AI 分析超時，請重試或縮小圖片"}
         return {"success": False, "error": f"網絡錯誤：{e}"}
     except Exception as e:
-        return {"success": False, "error": str(e)}
+        print(f"❌ Unexpected error: {e}")
+        import traceback
+        traceback.print_exc()
+        return {"success": False, "error": f"伺服器錯誤：{str(e)}"}
 
 # ============ API Routes ============
 
