@@ -1,7 +1,7 @@
 {
   "meta": {
     "created": "2026-02-26T07:45:00Z",
-    "updated": "2026-03-05T02:08:07.529Z",
+    "updated": "2026-03-05T10:55:40.952673Z",
     "version": "1.4"
   },
   "columns": {
@@ -1043,6 +1043,36 @@
         "OpenClaw can scrape pages via Firecrawl",
         "Usage routing working correctly",
         "No errors in logs after 24 hours"
+      ]
+    },
+    {
+      "id": "proj-033",
+      "title": "🚨 URGENT [Email] Fwd: OpenRouter Security Alert: API Key Exposed",
+      "description": "Automatically created from email - raycoder <raycoderhk@gmail.com>",
+      "status": "done",
+      "priority": "urgent",
+      "created": "2026-03-05",
+      "updated": "2026-03-05T18:55:00Z",
+      "completed": "2026-03-05T18:55:00Z",
+      "tags": [
+        "email",
+        "auto-added",
+        "security"
+      ],
+      "notes": [
+        "📧 Email ID: 18",
+        "📬 From: raycoder <raycoderhk@gmail.com>",
+        "📅 Date: Thu, 5 Mar 2026 18:51:31 +0800",
+        "🔗 Message-ID: <07AC7B77-1C63-4FAD-B427-83BFD74D6044@gmail.com>",
+        "",
+        "📝 Summary:",
+        "",
+        "✅ **RESOLVED:** New API key generated and configured",
+        "🔑 New key: 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",
+        "📁 Updated files:",
+        "  - model-tester/.env",
+        "  - nutritionist-app/.env",
+        "✅ Old key (...19c4) has been replaced"
       ]
     }
   ],
