@@ -20,7 +20,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
@@ -121,8 +121,8 @@
 
         .options {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
             margin-bottom: 20px;
         }
 
@@ -135,6 +135,7 @@
             font-size: 1em;
             cursor: pointer;
             transition: all 0.2s;
+            text-align: left;
         }
 
         .option-btn:hover {
@@ -155,22 +156,23 @@
         }
 
         .feedback {
-            padding: 15px;
-            border-radius: 8px;
+            padding: 20px;
+            border-radius: 10px;
             margin-bottom: 20px;
-            text-align: center;
-            font-size: 1.2em;
-            font-weight: bold;
+            font-size: 1.1em;
+            line-height: 1.6;
         }
 
         .feedback.correct {
             background: #c6f6d5;
             color: #22543d;
+            border-left: 5px solid #48bb78;
         }
 
         .feedback.wrong {
             background: #fed7d7;
             color: #742a2a;
+            border-left: 5px solid #f56565;
         }
 
         .btn {
@@ -277,19 +279,115 @@
             background: #718096;
             margin-right: 10px;
         }
+
+        .category-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #ed8936;
+            color: white;
+            border-radius: 15px;
+            font-size: 0.85em;
+            margin-bottom: 10px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .stat-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-box .num {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-box .lbl {
+            font-size: 0.85em;
+            color: #718096;
+        }
+
+        .mode-select {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .mode-btn {
+            background: white;
+            border: 3px solid #667eea;
+            color: #667eea;
+            padding: 25px;
+            border-radius: 12px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .mode-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .mode-btn .icon {
+            font-size: 2em;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .mode-btn .desc {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-top: 8px;
+        }
+
+        .explanation-box {
+            background: #ebf8ff;
+            border-left: 5px solid #4299e1;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .timer-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .timer-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #48bb78, #ecc94b, #f56565);
+            transition: width 0.1s linear;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>🏓 Pickleball Master</h1>
-            <p>匹克球挑戰遊戲</p>
+            <p>匹克球挑戰遊戲 + 教練認證模擬試</p>
         </div>
 
         <!-- Welcome Screen -->
         <div id="welcomeScreen" class="card welcome-screen">
             <h2>歡迎來到匹克球挑戰遊戲！🎉</h2>
             <p>目標：成為匹克球大師！通過各種挑戰提升你的等級。</p>
+            <p style="color: #ed8936; font-weight: bold;">🆕 新增：教練認證模擬考試 (30 條題目！)</p>
             
             <div class="input-group">
                 <input type="text" id="playerName" placeholder="請輸入你的名字" maxlength="20">
@@ -321,7 +419,7 @@
             </div>
 
             <div class="menu">
-                <button class="menu-btn" onclick="startQuiz()">📝 知識挑戰</button>
+                <button class="menu-btn" onclick="showQuizMode()">📝 知識挑戰</button>
                 <button class="menu-btn" onclick="startReflex()">⚡ 反應挑戰</button>
                 <button class="menu-btn" onclick="startServe()">🎯 發球挑戰</button>
                 <button class="menu-btn" onclick="showProgress()">📊 查看進度</button>
@@ -342,28 +440,78 @@
             level: 1,
             streak: 0,
             gamesPlayed: 0,
-            title: '🌱 新手'
+            title: '🌱 新手',
+            quizStats: {
+                total: 0,
+                correct: 0,
+                bestScore: 0
+            }
         };
 
-        // Questions Database
-        const questions = [
-            { q: "匹克球嘅英文係咩？", options: ["A) Tennis", "B) Pickleball", "C) Badminton", "D) Squash"], answer: 1, points: 10 },
-            { q: "一個標準匹克球場有幾呎長？", options: ["A) 20 呎", "B) 30 呎", "C) 44 呎", "D) 60 呎"], answer: 2, points: 15 },
-            { q: "匹克球比賽通常係幾分制？", options: ["A) 11 分", "B) 15 分", "C) 21 分", "D) 25 分"], answer: 0, points: 10 },
-            { q: "\"Kitchen\" 在匹克球中指的是什麼？", options: ["A) 休息區", "B) 發球區", "C) 非截擊區", "D) 觀眾區"], answer: 2, points: 15 },
-            { q: "匹克球拍通常用咩材料做？", options: ["A) 木", "B) 金屬", "C) 複合材料", "D) 塑料"], answer: 2, points: 10 },
-            { q: "雙打比賽有幾多人參與？", options: ["A) 2 人", "B) 3 人", "C) 4 人", "D) 6 人"], answer: 2, points: 5 },
-            { q: "發球時要打過幾多個區？", options: ["A) 1 個", "B) 2 個", "C) 3 個", "D) 4 個"], answer: 0, points: 10 },
-            { q: "匹克球起源於哪個國家？", options: ["A) 英國", "B) 美國", "C) 中國", "D) 澳洲"], answer: 1, points: 10 }
+        // Coach Certification Questions (30 題)
+        const coachQuestions = [
+            { q: "Pickleball 比賽開始時，發球方有幾多位球員可以發球？", options: ["A) 1 位", "B) 2 位", "C) 只有第一發球方 1 位，之後 2 位", "D) 視乎單打定雙打"], answer: 2, points: 15, category: "rules", explanation: "比賽開始時，第一發球方只有 1 位球員發球（右發球區）。之後每位球員輪到發球時都有兩次發球機會（左右區各一次）。" },
+            { q: "什麼是「Two-Bounce Rule」（兩跳規則）？", options: ["A) 球必須在場地內彈跳兩次才計分", "B) 發球後，接發球方和發球方各必須讓球彈跳一次才能擊球", "C) 每個球員最多可以擊球兩次", "D) 球在網上彈跳兩次後繼續比賽"], answer: 1, points: 15, category: "rules", explanation: "兩跳規則：發球後，接發球方必須讓球彈跳一次接發，然後發球方也必須讓球彈跳一次才能擊球。之後雙方都可以 Volley（空中擊球）或落地擊球。" },
+            { q: "標準 Pickleball 雙打場地的尺寸是？", options: ["A) 20' x 44' (6.10m x 13.41m)", "B) 36' x 78' (10.97m x 23.77m)", "C) 20' x 30' (6.10m x 9.14m)", "D) 25' x 50' (7.62m x 15.24m)"], answer: 0, points: 10, category: "court", explanation: "標準雙打場地 20 英尺 x 44 英尺 (6.10m x 13.41m)，與羽毛球雙打場地相同。" },
+            { q: "「Kitchen」（非截擊區）的範圍是？", options: ["A) 距離球網 5 英尺 (1.52m)", "B) 距離球網 7 英尺 (2.13m)", "C) 距離球網 10 英尺 (3.05m)", "D) 距離球網 3 英尺 (0.91m)"], answer: 1, points: 10, category: "court", explanation: "Kitchen 是距離球網兩側各 7 英尺 (2.13m) 的區域。球員不能在 Kitchen 內 Volley（空中擊球），但可以在該區域內擊打落地球。" },
+            { q: "標準 Pickleball 比賽的勝負條件是？", options: ["A) 先得 11 分，領先 2 分", "B) 先得 15 分，領先 2 分", "C) 先得 21 分，領先 2 分", "D) 以上皆可，視乎比賽規定"], answer: 3, points: 10, category: "scoring", explanation: "常見比賽制：11 分制（一般比賽）、15 分制（淘汰賽）、21 分制（決賽）。必須領先 2 分獲勝，或達到封頂分數。" },
+            { q: "在雙打比賽中，發球分數呼叫順序是？", options: ["A) 發球方分數 - 接發球方分數 - 發球手編號", "B) 接發球方分數 - 發球方分數 - 發球手編號", "C) 發球手編號 - 發球方分數 - 接發球方分數", "D) 只需呼叫發球方分數"], answer: 0, points: 15, category: "scoring", explanation: "雙打發球呼叫：「發球方分數 - 接發球方分數 - 發球手編號」。例如「3-2-1」表示發球方 3 分，接發球方 2 分，第一發球手。" },
+            { q: "發球時，球員必須？", options: ["A) 雙手發球", "B) 從下向上擊球，擊球點低於腰部", "C) 可以從上向下扣殺發球", "D) 必須用正手發球"], answer: 1, points: 15, category: "rules", explanation: "發球必須從下向上（underhand），擊球點低於腰部（肚臍水平），拍頭不可高於手腕。可以正手或反手發球。" },
+            { q: "如果發球觸網後落入正確的發球區，應該？", options: ["A) 重發（Let）", "B) 發球失誤", "C) 繼續比賽", "D) 接發球方選擇重發或繼續"], answer: 2, points: 10, category: "rules", explanation: "Pickleball 沒有 Let 規則。發球觸網後落入正確發球區，比賽繼續。" },
+            { q: "「Dink」是指什麼擊球？", options: ["A) 強力的底線抽球", "B) 輕柔的網前小球，落入對方 Kitchen", "C) 高吊球到對方底線", "D) 快速的截擊球"], answer: 1, points: 10, category: "technique", explanation: "Dink 是輕柔的網前小球，目的是讓球落入對方 Kitchen，迫使對方不能 Volley，是高級戰術的重要組成部分。" },
+            { q: "「Third Shot Drop」的目的是？", options: ["A) 直接得分", "B) 讓球快速飛向對方底線", "C) 讓球輕柔落入對方 Kitchen，爭取上網時間", "D) 發球後立即得分"], answer: 2, points: 15, category: "technique", explanation: "Third Shot Drop 是發球方第三擊的戰術，輕柔地將球打入對方 Kitchen，爭取時間上網，從防守轉為進攻。" },
+            { q: "球員在什麼情況下可以進入 Kitchen？", options: ["A) 任何時候都可以", "B) 只有在球彈跳後才能進入擊球", "C) 絕對不能進入", "D) 只有在發球時可以進入"], answer: 1, points: 15, category: "rules", explanation: "球員可以在球彈跳後進入 Kitchen 擊球，但不能在 Kitchen 內 Volley（空中擊球）。擊球後可以進入 Kitchen，只要擊球瞬間不在該區域內。" },
+            { q: "只有哪一方可以得分？", options: ["A) 發球方", "B) 接發球方", "C) 雙方都可以", "D) 視乎誰贏了該球"], answer: 0, points: 10, category: "scoring", explanation: "只有發球方可以得分。如果接發球方贏了該球，只獲得發球權（Side Out），不得分。" },
+            { q: "球網中央的高度是？", options: ["A) 34 英寸 (86cm)", "B) 36 英寸 (91cm)", "C) 30 英寸 (76cm)", "D) 32 英寸 (81cm)"], answer: 0, points: 10, category: "court", explanation: "球網中央高度 34 英寸 (86cm)，兩側高度 36 英寸 (91cm)。" },
+            { q: "如果球員的衣服或身體觸網，應該？", options: ["A) 繼續比賽", "B) 該球員失分", "C) 重發", "D) 警告一次"], answer: 1, points: 10, category: "rules", explanation: "球員的衣服、身體或球拍觸網屬於犯規，該球員/隊伍失分。" },
+            { q: "「Stacking」戰術是？", options: ["A) 雙打中兩位球員都站在同一側發球", "B) 發球後球員交換位置以發揮各自優勢", "C) 球員站在底線不動", "D) 球員都站在網前"], answer: 1, points: 15, category: "technique", explanation: "Stacking 是雙打戰術，發球後球員交換位置，讓正手強的球員保持在特定側，或讓兩位球員都用正手處理中路球。" },
+            { q: "教練在比賽中可以？", options: ["A) 隨時叫暫停指導", "B) 在死球時給予簡短指導", "C) 進入場地指導", "D) 替球員決定戰術"], answer: 1, points: 10, category: "coaching", explanation: "教練可以在死球時給予簡短指導，但不能延誤比賽、進入場地或干擾對方。正式比賽中教練指導有限制。" },
+            { q: "如果球擊中天花板或牆壁後落入對方場地，應該？", options: ["A) 繼續比賽", "B) 擊球方失分", "C) 重發", "D) 接球方選擇繼續或重發"], answer: 1, points: 10, category: "rules", explanation: "在室內場地，球擊中天花板或牆壁後落入對方場地屬於犯規，擊球方失分。" },
+            { q: "「Erne」擊球是？", options: ["A) 在 Kitchen 外側繞過 Kitchen 進行 Volley", "B) 在底線強力抽球", "C) 在網前輕放小球", "D) 發球直接得分"], answer: 0, points: 15, category: "technique", explanation: "Erne 是高級技術，球員繞到 Kitchen 外側（場地外）進行 Volley，避開 Kitchen 限制，通常用於對付對方的 Dink。" },
+            { q: "如果比分是 10-10，比賽如何結束？", options: ["A) 先得 11 分者勝", "B) 必須領先 2 分（如 12-10, 13-11）", "C) 抽籤決定", "D) 平手，加賽一局"], answer: 1, points: 10, category: "scoring", explanation: "必須領先 2 分獲勝。10-10 後繼續比賽直到一方領先 2 分，或達到封頂分數。" },
+            { q: "初學者最常犯的發球錯誤是？", options: ["A) 發球太快", "B) 擊球點高於腰部", "C) 發球太短", "D) 不使用旋轉"], answer: 1, points: 10, category: "coaching", explanation: "初學者常犯錯誤是擊球點高於腰部（肚臍），或拍頭高於手腕，這都是發球犯規。" },
+            { q: "單打比賽的發球規則與雙打有何不同？", options: ["A) 單打只有一位球員發球", "B) 單打沒有 Kitchen", "C) 單打發球時分數為偶數站右區，奇數站左區", "D) 單打不需要呼叫分數"], answer: 2, points: 15, category: "rules", explanation: "單打發球：分數為偶數時站右發球區，奇數時站左發球區。不需要呼叫發球手編號。" },
+            { q: "「ATP」(Around The Post) 擊球是？", options: ["A) 球從網柱外側繞過進入對方場地", "B) 球從網上方越過", "C) 球從網下方穿過", "D) 球擊中網柱後反彈"], answer: 0, points: 15, category: "technique", explanation: "ATP 是球從網柱外側繞過（不越過球網）進入對方場地，是合法擊球，通常用於大角度回球。" },
+            { q: "發球區被什麼線分隔？", options: ["A) 底線", "B) 中線（Center Line）", "C) 邊線", "D) Kitchen 線"], answer: 1, points: 10, category: "court", explanation: "中線將發球區分為左發球區和右發球區。發球必須落入對角線的發球區。" },
+            { q: "如果接發球時，球在 Kitchen 內彈跳，接發球員可以？", options: ["A) 在球彈跳前 Volley", "B) 等球彈跳後擊球", "C) 不能擊球，失分", "D) 要求重發"], answer: 1, points: 15, category: "rules", explanation: "接發球必須等球彈跳後擊球（兩跳規則）。即使球在 Kitchen 內彈跳，也要等彈跳後才能擊球。" },
+            { q: "教導初學者時，應該優先強調？", options: ["A) 強力的抽球", "B) 正確的發球動作和規則", "C) 高級戰術如 Dink", "D) 快速的 Volley"], answer: 1, points: 10, category: "coaching", explanation: "初學者應先掌握正確的發球動作（低於腰部、從下向上）和基本規則，再逐步學習戰術。" },
+            { q: "「Reset」擊球的目的是？", options: ["A) 重新開始比賽", "B) 將對方的強力擊球轉化為輕柔的 Dink", "C) 發球重新計時", "D) 換邊休息"], answer: 1, points: 15, category: "technique", explanation: "Reset 是將對方的強力擊球（如 Drive）輕柔地回擊成 Dink，重新控制節奏，從防守轉為相持。" },
+            { q: "如果球擊中對方球員身體後落入對方場地，應該？", options: ["A) 擊球方得分", "B) 被擊中方得分", "C) 重發", "D) 繼續比賽"], answer: 0, points: 10, category: "rules", explanation: "如果球擊中對方球員身體、衣服或球拍後落入對方場地，擊球方得分。" },
+            { q: "在 11 分制比賽中，什麼情況下需要換邊？", options: ["A) 每 3 分", "B) 每 5 分", "C) 當一方達到 6 分時", "D) 不需要換邊"], answer: 2, points: 10, category: "scoring", explanation: "11 分制中，當一方達到 6 分時換邊。15 分制是 8 分換邊，21 分制是 11 分換邊。" },
+            { q: "雙打溝通時，應該？", options: ["A) 保持沉默，專注擊球", "B) 大聲呼叫「Mine!」「Yours!」避免碰撞", "C) 只用手勢溝通", "D) 讓教練決定"], answer: 1, points: 10, category: "coaching", explanation: "雙打溝通至關重要，應大聲呼叫「Mine!」「Yours!」「Out!」「In!」等，避免碰撞和誤判。" },
+            { q: "「Soft Game」是指？", options: ["A) 力量較小的比賽", "B) 以 Dink 和網前控制為主的戰術", "C) 初學者比賽", "D) 練習賽"], answer: 1, points: 15, category: "technique", explanation: "Soft Game 是以 Dink、Drop Shot 和網前控制為主的戰術，強調精準度和耐心，是高級比賽的關鍵。" }
         ];
+
+        // Basic Questions (original 8 題)
+        const basicQuestions = [
+            { q: "匹克球嘅英文係咩？", options: ["A) Tennis", "B) Pickleball", "C) Badminton", "D) Squash"], answer: 1, points: 10, category: "basic", explanation: "Pickleball 係一種結合網球、羽毛球同乒乓球特點的運動。" },
+            { q: "一個標準匹克球場有幾呎長？", options: ["A) 20 呎", "B) 30 呎", "C) 44 呎", "D) 60 呎"], answer: 2, points: 15, category: "basic", explanation: "標準場地長 44 呎 (13.41m)，寬 20 呎 (6.10m)。" },
+            { q: "匹克球比賽通常係幾分制？", options: ["A) 11 分", "B) 15 分", "C) 21 分", "D) 25 分"], answer: 0, points: 10, category: "basic", explanation: "最常見係 11 分制，必須領先 2 分獲勝。" },
+            { q: "\"Kitchen\" 在匹克球中指的是什麼？", options: ["A) 休息區", "B) 發球區", "C) 非截擊區", "D) 觀眾區"], answer: 2, points: 15, category: "basic", explanation: "Kitchen 係非截擊區，距離球網 7 呎，不能在此區域 Volley。" },
+            { q: "匹克球拍通常用咩材料做？", options: ["A) 木", "B) 金屬", "C) 複合材料", "D) 塑料"], answer: 2, points: 10, category: "basic", explanation: "現代匹克球拍多用複合材料（碳纖維、玻璃纖維）製造。" },
+            { q: "雙打比賽有幾多人參與？", options: ["A) 2 人", "B) 3 人", "C) 4 人", "D) 6 人"], answer: 2, points: 5, category: "basic", explanation: "雙打比賽每隊 2 人，共 4 人參與。" },
+            { q: "發球時要打過幾多個區？", options: ["A) 1 個", "B) 2 個", "C) 3 個", "D) 4 個"], answer: 0, points: 10, category: "basic", explanation: "發球必須打入對角線的發球區，只有一個區。" },
+            { q: "匹克球起源於哪個國家？", options: ["A) 英國", "B) 美國", "C) 中國", "D) 澳洲"], answer: 1, points: 10, category: "basic", explanation: "匹克球 1965 年起源於美國華盛頓州。" }
+        ];
+
+        // Category names
+        const categoryNames = {
+            "rules": "📜 基本規則",
+            "scoring": "📊 計分系統",
+            "court": "🏟️ 場地規格",
+            "technique": "🎯 技術戰術",
+            "coaching": "👨‍🏫 教練知識",
+            "basic": "🌱 基礎知識"
+        };
 
         // Level System
         const levels = [
             { level: 1, title: "🌱 新手", minScore: 0 },
-            { level: 2, title: "🎾 初學者", minScore: 20 },
-            { level: 3, title: "🎯 中級玩家", minScore: 40 },
-            { level: 4, title: "⭐ 高級玩家", minScore: 70 },
-            { level: 5, title: "🏆 匹克球大師", minScore: 100 }
+            { level: 2, title: "🎾 初學者", minScore: 50 },
+            { level: 3, title: "🎯 中級玩家", minScore: 100 },
+            { level: 4, title: "⭐ 高級玩家", minScore: 200 },
+            { level: 5, title: "🏆 匹克球大師", minScore: 350 },
+            { level: 6, title: "👨‍🏫 認證教練", minScore: 500 }
         ];
 
         // Update Level
@@ -403,55 +551,88 @@
             document.getElementById('gameContent').innerHTML = '';
         }
 
-        // Show Progress
-        function showProgress() {
+        // Show Quiz Mode Selection
+        function showQuizMode() {
             document.getElementById('gameArea').classList.add('active');
             document.getElementById('gameContent').innerHTML = `
-                <div style="text-align: center; padding: 40px;">
-                    <h2 style="color: #667eea; margin-bottom: 20px;">📊 你的進度</h2>
-                    <div class="status-bar" style="margin-bottom: 30px;">
-                        <div class="status-item">
-                            <div class="label">等級</div>
-                            <div class="value">Lv.${gameState.level}</div>
-                            <div class="level-badge">${gameState.title}</div>
-                        </div>
-                        <div class="status-item">
-                            <div class="label">積分</div>
-                            <div class="value">${gameState.score}</div>
-                        </div>
-                        <div class="status-item">
-                            <div class="label">遊戲次數</div>
-                            <div class="value">${gameState.gamesPlayed}</div>
+                <div style="padding: 30px;">
+                    <h2 style="color: #667eea; margin-bottom: 15px;">📝 選擇測驗模式</h2>
+                    <p style="color: #718096; margin-bottom: 25px;">選擇適合你的挑戰難度</p>
+                    
+                    <div class="mode-select">
+                        <button class="mode-btn" onclick="startQuiz('basic')">
+                            <span class="icon">🌱</span>
+                            <strong>基礎知識挑戰</strong>
+                            <div class="desc">8 條基礎題目，適合初學者</div>
+                            <div class="desc">⏱️ 無限時 | 💰 每題 10-15 分</div>
+                        </button>
+                        
+                        <button class="mode-btn" onclick="startQuiz('coach')">
+                            <span class="icon">👨‍🏫</span>
+                            <strong>教練認證模擬試</strong>
+                            <div class="desc">30 條專業題目，5 大範疇</div>
+                            <div class="desc">⏱️ 每題 30 秒 | 💰 每題 10-15 分</div>
+                        </button>
+                        
+                        <button class="mode-btn" onclick="startQuiz('mixed')">
+                            <span class="icon">🎲</span>
+                            <strong>混合挑戰</strong>
+                            <div class="desc">隨機 10 題（基礎 + 認證）</div>
+                            <div class="desc">⏱️ 每題 30 秒 | 💰 每題 10-15 分</div>
+                        </button>
+                    </div>
+                    
+                    <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                        <h3 style="margin-bottom: 15px;">📊 你的測驗統計</h3>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <div class="num">${gameState.quizStats.total}</div>
+                                <div class="lbl">總題目數</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="num">${gameState.quizStats.correct}</div>
+                                <div class="lbl">正確答案</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="num">${gameState.quizStats.total > 0 ? Math.round(gameState.quizStats.correct / gameState.quizStats.total * 100) : 0}%</div>
+                                <div class="lbl">準確率</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="num">${gameState.quizStats.bestScore}%</div>
+                                <div class="lbl">最佳成績</div>
+                            </div>
                         </div>
                     </div>
-                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-                        <h3 style="margin-bottom: 15px;">🎯 下一目標</h3>
-                        <p>再得 <strong style="color: #667eea;">${Math.max(0, levels[gameState.level]?.minScore - gameState.score || 0)}</strong> 分就可以升級！</p>
-                        <div class="progress-bar" style="margin-top: 15px;">
-                            <div class="progress-fill" style="width: ${Math.min(100, (gameState.score / 100) * 100)}%;"></div>
-                        </div>
-                    </div>
-                    <button class="btn" onclick="backToMenu()">繼續挑戰 🚀</button>
                 </div>
             `;
         }
 
-        // Quiz Game
+        // Quiz State
         let quizState = {
             currentQuestion: 0,
             score: 0,
-            selected: []
+            questions: [],
+            timer: null,
+            timeLeft: 30
         };
 
-        function startQuiz() {
-            quizState.selected = [];
+        // Start Quiz
+        function startQuiz(mode) {
             quizState.score = 0;
             quizState.currentQuestion = 0;
             
-            // Select 3 random questions
-            quizState.questions = questions.sort(() => Math.random() - 0.5).slice(0, 3);
+            if (mode === 'basic') {
+                quizState.questions = [...basicQuestions].sort(() => Math.random() - 0.5).slice(0, 5);
+                quizState.timeLimit = 0; // No timer
+            } else if (mode === 'coach') {
+                quizState.questions = [...coachQuestions].sort(() => Math.random() - 0.5).slice(0, 10);
+                quizState.timeLimit = 30;
+            } else if (mode === 'mixed') {
+                const all = [...basicQuestions, ...coachQuestions];
+                quizState.questions = all.sort(() => Math.random() - 0.5).slice(0, 10);
+                quizState.timeLimit = 30;
+            }
             
-            document.getElementById('gameArea').classList.add('active');
             showQuestion();
         }
 
@@ -462,12 +643,21 @@
             }
 
             const q = quizState.questions[quizState.currentQuestion];
+            const category = categoryNames[q.category] || q.category;
+            
+            let timerHTML = '';
+            if (quizState.timeLimit > 0) {
+                timerHTML = `
+                    <div class="timer-bar">
+                        <div class="timer-fill" id="timerFill" style="width: 100%;"></div>
+                    </div>
+                `;
+            }
             
             document.getElementById('gameContent').innerHTML = `
                 <div style="padding: 20px;">
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: ${((quizState.currentQuestion + 1) / quizState.questions.length) * 100}%;"></div>
-                    </div>
+                    ${timerHTML}
+                    <div class="category-badge">${category}</div>
                     <p style="margin-bottom: 10px; color: #718096;">問題 ${quizState.currentQuestion + 1}/${quizState.questions.length}</p>
                     <div class="question">${q.q}</div>
                     <div class="options">
@@ -478,16 +668,68 @@
                     <div id="feedback"></div>
                 </div>
             `;
+            
+            // Start timer if enabled
+            if (quizState.timeLimit > 0) {
+                quizState.timeLeft = quizState.timeLimit;
+                startTimer();
+            }
+        }
+
+        function startTimer() {
+            const fill = document.getElementById('timerFill');
+            if (!fill) return;
+            
+            clearInterval(quizState.timer);
+            quizState.timer = setInterval(() => {
+                quizState.timeLeft -= 0.1;
+                const pct = (quizState.timeLeft / quizState.timeLimit) * 100;
+                fill.style.width = pct + '%';
+                
+                if (quizState.timeLeft <= 0) {
+                    clearInterval(quizState.timer);
+                    timeUp();
+                }
+            }, 100);
+        }
+
+        function timeUp() {
+            const q = quizState.questions[quizState.currentQuestion];
+            const buttons = document.querySelectorAll('.option-btn');
+            buttons.forEach(btn => btn.disabled = true);
+            
+            buttons[q.answer].classList.add('correct');
+            
+            gameState.streak = 0;
+            updateStatus();
+            
+            document.getElementById('feedback').innerHTML = `
+                <div class="feedback wrong">
+                    ⏰ 時間到！<br><br>
+                    <div class="explanation-box">
+                        <strong>正確答案：</strong> ${q.options[q.answer]}<br><br>
+                        <strong>💡 解釋：</strong> ${q.explanation}
+                    </div>
+                    <button class="btn" onclick="nextQuestion()" style="margin-top: 15px;">下一題 →</button>
+                </div>
+            `;
         }
 
         function selectAnswer(index) {
+            clearInterval(quizState.timer);
+            
             const q = quizState.questions[quizState.currentQuestion];
             const buttons = document.querySelectorAll('.option-btn');
             
             buttons.forEach(btn => btn.disabled = true);
             
+            // Track stats
+            gameState.quizStats.total++;
+            
             if (index === q.answer) {
                 buttons[index].classList.add('correct');
+                gameState.quizStats.correct++;
+                
                 const points = q.points + (gameState.streak >= 3 ? 5 : 0);
                 gameState.score += points;
                 gameState.streak++;
@@ -495,7 +737,11 @@
                 
                 document.getElementById('feedback').innerHTML = `
                     <div class="feedback correct">
-                        ✅ 正確！${points} 分 ${gameState.streak >= 3 ? '(🔥 連勝獎勵 +5!)' : ''}
+                        ✅ 正確！+${points} 分 ${gameState.streak >= 3 ? '(🔥 連勝獎勵 +5!)' : ''}<br><br>
+                        <div class="explanation-box">
+                            <strong>💡 解釋：</strong> ${q.explanation}
+                        </div>
+                        <button class="btn" onclick="nextQuestion()" style="margin-top: 15px;">下一題 →</button>
                     </div>
                 `;
             } else {
@@ -505,33 +751,74 @@
                 
                 document.getElementById('feedback').innerHTML = `
                     <div class="feedback wrong">
-                        ❌ 錯誤！正確答案係 ${q.options[q.answer]}
+                        ❌ 錯誤！<br><br>
+                        <div class="explanation-box">
+                            <strong>正確答案：</strong> ${q.options[q.answer]}<br><br>
+                            <strong>💡 解釋：</strong> ${q.explanation}
+                        </div>
+                        <button class="btn" onclick="nextQuestion()" style="margin-top: 15px;">下一題 →</button>
                     </div>
                 `;
             }
 
             updateStatus();
-            
-            setTimeout(() => {
-                quizState.currentQuestion++;
-                showQuestion();
-            }, 2000);
+        }
+
+        function nextQuestion() {
+            quizState.currentQuestion++;
+            showQuestion();
         }
 
         function endQuiz() {
             gameState.gamesPlayed++;
             updateLevel();
             
+            const pct = Math.round(quizState.score / quizState.questions.length * 100);
+            gameState.quizStats.bestScore = Math.max(gameState.quizStats.bestScore, pct);
+            
+            let msg, color;
+            if (pct >= 90) { msg = '🏆 優秀！'; color = '#48bb78'; }
+            else if (pct >= 70) { msg = '✅ 及格！'; color = '#4299e1'; }
+            else if (pct >= 50) { msg = '👍 不錯！'; color = '#ed8936'; }
+            else { msg = '💪 繼續練習！'; color = '#f56565'; }
+            
             document.getElementById('gameContent').innerHTML = `
                 <div style="text-align: center; padding: 40px;">
-                    <h2 style="color: #667eea; margin-bottom: 20px;">📊 本輪成績</h2>
-                    <div style="font-size: 3em; margin: 20px 0;">
-                        ${quizState.score}/${quizState.questions.length}
+                    <h2 style="color: #667eea; margin-bottom: 20px;">📊 測驗完成</h2>
+                    
+                    <div style="font-size: 4em; margin: 20px 0; color: ${color};">
+                        ${pct}%
                     </div>
-                    <p style="color: #718096; margin-bottom: 30px;">
-                        ${quizState.score === quizState.questions.length ? '🏆 完美！' : quizState.score >= 2 ? '👍 不錯！' : '💪 繼續練習！'}
-                    </p>
-                    <button class="btn" onclick="backToMenu()">返回選單</button>
+                    
+                    <div style="font-size: 1.5em; color: ${color}; margin-bottom: 10px;">
+                        ${msg}
+                    </div>
+                    
+                    <div style="color: #718096; margin-bottom: 30px;">
+                        ${quizState.score}/${quizState.questions.length} 正確
+                    </div>
+                    
+                    <div class="stats-grid" style="max-width: 500px; margin: 0 auto 30px;">
+                        <div class="stat-box">
+                            <div class="num">${gameState.quizStats.total}</div>
+                            <div class="lbl">總題目</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="num">${gameState.quizStats.correct}</div>
+                            <div class="lbl">正確</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="num">${Math.round(gameState.quizStats.correct / gameState.quizStats.total * 100) || 0}%</div>
+                            <div class="lbl">準確率</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="num">${gameState.quizStats.bestScore}%</div>
+                            <div class="lbl">最佳</div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn" onclick="showQuizMode()" style="margin: 10px;">再玩一次 🔄</button>
+                    <button class="btn back-btn" onclick="backToMenu()" style="margin: 10px;">返回選單</button>
                 </div>
             `;
         }
@@ -564,7 +851,6 @@
             const result = document.getElementById('reflexResult');
 
             if (!reflexState.waiting && !reflexState.startTime) {
-                // Start game
                 btn.disabled = true;
                 btn.textContent = '等待中...';
                 reflexState.waiting = true;
@@ -578,27 +864,19 @@
                     btn.textContent = '按我！🏓';
                 }, delay);
             } else if (reflexState.waiting) {
-                // Too early
                 clearTimeout(reflexState.timeout);
                 reflexState.waiting = false;
                 btn.disabled = false;
                 btn.textContent = '太快啦！再試一次 🏓';
             } else {
-                // Calculate reaction time
                 const reaction = (Date.now() - reflexState.startTime) / 1000;
                 let points, msg, color;
                 
-                if (reaction < 0.2) {
-                    points = 30; msg = '🏆 世界級反應！'; color = '#48bb78';
-                } else if (reaction < 0.3) {
-                    points = 20; msg = '⭐ 非常好！'; color = '#4299e1';
-                } else if (reaction < 0.4) {
-                    points = 15; msg = '👍 不錯！'; color = '#ed8936';
-                } else if (reaction < 0.5) {
-                    points = 10; msg = '🙂 平均'; color = '#ecc94b';
-                } else {
-                    points = 5; msg = '💪 繼續練習！'; color = '#f56565';
-                }
+                if (reaction < 0.2) { points = 30; msg = '🏆 世界級反應！'; color = '#48bb78'; }
+                else if (reaction < 0.3) { points = 20; msg = '⭐ 非常好！'; color = '#4299e1'; }
+                else if (reaction < 0.4) { points = 15; msg = '👍 不錯！'; color = '#ed8936'; }
+                else if (reaction < 0.5) { points = 10; msg = '🙂 平均'; color = '#ecc94b'; }
+                else { points = 5; msg = '💪 繼續練習！'; color = '#f56565'; }
                 
                 gameState.score += points;
                 gameState.gamesPlayed++;
@@ -660,7 +938,6 @@
                 </div>
             `;
 
-            // Animate target
             const target = document.getElementById('serveTarget');
             let position = 50;
             let direction = 1;
@@ -698,12 +975,15 @@
         }
 
         function endServe() {
-            const accuracy = (serveState.successful / 5) * 100;
-            const points = Math.floor(accuracy * 0.5);
-            
-            gameState.score += points;
             gameState.gamesPlayed++;
+            const points = serveState.successful * 15;
+            gameState.score += points;
             updateLevel();
+            
+            let msg;
+            if (serveState.successful === 5) msg = '🏆 完美！5/5';
+            else if (serveState.successful >= 3) msg = '👍 不錯！';
+            else msg = '💪 繼續練習！';
             
             document.getElementById('gameContent').innerHTML = `
                 <div style="text-align: center; padding: 40px;">
@@ -711,10 +991,70 @@
                     <div style="font-size: 3em; margin: 20px 0;">
                         ${serveState.successful}/5
                     </div>
-                    <p style="color: #718096; margin-bottom: 10px;">準確度：${accuracy.toFixed(0)}%</p>
-                    <p style="color: #718096; margin-bottom: 30px;">+${points} 分！</p>
-                    <button class="btn" onclick="startServe()">再玩一次 🔄</button>
-                    <button class="btn back-btn" onclick="backToMenu()" style="margin-left: 10px;">返回選單</button>
+                    <p style="color: #718096; margin-bottom: 20px;">${msg}</p>
+                    <p style="font-size: 1.3em; color: #667eea; margin-bottom: 30px;">
+                        +${points} 分！
+                    </p>
+                    <button class="btn" onclick="startServe()" style="margin: 10px;">再玩一次 🔄</button>
+                    <button class="btn back-btn" onclick="backToMenu()" style="margin: 10px;">返回選單</button>
+                </div>
+            `;
+        }
+
+        // Show Progress
+        function showProgress() {
+            document.getElementById('gameArea').classList.add('active');
+            document.getElementById('gameContent').innerHTML = `
+                <div style="text-align: center; padding: 40px;">
+                    <h2 style="color: #667eea; margin-bottom: 20px;">📊 你的進度</h2>
+                    
+                    <div class="status-bar" style="margin-bottom: 30px;">
+                        <div class="status-item">
+                            <div class="label">等級</div>
+                            <div class="value">Lv.${gameState.level}</div>
+                            <div class="level-badge">${gameState.title}</div>
+                        </div>
+                        <div class="status-item">
+                            <div class="label">積分</div>
+                            <div class="value">${gameState.score}</div>
+                        </div>
+                        <div class="status-item">
+                            <div class="label">遊戲次數</div>
+                            <div class="value">${gameState.gamesPlayed}</div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                        <h3 style="margin-bottom: 15px;">📝 測驗統計</h3>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <div class="num">${gameState.quizStats.total}</div>
+                                <div class="lbl">總題目</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="num">${gameState.quizStats.correct}</div>
+                                <div class="lbl">正確</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="num">${gameState.quizStats.total > 0 ? Math.round(gameState.quizStats.correct / gameState.quizStats.total * 100) : 0}%</div>
+                                <div class="lbl">準確率</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="num">${gameState.quizStats.bestScore}%</div>
+                                <div class="lbl">最佳</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                        <h3 style="margin-bottom: 15px;">🎯 下一目標</h3>
+                        <p>再得 <strong style="color: #667eea;">${Math.max(0, levels[gameState.level]?.minScore - gameState.score || 0)}</strong> 分就可以升級！</p>
+                        <div class="progress-bar" style="margin-top: 15px;">
+                            <div class="progress-fill" style="width: ${Math.min(100, (gameState.score / 500) * 100)}%;"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn" onclick="backToMenu()">繼續挑戰 🚀</button>
                 </div>
             `;
         }

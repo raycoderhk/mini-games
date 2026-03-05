@@ -1,137 +1,279 @@
-# 🏓 Pickleball Master - Web 版部署指南
+# 🏓 Pickleball Master - 匹克球挑戰遊戲
 
-## 🌐 在線玩
-
-**Zeabur 部署後：** https://pickleball-game.zeabur.app
-
----
-
-## 🚀 部署到 Zeabur
-
-### 方法 1：GitHub 部署 (推薦)
-
-#### 1. 上傳到 GitHub
-
-```bash
-# 進入遊戲目錄
-cd /home/node/.openclaw/workspace/games/pickleball-game-web
-
-# 初始化 Git
-git init
-
-# 添加所有文件
-git add .
-
-# Commit
-git commit -m "Initial commit: Pickleball Master Web Game"
-
-# 添加 remote (替換成你的 GitHub username)
-git remote add origin https://github.com/raycoderhk/pickleball-game-web.git
-
-# Push
-git push -u origin main
-```
-
-#### 2. Zeabur 部署
-
-1. **登入 Zeabur:** https://zeabur.com
-2. **New Project** → 選擇你個 GitHub repo
-3. **選擇 `pickleball-game-web`**
-4. **Deploy!**
-
-#### 3. 配置
-
-- **Port:** 8080 (自動檢測)
-- **Node Version:** 18.x
-- **Build Command:** (留空)
-- **Start Command:** `npm start`
-
----
-
-### 方法 2：本地測試
-
-```bash
-# 進入目錄
-cd /home/node/.openclaw/workspace/games/pickleball-game-web
-
-# 安裝依賴
-npm install
-
-# 運行
-npm start
-
-# 打開 browser
-# http://localhost:8080
-```
-
----
-
-## 📁 文件結構
-
-```
-pickleball-game-web/
-├── index.html      # 遊戲主文件 (HTML/CSS/JS)
-├── server.js       # Express 服務器
-├── package.json    # Node.js 配置
-└── README.md       # 呢個文件
-```
+**版本：** 2.0 (教練認證版)  
+**更新日期：** 2026-03-05  
+**狀態：** ✅ 完成
 
 ---
 
 ## 🎮 遊戲特色
 
-### 3 種挑戰模式：
+### 3 種挑戰模式
 
-| 模式 | 說明 | 最高分 |
-|------|------|--------|
-| 📝 知識挑戰 | 回答匹克球問題 | 45 分 |
-| ⚡ 反應挑戰 | 測試反應速度 | 30 分 |
-| 🎯 發球挑戰 | 發球準確度 | 50 分 |
+| 模式 | 說明 | 獎勵 |
+|------|------|------|
+| 📝 **知識挑戰** | 回答 Pickleball 相關問題 | 10-15 分/題 |
+| ⚡ **反應挑戰** | 測試你的反應速度 | 5-30 分 |
+| 🎯 **發球挑戰** | 時機判斷訓練 | 15 分/球 |
 
-### 等級系統：
+---
+
+## 🆕 2.0 升級內容
+
+### 教練認證模擬試
+
+**30 條專業題目**，涵蓋 5 大範疇：
+
+| 範疇 | 題目數 | 說明 |
+|------|--------|------|
+| 📜 基本規則 | 8 題 | 發球、兩跳規則、Kitchen 規則等 |
+| 📊 計分系統 | 5 題 | 11/15/21 分制、發球呼叫、換邊規則 |
+| 🏟️ 場地規格 | 4 題 | 場地尺寸、Kitchen 範圍、球網高度 |
+| 🎯 技術戰術 | 8 題 | Dink、Third Shot Drop、Erne、ATP、Stacking |
+| 👨‍🏫 教練知識 | 5 題 | 教學方法、比賽指導、溝通技巧 |
+
+### 3 種測驗模式
+
+| 模式 | 題目數 | 限時 | 適合對象 |
+|------|--------|------|----------|
+| 🌱 **基礎知識挑戰** | 5 題 | 無限時 | 初學者 |
+| 👨‍🏫 **教練認證模擬試** | 10 題 | 30 秒/題 | 準備認證考試 |
+| 🎲 **混合挑戰** | 10 題 | 30 秒/題 | 所有玩家 |
+
+---
+
+## 🎯 等級系統
 
 | 等級 | 稱號 | 所需積分 |
 |------|------|----------|
-| Lv.1 | 🌱 新手 | 0-19 |
-| Lv.2 | 🎾 初學者 | 20-39 |
-| Lv.3 | 🎯 中級玩家 | 40-69 |
-| Lv.4 | ⭐ 高級玩家 | 70-99 |
-| Lv.5 | 🏆 匹克球大師 | 100+ |
+| Lv.1 | 🌱 新手 | 0 |
+| Lv.2 | 🎾 初學者 | 50 |
+| Lv.3 | 🎯 中級玩家 | 100 |
+| Lv.4 | ⭐ 高級玩家 | 200 |
+| Lv.5 | 🏆 匹克球大師 | 350 |
+| Lv.6 | 👨‍🏫 認證教練 | 500 |
 
 ---
 
-## 📱 分享俾朋友
+## 📊 統計追蹤
 
-**URL:** https://pickleball-game.zeabur.app
+遊戲會記錄你的：
 
-**QR Code:** (可以用 Zeabur 生成)
-
----
-
-## 💡 未來改進
-
-- [ ] 記錄最高分 (LocalStorage / Database)
-- [ ] 成就系統
-- [ ] 多玩家模式 (Online Leaderboard)
-- [ ] 更多問題
-- [ ] 音效/音樂
-- [ ] Mobile 優化
+- ✅ 總題目數
+- ✅ 正確答案
+- ✅ 準確率
+- ✅ 最佳成績
+- ✅ 連勝紀錄
 
 ---
 
-## 🎨 技術棧
+## 🎮 如何開始
 
-- **Frontend:** HTML5 + CSS3 + Vanilla JavaScript
-- **Backend:** Node.js + Express (靜態文件服務)
-- **Deploy:** Zeabur (Free Tier)
+### 方法 1：本地運行
+
+```bash
+cd /home/node/.openclaw/workspace/games/pickleball-game-web
+python3 -m http.server 8080
+```
+
+然後開啟：http://localhost:8080
+
+### 方法 2：Zeabur 部署
+
+已部署至：**https://gameworld.zeabur.app/**
+
+**部署步驟：**
+
+1. Push 到 GitHub
+2. Zeabur 自動部署
+3. 或手動部署 `games/pickleball-game-web` 目錄
 
 ---
 
-## 📞 聯絡
+## 🎯 遊戲玩法
 
-**Developer:** Raymond  
-**GitHub:** raycoderhk
+### 知識挑戰
+
+1. 選擇測驗模式（基礎/認證/混合）
+2. 回答問題（限時 30 秒）
+3. 每題有詳細解釋
+4. 完成後顯示成績和準確率
+
+### 反應挑戰
+
+1. 按「開始」按鈕
+2. 等待「🏓」出現
+3. 立即按按鈕！
+4. 根據反應時間獲得分數
+
+| 反應時間 | 分數 | 評價 |
+|----------|------|------|
+| <0.2 秒 | 30 分 | 🏆 世界級 |
+| <0.3 秒 | 20 分 | ⭐ 非常好 |
+| <0.4 秒 | 15 分 | 👍 不錯 |
+| <0.5 秒 | 10 分 | 🙂 平均 |
+| >0.5 秒 | 5 分 | 💪 繼續練習 |
+
+### 發球挑戰
+
+1. 目標左右移動
+2. 在目標進入中心區時按按鈕
+3. 5 次發球機會
+4. 每次成功得 15 分
 
 ---
 
-**玩得開心！🏓**
+## 📝 示例題目
+
+### 基礎題
+
+> 匹克球嘅英文係咩？
+> 
+> 🇦 Tennis | 🇧 Pickleball | 🇨 Badminton | 🇩 Squash
+> 
+> **答案：** 🇧 ✅
+
+### 教練認證題
+
+> 什麼是「Two-Bounce Rule」（兩跳規則）？
+> 
+> 🇦 球必須在場地內彈跳兩次才計分  
+> 🇧 發球後，接發球方和發球方各必須讓球彈跳一次才能擊球  
+> 🇨 每個球員最多可以擊球兩次  
+> 🇩 球在網上彈跳兩次後繼續比賽
+> 
+> **答案：** 🇧 ✅  
+> **解釋：** 兩跳規則：發球後，接發球方必須讓球彈跳一次接發，然後發球方也必須讓球彈跳一次才能擊球。之後雙方都可以 Volley（空中擊球）或落地擊球。
+
+---
+
+## 🎨 界面特色
+
+- ✨ 漸變色設計（紫色主題）
+- 📱 手機/平板/桌面適配
+- 🎯 直觀的進度條
+- 💡 詳細的答案解釋
+- 📊 實時統計更新
+- 🏆 等級提升動畫
+
+---
+
+## 📂 文件結構
+
+```
+pickleball-game-web/
+├── index.html          # 主遊戲（45KB，含所有 CSS/JS）
+├── package.json        # Node.js 依賴
+├── server.js           # 簡單 HTTP 服務器
+├── node_modules/       # 依賴包
+└── README.md           # 本文件
+```
+
+---
+
+## 🔧 自定義題目
+
+編輯 `index.html` 中的題目陣列：
+
+```javascript
+const coachQuestions = [
+    {
+        q: "你的題目？",
+        options: ["A) 選項 A", "B) 選項 B", "C) 選項 C", "D) 選項 D"],
+        answer: 0,  // 正確答案索引 (0=A, 1=B, 2=C, 3=D)
+        points: 15,
+        category: "rules",  // rules/scoring/court/technique/coaching
+        explanation: "解釋為什麼這個答案正確"
+    },
+    // ... 添加更多題目
+];
+```
+
+---
+
+## 📊 題目分佈
+
+### 教練認證題庫 (30 題)
+
+| 類別 | 題目 ID | 分數 |
+|------|--------|------|
+| **基本規則** | 1,2,7,8,11,14,17,21,24,27 | 10-15 分 |
+| **計分系統** | 5,6,12,19,28 | 10-15 分 |
+| **場地規格** | 3,4,13,23 | 10 分 |
+| **技術戰術** | 9,10,15,18,22,26,30 | 10-15 分 |
+| **教練知識** | 16,20,25,29 | 10 分 |
+
+### 基礎題庫 (8 題)
+
+| 類別 | 題目 | 分數 |
+|------|------|------|
+| 基礎知識 | 8 題 | 5-15 分 |
+
+---
+
+## 🎓 教練認證資源
+
+### 官方認證機構
+
+| 機構 | 網站 |
+|------|------|
+| IPTPA | https://ipttapickleball.com |
+| PPR | https://pprpickleball.com |
+| APP | https://appickleball.com |
+| Pickleball Canada | https://pickleballcanada.org |
+
+### 學習資源
+
+- **官方規則：** https://pickleball.com/rules
+- **戰術教學：** https://pickleballtutorials.com
+- **視頻教學：** YouTube "Pickleball Coaching"
+
+---
+
+## 🚀 下一步
+
+- [ ] 添加多人對戰模式
+- [ ] 添加聲音效果
+- [ ] 添加更多題目（目標 50+）
+- [ ] 保存進度到 LocalStorage
+- [ ] 添加排行榜系統
+- [ ] 支持 Discord Bot 整合
+
+---
+
+## 📱 截圖功能
+
+遊戲包含：
+
+- 📊 實時狀態欄（玩家/等級/積分/連勝）
+- 🎯 進度條（題目進度/計時器）
+- 💡 詳細解釋框
+- 🏆 成績總結頁面
+- 📈 統計追蹤
+
+---
+
+## 🎉 測試清單
+
+- [x] 基礎知識挑戰（5 題）
+- [x] 教練認證模擬試（10 題）
+- [x] 混合挑戰（10 題）
+- [x] 反應挑戰
+- [x] 發球挑戰
+- [x] 等級系統
+- [x] 統計追蹤
+- [x] 手機適配
+- [x] 計時器功能
+- [x] 答案解釋
+
+---
+
+**祝你玩得開心，早日成為認證教練！** 🏓🏆
+
+---
+
+## 🔗 相關項目
+
+- **Discord Bot:** `/workspace/pickleball-quiz/` (Discord 版本)
+- **Revelation Game:** `/workspace/revelation-game/` (劇情冒險遊戲)
+- **Kanban Board:** `/workspace/kanban-board/` (任務管理)
