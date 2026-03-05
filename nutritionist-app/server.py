@@ -44,6 +44,7 @@ def server_error(e):
 PORT = int(os.environ.get("PORT", 8080))
 # 使用阿里雲 DashScope API (Coding Plan)
 ALIYUN_API_KEY = os.environ.get("ALIYUN_API_KEY", "")
+# Aliyun DashScope 兼容 OpenAI 格式的 endpoint
 DASHSCOPE_API_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
 
 # 自動載入 .env 文件
@@ -161,8 +162,9 @@ def analyze_food_minimax(image_base64):
     }
     
     # 使用 Qwen3.5-Plus (Coding Plan Lite 支持的視覺模型)
+    # Aliyun DashScope 模型名稱格式
     payload = {
-        "model": "qwen3.5-plus",
+        "model": "qwen-plus",  # Aliyun 官方模型名稱
         "max_tokens": 2048,
         "messages": [
             {
