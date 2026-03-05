@@ -1,12 +1,13 @@
 {
-  "lastChecked": "2026-03-04T10:12:00Z",
-  "lastUpdated": "2026-03-04T10:00:00Z",
-  "projectCount": 24,
+  "lastChecked": "2026-03-05T03:39:00Z",
+  "lastUpdated": "2026-03-05T02:08:07Z",
+  "projectCount": 31,
   "completedProjects": 13,
-  "inProgressProjects": 6,
-  "todoProjects": 4,
-  "blockedProjects": 1,
-  "lastChange": "proj-024 added (🧪 阿里雲模型測試器 - Aliyun Model Tester)",
-  "notes": "New project added: proj-024 for testing Aliyun Qwen models (turbo/plus/max comparison). Kanban updated March 4th 10:00 UTC.",
-  "sleepTimeCheck": false
+  "inProgressProjects": 7,
+  "todoProjects": 8,
+  "backlogProjects": 3,
+  "lastChange": "proj-029 added (Kanban Board Enhancements), proj-026/027/009 moved to backlog",
+  "notes": "New project: proj-029 Kanban Board Enhancements Phase 1 (in_progress, high). Security items (proj-026 OpenRouter, proj-027 HuggingFace) moved to backlog with low priority. proj-009 (Sub-agent testing) also moved to backlog.",
+  "sleepTimeCheck": false,
+  "urgentAlert": false
 }
