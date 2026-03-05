@@ -160,9 +160,9 @@ def analyze_food_minimax(image_base64):
         "Content-Type": "application/json"
     }
     
-    # 使用 Qwen-VL-Max (阿里雲最強視覺模型)
+    # 使用 Qwen3.5-Plus (Coding Plan Lite 支持的視覺模型)
     payload = {
-        "model": "qwen-vl-max",
+        "model": "qwen3.5-plus",
         "max_tokens": 2048,
         "messages": [
             {
@@ -501,8 +501,8 @@ def health():
     return jsonify({
         "status": "ok",
         "dashscope_configured": bool(DASHSCOPE_API_KEY),
-        "model": "qwen-vl-max",
-        "provider": "Aliyun DashScope",
+        "model": "qwen3.5-plus",
+        "provider": "Aliyun DashScope (Coding Plan Lite)",
         "version": "3.0 - Personal Nutrition Advisor",
         "database": "SQLite initialized"
     })
