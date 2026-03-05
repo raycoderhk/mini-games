@@ -989,6 +989,61 @@
           ]
         }
       ]
+    },
+    {
+      "id": "proj-032",
+      "title": "🔥 Deploy Firecrawl on Zeabur + OpenClaw Integration",
+      "description": "Deploy self-hosted Firecrawl as Zeabur service for unlimited web scraping. Currently blocked on PostgreSQL deployment.",
+      "status": "in_progress",
+      "priority": "high",
+      "created": "2026-03-05",
+      "updated": "2026-03-05T12:00:00Z",
+      "tags": [
+        "infrastructure",
+        "research",
+        "zeabur",
+        "web-scraping",
+        "firecrawl"
+      ],
+      "notes": [
+        "2026-03-05: Task created",
+        "2026-03-05: Research complete - Firecrawl migrated to ghcr.io/firecrawl/firecrawl:latest",
+        "2026-03-05: Identified PostgreSQL requirement (Firecrawl v2+)",
+        "",
+        "## Why Firecrawl:",
+        "- Tavily: 1000 searches/month limit",
+        "- web_fetch: No JavaScript support",
+        "- Browserless: 500 min/month, overkill for simple scraping",
+        "- Firecrawl: Unlimited, JS support, markdown extraction",
+        "",
+        "## Setup Steps:",
+        "1. Deploy PostgreSQL on Zeabur",
+        "2. Deploy Firecrawl service (ghcr.io/firecrawl/firecrawl:latest)",
+        "3. Configure env vars:",
+        "   - DATABASE_URL=${POSTGRES_CONNECTION_STRING}",
+        "   - NUQ_DATABASE_URL=${POSTGRES_CONNECTION_STRING}",
+        "   - USE_DB_AUTHENTICATION=false",
+        "4. Get internal URL",
+        "5. Update OpenClaw config",
+        "6. Test integration",
+        "",
+        "## Resources:",
+        "- Zeabur Project: 699e998cf134fffc31de75d6",
+        "- Firecrawl Image: ghcr.io/firecrawl/firecrawl:latest",
+        "- Docs: https://docs.firecrawl.dev",
+        "- Tracking: /workspace/tasks/FIRECRAWL-INTEGRATION.md"
+      ],
+      "blockers": [
+        "⏳ PostgreSQL service needs to be deployed on Zeabur",
+        "⏳ Environment variables need configuration"
+      ],
+      "successCriteria": [
+        "Firecrawl service shows 'Running' in Zeabur",
+        "curl test returns successful JSON response",
+        "OpenClaw can scrape pages via Firecrawl",
+        "Usage routing working correctly",
+        "No errors in logs after 24 hours"
+      ]
     }
   ],
   "settings": {
