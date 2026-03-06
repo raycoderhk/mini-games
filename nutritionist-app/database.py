@@ -100,13 +100,6 @@ def init_db():
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     ''')
-            water_intake_ml INTEGER DEFAULT 0,
-            exercise_minutes INTEGER DEFAULT 0,
-            notes TEXT,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (user_id) REFERENCES users(id)
-        )
-    ''')
     
     # 進度追蹤表
     cursor.execute('''
