@@ -1,35 +1,99 @@
 {
-  "_comment": "OpenClaw 配置模板 (去敏感化版本)",
+  "_comment": "OpenClaw 配置模板 (完整版本 - 基於 raycoderhk 實際配置)",
   "_version": "1.0",
   "_date": "2026-03-05",
   "_note": "此文件可以安全分享/commit 到 Git，所有 secrets 已用 ${ENV_VAR} 引用",
+  "_source": "基於 ~/.openclaw/openclaw.json 完整遷移",
   
   "meta": {
     "lastTouchedVersion": "2026.2.19",
-    "lastTouchedAt": "2026-03-05T00:00:00.000Z"
+    "lastTouchedAt": "2026-02-27T01:54:11.372Z"
   },
   
   "models": {
     "mode": "merge",
     "providers": {
-      "aliyun": {
-        "baseUrl": "https://coding.dashscope.aliyuncs.com/v1",
-        "apiKey": "${ALIYUN_API_KEY}",
-        "api": "openai-completions",
-        "_env_required": "ALIYUN_API_KEY",
-        "_env_source": "https://bailian.console.aliyun.com/"
-      },
       "deepseek": {
         "baseUrl": "https://api.deepseek.com/v1",
         "apiKey": "${DEEPSEEK_API_KEY}",
         "api": "openai-completions",
-        "_env_required": "DEEPSEEK_API_KEY"
+        "models": [
+          {
+            "id": "deepseek-chat",
+            "name": "DeepSeek Chat",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          },
+          {
+            "id": "deepseek-reasoner",
+            "name": "DeepSeek Reasoner",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          }
+        ]
+      },
+      "aliyun": {
+        "baseUrl": "https://coding.dashscope.aliyuncs.com/v1",
+        "apiKey": "${ALIYUN_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "qwen3.5-plus",
+            "name": "Qwen 3.5 Plus"
+          },
+          {
+            "id": "qwen3-coder-plus",
+            "name": "Qwen 3 Coder Plus"
+          },
+          {
+            "id": "qwen3-max-2026-01-23",
+            "name": "Qwen 3 Max"
+          },
+          {
+            "id": "qwen-vl-max-latest",
+            "name": "Qwen VL Max (Vision)",
+            "input": ["text", "image"],
+            "contextWindow": 32000,
+            "maxTokens": 8192
+          },
+          {
+            "id": "qwen-vl-max",
+            "name": "Qwen VL Max",
+            "input": ["text", "image"],
+            "contextWindow": 32000,
+            "maxTokens": 8192
+          }
+        ]
       },
       "openrouter": {
         "baseUrl": "https://openrouter.ai/api/v1",
         "apiKey": "${OPENROUTER_API_KEY}",
         "api": "openai-completions",
-        "_env_required": "OPENROUTER_API_KEY"
+        "models": [
+          {
+            "id": "minimax/minimax-01",
+            "name": "MiniMax 01 (Vision)",
+            "input": ["text", "image"],
+            "contextWindow": 1000000,
+            "maxTokens": 32000
+          }
+        ]
       }
     }
   },
@@ -39,12 +103,139 @@
       "model": {
         "primary": "aliyun/qwen3.5-plus"
       },
+      "models": {
+        "deepseek/deepseek-chat": {},
+        "deepseek/deepseek-reasoner": {},
+        "aliyun/qwen3.5-plus": {},
+        "aliyun/qwen3-coder-plus": {},
+        "aliyun/qwen3-max-2026-01-23": {},
+        "aliyun/qwen-turbo": {},
+        "aliyun/qwen-vl-max-latest": {},
+        "aliyun/qwen-vl-max": {},
+        "openrouter/minimax/minimax-01": {}
+      },
+      "heartbeat": {
+        "target": "discord"
+      },
       "maxConcurrent": 4,
       "subagents": {
         "maxConcurrent": 8,
-        "maxSpawnDepth": 2
+        "maxSpawnDepth": 2,
+        "maxChildrenPerAgent": 5,
+        "archiveAfterMinutes": 60,
+        "model": "aliyun/qwen-turbo"
+      }
+    },
+    "list": [
+      {
+        "id": "main",
+        "default": true,
+        "name": "Jarvis",
+        "workspace": "~/.openclaw/workspace",
+        "model": "aliyun/qwen3.5-plus"
+      },
+      {
+        "id": "coding",
+        "name": "Coding Agent",
+        "workspace": "~/.openclaw/agents/coding/workspace",
+        "agentDir": "~/.openclaw/agents/coding/agent",
+        "model": "aliyun/qwen3-coder-plus",
+        "subagents": {
+          "allowAgents": ["*"]
+        }
+      },
+      {
+        "id": "research",
+        "name": "Research Agent",
+        "workspace": "~/.openclaw/agents/research/workspace",
+        "agentDir": "~/.openclaw/agents/research/agent",
+        "model": "aliyun/qwen3.5-plus",
+        "subagents": {
+          "allowAgents": ["*"]
+        }
+      },
+      {
+        "id": "admin",
+        "name": "Admin Agent",
+        "workspace": "~/.openclaw/agents/admin/workspace",
+        "agentDir": "~/.openclaw/agents/admin/agent",
+        "model": "aliyun/qwen-turbo",
+        "subagents": {
+          "allowAgents": ["*"]
+        }
+      }
+    ]
+  },
+  
+  "tools": {
+    "web": {
+      "search": {
+        "provider": "brave",
+        "maxResults": 10,
+        "timeoutSeconds": 30
+      }
+    },
+    "subagents": {
+      "tools": {
+        "deny": ["cron"]
       }
     }
+  },
+  
+  "bindings": [
+    {
+      "agentId": "main",
+      "match": {
+        "channel": "discord",
+        "accountId": "default"
+      }
+    },
+    {
+      "agentId": "coding",
+      "match": {
+        "channel": "discord",
+        "accountId": "default",
+        "peer": {
+          "kind": "channel",
+          "id": "${DISCORD_CHANNEL_CODING_ID}"
+        }
+      }
+    },
+    {
+      "agentId": "research",
+      "match": {
+        "channel": "discord",
+        "accountId": "default",
+        "peer": {
+          "kind": "channel",
+          "id": "${DISCORD_CHANNEL_RESEARCH_ID}"
+        }
+      }
+    },
+    {
+      "agentId": "admin",
+      "match": {
+        "channel": "discord",
+        "accountId": "default",
+        "peer": {
+          "kind": "channel",
+          "id": "${DISCORD_CHANNEL_ADMIN_ID}"
+        }
+      }
+    },
+    {
+      "agentId": "main",
+      "match": {
+        "channel": "telegram",
+        "accountId": "default"
+      }
+    }
+  ],
+  
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true
   },
   
   "channels": {
@@ -52,7 +243,7 @@
       "dmPolicy": "pairing",
       "botToken": "${TELEGRAM_BOT_TOKEN}",
       "groupPolicy": "allowlist",
-      "_env_required": "TELEGRAM_BOT_TOKEN"
+      "streamMode": "partial"
     },
     "discord": {
       "groupPolicy": "allowlist",
@@ -61,7 +252,22 @@
           "token": "${DISCORD_BOT_TOKEN}",
           "groupPolicy": "allowlist",
           "dmPolicy": "allowlist",
-          "_env_required": "DISCORD_BOT_TOKEN"
+          "allowFrom": ["${DISCORD_USER_ID_OWNER}"],
+          "guilds": {
+            "${DISCORD_GUILD_ID}": {
+              "requireMention": false
+            }
+          }
+        },
+        "gamebot": {
+          "token": "${DISCORD_GAMEBOT_TOKEN}",
+          "groupPolicy": "allowlist",
+          "dmPolicy": "allowlist",
+          "guilds": {
+            "${DISCORD_GUILD_ID}": {
+              "requireMention": false
+            }
+          }
         }
       }
     }
@@ -74,8 +280,7 @@
     },
     "controlUi": {
       "allowInsecureAuth": true
-    },
-    "_env_required": "GATEWAY_AUTH_TOKEN"
+    }
   },
   
   "plugins": {
@@ -89,11 +294,45 @@
     }
   },
   
+  "_env_variables_required": {
+    "AI_MODELS": [
+      "ALIYUN_API_KEY",
+      "DEEPSEEK_API_KEY",
+      "OPENROUTER_API_KEY"
+    ],
+    "MESSAGING": [
+      "TELEGRAM_BOT_TOKEN",
+      "DISCORD_BOT_TOKEN",
+      "DISCORD_GAMEBOT_TOKEN"
+    ],
+    "DISCORD_IDS": [
+      "DISCORD_USER_ID_OWNER",
+      "DISCORD_GUILD_ID",
+      "DISCORD_CHANNEL_CODING_ID",
+      "DISCORD_CHANNEL_RESEARCH_ID",
+      "DISCORD_CHANNEL_ADMIN_ID"
+    ],
+    "GATEWAY": [
+      "GATEWAY_AUTH_TOKEN"
+    ],
+    "WEB_SERVICES": [
+      "BRAVE_SEARCH_API_KEY"
+    ]
+  },
+  
   "_setup_instructions": {
-    "step1": "複製此文件為 openclaw.json",
+    "step1": "複製此文件為 ~/.openclaw/openclaw.json",
     "step2": "創建 ~/.openclaw/.env 文件",
     "step3": "在 .env 中填充所有 ${ENV_VAR} 變數",
     "step4": "確保 .env 加入 .gitignore",
-    "step5": "運行 openclaw gateway start"
+    "step5": "運行 source ~/.openclaw/.env",
+    "step6": "測試 openclaw --version",
+    "step7": "運行 openclaw gateway start"
+  },
+  
+  "_discord_ids_howto": {
+    "USER_ID": "開啟 Discord → 設置 → 進階 → 開發者模式 → 右鍵用戶 → 複製 ID",
+    "GUILD_ID": "右鍵服務器圖標 → 複製 ID",
+    "CHANNEL_ID": "右鍵頻道 → 複製 ID"
   }
 }
