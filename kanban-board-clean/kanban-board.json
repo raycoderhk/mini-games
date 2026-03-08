@@ -1,7 +1,7 @@
 {
   "meta": {
     "created": "2026-02-26T07:45:00Z",
-    "updated": "2026-03-01T09:30:00Z",
+    "updated": "2026-03-08T12:34:32.979869Z",
     "version": "1.2"
   },
   "columns": {
@@ -493,6 +493,51 @@
         "限制：需手動連接瀏覽器、速度較慢（10-30 秒/次）",
         "文檔：/workspace/nutritionist-app/PERPLEXITY_AUTOMATION.md",
         "下一步：1) 用戶連接 Chrome 擴展 2) 測試自動化流程 3) 驗證可行性"
+      ]
+    },
+    {
+      "id": "proj-020",
+      "title": "🔒 電郵安全三審機制 - Email Security Triple Review",
+      "description": "實施電郵安全三審機制，防止未經授權訪問私人數據",
+      "status": "todo",
+      "priority": "high",
+      "created": "2026-03-08",
+      "updated": "2026-03-08T12:34:32.979843Z",
+      "tags": [
+        "security",
+        "email",
+        "openclaw",
+        "privacy"
+      ],
+      "notes": [
+        "2026-03-08: 用戶提出安全疑慮 - 擔心電郵渠道洩露私人數據",
+        "",
+        "🎯 **安全問題：**",
+        "  - 如果有人 send email 去 OpenClaw 問私人數據會點？",
+        "  - 用戶擔心 data security",
+        "",
+        "✅ **現有保護：**",
+        "  - Credentials 在 .env files (email 無法訪問)",
+        "  - 無 command execution from email",
+        "  - 無 data export features",
+        "  - Workspace files 隔離",
+        "",
+        "🔧 **三審機制建議：**",
+        "  1. **Email Whitelist** - 只處理 trusted senders 嘅電郵",
+        "  2. **Identity Verification** - 敏感請求需驗證身份",
+        "  3. **Audit Logging** - 記錄所有電郵互動",
+        "",
+        "📋 **實施步驟：**",
+        "  1. 添加 TRUSTED_SENDERS list 到 email checker",
+        "  2. 添加 identity verification for sensitive requests",
+        "  3. 添加 audit log 記錄可疑電郵",
+        "  4. 添加 Discord alert for suspicious emails",
+        "",
+        "🔐 **安全原則：**",
+        "  - 永不通過電郵分享 credentials",
+        "  - 永不訪問用戶私人數據",
+        "  - 永不執行電郵中的命令",
+        "  - 所有敏感請求需 Discord 確認"
       ]
     }
   ],
