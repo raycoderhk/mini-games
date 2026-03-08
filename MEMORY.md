@@ -178,7 +178,9 @@ async function getOrCreateUser(email, name, googleId, image) {
 **March 8 (Sun):** School field trip (HKUST + Yim Tin Tsai)  
 **March 10 (Tue):** Pickleball @ Tsuen Wan Pickledise (19:00-21:00)  
 **March 13 (Fri):** Lunch with Chris (TBD)  
-**March 14 (Sat):** School field trip + Clan Association Dinner  
+**March 14 (Sat):** ✅ Queen Elizabeth School PTA Trip (daughter selected) + Clan Association Dinner
+  - Trip: 08:45-16:30, $90/person (subsidized)
+  - Itinerary: Dragon fruit farm → Kimchi workshop → Abalone lunch (Flow Shan) → Mural Village  
 **March 15 (Sun):** Son's birthday, Maxim's vouchers expire ($250 x 2)  
 **March 17 (Tue):** Wedding anniversary @ Ocean Park Marriott
 
@@ -198,4 +200,4 @@ async function getOrCreateUser(email, name, googleId, image) {
 
 ---
 
-*Last updated: March 4th, 2026*
+*Last updated: March 8th, 2026*
