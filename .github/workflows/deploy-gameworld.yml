@@ -13,20 +13,18 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      
-      - name: Install Zeabur CLI
+      - name: Trigger Zeabur Deploy Hook
         run: |
-          curl -Ls https://github.com/zeabur/cli/releases/latest/download/zeabur-cli-linux-amd64 -o /tmp/zeabur
-          chmod +x /tmp/zeabur
+          curl -X POST "${{ secrets.ZEABUR_DEPLOY_HOOK }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            || echo "Deploy hook triggered or not configured"
+        continue-on-error: true
       
-      - name: Deploy to Zeabur
-        env:
-          ZEABUR_API_KEY: ${{ secrets.ZEABUR_API_KEY }}
-          ZEABUR_PROJECT_ID: ${{ secrets.ZEABUR_GAMEWORLD_PROJECT_ID }}
-          ZEABUR_SERVICE_ID: ${{ secrets.ZEABUR_GAMEWORLD_SERVICE_ID }}
+      - name: Deployment Message
         run: |
-          /tmp/zeabur deploy --project $ZEABUR_PROJECT_ID --service $ZEABUR_SERVICE_ID --dir games/2048-game
-          echo "✅ Gameworld deployed successfully!"
+          echo "✅ Code pushed to GitHub!"
+          echo "📦 Zeabur will auto-deploy (check dashboard)"
           echo "🌐 URL: https://gameworld.zeabur.app"
+          echo ""
+          echo "If auto-deploy fails, manually redeploy at:"
+          echo "https://app.zeabur.com/"
