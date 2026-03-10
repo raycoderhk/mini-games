@@ -23,8 +23,9 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-# Memory (keep recent)
-memory/2026-02-*.md
+# Memory (SECURITY - may contain API keys and secrets)
+# NEVER commit memory files to git
+memory/
 
 # Kanban/Mission Control (separate repos)
 kanban-zeabur/
@@ -38,8 +39,9 @@ kanban-zeabur/
 mission-control/
 movie-recommender/
 
-# Skills (separate)
+# Skills (separate) - except supermarket-prices
 skills/
+!skills/supermarket-prices/
 
 # Old games folder (using root now)
 games/

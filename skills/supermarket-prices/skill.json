@@ -1,0 +1,74 @@
+{
+  "name": "supermarket-prices",
+  "version": "1.0.0",
+  "description": "Consumer Council Online Price Watch integration - compare supermarket prices across Hong Kong",
+  "author": "OpenClaw Research Agent",
+  "license": "MIT",
+  "main": "supermarket-prices.js",
+  "scripts": {
+    "fetch": "node fetch-prices.js",
+    "process": "node process-prices.js",
+    "test": "node test/test-queries.js"
+  },
+  "dependencies": {
+    "node-fetch": "^2.7.0",
+    "better-sqlite3": "^9.0.0",
+    "node-cron": "^3.0.0",
+    "dotenv": "^16.0.0"
+  },
+  "config": {
+    "dataEndpoint": "https://data.gov.hk/data/dataset/cc-pricewatch/resource/latest.json",
+    "database": "./data/supermarket_prices.db",
+    "cronSchedule": "0 6 * * *",
+    "timezone": "Asia/Hong_Kong"
+  },
+  "tools": [
+    {
+      "name": "search_product_price",
+      "description": "Search for product prices across all supermarkets",
+      "parameters": {
+        "keyword": "string (required) - Product name or keyword",
+        "store": "string (optional) - Filter by specific store",
+        "limit": "number (optional, default 10) - Max results to return"
+      }
+    },
+    {
+      "name": "compare_stores",
+      "description": "Compare prices for a product across different stores",
+      "parameters": {
+        "keyword": "string (required) - Product name or keyword"
+      }
+    },
+    {
+      "name": "get_best_deals",
+      "description": "Get current discount offers and best deals",
+      "parameters": {
+        "category": "string (optional) - Product category filter",
+        "limit": "number (optional, default 10) - Max results"
+      }
+    },
+    {
+      "name": "price_history",
+      "description": "Get price history for a specific product",
+      "parameters": {
+        "product_id": "string (required) - Product ID",
+        "days": "number (optional, default 30) - Number of days to look back"
+      }
+    }
+  ],
+  "synonyms": {
+    "stores": {
+      "百佳": ["PARKnSHOP", "百佳超級市場", "百佳", "PKS"],
+      "惠康": ["Wellcome", "惠康超級市場", "惠康", "WCM"],
+      "七仔": ["7-Eleven", "7-11", "七仔", "柒拾壹"],
+      "OK": ["OK便利店", "OK", "OK Store"],
+      "AEON": ["AEON", "永旺", "吉之島"],
+      "Citysuper": ["Citysuper", "city'super", "超級市場"]
+    },
+    "products": {
+      "可樂": ["可口可樂", "Coca-Cola", "Coke", "可樂"],
+      "奶茶": ["阿華田", "Ovaltine", "好立克", "Horlicks", "奶茶"],
+      "麵": ["即食麵", "公仔麵", "Instant Noodles", "出前一丁"]
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "stores": {
+    "百佳": ["PARKnSHOP", "百佳超級市場", "百佳", "PKS", "百佳超市"],
+    "惠康": ["Wellcome", "惠康超級市場", "惠康", "WCM", "惠康超市"],
+    "七仔": ["7-Eleven", "7-11", "七仔", "柒拾壹", "711"],
+    "OK": ["OK 便利店", "OK", "OK Store", "OK Convenience"],
+    "AEON": ["AEON", "永旺", "吉之島", "JUSCO"],
+    "Citysuper": ["Citysuper", "city'super", "超級市場"],
+    "Market Place": ["Market Place", "Market Place by Jasons", "Market Place 超市"],
+    "Taste": ["Taste", "Taste 超市", "TASTE"],
+    "Uselect": ["Uselect", "Uselect 超市", "U-Select"],
+    "華潤": ["華潤", "華潤萬家", "CR Vanguard", "Vanguard"],
+    "百佳 TASTE": ["百佳 TASTE", "TASTE x FRESH", "TASTE x FRESH 超級市場"]
+  },
+  "products": {
+    "可樂": ["可口可樂", "Coca-Cola", "Coke", "可樂", "可口可乐"],
+    "雪碧": ["雪碧", "Sprite", "雪碧汽水"],
+    "奶茶": ["阿華田", "Ovaltine", "好立克", "Horlicks", "奶茶", "好立克"],
+    "麵": ["即食麵", "公仔麵", "Instant Noodles", "出前一丁", "日清", "Nissin", "康師傅", "Master Kong"],
+    "米": ["米", "大米", "Rice", "絲苗米", "泰國米", " Jasmine Rice"],
+    "油": ["食用油", "油", "Cooking Oil", "花生油", "菜油"],
+    "奶": ["牛奶", "奶", "Milk", "鮮奶", "全脂牛奶", "低脂牛奶"],
+    "麵包": ["麵包", "Bread", "方包", "吐司", "切片麵包"],
+    "雞蛋": ["雞蛋", "Eggs", "鮮雞蛋", "A 級雞蛋"],
+    "雞肉": ["雞肉", "Chicken", "雞髀", "雞胸", "雞翼"],
+    "豬肉": ["豬肉", "Pork", "豬扒", "豬肉片", "梅頭"],
+    "牛肉": ["牛肉", "Beef", "牛扒", "牛肉片", "肥牛"],
+    "魚": ["魚", "Fish", "魚柳", "三文魚", "Salmon"],
+    "蔬菜": ["蔬菜", "Vegetables", "菜", "生菜", "白菜", "椰菜"],
+    "水果": ["水果", "Fruits", "果", "蘋果", "橙", "香蕉", "Apple", "Orange", "Banana"],
+    "啤酒": ["啤酒", "Beer", "生啤", "藍帶", "Tiger", "Carlsberg", "Corona"],
+    "紅酒": ["紅酒", "Wine", "葡萄酒", "Red Wine", "White Wine"],
+    "零食": ["零食", "Snacks", "薯片", "餅乾", "Chips", "Cookies", "Biscuits"],
+    "洗髮水": ["洗髮水", "Shampoo", "洗頭水", "護髮素", "Conditioner"],
+    "沐浴露": ["沐浴露", "Body Wash", "洗澡露", "Soap"],
+    "洗衣液": ["洗衣液", "Laundry Detergent", "洗衣粉", "洗衣露"],
+    "紙巾": ["紙巾", "Tissue", "衛生紙", "廁紙", "面紙"]
+  },
+  "categories": {
+    "飲品": ["飲品", "Drinks", "飲料", "汽水", "果汁"],
+    "糧油": ["糧油", "Grain & Oil", "米麵", "食用油"],
+    "肉類": ["肉類", "Meat", "肉", "鮮肉"],
+    "海鮮": ["海鮮", "Seafood", "魚", "蝦", "蟹"],
+    "蔬果": ["蔬果", "Fruits & Vegetables", "菜", "果"],
+    "零食": ["零食", "Snacks", "小食"],
+    "酒類": ["酒類", "Alcohol", "酒"],
+    "個人護理": ["個人護理", "Personal Care", "洗護", "護理"],
+    "家居": ["家居", "Household", "清潔", "家品"],
+    "嬰兒": ["嬰兒", "Baby", "BB", "奶粉", "尿片"]
+  }
+}
