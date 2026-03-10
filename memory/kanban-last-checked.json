@@ -1,13 +1,13 @@
 {
-  "lastChecked": "2026-03-05T09:09:00Z",
-  "lastUpdated": "2026-03-05T12:00:00Z",
-  "projectCount": 32,
+  "lastChecked": "2026-03-10T06:14:00Z",
+  "lastUpdated": "2026-03-08T12:34:32Z",
+  "projectCount": 20,
   "completedProjects": 13,
-  "inProgressProjects": 8,
-  "todoProjects": 8,
-  "backlogProjects": 3,
-  "lastChange": "proj-032 added (Deploy Firecrawl on Zeabur + OpenClaw Integration)",
-  "notes": "New project: proj-032 Firecrawl deployment (in_progress, high). Currently blocked on PostgreSQL deployment on Zeabur.",
+  "inProgressProjects": 4,
+  "todoProjects": 2,
+  "blockedProjects": 1,
+  "lastChange": "proj-020 added (Email Security Triple Review)",
+  "notes": "Board last updated March 8. proj-020 (Email Security) added as todo/high priority.",
   "sleepTimeCheck": false,
   "urgentAlert": false
 }

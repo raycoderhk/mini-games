@@ -1,0 +1,38 @@
+{
+  "name": "supermarket-prices",
+  "version": "1.0.0",
+  "description": "Consumer Council Online Price Watch integration - compare supermarket prices across Hong Kong",
+  "main": "supermarket-prices.js",
+  "scripts": {
+    "fetch": "node fetch-prices.js",
+    "process": "node process-prices.js",
+    "test": "node supermarket-prices.js search 可口可樂",
+    "test:compare": "node supermarket-prices.js compare 公仔麵",
+    "test:deals": "node supermarket-prices.js deals"
+  },
+  "keywords": [
+    "supermarket",
+    "price-comparison",
+    "hong-kong",
+    "consumer-council",
+    "openclaw",
+    "skill"
+  ],
+  "author": "OpenClaw Research Agent",
+  "license": "MIT",
+  "dependencies": {
+    "better-sqlite3": "^9.0.0",
+    "dotenv": "^16.0.0",
+    "node-cron": "^3.0.0",
+    "node-fetch": "^2.7.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "config": {
+    "dataEndpoint": "https://data.gov.hk/data/dataset/cc-pricewatch/resource/latest.json",
+    "database": "./data/supermarket_prices.db",
+    "cronSchedule": "0 6 * * *",
+    "timezone": "Asia/Hong_Kong"
+  }
+}
