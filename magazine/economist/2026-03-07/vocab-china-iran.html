@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📖 ESL Vocabulary - China's ice-cold calculus over Iran | The Economist</title>
+    <style>
+        :root {
+            --economist-red: #e3120b;
+            --bg-color: #f5f5f5;
+            --card-bg: #fff;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.2s;
+        }
+        .back-link:hover { background: #555; }
+        
+        header {
+            background: linear-gradient(135deg, var(--economist-red), #c4120c);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1.2rem; opacity: 0.9; }
+        
+        .article-info {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .article-info table { width: 100%; border-collapse: collapse; }
+        .article-info td { padding: 8px 0; border-bottom: 1px solid #eee; }
+        .article-info td:first-child { font-weight: bold; width: 150px; }
+        .article-info a { color: var(--economist-red); text-decoration: none; }
+        .article-info a:hover { text-decoration: underline; }
+        
+        .level-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--economist-red);
+            color: white;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .vocab-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .vocab-section h2 {
+            color: var(--economist-red);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .vocab-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .vocab-table thead {
+            background: #333;
+            color: white;
+        }
+        
+        .vocab-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .vocab-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+        
+        .vocab-table tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .word-cell { font-size: 1.2em; font-weight: bold; color: var(--economist-red); }
+        .pos-cell { 
+            display: inline-block;
+            padding: 3px 10px;
+            background: #f0f0f0;
+            border-radius: 15px;
+            font-size: 0.85em;
+            color: #666;
+        }
+        
+        .example-box {
+            background: #f9f9f9;
+            padding: 10px 15px;
+            border-left: 3px solid var(--economist-red);
+            font-style: italic;
+            margin-top: 8px;
+        }
+        
+        .vocab-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.95em;
+            margin-top: 10px;
+        }
+        
+        .vocab-input:focus {
+            outline: none;
+            border-color: var(--economist-red);
+            box-shadow: 0 0 0 2px rgba(227, 18, 11, 0.1);
+        }
+        
+        .quiz-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .quiz-section h2 {
+            color: var(--economist-red);
+            margin-bottom: 20px;
+        }
+        
+        .quiz-question {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .quiz-question:last-child {
+            border-bottom: none;
+        }
+        
+        .quiz-question p {
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .quiz-option {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        
+        .quiz-option input {
+            margin-right: 10px;
+        }
+        
+        .feedback {
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .grammar-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .grammar-section h2 {
+            color: var(--economist-red);
+            margin-bottom: 20px;
+        }
+        
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .grammar-table th,
+        .grammar-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        
+        .grammar-table thead {
+            background: #f5f5f5;
+        }
+        
+        .progress-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .progress-section h2 {
+            color: var(--economist-red);
+            margin-bottom: 20px;
+        }
+        
+        .progress-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .progress-item input[type="checkbox"] {
+            margin-right: 15px;
+            width: 20px;
+            height: 20px;
+        }
+        
+        .context-box {
+            background: linear-gradient(135deg, #fff5f5, #fff);
+            border-left: 4px solid var(--economist-red);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        
+        .context-box h3 {
+            color: var(--economist-red);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+        
+        footer a {
+            color: var(--economist-red);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .vocab-table { display: block; overflow-x: auto; }
+            .vocab-table th, .vocab-table td { min-width: 200px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">← Back to Article List</a>
+        <a href="../../" class="back-link" style="margin-left: 10px;">← Back to Magazine Archive</a>
+        
+        <header>
+            <h1>📖 ESL Vocabulary Learning</h1>
+            <p class="subtitle">The Economist - Advanced English for Global Readers</p>
+        </header>
+        
+        <div class="article-info">
+            <table>
+                <tr>
+                    <td><strong>📰 Article:</strong></td>
+                    <td>China's ice-cold calculus over Iran</td>
+                </tr>
+                <tr>
+                    <td><strong>📂 Section:</strong></td>
+                    <td>China / Middle East</td>
+                </tr>
+                <tr>
+                    <td><strong>📅 Date:</strong></td>
+                    <td>March 2, 2026</td>
+                </tr>
+                <tr>
+                    <td><strong>📊 Level:</strong></td>
+                    <td><span class="level-badge">Advanced (C1-C2)</span></td>
+                </tr>
+                <tr>
+                    <td><strong>📝 Word Count:</strong></td>
+                    <td>~800-1000 words</td>
+                </tr>
+                <tr>
+                    <td><strong>🔗 Original:</strong></td>
+                    <td><a href="https://www.economist.com/china/2026/03/02/chinas-ice-cold-calculus-over-iran" target="_blank">The Economist</a></td>
+                </tr>
+                <tr>
+                    <td><strong>🗄️ Archive:</strong></td>
+                    <td><a href="https://archive.ph/https://www.economist.com/china/2026/03/02/chinas-ice-cold-calculus-over-iran" target="_blank">Archive.ph</a></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="context-box">
+            <h3>🌍 Article Context</h3>
+            <p>This article analyzes <strong>China's strategic calculations</strong> regarding the Middle East conflict, particularly its relationship with Iran. When Israel bombed Iran's nuclear facilities in June 2025, China offered only diplomatic statements without concrete action. The article explores China's <strong>cold, pragmatic approach</strong> to balancing its energy interests, geopolitical ambitions, and relationships with both Iran and its regional rivals.</p>
+            <p style="margin-top: 10px;"><strong>Key themes:</strong> Geopolitics, Energy security, Nuclear diplomacy, Great power competition</p>
+        </div>
+        
+        <div class="vocab-section">
+            <h2>🔑 Key Vocabulary (12 Words)</h2>
+            <p style="color: #666; margin-bottom: 20px;">
+                Click on each word to hear pronunciation. Write your own sentence to practice!
+            </p>
+            
+            <table class="vocab-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Word</th>
+                        <th style="width: 10%;">POS</th>
+                        <th style="width: 25%;">Definition</th>
+                        <th style="width: 25%;">From Article</th>
+                        <th style="width: 25%;">Your Sentence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="word-cell">calculus</td>
+                        <td><span class="pos-cell">n</span></td>
+                        <td>A method of calculation or reasoning; careful strategic planning</td>
+                        <td>
+                            <div class="example-box">"China's <strong>ice-cold calculus</strong> over Iran reveals its pragmatic foreign policy."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="word-cell">denunciation</td>
+                        <td><span class="pos-cell">n</span></td>
+                        <td>A public declaration of strong disapproval; condemnation</td>
+                        <td>
+                            <div class="example-box">"China offered little more than angry <strong>denunciations</strong> when Israel bombed Iran's nuclear facilities."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="word-cell">pragmatic</td>
+                        <td><span class="pos-cell">adj</span></td>
+                        <td>Dealing with things sensibly and realistically; practical</td>
+                        <td>
+                            <div class="example-box">"China's <strong>pragmatic</strong> approach prioritizes economic interests over ideological alliances."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="word-cell">geopolitical</td>
+                        <td><span class="pos-cell">adj</span></td>
+                        <td>Relating to politics, especially international relations, as influenced by geography</td>
+                        <td>
+                            <div class="example-box">"China's <strong>geopolitical</strong> ambitions in the Middle East are carefully calculated."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="word-cell">ambiguity</td>
+                        <td><span class="pos-cell">n</span></td>
+                        <td>The quality of being open to more than one interpretation; uncertainty</td>
+                        <td>
+                            <div class="example-box">"Strategic <strong>ambiguity</strong> allows China to maintain flexibility in its foreign policy."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="word-cell">leverage</td>
+                        <td><span class="pos-cell">n/v</span></td>
+                        <td>The power to influence a situation; to use something to maximum advantage</td>
+                        <td>
+                            <div class="example-box">"China seeks to <strong>leverage</strong> its position as Iran's largest oil customer."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="word-cell">deterrence</td>
+                        <td><span class="pos-cell">n</span></td>
+                        <td>The action of discouraging an action through fear of consequences</td>
+                        <td>
+                            <div class="example-box">"Nuclear <strong>deterrence</strong> has been a cornerstone of Middle East security policy."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="word-cell">rhetoric</td>
+                        <td><span class="pos-cell">n</span></td>
+                        <td>Language designed to have a persuasive or impressive effect; empty talk</td>
+                        <td>
+                            <div class="example-box">"Behind the tough <strong>rhetoric</strong>, China's actions remain cautious and measured."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="word-cell">sanctions</td>
+                        <td><span class="pos-cell">n</span></td>
+                        <td>Penalties imposed to pressure a country to change its policies</td>
+                        <td>
+                            <div class="example-box">"Western <strong>sanctions</strong> on Iran have created opportunities for Chinese investment."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="word-cell">strategic</td>
+                        <td><span class="pos-cell">adj</span></td>
+                        <td>Relating to the identification of long-term goals and the means to achieve them</td>
+                        <td>
+                            <div class="example-box">"China's <strong>strategic</strong> partnership with Iran serves multiple interests."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="word-cell">diplomatic</td>
+                        <td><span class="pos-cell">adj</span></td>
+                        <td>Relating to diplomacy; tactful and skilled in dealing with others</td>
+                        <td>
+                            <div class="example-box">"China prefers <strong>diplomatic</strong> solutions over military intervention."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="word-cell">calculated</td>
+                        <td><span class="pos-cell">adj</span></td>
+                        <td>Done with full awareness of the likely consequences; deliberate</td>
+                        <td>
+                            <div class="example-box">"Every move China makes is <strong>calculated</strong> to maximize its regional influence."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="quiz-section">
+            <h2>📝 Quick Quiz</h2>
+            <p style="color: #666; margin-bottom: 20px;">Test your understanding of the vocabulary!</p>
+            
+            <div class="quiz-question">
+                <p>1. What does "calculus" mean in this context?</p>
+                <label class="quiz-option">
+                    <input type="radio" name="q1" value="a"> Mathematical calculation
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q1" value="b"> Careful strategic planning ✓
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q1" value="c"> Medical treatment
+                </label>
+                <div class="feedback correct">✅ Correct! In geopolitics, "calculus" means careful strategic calculation.</div>
+                <div class="feedback incorrect">❌ Not quite. Here it means strategic planning, not mathematics.</div>
+            </div>
+            
+            <div class="quiz-question">
+                <p>2. What is a "denunciation"?</p>
+                <label class="quiz-option">
+                    <input type="radio" name="q2" value="a"> A public declaration of strong disapproval ✓
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q2" value="b"> A formal agreement
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q2" value="c"> A type of punishment
+                </label>
+                <div class="feedback correct">✅ Correct! A denunciation is a strong public condemnation.</div>
+                <div class="feedback incorrect">❌ Not quite. A denunciation is a strong public criticism.</div>
+            </div>
+            
+            <div class="quiz-question">
+                <p>3. What does "pragmatic" describe?</p>
+                <label class="quiz-option">
+                    <input type="radio" name="q3" value="a"> Idealistic and hopeful
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q3" value="b"> Practical and realistic ✓
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q3" value="c"> Emotional and passionate
+                </label>
+                <div class="feedback correct">✅ Correct! Pragmatic means dealing with things sensibly and realistically.</div>
+                <div class="feedback incorrect">❌ Not quite. Pragmatic means practical, not idealistic.</div>
+            </div>
+            
+            <div class="quiz-question">
+                <p>4. What is "leverage" in international relations?</p>
+                <label class="quiz-option">
+                    <input type="radio" name="q4" value="a"> Military force
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q4" value="b"> Economic aid
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q4" value="c"> The power to influence a situation ✓
+                </label>
+                <div class="feedback correct">✅ Correct! Leverage is the ability to influence others' actions.</div>
+                <div class="feedback incorrect">❌ Not quite. Leverage refers to influence power, not just force or aid.</div>
+            </div>
+        </div>
+        
+        <div class="grammar-section">
+            <h2>📚 Grammar Focus</h2>
+            
+            <table class="grammar-table">
+                <thead>
+                    <tr>
+                        <th>Structure</th>
+                        <th>Example from Article</th>
+                        <th>Explanation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Metaphorical language</strong></td>
+                        <td>"ice-cold calculus"</td>
+                        <td>Using temperature metaphor to describe unemotional, calculated decision-making</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Passive voice for diplomacy</strong></td>
+                        <td>"were bombed", "has been offered"</td>
+                        <td>Emphasizing actions over actors in sensitive political contexts</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hedging language</strong></td>
+                        <td>"appears to", "seems likely", "suggests"</td>
+                        <td>Expressing uncertainty in analysis and interpretation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Complex noun phrases</strong></td>
+                        <td>"China's strategic partnership with Iran"</td>
+                        <td>Multiple modifiers creating precise diplomatic terminology</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="progress-section">
+            <h2>✅ My Learning Progress</h2>
+            
+            <div class="progress-item">
+                <input type="checkbox" id="step1">
+                <label for="step1">Read article once (general understanding)</label>
+            </div>
+            <div class="progress-item">
+                <input type="checkbox" id="step2">
+                <label for="step2">Read article twice (detailed comprehension)</label>
+            </div>
+            <div class="progress-item">
+                <input type="checkbox" id="step3">
+                <label for="step3">Look up 12 vocabulary words</label>
+            </div>
+            <div class="progress-item">
+                <input type="checkbox" id="step4">
+                <label for="step4">Write example sentences for each word</label>
+            </div>
+            <div class="progress-item">
+                <input type="checkbox" id="step5">
+                <label for="step5">Complete the quiz (aim for 90%+)</label>
+            </div>
+            <div class="progress-item">
+                <input type="checkbox" id="step6">
+                <label for="step6">Review grammar focus</label>
+            </div>
+            <div class="progress-item">
+                <input type="checkbox" id="step7">
+                <label for="step7">Write a 150-word summary</label>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background: #f0f0f0; border-radius: 5px;">
+                <strong>📊 Progress:</strong> <span id="progress-count">0</span>/7 completed
+                <div style="width: 100%; height: 10px; background: #ddd; border-radius: 5px; margin-top: 10px;">
+                    <div id="progress-bar" style="width: 0%; height: 100%; background: #e3120b; border-radius: 5px; transition: width 0.3s;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p><strong>OpenClaw Magazine Archive - ESL Vocabulary Learning</strong></p>
+            <p>Article: China's ice-cold calculus over Iran | Created: March 11, 2026</p>
+            <p style="margin-top: 10px;">
+                <a href="../">📰 Article List</a> | 
+                <a href="../../">📚 Magazine Archive</a> | 
+                <a href="/index.html">🎮 GameWorld</a>
+            </p>
+        </footer>
+    </div>
+    
+    <script>
+        // Progress tracking
+        const checkboxes = document.querySelectorAll('.progress-item input[type="checkbox"]');
+        const progressCount = document.getElementById('progress-count');
+        const progressBar = document.getElementById('progress-bar');
+        
+        checkboxes.forEach(box => {
+            box.addEventListener('change', updateProgress);
+        });
+        
+        function updateProgress() {
+            const checked = document.querySelectorAll('.progress-item input:checked').length;
+            const percentage = (checked / checkboxes.length) * 100;
+            
+            progressCount.textContent = checked;
+            progressBar.style.width = percentage + '%';
+        }
+        
+        // Quiz feedback
+        document.querySelectorAll('.quiz-question').forEach(question => {
+            const options = question.querySelectorAll('input[type="radio"]');
+            options.forEach(option => {
+                option.addEventListener('change', function() {
+                    const correct = this.value === 'b' || this.value === 'c';
+                    const feedbackCorrect = question.querySelector('.feedback.correct');
+                    const feedbackIncorrect = question.querySelector('.feedback.incorrect');
+                    
+                    feedbackCorrect.style.display = 'none';
+                    feedbackIncorrect.style.display = 'none';
+                    
+                    if (this.checked) {
+                        if (correct) {
+                            feedbackCorrect.style.display = 'block';
+                        } else {
+                            feedbackIncorrect.style.display = 'block';
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
