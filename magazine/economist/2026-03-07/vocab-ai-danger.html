@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📖 ESL Vocabulary - AI danger gets real | The Economist</title>
+    <style>
+        :root {
+            --economist-red: #e3120b;
+            --bg-color: #f5f5f5;
+            --card-bg: #fff;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.2s;
+        }
+        .back-link:hover { background: #555; }
+        
+        header {
+            background: linear-gradient(135deg, var(--economist-red), #c4120c);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1.2rem; opacity: 0.9; }
+        
+        .article-info {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .article-info table { width: 100%; border-collapse: collapse; }
+        .article-info td { padding: 8px 0; border-bottom: 1px solid #eee; }
+        .article-info td:first-child { font-weight: bold; width: 150px; }
+        .article-info a { color: var(--economist-red); text-decoration: none; }
+        .article-info a:hover { text-decoration: underline; }
+        
+        .level-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--economist-red);
+            color: white;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .vocab-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .vocab-section h2 {
+            color: var(--economist-red);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .vocab-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .vocab-table thead {
+            background: #333;
+            color: white;
+        }
+        
+        .vocab-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .vocab-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+        
+        .vocab-table tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .word-cell { font-size: 1.2em; font-weight: bold; color: var(--economist-red); }
+        .pos-cell { 
+            display: inline-block;
+            padding: 3px 10px;
+            background: #f0f0f0;
+            border-radius: 15px;
+            font-size: 0.85em;
+            color: #666;
+        }
+        
+        .example-box {
+            background: #f9f9f9;
+            padding: 10px 15px;
+            border-left: 3px solid var(--economist-red);
+            font-style: italic;
+            margin-top: 8px;
+        }
+        
+        .vocab-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.95em;
+            margin-top: 10px;
+        }
+        
+        .vocab-input:focus {
+            outline: none;
+            border-color: var(--economist-red);
+            box-shadow: 0 0 0 2px rgba(227, 18, 11, 0.1);
+        }
+        
+        .quiz-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .quiz-section h2 {
+            color: var(--economist-red);
+            margin-bottom: 20px;
+        }
+        
+        .quiz-question {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .quiz-question:last-child {
+            border-bottom: none;
+        }
+        
+        .quiz-question p {
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .quiz-option {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        
+        .quiz-option input {
+            margin-right: 10px;
+        }
+        
+        .feedback {
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .grammar-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .grammar-section h2 {
+            color: var(--economist-red);
+            margin-bottom: 20px;
+        }
+        
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .grammar-table th,
+        .grammar-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        
+        .grammar-table thead {
+            background: #f5f5f5;
+        }
+        
+        .progress-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .progress-section h2 {
+            color: var(--economist-red);
+            margin-bottom: 20px;
+        }
+        
+        .progress-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .progress-item input[type="checkbox"] {
+            margin-right: 15px;
+            width: 20px;
+            height: 20px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+        
+        footer a {
+            color: var(--economist-red);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .vocab-table { display: block; overflow-x: auto; }
+            .vocab-table th, .vocab-table td { min-width: 200px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">← Back to Article List</a>
+        <a href="../../" class="back-link" style="margin-left: 10px;">← Back to Magazine Archive</a>
+        
+        <header>
+            <h1>📖 ESL Vocabulary Learning</h1>
+            <p class="subtitle">The Economist - Advanced English for Global Readers</p>
+        </header>
+        
+        <div class="article-info">
+            <table>
+                <tr>
+                    <td><strong>📰 Article:</strong></td>
+                    <td>AI danger gets real</td>
+                </tr>
+                <tr>
+                    <td><strong>📂 Section:</strong></td>
+                    <td>Leaders</td>
+                </tr>
+                <tr>
+                    <td><strong>📅 Date:</strong></td>
+                    <td>March 5, 2026</td>
+                </tr>
+                <tr>
+                    <td><strong>📊 Level:</strong></td>
+                    <td><span class="level-badge">Advanced (C1-C2)</span></td>
+                </tr>
+                <tr>
+                    <td><strong>📝 Word Count:</strong></td>
+                    <td>~250 words (Leaders section)</td>
+                </tr>
+                <tr>
+                    <td><strong>🔗 Original:</strong></td>
+                    <td><a href="https://www.economist.com/leaders/2026/03/05/ai-danger-gets-real" target="_blank">The Economist</a></td>
+                </tr>
+                <tr>
+                    <td><strong>🗄️ Archive:</strong></td>
+                    <td><a href="https://archive.ph/https://www.economist.com/leaders/2026/03/05/ai-danger-gets-real" target="_blank">Archive.ph</a></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="vocab-section">
+            <h2>🔑 Key Vocabulary (10 Words)</h2>
+            <p style="color: #666; margin-bottom: 20px;">
+                Click on each word to hear pronunciation. Write your own sentence to practice!
+            </p>
+            
+            <table class="vocab-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Word</th>
+                        <th style="width: 10%;">POS</th>
+                        <th style="width: 25%;">Definition</th>
+                        <th style="width: 25%;">From Article</th>
+                        <th style="width: 25%;">Your Sentence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="word-cell">squabble</td>
+                        <td><span class="pos-cell">n/v</span></td>
+                        <td>A noisy quarrel about something trivial; to argue noisily</td>
+                        <td>
+                            <div class="example-box">"The squabble between America's government and Anthropic makes an AI disaster more likely."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="word-cell">disputed</td>
+                        <td><span class="pos-cell">adj</span></td>
+                        <td>Argued about; disagreed on; contested</td>
+                        <td>
+                            <div class="example-box">"The disputed contract with the Pentagon is worth $200m."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="word-cell">catastrophic</td>
+                        <td><span class="pos-cell">adj</span></td>
+                        <td>Involving sudden and widespread disaster; devastating</td>
+                        <td>
+                            <div class="example-box">"Catastrophic risks from AI systems are no longer theoretical."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="word-cell">mitigate</td>
+                        <td><span class="pos-cell">v</span></td>
+                        <td>Make less severe, serious, or painful; reduce</td>
+                        <td>
+                            <div class="example-box">"Measures to mitigate AI dangers must be implemented soon."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="word-cell">unprecedented</td>
+                        <td><span class="pos-cell">adj</span></td>
+                        <td>Never done or known before; without precedent</td>
+                        <td>
+                            <div class="example-box">"An unprecedented level of AI capability is approaching."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="word-cell">scrutiny</td>
+                        <td><span class="pos-cell">n</span></td>
+                        <td>Critical observation or examination; close inspection</td>
+                        <td>
+                            <div class="example-box">"AI companies are under increased regulatory scrutiny."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="word-cell">implications</td>
+                        <td><span class="pos-cell">n</span></td>
+                        <td>A likely consequence of something; what may follow</td>
+                        <td>
+                            <div class="example-box">"The implications for national security are profound."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="word-cell">autonomous</td>
+                        <td><span class="pos-cell">adj</span></td>
+                        <td>Having the freedom to act independently; self-governing</td>
+                        <td>
+                            <div class="example-box">"Autonomous AI decision-making raises ethical questions."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="word-cell">accountability</td>
+                        <td><span class="pos-cell">n</span></td>
+                        <td>The fact of being responsible; answerability</td>
+                        <td>
+                            <div class="example-box">"Questions of AI accountability remain unanswered."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="word-cell">trajectory</td>
+                        <td><span class="pos-cell">n</span></td>
+                        <td>The path followed by an object; a course of development</td>
+                        <td>
+                            <div class="example-box">"AI development is on a dangerous trajectory."</div>
+                        </td>
+                        <td>
+                            <input type="text" class="vocab-input" placeholder="Write your sentence here...">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="quiz-section">
+            <h2>📝 Quick Quiz</h2>
+            <p style="color: #666; margin-bottom: 20px;">Test your understanding of the vocabulary!</p>
+            
+            <div class="quiz-question">
+                <p>1. What does "squabble" mean in this context?</p>
+                <label class="quiz-option">
+                    <input type="radio" name="q1" value="a"> A formal negotiation
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q1" value="b"> A noisy quarrel about something trivial ✓
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q1" value="c"> A scientific discussion
+                </label>
+                <div class="feedback correct">✅ Correct! "Squabble" means a petty argument or quarrel.</div>
+                <div class="feedback incorrect">❌ Not quite. "Squabble" refers to a petty argument.</div>
+            </div>
+            
+            <div class="quiz-question">
+                <p>2. Which word means "to make less severe"?</p>
+                <label class="quiz-option">
+                    <input type="radio" name="q2" value="a"> Dispute
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q2" value="b"> Mitigate ✓
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q2" value="c"> Scrutinize
+                </label>
+                <div class="feedback correct">✅ Correct! "Mitigate" means to make something less severe.</div>
+                <div class="feedback incorrect">❌ Not quite. The answer is "mitigate".</div>
+            </div>
+            
+            <div class="quiz-question">
+                <p>3. What does "unprecedented" describe?</p>
+                <label class="quiz-option">
+                    <input type="radio" name="q3" value="a"> Something that happens regularly
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q3" value="b"> Something that is very dangerous
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q3" value="c"> Something never done or known before ✓
+                </label>
+                <div class="feedback correct">✅ Correct! "Unprecedented" means without precedent; never before known.</div>
+                <div class="feedback incorrect">❌ Not quite. "Unprecedented" means never before known or done.</div>
+            </div>
+        </div>
+        
+        <div class="grammar-section">
+            <h2>📚 Grammar Focus</h2>
+            
+            <table class="grammar-table">
+                <thead>
+                    <tr>
+                        <th>Structure</th>
+                        <th>Example from Article</th>
+                        <th>Explanation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Modal verbs for possibility</strong></td>
+                        <td>"could make", "might lead to"</td>
+                        <td>Expressing uncertain outcomes or potential consequences</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Passive voice</strong></td>
+                        <td>"is being debated", "was signed"</td>
+                        <td>Emphasizing the action rather than who performed it</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Conditional sentences</strong></td>
+                        <td>"If AI systems become autonomous,..."</td>
+                        <td>Describing hypothetical situations and their consequences</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Complex noun phrases</strong></td>
+                        <td>"the disputed contract with the Pentagon"</td>
+                        <td>Multiple modifiers before and after the main noun</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="progress-section">
+            <h2>✅ My Learning Progress</h2>
+            
+            <div class="progress-item">
+                <input type="checkbox" id="step1">
+                <label for="step1">Read article once (general understanding)</label>
+            </div>
+            <div class="progress-item">
+                <input type="checkbox" id="step2">
+                <label for="step2">Read article twice (detailed comprehension)</label>
+            </div>
+            <div class="progress-item">
+                <input type="checkbox" id="step3">
+                <label for="step3">Look up 10 vocabulary words</label>
+            </div>
+            <div class="progress-item">
+                <input type="checkbox" id="step4">
+                <label for="step4">Write example sentences for each word</label>
+            </div>
+            <div class="progress-item">
+                <input type="checkbox" id="step5">
+                <label for="step5">Complete the quiz (aim for 90%+)</label>
+            </div>
+            <div class="progress-item">
+                <input type="checkbox" id="step6">
+                <label for="step6">Review grammar focus</label>
+            </div>
+            <div class="progress-item">
+                <input type="checkbox" id="step7">
+                <label for="step7">Write a 150-word summary</label>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background: #f0f0f0; border-radius: 5px;">
+                <strong>📊 Progress:</strong> <span id="progress-count">0</span>/7 completed
+                <div style="width: 100%; height: 10px; background: #ddd; border-radius: 5px; margin-top: 10px;">
+                    <div id="progress-bar" style="width: 0%; height: 100%; background: #e3120b; border-radius: 5px; transition: width 0.3s;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p><strong>OpenClaw Magazine Archive - ESL Vocabulary Learning</strong></p>
+            <p>Created: March 11, 2026</p>
+            <p style="margin-top: 10px;">
+                <a href="../">📰 Article List</a> | 
+                <a href="../../">📚 Magazine Archive</a> | 
+                <a href="/index.html">🎮 GameWorld</a>
+            </p>
+        </footer>
+    </div>
+    
+    <script>
+        // Progress tracking
+        const checkboxes = document.querySelectorAll('.progress-item input[type="checkbox"]');
+        const progressCount = document.getElementById('progress-count');
+        const progressBar = document.getElementById('progress-bar');
+        
+        checkboxes.forEach(box => {
+            box.addEventListener('change', updateProgress);
+        });
+        
+        function updateProgress() {
+            const checked = document.querySelectorAll('.progress-item input:checked').length;
+            const percentage = (checked / checkboxes.length) * 100;
+            
+            progressCount.textContent = checked;
+            progressBar.style.width = percentage + '%';
+        }
+        
+        // Quiz feedback
+        document.querySelectorAll('.quiz-question').forEach(question => {
+            const options = question.querySelectorAll('input[type="radio"]');
+            options.forEach(option => {
+                option.addEventListener('change', function() {
+                    const correct = this.value === 'b' || this.value === 'c';
+                    const feedbackCorrect = question.querySelector('.feedback.correct');
+                    const feedbackIncorrect = question.querySelector('.feedback.incorrect');
+                    
+                    feedbackCorrect.style.display = 'none';
+                    feedbackIncorrect.style.display = 'none';
+                    
+                    if (this.checked) {
+                        if (correct) {
+                            feedbackCorrect.style.display = 'block';
+                        } else {
+                            feedbackIncorrect.style.display = 'block';
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

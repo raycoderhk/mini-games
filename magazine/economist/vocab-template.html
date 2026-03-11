@@ -1,0 +1,295 @@
+# 📚 Economist ESL Vocabulary Learning Template
+
+## 詞彙學習格式設計 (For ESL Learners)
+
+---
+
+## 📋 基本格式
+
+```html
+<div class="vocabulary-section">
+    <h2>📖 Vocabulary from This Article</h2>
+    <p class="article-info">
+        <strong>Article:</strong> [Article Title]<br>
+        <strong>Source:</strong> The Economist, [Date]<br>
+        <strong>Level:</strong> Advanced (C1-C2)
+    </p>
+    
+    <table class="vocab-table">
+        <thead>
+            <tr>
+                <th>Word/Phrase</th>
+                <th>Part of Speech</th>
+                <th>Definition</th>
+                <th>Example from Article</th>
+                <th>Your Sentence</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>calculus</strong></td>
+                <td>noun</td>
+                <td>A method of calculation or reasoning</td>
+                <td>"China's ice-cold calculus over Iran"</td>
+                <td><input type="text" placeholder="Write your sentence..."></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+```
+
+---
+
+## 🎯 完整示例 (March 7, 2026 - AI Danger Gets Real)
+
+### Article Info
+| Field | Value |
+|-------|-------|
+| **Title** | AI danger gets real |
+| **Section** | Leaders |
+| **Date** | March 5, 2026 |
+| **URL** | https://www.economist.com/leaders/2026/03/05/ai-danger-gets-real |
+| **Archive** | https://archive.ph/https://www.economist.com/leaders/2026/03/05/ai-danger-gets-real |
+| **Level** | Advanced (C1-C2) |
+| **Word Count** | ~250 words (Leaders section) |
+
+---
+
+### 🔑 Key Vocabulary (10-15 words per article)
+
+| # | Word/Phrase | POS | Definition | Example from Article | Your Sentence |
+|---|-------------|-----|------------|---------------------|---------------|
+| 1 | **squabble** | noun/verb | A noisy quarrel about something trivial | "The squabble between America's government and Anthropic" | |
+| 2 | **disputed** | adjective | Argued about; disagreed on | "The disputed contract with the Pentagon" | |
+| 3 | **catastrophic** | adjective | Involving sudden and widespread disaster | "Catastrophic risks from AI systems" | |
+| 4 | **mitigate** | verb | Make less severe, serious, or painful | "Measures to mitigate AI dangers" | |
+| 5 | **unprecedented** | adjective | Never done or known before | "An unprecedented level of AI capability" | |
+| 6 | **scrutiny** | noun | Critical observation or examination | "Under increased regulatory scrutiny" | |
+| 7 | **implications** | noun | A likely consequence of something | "The implications for national security" | |
+| 8 | **autonomous** | adjective | Having the freedom to act independently | "Autonomous AI decision-making" | |
+| 9 | **accountability** | noun | The fact of being responsible | "Questions of AI accountability" | |
+| 10 | **trajectory** | noun | The path followed by an object | "On a dangerous trajectory" | |
+
+---
+
+### 📝 Comprehension Questions
+
+#### Level 1: Factual (Recall)
+1. What is the main issue between the US government and Anthropic?
+2. What is the value of the disputed contract?
+3. What does the article say about AI disaster risks?
+
+#### Level 2: Analytical (Understanding)
+4. Why does the article suggest this squabble makes AI disaster more likely?
+5. What are the two opposing viewpoints mentioned?
+
+#### Level 3: Critical (Evaluation)
+6. Do you agree with the article's position? Why or why not?
+7. What other solutions could address AI safety concerns?
+
+---
+
+### 💬 Discussion Prompts
+
+1. **Debate Topic:** "AI regulation should prioritize safety over innovation." Discuss both sides.
+2. **Personal Connection:** How do you think AI will affect your industry/career?
+3. **Global Perspective:** Should AI regulation be international or country-specific?
+
+---
+
+### 🎓 Grammar Focus (from the article)
+
+| Structure | Example | Explanation |
+|-----------|---------|-------------|
+| **Modal verbs for possibility** | "could make", "might lead to" | Expressing uncertain outcomes |
+| **Passive voice** | "is being debated", "was signed" | Emphasizing action over actor |
+| **Conditional sentences** | "If AI systems become autonomous,..." | Hypothetical situations |
+| **Complex noun phrases** | "the disputed contract with the Pentagon" | Multiple modifiers before noun |
+
+---
+
+### 📊 Progress Tracking
+
+```markdown
+## My Learning Progress
+
+### Article: AI danger gets real
+- [ ] Read article once (general understanding)
+- [ ] Read article twice (detailed comprehension)
+- [ ] Look up 10 vocabulary words
+- [ ] Write example sentences for each word
+- [ ] Answer comprehension questions
+- [ ] Participate in discussion
+- [ ] Review grammar focus
+- [ ] Write a 150-word summary
+
+**Date Started:** _________
+**Date Completed:** _________
+**Time Spent:** _________ minutes
+**Difficulty Rating:** ⭐⭐⭐⭐☆ (4/5)
+```
+
+---
+
+## 🗂️ File Structure for Vocabulary Pages
+
+```
+magazine/
+├── economist/
+│   ├── 2026-03-07/
+│   │   ├── index.html              # Article list
+│   │   └── vocab/
+│   │       ├── ai-danger-gets-real.html
+│   │       ├── dont-trump-must-stop.html
+│   │       └── index.html          # Vocab index for this issue
+│   ├── 2026-02-28/
+│   │   ├── index.html
+│   │   └── vocab/
+│   └── vocab-template.html         # Reusable template
+```
+
+---
+
+## 🎨 HTML/CSS Design
+
+### Vocabulary Card Style
+
+```html
+<style>
+.vocab-card {
+    background: white;
+    border-left: 4px solid #e3120b;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.vocab-word {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #e3120b;
+}
+
+.vocab-pos {
+    display: inline-block;
+    background: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    color: #666;
+    margin-left: 10px;
+}
+
+.vocab-definition {
+    margin: 10px 0;
+    font-style: italic;
+}
+
+.vocab-example {
+    background: #f9f9f9;
+    padding: 10px;
+    border-left: 3px solid #ccc;
+    margin: 10px 0;
+}
+
+.vocab-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+</style>
+
+<div class="vocab-card">
+    <div class="vocab-word">calculus <span class="vocab-pos">noun</span></div>
+    <div class="vocab-definition">A method of calculation or reasoning; careful planning based on strategic considerations</div>
+    <div class="vocab-example">
+        <strong>From article:</strong> "China's ice-cold calculus over Iran"
+    </div>
+    <input type="text" class="vocab-input" placeholder="Write your own sentence...">
+</div>
+```
+
+---
+
+## 📱 Interactive Features
+
+### Quiz Format
+
+```html
+<div class="vocab-quiz">
+    <h3>📝 Quick Quiz</h3>
+    
+    <div class="quiz-question">
+        <p>1. What does "calculus" mean in this context?</p>
+        <input type="radio" name="q1" id="q1a"> <label for="q1a">Mathematical calculation</label><br>
+        <input type="radio" name="q1" id="q1b"> <label for="q1b">Strategic reasoning</label><br>
+        <input type="radio" name="q1" id="q1c"> <label for="q1c">Medical treatment</label><br>
+        <p class="feedback correct" style="display:none;">✅ Correct! In this context, it means strategic reasoning.</p>
+    </div>
+</div>
+```
+
+### Flashcard Mode
+
+```html
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+    <div class="front">
+        <strong>calculus</strong>
+        <span class="pos">noun</span>
+    </div>
+    <div class="back">
+        <p>A method of calculation or reasoning</p>
+        <p><em>"China's ice-cold calculus over Iran"</em></p>
+    </div>
+</div>
+```
+
+---
+
+## 🎯 Difficulty Levels
+
+| Level | CEFR | Vocabulary Count | Article Type |
+|-------|------|------------------|--------------|
+| **Beginner** | A2-B1 | 5-8 words | Graphic Detail, Culture |
+| **Intermediate** | B1-B2 | 8-12 words | Business, Finance, Technology |
+| **Advanced** | C1-C2 | 12-15 words | Leaders, Briefing, World |
+
+---
+
+## 📈 Learning Analytics
+
+Track progress across articles:
+
+```markdown
+## My Vocabulary Journey
+
+| Article | Date | Words Learned | Quiz Score | Time Spent |
+|---------|------|---------------|------------|------------|
+| AI danger gets real | 2026-03-05 | 10/10 | 90% | 45 min |
+| Donald Trump must stop soon | 2026-03-05 | 8/10 | 85% | 40 min |
+| China's ice-cold calculus | 2026-03-02 | 12/12 | 95% | 50 min |
+
+**Total Words:** 30
+**Average Score:** 90%
+**Total Time:** 135 minutes
+**Current Streak:** 3 articles 🔥
+```
+
+---
+
+## 🚀 Implementation Steps
+
+1. **Create template HTML** (`vocab-template.html`)
+2. **Add vocabulary section** to each article page
+3. **Include interactive elements** (quiz, flashcards, input fields)
+4. **Add progress tracking** (localStorage or simple JSON)
+5. **Create index page** for all vocabulary lessons
+6. **Optional:** Add audio pronunciation (TTS)
+
+---
+
+**Created:** March 11, 2026  
+**For:** OpenClaw Magazine Archive - ESL Learning Section
