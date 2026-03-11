@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📰 The Economist - 期號列表 | Magazine Archive</title>
+    <style>
+        :root {
+            --economist-red: #e3120b;
+            --bg-color: #f5f5f5;
+            --card-bg: #fff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            padding: 12px 24px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .back-link:hover {
+            background: #555;
+            transform: translateY(-2px);
+        }
+        
+        .magazine-title {
+            font-size: 3em;
+            color: var(--economist-red);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .magazine-subtitle {
+            font-size: 1.3em;
+            color: #666;
+        }
+        
+        .issues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+        
+        .issue-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            display: block;
+        }
+        
+        .issue-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .issue-cover {
+            width: 100%;
+            height: 380px;
+            background: linear-gradient(135deg, var(--economist-red) 0%, #c4120c 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .issue-cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .cover-icon {
+            font-size: 6em;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cover-date {
+            font-size: 1.5em;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cover-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-top: 5px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .issue-info {
+            padding: 20px;
+        }
+        
+        .issue-headline {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        
+        .issue-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.9em;
+            color: #888;
+            margin-top: 15px;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            background: var(--economist-red);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .tag.new {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+        
+        .coming-soon {
+            opacity: 0.5;
+            filter: grayscale(50%);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .footer a {
+            color: var(--economist-red);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .magazine-title { font-size: 2em; }
+            .issues-grid { grid-template-columns: 1fr; }
+            .issue-cover { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">← 返回雜誌存檔 | Back to Magazine Archive</a>
+        
+        <div class="header">
+            <h1 class="magazine-title">📰 The Economist</h1>
+            <p class="magazine-subtitle">期號列表 | Issue Archive</p>
+        </div>
+        
+        <div class="issues-grid">
+            <!-- March 7, 2026 Issue -->
+            <a href="2026-03-07/" class="issue-card">
+                <div class="issue-cover">
+                    <div class="cover-icon">🌍</div>
+                    <div class="cover-date">March 7, 2026</div>
+                    <div class="cover-label">Weekly Edition</div>
+                </div>
+                <div class="issue-info">
+                    <span class="tag new">✨ 最新</span>
+                    <h2 class="issue-headline">A war without a strategy</h2>
+                    <div class="issue-meta">
+                        <span class="meta-item">📝 18 篇文章</span>
+                        <span class="meta-item">📊 封面故事</span>
+                        <span class="meta-item">🆕 2026-03-07</span>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Coming Soon Placeholder -->
+            <div class="coming-soon">
+                <div class="issue-card">
+                    <div class="issue-cover" style="background: linear-gradient(135deg, #ccc, #999);">
+                        <div class="cover-icon">📅</div>
+                        <div class="cover-date">Coming Soon</div>
+                        <div class="cover-label">更多期號即將推出</div>
+                    </div>
+                    <div class="issue-info">
+                        <span class="tag">即將推出</span>
+                        <h2 class="issue-headline" style="color: #999;">更多歷史期號</h2>
+                        <div class="issue-meta">
+                            <span class="meta-item">📝 敬請期待</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>📰 The Economist Archive © 2026</p>
+            <p style="margin-top: 10px;">
+                <a href="../../">🎮 GameWorld</a>
+                <span style="margin: 0 10px;">|</span>
+                <a href="../">📚 Magazine Archive</a>
+                <span style="margin: 0 10px;">|</span>
+                <a href="https://www.economist.com/" target="_blank">The Economist Official</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
