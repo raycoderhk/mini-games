@@ -184,6 +184,22 @@ async function getOrCreateUser(email, name, googleId, image) {
 **March 15 (Sun):** Son's birthday, Maxim's vouchers expire ($250 x 2)  
 **March 17 (Tue):** Wedding anniversary @ Ocean Park Marriott
 
+## 🎓 Son's DSE Exams (2026)
+**Status:** Critical exam period  
+**Oral Exam:** Next week (mid-March)  
+**Major Written Exams:** April 2026  
+
+**Academic Profile:**
+- **Strong:** Math, M2, ICT (expecting at least 5* in each)
+- **Weak:** Chinese (borderline concern)
+- **Strategy:** Strong subjects should compensate, Chinese needs attention
+
+**Family Context:**
+- High-stress period for the family
+- Son needs support and quiet study environment
+- Parents likely juggling school events + exam prep
+- Consider reducing non-urgent notifications during this period
+
 ---
 
 ## 🤖 AI Assistant Notes

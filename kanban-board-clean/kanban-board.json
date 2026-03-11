@@ -1,7 +1,7 @@
 {
   "meta": {
     "created": "2026-02-26T07:45:00Z",
-    "updated": "2026-03-10T06:48:10.991366Z",
+    "updated": "2026-03-11T00:23:40.375076Z",
     "version": "1.2"
   },
   "columns": {
@@ -585,6 +585,61 @@
         "  - timeout-minutes: 5",
         "  - Email sent with workflow code",
         "  - Waiting for user to commit"
+      ]
+    },
+    {
+      "id": "proj-022",
+      "title": "🔒 [SECURITY] Fix Supabase Vulnerabilities - 15 Errors",
+      "description": "Supabase Security Advisor detected 15 security vulnerabilities in FocusTimer project",
+      "status": "todo",
+      "priority": "high",
+      "created": "2026-03-11",
+      "updated": "2026-03-11T00:23:40.375058Z",
+      "tags": [
+        "security",
+        "supabase",
+        "vulnerability",
+        "urgent",
+        "email-alert"
+      ],
+      "notes": [
+        "📧 Email received: 2026-03-11 07:38 HKT",
+        "📊 Report created: 07 Mar 2026",
+        "",
+        "🔍 Vulnerability Summary:",
+        "  - Project: FocusTimer",
+        "  - Project ID: hxrgvuzujvagzlaevwtk",
+        "  - Total errors: 15",
+        "  - Severity: Security vulnerabilities (could expose data)",
+        "",
+        "⚠️ Supabase Warning:",
+        "  \"These errors require your attention immediately\"",
+        "  \"We detected security vulnerabilities in 1 of your projects\"",
+        "  \"that could expose your data to unauthorized access.\"",
+        "  \"Review and fix them before your data is compromised.\"",
+        "",
+        "🔧 Fix Steps:",
+        "  1. Go to Supabase Dashboard",
+        "  2. Open Security Advisor",
+        "  3. Review all 15 vulnerabilities",
+        "  4. Fix RLS policies, auth issues, etc.",
+        "  5. Re-run security scan",
+        "",
+        "📋 Likely Issues:",
+        "  - Missing Row Level Security (RLS) policies",
+        "  - Overly permissive table access",
+        "  - Missing authentication requirements",
+        "  - Public access to sensitive tables",
+        "",
+        "🔗 Links:",
+        "  - Supabase Dashboard: https://app.supabase.com",
+        "  - Project: FocusTimer (hxrgvuzujvagzlaevwtk)",
+        "  - Security Advisor: View in dashboard",
+        "",
+        "⏰ Timeline:",
+        "  - Detected: 07 Mar 2026",
+        "  - Email received: 11 Mar 2026 07:38 HKT",
+        "  - Action: Kanban task created"
       ]
     }
   ],

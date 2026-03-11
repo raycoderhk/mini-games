@@ -10,10 +10,8 @@ If nothing needs attention, reply HEARTBEAT_OK.
 **恢復**: 08:00 HKT 恢復正常通知
 
 ## 即將到來的事件
-**今日 (3 月 10 日 星期二)** ⭐
-• 19:00-21:00 HKT - 匹克球 (Tsuen Wan Pickledise)
-  - 朋友：Pulley (預計 19:10 到場，因泊車安排)
-  - 泊車：19:00 準時到場 (場所有泊車優惠)
+**今日 (3 月 11 日 星期三)** ⭐
+• 正常工作日
 
 **已完成：**
 • Hugging Face Token 申請
@@ -23,18 +21,14 @@ If nothing needs attention, reply HEARTBEAT_OK.
 • 兒子學校家長日 - 3/7
 • 學校旅行 (科大及鹽田梓) - 3/8
 • Maxim's 現金券 $250 x 2 - ✅ 已使用
+• 匹克球 (Pulley) - 3/10
 
 **3 月 13 日 (星期五)**
 • 11:00-13:00 HKT - 匹克球 @ Pickleland
 • 午餐 - 匹克球朋友 (after pickleball)
 
-**3 月 13 日 (星期五)** 📚
-• 女兒歷史科測驗 (Uniform Test) - 開始溫習
-• 午餐 - 朋友 Chris (Reschedule to next week)
-
 **3 月 14 日 (星期六)** ✅ 已報名成功
 • **08:45-16:30 伊利沙伯中學 PTA 新春親子旅行** (已中籤)
-• 女兒歷史科測驗 (Uniform Test) - 考試日
   - 集合：08:45 (待定地點)
   - 解散：16:30
   - 團費：$90/人 (已資助)
@@ -66,6 +60,24 @@ If nothing needs attention, reply HEARTBEAT_OK.
 • 包括：新項目、狀態變更、項目完成
 
 ## Heartbeat Tasks
+
+### Google Calendar Sync (每次 Heartbeat 檢查)
+**目標:** 自動同步 HEARTBEAT.md 事件到 Google Calendar  
+**頻率:** 每次 Heartbeat (約 30 分鐘)  
+**位置:** `skills/google-calendar/sync_calendar.py`
+
+**檢查項目:**
+1. 讀取 HEARTBEAT.md 即將到來的事件
+2. 同步到 Google Calendar (避免重複)
+3. 用戶可在 iPhone Google Calendar App 查看
+
+**設置狀態:**
+- [ ] 安裝依賴：`pip3 install -r requirements.txt`
+- [ ] OAuth 認證：`python3 auth.py`
+- [ ] 測試同步：`python3 sync_calendar.py`
+- [ ] 啟用自動同步
+
+---
 
 ### Daily OpenClaw Community Engagement (每日檢查)
 **目標：** 每日參與 OpenClaw Discord 社區
