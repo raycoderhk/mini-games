@@ -139,6 +139,16 @@
             grid-row: 2;
         }
         
+        /* 2-issue layout (no March 14 yet) */
+        .issue-thumbnails.two-issues {
+            grid-template-rows: 1fr;
+            grid-template-columns: 1fr 1fr;
+        }
+        
+        .issue-thumbnails.two-issues .issue-thumb {
+            grid-row: 1;
+        }
+        
         .issue-thumb img {
             width: 100%;
             height: 100%;
@@ -255,21 +265,16 @@
             <!-- The Economist -->
             <a href="economist/" class="magazine-card">
                 <div class="magazine-cover">
-                    <div class="issue-thumbnails">
-                        <!-- Latest Issue (March 14, 2026) - Large Top -->
-                        <div class="issue-thumb large">
-                            <img src="economist/2026-03-14/cover.jpg" alt="March 14, 2026" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'issue-thumb-emoji\'>📰</div><div class=\'issue-thumb-label\'>Mar 14, 2026</div>'">
-                            <div class="issue-thumb-label">Mar 14, 2026 ✨</div>
-                        </div>
-                        <!-- February 28, 2026 - Bottom Left -->
-                        <div class="issue-thumb small">
+                    <div class="issue-thumbnails two-issues">
+                        <!-- February 28, 2026 - Left -->
+                        <div class="issue-thumb">
                             <img src="economist/2026-02-28/cover.jpg" alt="February 28, 2026" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'issue-thumb-emoji\'>📊</div><div class=\'issue-thumb-label\'>Feb 28</div>'">
-                            <div class="issue-thumb-label">Feb 28</div>
+                            <div class="issue-thumb-label">Feb 28, 2026</div>
                         </div>
-                        <!-- March 7, 2026 - Bottom Right -->
-                        <div class="issue-thumb small">
+                        <!-- March 7, 2026 - Right -->
+                        <div class="issue-thumb">
                             <img src="economist/2026-03-07/cover.jpg" alt="March 7, 2026" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'issue-thumb-emoji\'>🌍</div><div class=\'issue-thumb-label\'>Mar 7</div>'">
-                            <div class="issue-thumb-label">Mar 7</div>
+                            <div class="issue-thumb-label">Mar 7, 2026 ✨</div>
                         </div>
                     </div>
                 </div>
@@ -278,9 +283,9 @@
                     <h2 class="magazine-name">The Economist</h2>
                     <p class="magazine-desc">全球領先的商業和國際事務週刊。深度分析、獨到見解，為您解讀世界大事。</p>
                     <div class="magazine-stats">
-                        <span class="stat">📅 3 期</span>
-                        <span class="stat">📝 169 篇文章</span>
-                        <span class="stat">🆕 2026-03-14</span>
+                        <span class="stat">📅 2 期</span>
+                        <span class="stat">📝 151 篇文章</span>
+                        <span class="stat">🆕 2026-03-07</span>
                     </div>
                 </div>
             </a>
