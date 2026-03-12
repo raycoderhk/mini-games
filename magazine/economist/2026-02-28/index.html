@@ -19,27 +19,20 @@
         .info-box ul { list-style: none; padding-left: 0; }
         .info-box li { padding: 8px 0; border-bottom: 1px solid #eee; }
         .info-box li:last-child { border-bottom: none; }
-        .info-box a { color: var(--economist-red); text-decoration: none; }
-        .verified-badge { display: inline-block; padding: 5px 12px; background: #22c55e; color: white; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-left: 10px; }
-        table { width: 100%; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-collapse: collapse; }
+        .section-header { background: linear-gradient(135deg, var(--economist-red), #c4120c); color: white; padding: 15px 20px; margin: 30px 0 15px 0; border-radius: 10px 10px 0 0; }
+        .section-header h2 { font-size: 1.5rem; margin: 0; }
+        table { width: 100%; background: white; border-radius: 0 0 10px 10px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-collapse: collapse; }
         thead { background: #333; color: white; }
         th { padding: 15px; text-align: left; font-weight: 600; }
         th:nth-child(1) { width: 5%; }
-        th:nth-child(2) { width: 45%; }
-        th:nth-child(3) { width: 20%; }
-        th:nth-child(4) { width: 30%; }
+        th:nth-child(2) { width: 55%; }
+        th:nth-child(3) { width: 40%; }
         td { padding: 15px; border-bottom: 1px solid #eee; }
         tbody tr:hover { background-color: #f9f9f9; }
-        .category { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
-        .category.leaders { background: #ffe0e0; color: #c4120c; }
-        .category.briefing { background: #e0f0ff; color: #0066cc; }
-        .category.world { background: #e0ffe0; color: #008800; }
-        .category.business { background: #fff0e0; color: #cc6600; }
-        .category.finance { background: #f0e0ff; color: #6633cc; }
-        .category.tech { background: #e0ffff; color: #008888; }
-        .category.culture { background: #ffe0ff; color: #cc00cc; }
-        .category.china { background: #ffe0e0; color: #c4120c; }
-        .category.middleeast { background: #fff0e0; color: #cc6600; }
+        .article-title { font-weight: 600; color: #333; }
+        .article-title a { color: var(--economist-red); text-decoration: none; }
+        .article-title a:hover { text-decoration: underline; }
+        .article-section { font-size: 0.85rem; color: #666; }
         .links { display: flex; gap: 10px; flex-wrap: wrap; }
         .links a { padding: 6px 12px; border-radius: 5px; text-decoration: none; font-size: 0.9rem; }
         .original { background: var(--economist-red); color: white; }
@@ -60,43 +53,79 @@
         
         <header>
             <h1>📰 The Economist</h1>
-            <p class="subtitle">February 28, 2026 Issue <span class="verified-badge">✅ Tavily Verified</span></p>
+            <p class="subtitle">February 28, 2026 Issue</p>
         </header>
         
         <div class="info-box" style="border-left: 4px solid #22c55e; background: #f0fdf4;">
-            <h2 style="color: #22c55e;">✅ 已驗證真實數據</h2>
+            <h2 style="color: #22c55e;">✅ 真實文章數據</h2>
             <ul>
-                <li><strong>數據來源：</strong> Tavily Search API 實時搜索</li>
-                <li><strong>驗證方法：</strong> 所有文章 URL 均可在 The Economist 官網找到</li>
-                <li><strong>封面故事：</strong> Digging for Victory（關鍵礦物地緣政治）</li>
+                <li><strong>數據來源：</strong> 用戶從 Economist.com 提取</li>
+                <li><strong>文章總數：</strong> 79 篇文章</li>
+                <li><strong>期號日期：</strong> February 28, 2026</li>
+                <li><strong>ESL 詞彙頁面：</strong> 18 篇完成</li>
             </ul>
         </div>
-        
-        <div class="info-box" style="border-left: 4px solid #e3120b;">
-            <h2>📋 本期重點 | Highlights</h2>
-            <ul>
-                <li><strong>封面故事：</strong> Digging for Victory - 關鍵礦物作為戰略武器</li>
-                <li><strong>Leaders：</strong> Trump 的關鍵礦物主導權、無目的的戰爭風險</li>
-                <li><strong>China：</strong> IVF 輔助生殖技術應對出生率下降</li>
-                <li><strong>Middle East：</strong> 伊朗最高領袖去世後的繼承問題</li>
-                <li><strong>Business：</strong> Trump 全球關稅政策引發貿易緊張</li>
-            </ul>
+
+        <!-- The World This Week -->
+        <div class="section-header">
+            <h2>🌍 The World This Week</h2>
         </div>
-        
         <table>
             <thead>
-                <tr>
-                    <th>#</th>
-                    <th>文章標題 | Article</th>
-                    <th>分類 | Section</th>
-                    <th>連結 | Links</th>
-                </tr>
+                <tr><th>#</th><th>文章標題 | Article</th><th>連結 | Links</th></tr>
             </thead>
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td><strong>Digging for victory</strong><br><small>封面故事 - 關鍵礦物的地緣政治競爭</small></td>
-                    <td><span class="category leaders">Leaders</span></td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/the-world-this-week/2026/02/26/politics" target="_blank">Politics</a></div>
+                        <div class="article-section">The World This Week</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/the-world-this-week/2026/02/26/politics" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/the-world-this-week/2026/02/26/politics" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/the-world-this-week/2026/02/26/business" target="_blank">Business</a></div>
+                        <div class="article-section">The World This Week</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/the-world-this-week/2026/02/26/business" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/the-world-this-week/2026/02/26/business" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/the-world-this-week/2026/02/26/the-weekly-cartoon" target="_blank">The weekly cartoon</a></div>
+                        <div class="article-section">The World This Week</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/the-world-this-week/2026/02/26/the-weekly-cartoon" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/the-world-this-week/2026/02/26/the-weekly-cartoon" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Leaders -->
+        <div class="section-header">
+            <h2>📝 Leaders</h2>
+        </div>
+        <table>
+            <thead>
+                <tr><th>#</th><th>文章標題 | Article</th><th>連結 | Links</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>4</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/leaders/2026/02/26/americas-dangerous-pursuit-of-critical-mineral-dominance" target="_blank">America's dangerous pursuit of critical-mineral dominance</a></div>
+                        <div class="article-section">Leaders</div>
+                    </td>
                     <td class="links">
                         <a href="https://www.economist.com/leaders/2026/02/26/americas-dangerous-pursuit-of-critical-mineral-dominance" class="original" target="_blank">Original</a>
                         <a href="https://archive.ph/https://www.economist.com/leaders/2026/02/26/americas-dangerous-pursuit-of-critical-mineral-dominance" class="archive" target="_blank">Archive</a>
@@ -104,9 +133,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>2</td>
-                    <td><strong>Donald Trump is at risk of launching a war without purpose</strong><br><small>無目的的戰爭風險</small></td>
-                    <td><span class="category leaders">Leaders</span></td>
+                    <td>5</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/leaders/2026/02/26/donald-trump-is-at-risk-of-launching-a-war-without-purpose" target="_blank">Donald Trump is at risk of launching a war without purpose</a></div>
+                        <div class="article-section">Leaders</div>
+                    </td>
                     <td class="links">
                         <a href="https://www.economist.com/leaders/2026/02/26/donald-trump-is-at-risk-of-launching-a-war-without-purpose" class="original" target="_blank">Original</a>
                         <a href="https://archive.ph/https://www.economist.com/leaders/2026/02/26/donald-trump-is-at-risk-of-launching-a-war-without-purpose" class="archive" target="_blank">Archive</a>
@@ -114,152 +145,972 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>3</td>
-                    <td><strong>China hopes IVF can slow its baby bust</strong><br><small>中國希望 IVF 減緩出生率下降</small></td>
-                    <td><span class="category china">China</span></td>
-                    <td class="links">
-                        <a href="https://www.economist.com/china/2026/03/01/china-hopes-ivf-can-slow-its-baby-bust" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/china/2026/03/01/china-hopes-ivf-can-slow-its-baby-bust" class="archive" target="_blank">Archive</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td><strong>War, succession and the perilous test of two myths about Iran</strong><br><small>伊朗戰爭、繼承與神話考驗</small></td>
-                    <td><span class="category middleeast">Middle East & Africa</span></td>
-                    <td class="links">
-                        <a href="https://www.economist.com/middle-east-and-africa/2026/03/01/war-succession-and-the-perilous-test-of-two-myths-about-iran" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/middle-east-and-africa/2026/03/01/war-succession-and-the-perilous-test-of-two-myths-about-iran" class="archive" target="_blank">Archive</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td><strong>Ali Khamenei grabbed power and held it, at bloody cost</strong><br><small>伊朗最高領袖 Khamenei 的權力之路</small></td>
-                    <td><span class="category middleeast">Middle East & Africa</span></td>
-                    <td class="links">
-                        <a href="https://www.economist.com/middle-east-and-africa/2026/03/01/ali-khamenei-grabbed-power-and-held-it-at-bloody-cost" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/middle-east-and-africa/2026/03/01/ali-khamenei-grabbed-power-and-held-it-at-bloody-cost" class="archive" target="_blank">Archive</a>
-                    </td>
-                </tr>
-                <tr>
                     <td>6</td>
-                    <td><strong>Why Ali Khamenei may have welcomed the nature of his death</strong><br><small>Khamenei 如何精心安排殉道</small></td>
-                    <td><span class="category middleeast">Middle East & Africa</span></td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/leaders/2026/02/25/the-right-response-to-private-market-dangers" target="_blank">The right response to private-market dangers</a></div>
+                        <div class="article-section">Leaders</div>
+                    </td>
                     <td class="links">
-                        <a href="https://www.economist.com/middle-east-and-africa/2026/03/03/why-ali-khamenei-may-have-welcomed-the-nature-of-his-death" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/middle-east-and-africa/2026/03/03/why-ali-khamenei-may-have-welcomed-the-nature-of-his-death" class="archive" target="_blank">Archive</a>
+                        <a href="https://www.economist.com/leaders/2026/02/25/the-right-response-to-private-market-dangers" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/leaders/2026/02/25/the-right-response-to-private-market-dangers" class="archive" target="_blank">Archive</a>
                     </td>
                 </tr>
                 <tr>
                     <td>7</td>
-                    <td><strong>Trump's global tariff threat angering trade partners</strong><br><small>Trump 全球關稅威脅激怒貿易夥伴</small></td>
-                    <td><span class="category business">Business</span></td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/leaders/2026/02/26/americas-states-should-beware-of-copying-europe-too-much" target="_blank">America's states should beware of copying Europe too much</a></div>
+                        <div class="article-section">Leaders</div>
+                    </td>
                     <td class="links">
-                        <a href="https://www.economist.com/the-world-this-week/2026/02/26/business" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/the-world-this-week/2026/02/26/business" class="archive" target="_blank">Archive</a>
+                        <a href="https://www.economist.com/leaders/2026/02/26/americas-states-should-beware-of-copying-europe-too-much" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/leaders/2026/02/26/americas-states-should-beware-of-copying-europe-too-much" class="archive" target="_blank">Archive</a>
                     </td>
                 </tr>
                 <tr>
                     <td>8</td>
-                    <td><strong>Politics - The World This Week</strong><br><small>每週政治摘要</small></td>
-                    <td><span class="category world">World</span></td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/leaders/2026/02/26/heathrows-third-runway-is-turning-into-another-infrastructure-fiasco" target="_blank">Heathrow's third runway is turning into another infrastructure fiasco</a></div>
+                        <div class="article-section">Leaders</div>
+                    </td>
                     <td class="links">
-                        <a href="https://www.economist.com/the-world-this-week/2026/02/26/politics" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/the-world-this-week/2026/02/26/politics" class="archive" target="_blank">Archive</a>
+                        <a href="https://www.economist.com/leaders/2026/02/26/heathrows-third-runway-is-turning-into-another-infrastructure-fiasco" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/leaders/2026/02/26/heathrows-third-runway-is-turning-into-another-infrastructure-fiasco" class="archive" target="_blank">Archive</a>
                     </td>
                 </tr>
                 <tr>
                     <td>9</td>
-                    <td><strong>Trump's state-of-the-union speech (longest ever)</strong><br><small>Trump 國情咨文演講（史上最長）</small></td>
-                    <td><span class="category world">United States</span></td>
-                    <td class="links">
-                        <a href="https://www.economist.com/united-states/2026/02/28/trumps-state-of-the-union" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/united-states/2026/02/28/trumps-state-of-the-union" class="archive" target="_blank">Archive</a>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/leaders/2026/02/27/brazils-almighty-supreme-court-must-win-back-public-trust" target="_blank">Brazil's almighty Supreme Court must win back public trust</a></div>
+                        <div class="article-section">Leaders</div>
                     </td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td><strong>India strengthens security and trade ties</strong><br><small>印度加強安全與貿易關係</small></td>
-                    <td><span class="category world">Asia</span></td>
                     <td class="links">
-                        <a href="https://www.economist.com/asia/2026/02/28/india-strengthens-security-ties" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/asia/2026/02/28/india-strengthens-security-ties" class="archive" target="_blank">Archive</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>11</td>
-                    <td><strong>China's fertility rate falls to lowest since 1949</strong><br><small>中國生育率降至 1949 年以來最低</small></td>
-                    <td><span class="category china">China</span></td>
-                    <td class="links">
-                        <a href="https://www.economist.com/china/2026/01/19/chinas-birthrate-falls-to-lowest" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/china/2026/01/19/chinas-birthrate-falls-to-lowest" class="archive" target="_blank">Archive</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>12</td>
-                    <td><strong>Europe's energy transition challenges</strong><br><small>歐洲能源轉型挑戰</small></td>
-                    <td><span class="category finance">Finance & Economics</span></td>
-                    <td class="links">
-                        <a href="https://www.economist.com/finance-and-economics/2026/02/28/europes-energy-transition" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/finance-and-economics/2026/02/28/europes-energy-transition" class="archive" target="_blank">Archive</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>13</td>
-                    <td><strong>Emerging markets face capital outflows</strong><br><small>新興市場面臨資金外流</small></td>
-                    <td><span class="category finance">Finance & Economics</span></td>
-                    <td class="links">
-                        <a href="https://www.economist.com/finance-and-economics/2026/02/28/emerging-markets-capital-outflows" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/finance-and-economics/2026/02/28/emerging-markets-capital-outflows" class="archive" target="_blank">Archive</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>14</td>
-                    <td><strong>UK productivity puzzle deepens</strong><br><small>英國生產力謎題加深</small></td>
-                    <td><span class="category business">Britain</span></td>
-                    <td class="links">
-                        <a href="https://www.economist.com/britain/2026/02/28/uk-productivity-puzzle" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/britain/2026/02/28/uk-productivity-puzzle" class="archive" target="_blank">Archive</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>15</td>
-                    <td><strong>AI regulation debate intensifies</strong><br><small>AI 監管辯論升級</small></td>
-                    <td><span class="category tech">Technology</span></td>
-                    <td class="links">
-                        <a href="https://www.economist.com/science-and-technology/2026/02/28/ai-regulation-debate" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/science-and-technology/2026/02/28/ai-regulation-debate" class="archive" target="_blank">Archive</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>16</td>
-                    <td><strong>Electric vehicle market slowdown</strong><br><small>電動車市場放緩</small></td>
-                    <td><span class="category business">Business</span></td>
-                    <td class="links">
-                        <a href="https://www.economist.com/business/2026/02/28/ev-market-slowdown" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/business/2026/02/28/ev-market-slowdown" class="archive" target="_blank">Archive</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>17</td>
-                    <td><strong>Economic & Financial Indicators</strong><br><small>經濟與金融指標</small></td>
-                    <td><span class="category finance">Finance & Economics</span></td>
-                    <td class="links">
-                        <a href="https://www.economist.com/economic-and-financial-indicators/2026/02/28" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/economic-and-financial-indicators/2026/02/28" class="archive" target="_blank">Archive</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>18</td>
-                    <td><strong>The Weekly Cartoon</strong><br><small>每週漫畫</small></td>
-                    <td><span class="category culture">Culture</span></td>
-                    <td class="links">
-                        <a href="https://www.economist.com/the-world-this-week/2026/02/28/the-weekly-cartoon" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/the-world-this-week/2026/02/28/the-weekly-cartoon" class="archive" target="_blank">Archive</a>
+                        <a href="https://www.economist.com/leaders/2026/02/27/brazils-almighty-supreme-court-must-win-back-public-trust" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/leaders/2026/02/27/brazils-almighty-supreme-court-must-win-back-public-trust" class="archive" target="_blank">Archive</a>
                     </td>
                 </tr>
             </tbody>
         </table>
-        
+
+        <!-- Letters -->
+        <div class="section-header">
+            <h2>✉️ Letters</h2>
+        </div>
+        <table>
+            <thead><tr><th>#</th><th>文章標題 | Article</th><th>連結 | Links</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>10</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/letters/2026/02/26/in-favour-of-allowing-under-16s-to-continue-using-social-media" target="_blank">In favour of allowing under-16s to continue using social media</a></div>
+                        <div class="article-section">Letters</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/letters/2026/02/26/in-favour-of-allowing-under-16s-to-continue-using-social-media" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/letters/2026/02/26/in-favour-of-allowing-under-16s-to-continue-using-social-media" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- By Invitation -->
+        <div class="section-header">
+            <h2>🎤 By Invitation</h2>
+        </div>
+        <table>
+            <thead><tr><th>#</th><th>文章標題 | Article</th><th>連結 | Links</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>11</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/by-invitation/2026/02/20/the-supreme-court-tariffs-ruling-reins-in-donald-trump" target="_blank">The Supreme Court tariffs ruling reins in Donald Trump</a></div>
+                        <div class="article-section">By Invitation</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/by-invitation/2026/02/20/the-supreme-court-tariffs-ruling-reins-in-donald-trump" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/by-invitation/2026/02/20/the-supreme-court-tariffs-ruling-reins-in-donald-trump" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Briefing -->
+        <div class="section-header">
+            <h2>📊 Briefing</h2>
+        </div>
+        <table>
+            <thead><tr><th>#</th><th>文章標題 | Article</th><th>連結 | Links</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>12</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/briefing/2026/02/26/americas-new-era-of-state-sponsored-mining" target="_blank">America's new era of state-sponsored mining</a></div>
+                        <div class="article-section">Briefing</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/briefing/2026/02/26/americas-new-era-of-state-sponsored-mining" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/briefing/2026/02/26/americas-new-era-of-state-sponsored-mining" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Asia -->
+        <div class="section-header">
+            <h2>🌏 Asia</h2>
+        </div>
+        <table>
+            <thead><tr><th>#</th><th>文章標題 | Article</th><th>連結 | Links</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>13</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/asia/2026/02/25/modernisation-is-making-south-east-asia-more-islamic" target="_blank">Modernisation is making South-East Asia more Islamic</a></div>
+                        <div class="article-section">Asia</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/asia/2026/02/25/modernisation-is-making-south-east-asia-more-islamic" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/asia/2026/02/25/modernisation-is-making-south-east-asia-more-islamic" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/asia/2026/02/26/sos-for-indias-pink-city" target="_blank">SOS for India's Pink City</a></div>
+                        <div class="article-section">Asia</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/asia/2026/02/26/sos-for-indias-pink-city" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/asia/2026/02/26/sos-for-indias-pink-city" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/asia/2026/02/26/china-piles-pressure-on-japan-after-takaichi-sanaes-triumph" target="_blank">China piles pressure on Japan after Takaichi Sanae's triumph</a></div>
+                        <div class="article-section">Asia</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/asia/2026/02/26/china-piles-pressure-on-japan-after-takaichi-sanaes-triumph" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/asia/2026/02/26/china-piles-pressure-on-japan-after-takaichi-sanaes-triumph" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/asia/2026/02/26/google-maps-makes-another-pitch-for-better-south-korean-data" target="_blank">Google Maps makes another pitch for better South Korean data</a></div>
+                        <div class="article-section">Asia</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/asia/2026/02/26/google-maps-makes-another-pitch-for-better-south-korean-data" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/asia/2026/02/26/google-maps-makes-another-pitch-for-better-south-korean-data" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/asia/2026/02/22/indias-vip-culture-is-out-of-control" target="_blank">India's VIP culture is out of control</a></div>
+                        <div class="article-section">Asia</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/asia/2026/02/22/indias-vip-culture-is-out-of-control" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/asia/2026/02/22/indias-vip-culture-is-out-of-control" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- China -->
+        <div class="section-header">
+            <h2>🇨🇳 China</h2>
+        </div>
+        <table>
+            <thead><tr><th>#</th><th>文章標題 | Article</th><th>連結 | Links</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>18</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/china/2026/02/24/how-to-get-rich-in-modern-china" target="_blank">How to get rich in modern China</a></div>
+                        <div class="article-section">China</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/china/2026/02/24/how-to-get-rich-in-modern-china" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/china/2026/02/24/how-to-get-rich-in-modern-china" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/china/2026/02/25/american-labs-say-chinas-ai-tigers-are-copycats" target="_blank">American labs say China's AI tigers are copycats</a></div>
+                        <div class="article-section">China</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/china/2026/02/25/american-labs-say-chinas-ai-tigers-are-copycats" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/china/2026/02/25/american-labs-say-chinas-ai-tigers-are-copycats" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/china/2026/02/26/mapping-chinas-holiday-rush" target="_blank">Mapping China's holiday rush</a></div>
+                        <div class="article-section">China</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/china/2026/02/26/mapping-chinas-holiday-rush" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/china/2026/02/26/mapping-chinas-holiday-rush" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/china/2026/02/23/the-rotten-tail-of-chinas-property-bust" target="_blank">The rotten tail of China's property bust</a></div>
+                        <div class="article-section">China</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/china/2026/02/23/the-rotten-tail-of-chinas-property-bust" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/china/2026/02/23/the-rotten-tail-of-chinas-property-bust" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- United States -->
+        <div class="section-header">
+            <h2>🇺🇸 United States</h2>
+        </div>
+        <table>
+            <thead><tr><th>#</th><th>文章標題 | Article</th><th>連結 | Links</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>22</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/united-states/2026/02/21/the-midwests-remarkable-turnaround" target="_blank">The Midwest's remarkable turnaround</a></div>
+                        <div class="article-section">United States</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/united-states/2026/02/21/the-midwests-remarkable-turnaround" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/united-states/2026/02/21/the-midwests-remarkable-turnaround" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/united-states/2026/02/26/the-trump-court-not-quite" target="_blank">The Trump court? Not quite</a></div>
+                        <div class="article-section">United States</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/united-states/2026/02/26/the-trump-court-not-quite" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/united-states/2026/02/26/the-trump-court-not-quite" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>24</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/united-states/2026/02/26/the-battle-to-flip-texas" target="_blank">The battle to flip Texas</a></div>
+                        <div class="article-section">United States</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/united-states/2026/02/26/the-battle-to-flip-texas" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/united-states/2026/02/26/the-battle-to-flip-texas" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>25</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/united-states/2026/02/26/each-year-tens-of-thousands-of-americans-accidentally-kill" target="_blank">Each year tens of thousands of Americans accidentally kill</a></div>
+                        <div class="article-section">United States</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/united-states/2026/02/26/each-year-tens-of-thousands-of-americans-accidentally-kill" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/united-states/2026/02/26/each-year-tens-of-thousands-of-americans-accidentally-kill" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/united-states/2026/02/24/its-californias-250th-birthday-too" target="_blank">It's California's 250th birthday, too</a></div>
+                        <div class="article-section">United States</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/united-states/2026/02/24/its-californias-250th-birthday-too" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/united-states/2026/02/24/its-californias-250th-birthday-too" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>27</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/united-states/2026/02/25/donald-trumps-unworthy-state-of-the-union" target="_blank">Donald Trump's unworthy state of the union</a></div>
+                        <div class="article-section">United States</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/united-states/2026/02/25/donald-trumps-unworthy-state-of-the-union" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/united-states/2026/02/25/donald-trumps-unworthy-state-of-the-union" class="archive" target="_blank">Archive</a>
+                        <a href="vocab-trump-sotu.html" class="study-btn">📖 Study</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- The Americas -->
+        <div class="section-header">
+            <h2>🌎 The Americas</h2>
+        </div>
+        <table>
+            <thead><tr><th>#</th><th>文章標題 | Article</th><th>連結 | Links</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>28</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/the-americas/2026/02/23/the-killing-of-mexicos-most-powerful-narco-will-please-donald-trump" target="_blank">The killing of Mexico's most powerful narco will please Donald Trump</a></div>
+                        <div class="article-section">The Americas</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/the-americas/2026/02/23/the-killing-of-mexicos-most-powerful-narco-will-please-donald-trump" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/the-americas/2026/02/23/the-killing-of-mexicos-most-powerful-narco-will-please-donald-trump" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>29</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/the-americas/2026/02/24/brazils-high-court-is-caught-up-in-a-vast-scandal" target="_blank">Brazil's high court is caught up in a vast scandal</a></div>
+                        <div class="article-section">The Americas</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/the-americas/2026/02/24/brazils-high-court-is-caught-up-in-a-vast-scandal" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/the-americas/2026/02/24/brazils-high-court-is-caught-up-in-a-vast-scandal" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>30</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/the-americas/2026/02/26/donald-trumps-oil-embargo-reveals-a-solar-boom-in-cuba" target="_blank">Donald Trump's oil embargo reveals a solar boom in Cuba</a></div>
+                        <div class="article-section">The Americas</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/the-americas/2026/02/26/donald-trumps-oil-embargo-reveals-a-solar-boom-in-cuba" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/the-americas/2026/02/26/donald-trumps-oil-embargo-reveals-a-solar-boom-in-cuba" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Middle East & Africa -->
+        <div class="section-header">
+            <h2>🌍 Middle East & Africa</h2>
+        </div>
+        <table>
+            <thead><tr><th>#</th><th>文章標題 | Article</th><th>連結 | Links</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>31</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/middle-east-and-africa/2026/02/25/americans-have-no-idea-what-donald-trump-wants-from-iran" target="_blank">Americans have no idea what Donald Trump wants from Iran</a></div>
+                        <div class="article-section">Middle East & Africa</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/middle-east-and-africa/2026/02/25/americans-have-no-idea-what-donald-trump-wants-from-iran" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/middle-east-and-africa/2026/02/25/americans-have-no-idea-what-donald-trump-wants-from-iran" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>32</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/middle-east-and-africa/2026/02/26/iranians-angry-defiance-is-growing-once-again" target="_blank">Iranians' angry defiance is growing once again</a></div>
+                        <div class="article-section">Middle East & Africa</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/middle-east-and-africa/2026/02/26/iranians-angry-defiance-is-growing-once-again" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/middle-east-and-africa/2026/02/26/iranians-angry-defiance-is-growing-once-again" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>33</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/middle-east-and-africa/2026/02/26/ali-larijani-is-an-increasingly-plausible-heir-in-iran" target="_blank">Ali Larijani is an increasingly plausible heir in Iran</a></div>
+                        <div class="article-section">Middle East & Africa</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/middle-east-and-africa/2026/02/26/ali-larijani-is-an-increasingly-plausible-heir-in-iran" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/middle-east-and-africa/2026/02/26/ali-larijani-is-an-increasingly-plausible-heir-in-iran" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>34</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/middle-east-and-africa/2026/02/26/iran-may-insist-hizbullah-fights-on-its-behalf" target="_blank">Iran may insist Hizbullah fights on its behalf</a></div>
+                        <div class="article-section">Middle East & Africa</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/middle-east-and-africa/2026/02/26/iran-may-insist-hizbullah-fights-on-its-behalf" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/middle-east-and-africa/2026/02/26/iran-may-insist-hizbullah-fights-on-its-behalf" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>35</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/middle-east-and-africa/2026/02/26/south-sudans-decrepit-regime-is-unravelling" target="_blank">South Sudan's decrepit regime is unravelling</a></div>
+                        <div class="article-section">Middle East & Africa</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/middle-east-and-africa/2026/02/26/south-sudans-decrepit-regime-is-unravelling" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/middle-east-and-africa/2026/02/26/south-sudans-decrepit-regime-is-unravelling" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Europe -->
+        <div class="section-header">
+            <h2>🇪🇺 Europe</h2>
+        </div>
+        <table>
+            <thead><tr><th>#</th><th>文章標題 | Article</th><th>連結 | Links</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>36</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/europe/2026/02/26/giorgia-meloni-is-taking-on-the-courts-in-italy" target="_blank">Giorgia Meloni is taking on the courts in Italy</a></div>
+                        <div class="article-section">Europe</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/europe/2026/02/26/giorgia-meloni-is-taking-on-the-courts-in-italy" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/europe/2026/02/26/giorgia-meloni-is-taking-on-the-courts-in-italy" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>37</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/europe/2026/02/26/ukraine-is-scaling-up-interceptor-drones" target="_blank">Ukraine is scaling up interceptor drones</a></div>
+                        <div class="article-section">Europe</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/europe/2026/02/26/ukraine-is-scaling-up-interceptor-drones" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/europe/2026/02/26/ukraine-is-scaling-up-interceptor-drones" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>38</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/europe/2026/02/22/why-one-corner-of-europes-car-industry-is-still-booming" target="_blank">Why one corner of Europe's car industry is still booming</a></div>
+                        <div class="article-section">Europe</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/europe/2026/02/22/why-one-corner-of-europes-car-industry-is-still-booming" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/europe/2026/02/22/why-one-corner-of-europes-car-industry-is-still-booming" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>39</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/europe/2026/02/23/frances-far-left-reckons-with-the-murder-of-a-far-right-activist" target="_blank">France's far left reckons with the murder of a far-right activist</a></div>
+                        <div class="article-section">Europe</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/europe/2026/02/23/frances-far-left-reckons-with-the-murder-of-a-far-right-activist" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/europe/2026/02/23/frances-far-left-reckons-with-the-murder-of-a-far-right-activist" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>40</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/europe/2026/02/26/how-the-war-in-ukraine-affects-siberian-russia" target="_blank">How the war in Ukraine affects Siberian Russia</a></div>
+                        <div class="article-section">Europe</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/europe/2026/02/26/how-the-war-in-ukraine-affects-siberian-russia" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/europe/2026/02/26/how-the-war-in-ukraine-affects-siberian-russia" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>41</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/europe/2026/02/25/luxury-goods-are-europes-global-tax-on-vanity" target="_blank">Luxury goods are Europe's global tax on vanity</a></div>
+                        <div class="article-section">Europe</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/europe/2026/02/25/luxury-goods-are-europes-global-tax-on-vanity" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/europe/2026/02/25/luxury-goods-are-europes-global-tax-on-vanity" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Britain -->
+        <div class="section-header">
+            <h2>🇬🇧 Britain</h2>
+        </div>
+        <table>
+            <thead><tr><th>#</th><th>文章標題 | Article</th><th>連結 | Links</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>42</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/britain/2026/02/24/heathrows-expansion-is-on-track-to-be-eye-wateringly-expensive" target="_blank">Heathrow's expansion is on track to be eye-wateringly expensive</a></div>
+                        <div class="article-section">Britain</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/britain/2026/02/24/heathrows-expansion-is-on-track-to-be-eye-wateringly-expensive" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/britain/2026/02/24/heathrows-expansion-is-on-track-to-be-eye-wateringly-expensive" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>43</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/britain/2026/02/26/britains-civil-service-has-a-new-leader" target="_blank">Britain's civil service has a new leader</a></div>
+                        <div class="article-section">Britain</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/britain/2026/02/26/britains-civil-service-has-a-new-leader" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/britain/2026/02/26/britains-civil-service-has-a-new-leader" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>44</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/britain/2026/02/26/labours-handling-of-special-educational-needs-offers-hope" target="_blank">Labour's handling of special educational needs offers hope</a></div>
+                        <div class="article-section">Britain</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/britain/2026/02/26/labours-handling-of-special-educational-needs-offers-hope" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/britain/2026/02/26/labours-handling-of-special-educational-needs-offers-hope" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>45</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/britain/2026/02/26/reform-uks-economic-plan-looks-a-lot-like-labours" target="_blank">Reform UK's economic plan looks a lot like Labour's</a></div>
+                        <div class="article-section">Britain</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/britain/2026/02/26/reform-uks-economic-plan-looks-a-lot-like-labours" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/britain/2026/02/26/reform-uks-economic-plan-looks-a-lot-like-labours" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>46</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/britain/2026/02/17/its-a-good-time-to-be-a-british-football-prodigy" target="_blank">It's a good time to be a British football prodigy</a></div>
+                        <div class="article-section">Britain</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/britain/2026/02/17/its-a-good-time-to-be-a-british-football-prodigy" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/britain/2026/02/17/its-a-good-time-to-be-a-british-football-prodigy" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>47</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/britain/2026/02/23/a-massive-engineering-project-has-changed-the-shape-of-the-thames" target="_blank">A massive engineering project has changed the shape of the Thames</a></div>
+                        <div class="article-section">Britain</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/britain/2026/02/23/a-massive-engineering-project-has-changed-the-shape-of-the-thames" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/britain/2026/02/23/a-massive-engineering-project-has-changed-the-shape-of-the-thames" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>48</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/britain/2026/02/26/the-paranoid-style-in-british-politics" target="_blank">The paranoid style in British politics</a></div>
+                        <div class="article-section">Britain</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/britain/2026/02/26/the-paranoid-style-in-british-politics" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/britain/2026/02/26/the-paranoid-style-in-british-politics" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- International -->
+        <div class="section-header">
+            <h2>🌐 International</h2>
+        </div>
+        <table>
+            <thead><tr><th>#</th><th>文章標題 | Article</th><th>連結 | Links</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>49</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/international/2026/02/26/who-speaks-for-the-muslim-world" target="_blank">Who speaks for the Muslim world?</a></div>
+                        <div class="article-section">International</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/international/2026/02/26/who-speaks-for-the-muslim-world" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/international/2026/02/26/who-speaks-for-the-muslim-world" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>50</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/international/2026/02/24/a-stay-calm-plan-to-save-the-world" target="_blank">A stay-calm plan to save the world</a></div>
+                        <div class="article-section">International</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/international/2026/02/24/a-stay-calm-plan-to-save-the-world" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/international/2026/02/24/a-stay-calm-plan-to-save-the-world" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Business -->
+        <div class="section-header">
+            <h2>💼 Business</h2>
+        </div>
+        <table>
+            <thead><tr><th>#</th><th>文章標題 | Article</th><th>連結 | Links</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>51</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/business/2026/02/23/rejoice-private-equity-is-taking-over-americas-small-businesses" target="_blank">Rejoice! Private equity is taking over America's small businesses</a></div>
+                        <div class="article-section">Business</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/business/2026/02/23/rejoice-private-equity-is-taking-over-americas-small-businesses" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/business/2026/02/23/rejoice-private-equity-is-taking-over-americas-small-businesses" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>52</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/business/2026/02/26/the-sphere-is-taking-its-success-in-las-vegas-to-the-world" target="_blank">The Sphere is taking its success in Las Vegas to the world</a></div>
+                        <div class="article-section">Business</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/business/2026/02/26/the-sphere-is-taking-its-success-in-las-vegas-to-the-world" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/business/2026/02/26/the-sphere-is-taking-its-success-in-las-vegas-to-the-world" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>53</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/business/2026/02/26/the-stunning-rise-of-chinas-most-audacious-miner" target="_blank">The stunning rise of China's most audacious miner</a></div>
+                        <div class="article-section">Business</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/business/2026/02/26/the-stunning-rise-of-chinas-most-audacious-miner" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/business/2026/02/26/the-stunning-rise-of-chinas-most-audacious-miner" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>54</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/business/2026/02/26/the-fake-meat-industry-is-in-trouble" target="_blank">The fake-meat industry is in trouble</a></div>
+                        <div class="article-section">Business</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/business/2026/02/26/the-fake-meat-industry-is-in-trouble" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/business/2026/02/26/the-fake-meat-industry-is-in-trouble" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>55</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/business/2026/02/24/the-war-against-pdfs-is-heating-up" target="_blank">The war against PDFs is heating up</a></div>
+                        <div class="article-section">Business</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/business/2026/02/24/the-war-against-pdfs-is-heating-up" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/business/2026/02/24/the-war-against-pdfs-is-heating-up" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>56</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/business/2026/02/24/pete-hegseth-wages-war-on-anthropic" target="_blank">Pete Hegseth wages war on Anthropic</a></div>
+                        <div class="article-section">Business</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/business/2026/02/24/pete-hegseth-wages-war-on-anthropic" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/business/2026/02/24/pete-hegseth-wages-war-on-anthropic" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>57</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/business/2026/02/26/tony-robbins-the-megalosaurus-of-motivation" target="_blank">Tony Robbins, the megalosaurus of motivation</a></div>
+                        <div class="article-section">Business</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/business/2026/02/26/tony-robbins-the-megalosaurus-of-motivation" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/business/2026/02/26/tony-robbins-the-megalosaurus-of-motivation" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>58</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/business/2026/02/25/americas-bosses-are-being-dragged-into-local-politics" target="_blank">America's bosses are being dragged into local politics</a></div>
+                        <div class="article-section">Business</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/business/2026/02/25/americas-bosses-are-being-dragged-into-local-politics" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/business/2026/02/25/americas-bosses-are-being-dragged-into-local-politics" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Finance & Economics -->
+        <div class="section-header">
+            <h2>📈 Finance & Economics</h2>
+        </div>
+        <table>
+            <thead><tr><th>#</th><th>文章標題 | Article</th><th>連結 | Links</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>59</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/finance-and-economics/2026/02/26/americas-trade-chaos-is-just-beginning" target="_blank">America's trade chaos is just beginning</a></div>
+                        <div class="article-section">Finance & Economics</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/finance-and-economics/2026/02/26/americas-trade-chaos-is-just-beginning" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/finance-and-economics/2026/02/26/americas-trade-chaos-is-just-beginning" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>60</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/finance-and-economics/2026/02/22/the-ai-productivity-boom-is-not-here-yet" target="_blank">The AI productivity boom is not here (yet)</a></div>
+                        <div class="article-section">Finance & Economics</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/finance-and-economics/2026/02/22/the-ai-productivity-boom-is-not-here-yet" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/finance-and-economics/2026/02/22/the-ai-productivity-boom-is-not-here-yet" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>61</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/finance-and-economics/2026/02/25/a-viral-research-note-on-ai-gets-its-economics-wrong" target="_blank">A viral research note on AI gets its economics wrong</a></div>
+                        <div class="article-section">Finance & Economics</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/finance-and-economics/2026/02/25/a-viral-research-note-on-ai-gets-its-economics-wrong" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/finance-and-economics/2026/02/25/a-viral-research-note-on-ai-gets-its-economics-wrong" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>62</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/finance-and-economics/2026/02/25/americas-welfare-state-is-more-european-than-you-think" target="_blank">America's welfare state is more European than you think</a></div>
+                        <div class="article-section">Finance & Economics</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/finance-and-economics/2026/02/25/americas-welfare-state-is-more-european-than-you-think" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/finance-and-economics/2026/02/25/americas-welfare-state-is-more-european-than-you-think" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>63</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/finance-and-economics/2026/02/26/protectionists-dislike-trade-and-migration-and-capital-flows" target="_blank">Protectionists dislike trade and migration. And capital flows?</a></div>
+                        <div class="article-section">Finance & Economics</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/finance-and-economics/2026/02/26/protectionists-dislike-trade-and-migration-and-capital-flows" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/finance-and-economics/2026/02/26/protectionists-dislike-trade-and-migration-and-capital-flows" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>64</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/finance-and-economics/2026/02/22/markets-are-churning-furiously-beneath-the-surface" target="_blank">Markets are churning furiously beneath the surface</a></div>
+                        <div class="article-section">Finance & Economics</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/finance-and-economics/2026/02/22/markets-are-churning-furiously-beneath-the-surface" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/finance-and-economics/2026/02/22/markets-are-churning-furiously-beneath-the-surface" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>65</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/finance-and-economics/2026/02/26/why-chinese-people-spend-so-much-on-food" target="_blank">Why Chinese people spend so much on food</a></div>
+                        <div class="article-section">Finance & Economics</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/finance-and-economics/2026/02/26/why-chinese-people-spend-so-much-on-food" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/finance-and-economics/2026/02/26/why-chinese-people-spend-so-much-on-food" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Science & Technology -->
+        <div class="section-header">
+            <h2>🔬 Science & Technology</h2>
+        </div>
+        <table>
+            <thead><tr><th>#</th><th>文章標題 | Article</th><th>連結 | Links</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>66</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/science-and-technology/2026/02/25/ai-tools-are-being-prepared-for-the-physical-world" target="_blank">AI tools are being prepared for the physical world</a></div>
+                        <div class="article-section">Science & Technology</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/science-and-technology/2026/02/25/ai-tools-are-being-prepared-for-the-physical-world" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/science-and-technology/2026/02/25/ai-tools-are-being-prepared-for-the-physical-world" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>67</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/science-and-technology/2026/02/25/will-one-stop-blood-tests-for-cancer-save-lives" target="_blank">Will one-stop blood tests for cancer save lives?</a></div>
+                        <div class="article-section">Science & Technology</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/science-and-technology/2026/02/25/will-one-stop-blood-tests-for-cancer-save-lives" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/science-and-technology/2026/02/25/will-one-stop-blood-tests-for-cancer-save-lives" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>68</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/science-and-technology/2026/02/25/marks-left-by-stone-age-humans-were-surprisingly-complex" target="_blank">Marks left by Stone Age humans were surprisingly complex</a></div>
+                        <div class="article-section">Science & Technology</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/science-and-technology/2026/02/25/marks-left-by-stone-age-humans-were-surprisingly-complex" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/science-and-technology/2026/02/25/marks-left-by-stone-age-humans-were-surprisingly-complex" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>69</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/science-and-technology/2026/02/20/should-you-be-fibremaxxing" target="_blank">Should you be fibremaxxing?</a></div>
+                        <div class="article-section">Science & Technology</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/science-and-technology/2026/02/20/should-you-be-fibremaxxing" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/science-and-technology/2026/02/20/should-you-be-fibremaxxing" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Culture -->
+        <div class="section-header">
+            <h2>🎭 Culture</h2>
+        </div>
+        <table>
+            <thead><tr><th>#</th><th>文章標題 | Article</th><th>連結 | Links</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>70</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/culture/2026/02/26/the-biggest-band-youve-never-heard-of" target="_blank">The biggest band you've never heard of</a></div>
+                        <div class="article-section">Culture</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/culture/2026/02/26/the-biggest-band-youve-never-heard-of" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/culture/2026/02/26/the-biggest-band-youve-never-heard-of" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>71</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/culture/2026/02/26/life-after-escaping-from-nazi-germany-a-familys-story" target="_blank">Life after escaping from Nazi Germany: a family's story</a></div>
+                        <div class="article-section">Culture</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/culture/2026/02/26/life-after-escaping-from-nazi-germany-a-familys-story" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/culture/2026/02/26/life-after-escaping-from-nazi-germany-a-familys-story" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>72</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/culture/2026/02/25/why-readers-and-viewers-hunger-for-hannibal-lecter" target="_blank">Why readers and viewers hunger for Hannibal Lecter</a></div>
+                        <div class="article-section">Culture</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/culture/2026/02/25/why-readers-and-viewers-hunger-for-hannibal-lecter" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/culture/2026/02/25/why-readers-and-viewers-hunger-for-hannibal-lecter" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>73</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/culture/2026/02/22/the-latest-choreography-craze-line-dancing" target="_blank">The latest choreography craze? Line dancing</a></div>
+                        <div class="article-section">Culture</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/culture/2026/02/22/the-latest-choreography-craze-line-dancing" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/culture/2026/02/22/the-latest-choreography-craze-line-dancing" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>74</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/culture/2026/02/26/thirty-years-on-pokemon-is-still-a-monster-hit" target="_blank">Thirty years on, Pokémon is still a monster hit</a></div>
+                        <div class="article-section">Culture</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/culture/2026/02/26/thirty-years-on-pokemon-is-still-a-monster-hit" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/culture/2026/02/26/thirty-years-on-pokemon-is-still-a-monster-hit" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>75</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/culture/2026/02/26/how-chinas-communist-party-seized-power-in-1949" target="_blank">How China's Communist Party seized power in 1949</a></div>
+                        <div class="article-section">Culture</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/culture/2026/02/26/how-chinas-communist-party-seized-power-in-1949" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/culture/2026/02/26/how-chinas-communist-party-seized-power-in-1949" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Economic & Financial Indicators -->
+        <div class="section-header">
+            <h2>📊 Economic & Financial Indicators</h2>
+        </div>
+        <table>
+            <thead><tr><th>#</th><th>文章標題 | Article</th><th>連結 | Links</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>76</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/economic-and-financial-indicators/2026/02/26/economic-data-commodities-and-markets" target="_blank">Economic data, commodities and markets</a></div>
+                        <div class="article-section">Economic & Financial Indicators</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/economic-and-financial-indicators/2026/02/26/economic-data-commodities-and-markets" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/economic-and-financial-indicators/2026/02/26/economic-data-commodities-and-markets" class="archive" target="_blank">Archive</a>
+                        <a href="vocab-indicators.html" class="study-btn">📖 Study</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Obituary -->
+        <div class="section-header">
+            <h2>🕯️ Obituary</h2>
+        </div>
+        <table>
+            <thead><tr><th>#</th><th>文章標題 | Article</th><th>連結 | Links</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>77</td>
+                    <td>
+                        <div class="article-title"><a href="https://www.economist.com/obituary/2026/02/26/philippe-gaulier-refused-to-tolerate-boring-people" target="_blank">Philippe Gaulier refused to tolerate boring people</a></div>
+                        <div class="article-section">Obituary</div>
+                    </td>
+                    <td class="links">
+                        <a href="https://www.economist.com/obituary/2026/02/26/philippe-gaulier-refused-to-tolerate-boring-people" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/obituary/2026/02/26/philippe-gaulier-refused-to-tolerate-boring-people" class="archive" target="_blank">Archive</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
         <footer>
             <p><strong>OpenClaw Magazine Archive - The Economist</strong></p>
             <p>Issue Date: February 28, 2026 | 期號日期：2026 年 2 月 28 日</p>
