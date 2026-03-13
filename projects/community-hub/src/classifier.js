@@ -132,6 +132,15 @@ async function classifyAll(inputPath, outputPath, apiKey) {
     if (i + BATCH_SIZE < messages.length) {
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
+    
+    // Save progress every 10 batches
+    if (batchNum % 10 === 0) {
+      fs.writeFileSync(outputPath, JSON.stringify(results, null, 2));
+      const useful = results.filter(r => r.useful && r.category);
+      const usefulPath = outputPath.replace('.json', '_useful.json');
+      fs.writeFileSync(usefulPath, JSON.stringify(useful, null, 2));
+      console.log(`💾 Progress saved: ${results.length} classified, ${useful.length} useful`);
+    }
   }
   
   // Separate useful vs not useful

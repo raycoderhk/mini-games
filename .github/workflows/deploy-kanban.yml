@@ -1,0 +1,30 @@
+name: 🚀 Deploy to Zeabur - Kanban Board
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'kanban-zeabur/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy Kanban to Zeabur
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Deploy to Zeabur
+        uses: zeabur/action@v1
+        with:
+          zeabur-api-key: ${{ secrets.ZEABUR_API_KEY }}
+          project-id: ${{ secrets.ZEABUR_KANBAN_PROJECT_ID }}
+          service-id: ${{ secrets.ZEABUR_KANBAN_SERVICE_ID }}
+          environment: production
+        
+      - name: Deployment Complete
+        run: |
+          echo "✅ Kanban Board deployed successfully!"
+          echo "🌐 URL: https://kanban.zeabur.app"

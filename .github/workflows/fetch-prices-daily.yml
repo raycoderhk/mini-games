@@ -1,0 +1,108 @@
+name: Daily Price Data Fetch
+
+on:
+  schedule:
+    # Runs at 10 PM UTC daily (6 AM HKT next day)
+    - cron: '0 22 * * *'
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  fetch-prices:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Set up Git
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+      
+      - name: Fetch Price Data from Consumer Council
+        run: |
+          echo "🛒 Fetching Consumer Council price data..."
+          
+          # Try multiple times with different user agents
+          for i in 1 2 3; do
+            echo "Attempt $i..."
+            
+            # Try with curl and browser-like headers
+            HTTP_CODE=$(curl -s -w "%{http_code}" -o pricewatch.json \
+              -H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" \
+              -H "Accept: application/json, text/javascript, */*; q=0.01" \
+              -H "Accept-Language: en-US,en;q=0.9,zh-HK;q=0.8,zh;q=0.7" \
+              -H "Referer: https://online-price-watch.consumer.org.hk/" \
+              -H "Connection: keep-alive" \
+              -H "Cache-Control: no-cache" \
+              -H "Pragma: no-cache" \
+              "https://online-price-watch.consumer.org.hk/opw/opendata/pricewatch.json")
+            
+            echo "HTTP Status: $HTTP_CODE"
+            
+            if [ "$HTTP_CODE" = "200" ] && [ -s pricewatch.json ]; then
+              echo "✅ Successfully fetched price data"
+              echo "File size: $(wc -c < pricewatch.json) bytes"
+              echo "Record count: $(cat pricewatch.json | python3 -c "import sys,json; data=json.load(sys.stdin); print(len(data) if isinstance(data, list) else 'unknown')" 2>/dev/null || echo "unknown")"
+              exit 0
+            else
+              echo "❌ Attempt $i failed with status $HTTP_CODE"
+              rm -f pricewatch.json
+              sleep 5
+            fi
+          done
+          
+          echo "❌ All attempts failed"
+          exit 1
+      
+      - name: Validate JSON
+        run: |
+          echo "🔍 Validating JSON structure..."
+          if python3 -c "import json; json.load(open('pricewatch.json'))" 2>/dev/null; then
+            echo "✅ JSON is valid"
+          else
+            echo "❌ JSON is invalid"
+            exit 1
+          fi
+      
+      - name: Create backup of previous data
+        run: |
+          if [ -f data/pricewatch.json ]; then
+            cp data/pricewatch.json "data/pricewatch-$(date +%Y%m%d).json"
+            echo "✅ Backup created: data/pricewatch-$(date +%Y%m%d).json"
+          fi
+      
+      - name: Move data to correct location
+        run: |
+          mkdir -p data
+          mv pricewatch.json data/pricewatch.json
+          echo "✅ Data saved to data/pricewatch.json"
+      
+      - name: Commit and push if changed
+        run: |
+          echo "📊 Checking for changes..."
+          if ! git diff --quiet data/pricewatch.json 2>/dev/null; then
+            echo "📝 Changes detected, committing..."
+            git add data/pricewatch.json
+            git commit -m "🛒 Daily price data update $(date +%Y-%m-%d) [skip-ci]
+
+            Automated daily fetch from Consumer Council Online Price Watch
+            Source: https://online-price-watch.consumer.org.hk/opw/opendata/pricewatch.json
+            "
+            echo "🚀 Pushing to repository..."
+            git push origin main
+            echo "✅ Data updated successfully"
+          else
+            echo "ℹ️  No changes detected, skipping commit"
+          fi
+        continue-on-error: true
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pricewatch-data
+          path: data/pricewatch.json
+          retention-days: 7
