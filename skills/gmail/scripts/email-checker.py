@@ -25,9 +25,10 @@ MEMORY_DIR = "/home/node/.openclaw/workspace/memory"
 EMAIL_STATE_FILE = f"{MEMORY_DIR}/email-last-checked.json"
 
 # 🔒 SECURITY: Trusted Senders Whitelist (LAYER 1)
-# STRICT SECURITY MODE: Only trust emails forwarded by raycoderhk@gmail.com
+# STRICT SECURITY MODE: Only trust emails forwarded by these addresses
 TRUSTED_SENDERS = [
-    'raycoderhk@gmail.com',  # User's ONLY confirmed email - STRICT MODE
+    'raycoderhk@gmail.com',      # User's primary confirmed email
+    'raymondcuhk@gmail.com',     # User's other email (added by request)
 ]
 
 # 🔒 SECURITY: Reply/Send Restrictions
@@ -441,7 +442,10 @@ def get_trusted_senders_summary():
 
 def get_security_mode_summary():
     """🔒 Get security mode description"""
-    return f"STRICT MODE - Trust {TRUSTED_SENDERS[0]} (direct or forwarded)"
+    if len(TRUSTED_SENDERS) == 1:
+        return f"STRICT MODE - Only trust {TRUSTED_SENDERS[0]}"
+    else:
+        return f"STRICT MODE - Trust {len(TRUSTED_SENDERS)} senders: {', '.join(TRUSTED_SENDERS)}"
 
 def format_discord_message(result, include_status=False, only_on_new=False):
     """Format Discord message with color coding"""
@@ -460,7 +464,7 @@ def format_discord_message(result, include_status=False, only_on_new=False):
             message += f"- 🛡️ Audit Log: {audit['total']} entries\n"
             message += f"- 🚫 Blocked: {audit['blocked']} emails\n"
             message += f"- ✅ Processed: {audit['processed']} emails\n"
-            message += f"- 📧 Reply allowed: Only to {ALLOWED_REPLY_TO[0]}\n\n"
+            message += f"- 📧 Reply allowed: Only to {', '.join(ALLOWED_REPLY_TO)}\n\n"
         message += "Next check: 30 minutes"
         return message
     
