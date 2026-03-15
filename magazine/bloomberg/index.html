@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Bloomberg - Magazine Archive</title>
+    <style>
+        :root { --bloomberg-blue: #002878; --bloomberg-orange: #ff6600; --bg-color: #f5f5f5; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
+            background-color: var(--bg-color);
+            padding: 40px 20px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            padding: 12px 24px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        .back-link:hover { background: #555; transform: translateY(-2px); }
+        .header { text-align: center; margin-bottom: 50px; }
+        .magazine-title { font-size: 3em; color: var(--bloomberg-blue); margin-bottom: 10px; font-weight: bold; }
+        .magazine-subtitle { font-size: 1.3em; color: #666; }
+        .issues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+        .issue-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            display: block;
+        }
+        .issue-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        .issue-cover {
+            width: 100%;
+            height: 380px;
+            background: linear-gradient(135deg, var(--bloomberg-blue), #003399);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .issue-cover::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 1;
+        }
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: auto;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+        .cover-date { font-size: 1.5em; font-weight: bold; color: white; }
+        .cover-label { font-size: 0.9em; color: rgba(255,255,255,0.8); margin-top: 5px; }
+        .issue-info { padding: 20px; }
+        .issue-headline { font-size: 1.2em; font-weight: bold; color: #333; margin-bottom: 10px; line-height: 1.4; }
+        .issue-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.9em;
+            color: #888;
+            margin-top: 15px;
+        }
+        .meta-item { display: flex; align-items: center; gap: 5px; }
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            background: var(--bloomberg-blue);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .tag.new { background: linear-gradient(135deg, var(--bloomberg-orange), #ff8800); }
+        .tag.business { background: linear-gradient(135deg, #28a745, #20c997); }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        .footer a { color: var(--bloomberg-blue); text-decoration: none; font-weight: bold; }
+        @media (max-width: 768px) {
+            .magazine-title { font-size: 2em; }
+            .issues-grid { grid-template-columns: 1fr; }
+            .issue-cover { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">← Back to Magazine Archive</a>
+        
+        <div class="header">
+            <h1 class="magazine-title">📊 Bloomberg</h1>
+            <p class="magazine-subtitle">Bloomberg Magazine Archive - 彭博社雜誌存檔</p>
+        </div>
+        
+        <div class="issues-grid">
+            <!-- Coming Soon Placeholder -->
+            <div class="issue-card coming-soon" style="opacity: 0.6;">
+                <div class="issue-cover">
+                    <div style="text-align: center; position: relative; z-index: 2;">
+                        <div style="font-size: 4em; margin-bottom: 20px;">📈</div>
+                        <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 10px;">Coming Soon</div>
+                        <div style="font-size: 1em; color: rgba(255,255,255,0.7);">即將推出</div>
+                    </div>
+                </div>
+                <div class="issue-info">
+                    <span class="tag">Coming Soon</span>
+                    <h2 class="issue-headline">First issue coming soon</h2>
+                    <div class="issue-meta">
+                        <span class="meta-item">📅 Stay tuned</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, var(--bloomberg-blue), #003399); padding: 30px; border-radius: 15px; margin-top: 40px; color: white;">
+            <h2 style="margin-bottom: 15px; font-size: 1.8em;">📊 About Bloomberg</h2>
+            <p style="line-height: 1.8; margin-bottom: 15px;">
+                <strong>Bloomberg</strong> (彭博社) is a global financial news and data company providing real-time 
+                financial information, news, and analytics to businesses and professionals worldwide.
+            </p>
+            <p style="line-height: 1.8;">
+                <strong>適合學習者：</strong> 對金融、商業、經濟、市場分析感興趣的學習者。文章難度中高級 (B2-C1)，
+                適合金融從業員、商科學生、投資者，或想學習商業英文的進階學習者。
+            </p>
+            <div style="margin-top: 20px; display: flex; gap: 20px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 200px;">
+                    <h3 style="margin-bottom: 10px; color: var(--bloomberg-orange);">💼 主題範圍</h3>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li>📈 金融市場 (Financial Markets)</li>
+                        <li>💰 經濟新聞 (Economic News)</li>
+                        <li>🏢 商業策略 (Business Strategy)</li>
+                        <li>🌍 全球貿易 (Global Trade)</li>
+                        <li>🔍 市場分析 (Market Analysis)</li>
+                        <li>💹 股票與投資 (Stocks & Investment)</li>
+                        <li>🏛️ 政策與監管 (Policy & Regulation)</li>
+                        <li>🚀 科技與創新 (Tech & Innovation)</li>
+                    </ul>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <h3 style="margin-bottom: 10px; color: var(--bloomberg-orange);">✨ 學習重點</h3>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li>💼 商業詞彙 (Business Vocabulary)</li>
+                        <li>📊 財經術語 (Financial Terminology)</li>
+                        <li>📈 市場表達 (Market Expression)</li>
+                        <li>📝 新聞寫作 (News Writing)</li>
+                        <li>🌐 全球視野 (Global Perspective)</li>
+                        <li>📉 數據分析 (Data Analysis)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>OpenClaw Magazine Archive - Bloomberg</strong></p>
+            <p style="margin-top: 10px;">
+                <a href="../../">🎮 GameWorld</a> | 
+                <a href="../">📚 Magazine Archive</a> | 
+                <a href="https://www.bloomberg.com/" target="_blank">Bloomberg Official</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

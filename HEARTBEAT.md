@@ -105,6 +105,12 @@ If nothing needs attention, reply HEARTBEAT_OK.
    - 人數：2 人 (夫婦)
    - 截止：今日內完成預約
 
+**3 月 22 日 (星期日)** 🏥
+• [Son] 醫健通 - 兒子滿 16 歲註冊 (截止)
+  - 📱 下載：App Store / Google Play 搜尋「醫健通」
+  - 🔢 醫健通號碼：391967263789
+  - ⚠️ 邀請有效期：30 日
+
 **✅ 已完成**
 • Hugging Face Token 申請 - ✅ Done (3 月 1 日)
 • 營養師 App 配置 - ✅ Done (proj-020, 測試成功!)
