@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📱 Screen Time - Vocabulary | Bloomberg March 2026</title>
+    <style>
+        :root { --bloomberg-blue: #002878; --bloomberg-orange: #ff6600; --bg-color: #f5f5f5; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif; background-color: var(--bg-color); color: #333; line-height: 1.8; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .back-link { display: inline-block; margin-bottom: 20px; padding: 10px 20px; background: #333; color: white; text-decoration: none; border-radius: 5px; }
+        .back-link:hover { background: #555; }
+        header { background: linear-gradient(135deg, var(--bloomberg-blue), #003399); color: white; padding: 30px; border-radius: 10px; margin-bottom: 30px; }
+        h1 { font-size: 2.5rem; margin-bottom: 10px; color: white; }
+        .article-link { color: var(--bloomberg-orange); text-decoration: none; font-weight: bold; }
+        .article-link:hover { text-decoration: underline; }
+        .word-table { width: 100%; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-collapse: collapse; margin-bottom: 30px; }
+        .word-table thead { background: var(--bloomberg-blue); color: white; }
+        .word-table th { padding: 15px; text-align: left; font-weight: 600; }
+        .word-table td { padding: 15px; border-bottom: 1px solid #eee; }
+        .word-table tbody tr:hover { background-color: #f0f4ff; }
+        .word { font-weight: bold; color: var(--bloomberg-blue); font-size: 1.1em; }
+        .pos { font-style: italic; color: #666; font-size: 0.9em; }
+        .ipa { color: #999; font-family: "Lucida Sans Unicode", "Arial Unicode MS", sans-serif; }
+        .definition { font-weight: 500; }
+        .example { color: #666; font-style: italic; margin-top: 5px; }
+        .quiz-section { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-top: 30px; }
+        .quiz-section h2 { color: var(--bloomberg-blue); margin-bottom: 20px; }
+        .quiz-question { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .quiz-question:last-child { border-bottom: none; }
+        .quiz-options { list-style: none; }
+        .quiz-options li { margin: 10px 0; }
+        .quiz-options label { display: block; padding: 12px 15px; background: #f9f9f9; border-radius: 5px; cursor: pointer; transition: all 0.3s; }
+        .quiz-options label:hover { background: #f0f4ff; }
+        .quiz-options label.correct { background: #d4edda; border-left: 4px solid #28a745; color: #155724; }
+        .quiz-options label.incorrect { background: #f8d7da; border-left: 4px solid #dc3545; color: #721c24; }
+        .quiz-options input[type="radio"] { margin-right: 10px; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 5px; display: none; }
+        .feedback.correct { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+        .feedback.incorrect { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .explanation { margin-top: 10px; font-size: 0.95em; line-height: 1.6; }
+        .ai-details-btn { background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 0.85em; font-weight: bold; cursor: pointer; margin-top: 10px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 6px; }
+        .ai-details-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); }
+        .ai-details-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
+        .ai-details-content { margin-top: 15px; padding: 15px; background: linear-gradient(135deg, #f5f7fa, #e4e8ec); border-radius: 8px; border-left: 4px solid #667eea; display: none; }
+        .ai-details-content.show { display: block; animation: fadeIn 0.4s ease-out; }
+        .ai-details-content h4 { color: #667eea; margin-bottom: 10px; font-size: 1em; }
+        .detail-text { line-height: 1.8; font-size: 0.95em; }
+        footer { text-align: center; padding: 30px; color: #666; margin-top: 30px; }
+        footer a { color: var(--bloomberg-blue); text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">← Back to Issue</a>
+        <a href="../../" class="back-link" style="margin-left: 10px;">← Back to Bloomberg</a>
+        
+        <header>
+            <h1>📱 Screen Time Vocabulary</h1>
+            <p style="font-size: 1.2em;">Millennials Melted Their Brains With Screens. Their Kids Want None of It</p>
+            <p style="margin-top: 10px;">
+                <a href="https://www.bloomberg.com/news/articles/2026-02-18/are-smartphones-bad-for-kids-why-gen-alpha-is-pushing-back-on-social-media" class="article-link" target="_blank">📖 Read Original Article →</a>
+            </p>
+        </header>
+
+        <h2 style="color: var(--bloomberg-blue); margin-bottom: 20px;">📚 Vocabulary | 詞彙</h2>
+        <table class="word-table">
+            <thead>
+                <tr>
+                    <th style="width: 15%;">Word</th>
+                    <th style="width: 10%;">POS</th>
+                    <th style="width: 15%;">IPA</th>
+                    <th style="width: 30%;">Definition</th>
+                    <th style="width: 30%;">Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="word">screen time</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/skriːn taɪm/</span></td>
+                    <td><div class="definition">Time spent using digital devices<br>螢幕時間</div></td>
+                    <td><div class="example">"Parents worry about excessive <strong>screen time</strong>."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">social media</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ˈsoʊ.ʃəl ˈmiː.di.ə/</span></td>
+                    <td><div class="definition">Websites for sharing content and connecting<br>社交媒體</div></td>
+                    <td><div class="example">"Gen Alpha is rejecting <strong>social media</strong>."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">smartphone</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ˈsmɑːrt.foʊn/</span></td>
+                    <td><div class="definition">A mobile phone with advanced features<br>智能手機</div></td>
+                    <td><div class="example">"Kids are getting <strong>smartphones</strong> later."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">addiction</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/əˈdɪk.ʃən/</span></td>
+                    <td><div class="definition">Compulsive dependence on something<br>成癮，沉迷</div></td>
+                    <td><div class="example">"Social media <strong>addiction</strong> affects mental health."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">mental health</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ˈmen.təl helθ/</span></td>
+                    <td><div class="definition">Emotional and psychological well-being<br>心理健康</div></td>
+                    <td><div class="example">"Too much screen time harms <strong>mental health</strong>."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">anxiety</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/æŋˈzaɪ.ə.ti/</span></td>
+                    <td><div class="definition">Feeling of worry or fear<br>焦慮，不安</div></td>
+                    <td><div class="example">"Social media increases teen <strong>anxiety</strong>."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">depression</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/dɪˈpreʃ.ən/</span></td>
+                    <td><div class="definition">Persistent feeling of sadness<br>抑鬱症</div></td>
+                    <td><div class="example">"Heavy social media use links to <strong>depression</strong>."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">cyberbullying</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ˈsaɪ.bərˌbʊl.i.ɪŋ/</span></td>
+                    <td><div class="definition">Bullying that occurs online<br>網絡欺凌</div></td>
+                    <td><div class="example">"<strong>Cyberbullying</strong> is a major concern for parents."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">privacy</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ˈpraɪ.və.si/</span></td>
+                    <td><div class="definition">State of being free from public attention<br>私隱，隱私</div></td>
+                    <td><div class="example">"Gen Alpha values online <strong>privacy</strong>."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">digital detox</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ˈdɪdʒ.ɪ.təl ˈdiː.tɒks/</span></td>
+                    <td><div class="definition">Period of not using digital devices<br>數位排毒</div></td>
+                    <td><div class="example">"Families are trying <strong>digital detox</strong> challenges."</div></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="quiz-section">
+            <h2>📝 Quiz | 測驗</h2>
+            <p style="margin-bottom: 20px; color: #666;">Choose the correct answer for each question.</p>
+            
+            <form id="quizForm">
+                <div class="quiz-question" id="q1-container">
+                    <p><strong>1. What is "screen time"?</strong></p>
+                    <ul class="quiz-options">
+                        <li><label id="q1-a"><input type="radio" name="q1" value="a" onclick="checkAnswer('q1', 'c')"> A) Time spent watching TV only</label></li>
+                        <li><label id="q1-b"><input type="radio" name="q1" value="b" onclick="checkAnswer('q1', 'c')"> B) Time spent playing video games</label></li>
+                        <li><label id="q1-c"><input type="radio" name="q1" value="c" onclick="checkAnswer('q1', 'c')"> C) Time spent using any digital device</label></li>
+                        <li><label id="q1-d"><input type="radio" name="q1" value="d" onclick="checkAnswer('q1', 'c')"> D) Time spent on phone calls</label></li>
+                    </ul>
+                    <div id="q1-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation:</strong><br>
+                            Screen time refers to any time spent looking at a screen (phone, tablet, computer, TV).
+                        </div>
+                        <button type="button" class="ai-details-btn" onclick="getAIDetails('q1', 'screen time')">
+                            <span>🤖 Ask AI for Details</span>
+                        </button>
+                        <div id="q1-ai-content" class="ai-details-content">
+                            <h4>📚 AI-Generated Explanation</h4>
+                            <div class="detail-text" id="q1-detail-text">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="q2-container">
+                    <p><strong>2. What does "cyberbullying" mean?</strong></p>
+                    <ul class="quiz-options">
+                        <li><label id="q2-a"><input type="radio" name="q2" value="a" onclick="checkAnswer('q2', 'b')"> A) Playing online games</label></li>
+                        <li><label id="q2-b"><input type="radio" name="q2" value="b" onclick="checkAnswer('q2', 'b')"> B) Bullying that happens online</label></li>
+                        <li><label id="q2-c"><input type="radio" name="q2" value="c" onclick="checkAnswer('q2', 'b')"> C) Learning computer skills</label></li>
+                        <li><label id="q2-d"><input type="radio" name="q2" value="d" onclick="checkAnswer('q2', 'b')"> D) Shopping online</label></li>
+                    </ul>
+                    <div id="q2-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation:</strong><br>
+                            Cyberbullying is bullying that takes place over digital devices like phones, computers, and tablets.
+                        </div>
+                        <button type="button" class="ai-details-btn" onclick="getAIDetails('q2', 'cyberbullying')">
+                            <span>🤖 Ask AI for Details</span>
+                        </button>
+                        <div id="q2-ai-content" class="ai-details-content">
+                            <h4>📚 AI-Generated Explanation</h4>
+                            <div class="detail-text" id="q2-detail-text">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="q3-container">
+                    <p><strong>3. What is a "digital detox"?</strong></p>
+                    <ul class="quiz-options">
+                        <li><label id="q3-a"><input type="radio" name="q3" value="a" onclick="checkAnswer('q3', 'c')"> A) Cleaning your devices</label></li>
+                        <li><label id="q3-b"><input type="radio" name="q3" value="b" onclick="checkAnswer('q3', 'c')"> B) Installing antivirus software</label></li>
+                        <li><label id="q3-c"><input type="radio" name="q3" value="c" onclick="checkAnswer('q3', 'c')"> C) A period of not using digital devices</label></li>
+                        <li><label id="q3-d"><input type="radio" name="q3" value="d" onclick="checkAnswer('q3', 'c')"> D) Upgrading to new devices</label></li>
+                    </ul>
+                    <div id="q3-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation:</strong><br>
+                            A digital detox is a period when people voluntarily avoid using digital devices to reduce stress.
+                        </div>
+                        <button type="button" class="ai-details-btn" onclick="getAIDetails('q3', 'digital detox')">
+                            <span>🤖 Ask AI for Details</span>
+                        </button>
+                        <div id="q3-ai-content" class="ai-details-content">
+                            <h4>📚 AI-Generated Explanation</h4>
+                            <div class="detail-text" id="q3-detail-text">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" style="background: linear-gradient(135deg, var(--bloomberg-orange), #ff8800); color: white; border: none; padding: 15px 30px; font-size: 1.1em; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 20px;" onclick="checkQuiz()">Submit All Answers | 提交答案</button>
+            </form>
+
+            <div id="result" class="result" style="display: none; margin-top: 20px; padding: 20px; border-radius: 5px; font-weight: bold;"></div>
+        </div>
+
+        <footer>
+            <p><strong>Bloomberg Businessweek Archive - ESL Vocabulary</strong></p>
+            <p>March 1, 2026 Issue | Gen Alpha Section</p>
+        </footer>
+    </div>
+
+    <script>
+        const answers = { q1: 'c', q2: 'b', q3: 'c' };
+        let score = 0;
+        let answeredQuestions = new Set();
+        
+        // Pre-generated AI explanations
+        const aiExplanations = {
+            'q1': {
+                word: 'screen time',
+                explanation: `
+                    <strong>📖 Word Origin:</strong><br>
+                    "Screen" from Old Norse "skjermr" (shield). "Time" from Old English "tima". Combined in 1990s as screens became ubiquitous.<br><br>
+                    
+                    <strong>🔬 Technical Usage:</strong><br>
+                    In health and parenting contexts, screen time measures daily hours spent on devices. AAP recommends limits: 0 for under 18 months, 1 hour for 2-5 years, consistent limits for 6+. Excessive screen time links to sleep problems, obesity, and mental health issues.<br><br>
+                    
+                    <strong>📝 Related Words:</strong><br>
+                    • Digital device 數碼裝置<br>
+                    • Sedentary 久坐的<br>
+                    • Blue light 藍光<br>
+                    • Eye strain 眼睛疲勞<br><br>
+                    
+                    <strong>💬 Example:</strong><br>
+                    "Parents worry about excessive <strong>screen time</strong> affecting their children's development."<br>
+                    <em>家長擔心過多的螢幕時間影響孩子的發展。</em>
+                `
+            },
+            'q2': {
+                word: 'cyberbullying',
+                explanation: `
+                    <strong>📖 Word Origin:</strong><br>
+                    "Cyber" from Greek "kybernetes" (steersman). "Bullying" from Dutch "boel" (lover, later meaning coward). Combined in 1990s with rise of internet.<br><br>
+                    
+                    <strong>🔬 Technical Usage:</strong><br>
+                    In psychology and education, cyberbullying includes harassment, doxxing, exclusion, and impersonation online. Unlike traditional bullying, it can occur 24/7, reach wide audiences, and allow anonymity. Affects 15-40% of teens globally.<br><br>
+                    
+                    <strong>📝 Related Words:</strong><br>
+                    • Harassment 騷擾<br>
+                    • Doxxing 起底<br>
+                    • Trolling 釣魚<br>
+                    • Block/Report 封鎖/舉報<br><br>
+                    
+                    <strong>💬 Example:</strong><br>
+                    "Schools are implementing programs to prevent <strong>cyberbullying</strong> among students."<br>
+                    <em>學校正在實施計劃預防學生之間的網絡欺凌。</em>
+                `
+            },
+            'q3': {
+                word: 'digital detox',
+                explanation: `
+                    <strong>📖 Word Origin:</strong><br>
+                    "Digital" from Latin "digitus" (finger). "Detox" short for "detoxification" (removing toxins). Combined in 2010s as wellness trend.<br><br>
+                    
+                    <strong>🔬 Technical Usage:</strong><br>
+                    In wellness and mental health, digital detox refers to voluntarily avoiding digital devices for a period (hours to weeks). Benefits include improved sleep, reduced anxiety, better focus, and stronger real-world relationships. Popular during vacations or weekends.<br><br>
+                    
+                    <strong>📝 Related Words:</strong><br>
+                    • Unplug 拔掉插頭<br>
+                    • Mindfulness 正念<br>
+                    • Offline 離線<br>
+                    • Screen-free 無螢幕<br><br>
+                    
+                    <strong>💬 Example:</strong><br>
+                    "Our family tried a <strong>digital detox</strong> weekend with no phones or tablets."<br>
+                    <em>我們家嘗試了一個沒有手機和平板電腦的數位排毒週末。</em>
+                `
+            }
+        };
+        
+        function getAIDetails(questionId, word) {
+            const btn = event.target.closest('.ai-details-btn');
+            const contentDiv = document.getElementById(`${questionId}-ai-content`);
+            const textDiv = document.getElementById(`${questionId}-detail-text`);
+            
+            if (contentDiv.classList.contains('show')) {
+                contentDiv.classList.remove('show');
+                btn.innerHTML = '<span>🤖 Ask AI for Details</span>';
+                return;
+            }
+            
+            const aiData = aiExplanations[questionId];
+            if (aiData) {
+                textDiv.innerHTML = `<div style="line-height: 1.8;">${aiData.explanation}</div><div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #ddd; font-size: 0.85em; color: #666;"><strong>🤖 AI-Generated Explanation (Pre-loaded)</strong></div>`;
+                contentDiv.classList.add('show');
+                btn.innerHTML = '<span>✅ Show Less</span>';
+            }
+        }
+        
+        function checkAnswer(question, correctAnswer) {
+            if (answeredQuestions.has(question)) return;
+            answeredQuestions.add(question);
+            
+            const formData = new FormData(document.getElementById('quizForm'));
+            const userAnswer = formData.get(question);
+            
+            const options = document.querySelectorAll(`input[name="${question}"]`);
+            options.forEach(opt => {
+                opt.disabled = true;
+                const label = document.getElementById(`${question}-${opt.value}`);
+                if (opt.value === correctAnswer) label.classList.add('correct');
+                else if (opt.value === userAnswer && userAnswer !== correctAnswer) label.classList.add('incorrect');
+            });
+            
+            const feedbackDiv = document.getElementById(`${question}-feedback`);
+            feedbackDiv.classList.add('show');
+            
+            if (userAnswer === correctAnswer) {
+                feedbackDiv.classList.add('correct');
+                feedbackDiv.innerHTML = `<div style="font-weight: bold; margin-bottom: 5px;">✅ Correct!</div><div class="explanation">${feedbackDiv.querySelector('.explanation').innerHTML}</div>` + feedbackDiv.querySelector('.ai-details-btn').outerHTML + feedbackDiv.querySelector('.ai-details-content').outerHTML;
+                score++;
+            } else {
+                feedbackDiv.classList.add('incorrect');
+                feedbackDiv.innerHTML = `<div style="font-weight: bold; margin-bottom: 5px;">❌ Incorrect. Correct: ${correctAnswer.toUpperCase()}</div><div class="explanation">${feedbackDiv.querySelector('.explanation').innerHTML}</div>` + feedbackDiv.querySelector('.ai-details-btn').outerHTML + feedbackDiv.querySelector('.ai-details-content').outerHTML;
+            }
+        }
+        
+        function checkQuiz() {
+            const total = Object.keys(answers).length;
+            const answered = answeredQuestions.size;
+            if (answered < total) { alert(`Answered ${answered}/${total}. Complete all questions!`); return; }
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result ' + (score === total ? 'correct' : score >= 2 ? 'correct' : 'incorrect');
+            resultDiv.style.background = score === total ? '#d4edda' : score >= 2 ? '#d4edda' : '#f8d7da';
+            resultDiv.style.color = score === total ? '#155724' : score >= 2 ? '#155724' : '#721c24';
+            resultDiv.innerHTML = score === total ? `🎉 Perfect! ${score}/${total}` : score >= 2 ? `✅ Great! ${score}/${total}` : `📚 Keep studying! ${score}/${total}`;
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
