@@ -32,6 +32,21 @@ If nothing needs attention, reply HEARTBEAT_OK.
 **3 月 21 日 (星期六)**
 • 12:00-13:00 - [Raymond] 匹克球 @ 荃灣愉景新城 BayPickle
 
+**3 月 23 日 (星期一)**
+• 10:15-10:20 [Raymond] Meet Sheng @ 7-Eleven (D park)
+  - 📍 荃灣 D park (荃新天地) 7-11
+  - 👥 Raymond + Sheng
+  - 🎾 Bring two paddles + iPad Pro
+• 10:20-10:25 [Raymond] Heidi pickup @ D park taxi stand
+  - 📍 荃灣 D park (荃新天地) 的士站
+  - 👥 Raymond + Sheng + Heidi
+• 11:00-13:00 [Raymond] 元朗朗壹廣場 with Heidi
+  - 📍 元朗朗壹廣場
+• 14:00 [Raymond] OpenClaw session with Sheng
+  - 💻 Sheng brings: MacBook Air + iPad Pro
+  - 🎯 Use iPad Pro as second screen for MacBook Air
+  - 🦐 Research: OpenClaw setup & features
+
 **3 月 14 日 (星期六)** ✅ 已報名成功
 • 08:45-16:30 [Family] 伊利沙伯中學 PTA 新春親子旅行 (已中籤)
   - 集合：08:45 (待定地點)
@@ -54,11 +69,12 @@ If nothing needs attention, reply HEARTBEAT_OK.
 • 18:30 HKT - [Family] 同鄉會晚宴 @North Point (Tentative)
 
 **3 月 15 日 (星期日)**
-• 11:15 [Raymond] Gym
-• [Raymond] ☐ Parcel
-• [Raymond] ☐ Buy cake
 • [Son] 兒子生日 🎂
 • [Family] 慶祝活動: board game
+
+**3 月 16 日 (星期一)**
+• 9:45-9:50 [Raymond] Meet Sheng @ 7-Eleven
+• 10:00-12:00 [Raymond] 匹克球 Morning Social Play @ Pickledise.hk (Pink court)
 
 **3 月 17 日 (星期二)** 💕
 • 10:00-11:00 [Couple] 荃灣皇崗巴士 (往皇崗口岸)
@@ -87,6 +103,9 @@ If nothing needs attention, reply HEARTBEAT_OK.
 **3 月 31 日 (星期二)** 📚
 • 08:15 [Daughter UT] 科學
 • 09:45 [Daughter UT] 中國歷史
+
+**4 月 1 日 (星期三)** 🥋
+• 16:30-18:30 [Daughter] 武術補堂
 
 **已完成 (Past Events):**
 • Hugging Face Token 申請

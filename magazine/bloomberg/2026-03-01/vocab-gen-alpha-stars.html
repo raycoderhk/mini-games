@@ -324,11 +324,11 @@
             
             if (userAnswer === correctAnswer) {
                 feedbackDiv.classList.add('correct');
-                feedbackDiv.innerHTML = `<div style="font-weight: bold; margin-bottom: 5px;">✅ Correct!</div><div class="explanation">${feedbackDiv.querySelector('.explanation').innerHTML}</div>`;
+                feedbackDiv.innerHTML = `<div style="font-weight: bold; margin-bottom: 5px;">✅ Correct!</div><div class="explanation">${feedbackDiv.querySelector('.explanation').innerHTML}</div>` + feedbackDiv.querySelector('.ai-details-btn').outerHTML + feedbackDiv.querySelector('.ai-details-content').outerHTML;
                 score++;
             } else {
                 feedbackDiv.classList.add('incorrect');
-                feedbackDiv.innerHTML = `<div style="font-weight: bold; margin-bottom: 5px;">❌ Incorrect. Correct: ${correctAnswer.toUpperCase()}</div><div class="explanation">${feedbackDiv.querySelector('.explanation').innerHTML}</div>`;
+                feedbackDiv.innerHTML = `<div style="font-weight: bold; margin-bottom: 5px;">❌ Incorrect. Correct: ${correctAnswer.toUpperCase()}</div><div class="explanation">${feedbackDiv.querySelector('.explanation').innerHTML}</div>` + feedbackDiv.querySelector('.ai-details-btn').outerHTML + feedbackDiv.querySelector('.ai-details-content').outerHTML;
             }
         }
         
