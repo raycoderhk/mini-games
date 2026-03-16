@@ -244,64 +244,87 @@
         let score = 0;
         let answeredQuestions = new Set();
         
-        async function getAIDetails(questionId, word) {
+        // Pre-generated AI explanations (no API needed - instant!)
+        const aiExplanations = {
+            'q1': {
+                word: 'content creator',
+                explanation: `
+                    <strong>📖 Word Origin:</strong><br>
+                    "Content" from Latin "contentus" (contained). "Creator" from Latin "creare" (to make). Combined in digital age (2000s) to describe people who make online media.<br><br>
+                    
+                    <strong>🔬 Technical Usage:</strong><br>
+                    In social media, a content creator produces videos, photos, posts for platforms like YouTube, TikTok, Instagram. They may earn money through ads, sponsorships, or fan support.<br><br>
+                    
+                    <strong>📝 Related Words:</strong><br>
+                    • Influencer 網紅 - Someone who affects others' decisions<br>
+                    • YouTuber YouTuber - YouTube content creator<br>
+                    • Streamer 直播主 - Live broadcast creator<br>
+                    • Vlogger 視頻博主 - Video blog creator<br><br>
+                    
+                    <strong>💬 Example:</strong><br>
+                    "Young <strong>content creators</strong> can earn millions from sponsorships."<br>
+                    <em>年輕內容創作者可以從贊助中賺取數百萬。</em>
+                `
+            },
+            'q2': {
+                word: 'viral',
+                explanation: `
+                    <strong>📖 Word Origin:</strong><br>
+                    From Latin "virus" (poison, slime). Originally medical term for infectious disease. Internet meaning emerged in 1990s, describing content that spreads rapidly like a virus.<br><br>
+                    
+                    <strong>🔬 Technical Usage:</strong><br>
+                    In social media marketing, "viral" describes content that achieves rapid, exponential sharing. A viral video might get millions of views in hours through shares, not paid promotion.<br><br>
+                    
+                    <strong>📝 Related Words:</strong><br>
+                    • Trending 熱門 - Currently popular<br>
+                    • Share 分享 - To distribute content<br>
+                    • Reach 覆蓋範圍 - Number of people who see content<br>
+                    • Engagement 互動 - Likes, comments, shares<br><br>
+                    
+                    <strong>💬 Example:</strong><br>
+                    "Her dance video went <strong>viral</strong> overnight with 10 million views."<br>
+                    <em>她的舞蹈視頻一夜爆紅，獲得 1000 萬次觀看。</em>
+                `
+            },
+            'q3': {
+                word: 'influencer',
+                explanation: `
+                    <strong>📖 Word Origin:</strong><br>
+                    From Latin "influere" (to flow into). Originally astrology term (stars influence fate). Marketing usage emerged in 2000s with rise of social media.<br><br>
+                    
+                    <strong>🔬 Technical Usage:</strong><br>
+                    In digital marketing, an influencer has power to affect audience purchasing decisions through recommendations. Brands pay influencers for sponsored content. Categories: mega (1M+ followers), macro (100K-1M), micro (10K-100K), nano (<10K).<br><br>
+                    
+                    <strong>📝 Related Words:</strong><br>
+                    • KOL 關鍵意見領袖 - Key Opinion Leader<br>
+                    • Brand Ambassador 品牌大使 - Long-term brand partner<br>
+                    • Sponsored Content 贊助內容 - Paid promotion<br>
+                    • Affiliate Marketing 聯盟營銷 - Commission-based promotion<br><br>
+                    
+                    <strong>💬 Example:</strong><br>
+                    "Child <strong>influencers</strong> can impact family purchases worth thousands of dollars."<br>
+                    <em>兒童網紅可以影響家庭數千美元的購買決策。</em>
+                `
+            }
+        };
+        
+        function getAIDetails(questionId, word) {
             const btn = event.target.closest('.ai-details-btn');
             const contentDiv = document.getElementById(`${questionId}-ai-content`);
             const textDiv = document.getElementById(`${questionId}-detail-text`);
             
             if (contentDiv.classList.contains('show')) {
                 contentDiv.classList.remove('show');
-                btn.disabled = false;
                 btn.innerHTML = '<span>🤖 Ask AI for Details</span>';
                 return;
             }
             
-            btn.disabled = true;
-            btn.innerHTML = '<span class="loading-spinner"></span> Asking AI...';
-            
-            try {
-                // Use allorigins.win proxy (better CORS support)
-                const proxyUrl = 'https://api.allorigins.win/raw?url=';
-                const aliyunUrl = encodeURIComponent('https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation');
-                
-                const requestBody = {
-                    model: 'qwen-plus',
-                    input: {
-                        messages: [{
-                            role: 'system',
-                            content: 'You are an ESL English teacher for business/social studies students. Explain vocabulary with etymology, usage, related words, examples. Bilingual: English + Traditional Chinese. Use HTML: <br>, <strong>, <em>. Keep concise (200-300 words).'
-                        }, {
-                            role: 'user',
-                            content: `Explain "${word}" with: 1) Word Origin, 2) Usage (social media/business context), 3) Related Words, 4) Example. English + Traditional Chinese. HTML format.`
-                        }]
-                    },
-                    parameters: { temperature: 0.7, max_tokens: 500 }
-                };
-                
-                const response = await fetch(proxyUrl + aliyunUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': 'Bearer sk-92b75e89aa404648b08741885f191e6b',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(requestBody)
-                });
-                
-                if (!response.ok) throw new Error(`API ${response.status}`);
-                
-                const data = await response.json();
-                const aiResponse = data.output?.text || 'No response';
-                
-                textDiv.innerHTML = `<div style="line-height: 1.8;">${aiResponse}</div><div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #ddd; font-size: 0.85em; color: #666;"><strong>🤖 Generated by Aliyun Qwen AI (Real-time)</strong></div>`;
+            // Show pre-generated AI explanation instantly!
+            const aiData = aiExplanations[questionId];
+            if (aiData) {
+                textDiv.innerHTML = `<div style="line-height: 1.8;">${aiData.explanation}</div><div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #ddd; font-size: 0.85em; color: #666;"><strong>🤖 AI-Generated Explanation (Pre-loaded)</strong></div>`;
                 contentDiv.classList.add('show');
                 btn.innerHTML = '<span>✅ Show Less</span>';
-                btn.disabled = false;
-                
-            } catch (error) {
-                textDiv.innerHTML = `<div style="color: #dc3545;"><strong>❌ Error:</strong> ${error.message}</div><button onclick="getAIDetails('${questionId}', '${word}')" style="margin-top: 10px; padding: 8px 16px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer;">🔄 Retry</button>`;
-                contentDiv.classList.add('show');
-                btn.innerHTML = '<span>🔄 Retry</span>';
-                btn.disabled = false;
             }
         }
         
