@@ -260,8 +260,9 @@
             btn.innerHTML = '<span class="loading-spinner"></span> Asking AI...';
             
             try {
-                const proxyUrl = 'https://corsproxy.io/?';
-                const aliyunUrl = 'https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation';
+                // Use allorigins.win proxy (better CORS support)
+                const proxyUrl = 'https://api.allorigins.win/raw?url=';
+                const aliyunUrl = encodeURIComponent('https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation');
                 
                 const requestBody = {
                     model: 'qwen-plus',
@@ -277,7 +278,7 @@
                     parameters: { temperature: 0.7, max_tokens: 500 }
                 };
                 
-                const response = await fetch(proxyUrl + encodeURIComponent(aliyunUrl), {
+                const response = await fetch(proxyUrl + aliyunUrl, {
                     method: 'POST',
                     headers: {
                         'Authorization': 'Bearer sk-92b75e89aa404648b08741885f191e6b',
