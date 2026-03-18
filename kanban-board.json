@@ -15,7 +15,7 @@
     },
     {
       "id": "proj-001",
-      "title": "⚠️ HIGH [Email] Fwd: Payment instruction advice付款指示通知書",
+      "title": "⚠️ HIGH [Email] Fwd: Payment instruction advice 付款指示通知書",
       "description": "Automatically created from email - Raymond <raymondcuhk@gmail.com>",
       "status": "todo",
       "priority": "high",
@@ -35,10 +35,68 @@
         "📝 Summary:",
         ""
       ]
+    },
+    {
+      "id": "proj-002",
+      "title": "📰 Magazine Learning Center - English Learning System",
+      "description": "Build English learning system integrated with Magazine Archive (Economist, Bloomberg, HKEJ). Users can mark articles as read, save vocabulary with context, and review with spaced repetition.",
+      "status": "in_progress",
+      "priority": "high",
+      "created": "2026-03-18",
+      "updated": "2026-03-18T01:15:00Z",
+      "tags": [
+        "magazine",
+        "learning",
+        "english",
+        "feature"
+      ],
+      "notes": [
+        "🎯 Goal: Context-based English learning from actual reading",
+        "",
+        "✅ Phase 1 Complete (March 18, 2026):",
+        "- Created JSON storage (articles-read.json, vocabulary.json, reviews.json)",
+        "- Built Sign In page (magazine/auth/signin.html)",
+        "- Built Learning Center Dashboard (magazine/learning-center/index.html)",
+        "- Built Study Session page (magazine/learning/study.html)",
+        "- Updated Economist index with Mark Read/Study buttons",
+        "- Hybrid mode: Public reading, login required for learning",
+        "- Committed: fde4c1f",
+        "",
+        "📁 File Structure:",
+        "- magazine/articles-read.json - Track read articles per user",
+        "- magazine/learning-center/vocabulary.json - All learned words",
+        "- magazine/learning-center/reviews.json - Spaced repetition schedule",
+        "- magazine/auth/signin.html - User authentication",
+        "- magazine/learning-center/index.html - Dashboard with stats",
+        "- magazine/learning/study.html - Vocabulary entry with timer",
+        "",
+        "🔧 Features Implemented:",
+        "- Mark articles as read (localStorage)",
+        "- Study button with lock icon for non-logged users",
+        "- Login modal for unauthenticated users",
+        "- Study session with timer and vocabulary form",
+        "- Learning Center dashboard with stats",
+        "- Demo mode available without login",
+        "",
+        "📋 Next Steps:",
+        "- [ ] Deploy to Zeabur",
+        "- [ ] Test authentication flow",
+        "- [ ] Add real Google OAuth integration",
+        "- [ ] Implement spaced repetition algorithm",
+        "- [ ] Add Bloomberg & HKEJ integration",
+        "- [ ] Create vocabulary review quiz interface",
+        "- [ ] Add progress tracking & streaks",
+        "",
+        "🔗 URLs:",
+        "- Learning Center: /magazine/learning-center/",
+        "- Sign In: /magazine/auth/signin.html",
+        "- Study Session: /magazine/learning/study.html",
+        "- Economist: /magazine/economist/"
+      ]
     }
   ],
   "meta": {
     "created": "2026-03-17T13:02:36+08:00",
-    "updated": "2026-03-17T05:03:28.143464Z"
+    "updated": "2026-03-18T01:15:00Z"
   }
 }
