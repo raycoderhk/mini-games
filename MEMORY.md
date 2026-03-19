@@ -80,6 +80,56 @@
 
 ---
 
+### Media Tracker Suite (Books + Movies + TV Series)
+**Completed:** March 18th-19th, 2026  
+**Status:** ✅ Production Ready  
+**URL:** https://kanban-board.zeabur.app/  
+**GitHub:** https://github.com/raycoderhk/kanban-board
+
+**Features:**
+- **Book Tracker:** Track reading progress, ratings, notes, purchase links
+- **Movie Tracker:** Track movies watched, ratings, director, cast, notes
+- **TV Series Tracker:** Track series with seasons/episodes, status, creator, cast
+- **Unified Navigation:** All trackers accessible from main Kanban homepage
+- **Google OAuth SSO:** Single sign-on across all trackers
+- **Search & Filter:** Full-text search + tag cloud filtering
+- **Dated Notes:** Add timestamped notes to any item
+- **Status Tracking:** Want to Read/Watch, In Progress, Completed, Dropped
+- **Cover Images:** Upload custom poster/cover images
+- **Responsive Design:** Works on desktop and mobile
+
+**Tech Stack:**
+- Frontend: Vanilla HTML/CSS/JavaScript
+- Backend: Node.js + Express (Kanban server)
+- Storage: JSON files (public/*.json)
+- Auth: Google OAuth (reuses Kanban `/api/auth/status`)
+- Hosting: Zeabur (auto-deploy from GitHub)
+- Cost: $0/month (free tiers)
+
+**Initial Content:**
+- **Books:** 6+ books (Economist, National Geographic, AI books, art books)
+- **Movies:** 3 movies (Project Hail Mary, 一戰再戰, 50 First Dates)
+- **TV Series:** 4 series (Black Mirror, The Bear, Shōgun, 唐宫奇案)
+
+**URLs:**
+| Tracker | URL |
+|---------|-----|
+| Main Kanban | https://kanban-board.zeabur.app/ |
+| Books | https://kanban-board.zeabur.app/public/index.html |
+| Movies | https://kanban-board.zeabur.app/public/movies.html |
+| TV Series | https://kanban-board.zeabur.app/public/series.html |
+| Magazine | https://kanban-board.zeabur.app/magazine/ |
+| Learning Center | https://kanban-board.zeabur.app/magazine/learning-center/ |
+
+**Key Decisions:**
+- JSON storage over Supabase (simpler for personal use, migration task created)
+- Public access for trackers (no login required to view)
+- OAuth for Learning Center (required for personal progress tracking)
+- Single sign-on across all pages
+- User can add custom items via "Add" buttons
+
+---
+
 ## 📊 Architecture Patterns (Reusable)
 
 ### Google OAuth + Supabase Pattern
