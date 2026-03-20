@@ -20,8 +20,13 @@
         .section h2 { color: var(--economist-red); border-bottom: 2px solid var(--economist-red); padding-bottom: 10px; margin-bottom: 20px; font-size: 1.5rem; }
         .article { margin-bottom: 15px; padding: 15px; background: #fafafa; border-left: 4px solid var(--economist-red); border-radius: 5px; transition: all 0.3s; }
         .article:hover { background: #f0f0f0; transform: translateX(5px); }
-        .article a { color: #333; text-decoration: none; font-weight: bold; font-size: 1.1rem; }
-        .article a:hover { color: var(--economist-red); text-decoration: underline; }
+        .article-title { color: #333; text-decoration: none; font-weight: bold; font-size: 1.1rem; display: block; margin-bottom: 8px; }
+        .article-title:hover { color: var(--economist-red); text-decoration: underline; }
+        .article-links { font-size: 0.85rem; }
+        .article-links a { margin-right: 15px; text-decoration: none; }
+        .article-links .original { color: #0066cc; }
+        .article-links .archive { color: #666; }
+        .article-links a:hover { text-decoration: underline; }
         .article-number { color: #999; font-size: 0.9rem; margin-right: 10px; }
         .stats { background: white; padding: 20px; border-radius: 10px; margin-bottom: 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; text-align: center; }
@@ -70,18 +75,74 @@
 
         <div class="section">
             <h2>🌍 The World This Week</h2>
-            <div class="article"><span class="article-number">1.</span><a href="https://www.economist.com/the-world-this-week/2026/03/19/politics" target="_blank">Politics</a></div>
-            <div class="article"><span class="article-number">2.</span><a href="https://www.economist.com/the-world-this-week/2026/03/19/business" target="_blank">Business</a></div>
-            <div class="article"><span class="article-number">3.</span><a href="https://www.economist.com/the-world-this-week/2026/03/19/the-weekly-cartoon" target="_blank">The weekly cartoon</a></div>
+            <div class="article">
+                <span class="article-number">1.</span>
+                <a href="https://www.economist.com/the-world-this-week/2026/03/19/politics" class="article-title" target="_blank">Politics</a>
+                <div class="article-links">
+                    <a href="https://www.economist.com/the-world-this-week/2026/03/19/politics" class="original" target="_blank">📖 Original</a>
+                    <a href="https://archive.ph/?run=1&q=https://www.economist.com/the-world-this-week/2026/03/19/politics" class="archive" target="_blank">📸 archive.ph</a>
+                </div>
+            </div>
+            <div class="article">
+                <span class="article-number">2.</span>
+                <a href="https://www.economist.com/the-world-this-week/2026/03/19/business" class="article-title" target="_blank">Business</a>
+                <div class="article-links">
+                    <a href="https://www.economist.com/the-world-this-week/2026/03/19/business" class="original" target="_blank">📖 Original</a>
+                    <a href="https://archive.ph/?run=1&q=https://www.economist.com/the-world-this-week/2026/03/19/business" class="archive" target="_blank">📸 archive.ph</a>
+                </div>
+            </div>
+            <div class="article">
+                <span class="article-number">3.</span>
+                <a href="https://www.economist.com/the-world-this-week/2026/03/19/the-weekly-cartoon" class="article-title" target="_blank">The weekly cartoon</a>
+                <div class="article-links">
+                    <a href="https://www.economist.com/the-world-this-week/2026/03/19/the-weekly-cartoon" class="original" target="_blank">📖 Original</a>
+                    <a href="https://archive.ph/?run=1&q=https://www.economist.com/the-world-this-week/2026/03/19/the-weekly-cartoon" class="archive" target="_blank">📸 archive.ph</a>
+                </div>
+            </div>
         </div>
 
         <div class="section">
             <h2>📝 Leaders</h2>
-            <div class="article"><span class="article-number">1.</span><a href="https://www.economist.com/leaders/2026/03/19/war-in-iran-is-making-donald-trump-weaker-and-angrier" target="_blank">War in Iran is making Donald Trump weaker—and angrier</a></div>
-            <div class="article"><span class="article-number">2.</span><a href="https://www.economist.com/leaders/2026/03/19/lebanons-leaders-must-take-on-hizbullah" target="_blank">Lebanon's leaders must take on Hizbullah</a></div>
-            <div class="article"><span class="article-number">3.</span><a href="https://www.economist.com/leaders/2026/03/19/africa-after-aid-is-more-resilient-than-you-might-think" target="_blank">Africa after aid is more resilient than you might think</a></div>
-            <div class="article"><span class="article-number">4.</span><a href="https://www.economist.com/leaders/2026/03/18/a-dirty-deal-with-cuba-would-be-better-than-the-alternatives" target="_blank">A dirty deal with Cuba would be better than the alternatives</a></div>
-            <div class="article"><span class="article-number">5.</span><a href="https://www.economist.com/leaders/2026/03/19/gas-will-not-be-killed-off-by-renewables-any-time-soon" target="_blank">Gas will not be killed off by renewables any time soon</a></div>
+            <div class="article">
+                <span class="article-number">1.</span>
+                <a href="https://www.economist.com/leaders/2026/03/19/war-in-iran-is-making-donald-trump-weaker-and-angrier" class="article-title" target="_blank">War in Iran is making Donald Trump weaker—and angrier</a>
+                <div class="article-links">
+                    <a href="https://www.economist.com/leaders/2026/03/19/war-in-iran-is-making-donald-trump-weaker-and-angrier" class="original" target="_blank">📖 Original</a>
+                    <a href="https://archive.ph/?run=1&q=https://www.economist.com/leaders/2026/03/19/war-in-iran-is-making-donald-trump-weaker-and-angrier" class="archive" target="_blank">📸 archive.ph</a>
+                </div>
+            </div>
+            <div class="article">
+                <span class="article-number">2.</span>
+                <a href="https://www.economist.com/leaders/2026/03/19/lebanons-leaders-must-take-on-hizbullah" class="article-title" target="_blank">Lebanon's leaders must take on Hizbullah</a>
+                <div class="article-links">
+                    <a href="https://www.economist.com/leaders/2026/03/19/lebanons-leaders-must-take-on-hizbullah" class="original" target="_blank">📖 Original</a>
+                    <a href="https://archive.ph/?run=1&q=https://www.economist.com/leaders/2026/03/19/lebanons-leaders-must-take-on-hizbullah" class="archive" target="_blank">📸 archive.ph</a>
+                </div>
+            </div>
+            <div class="article">
+                <span class="article-number">3.</span>
+                <a href="https://www.economist.com/leaders/2026/03/19/africa-after-aid-is-more-resilient-than-you-might-think" class="article-title" target="_blank">Africa after aid is more resilient than you might think</a>
+                <div class="article-links">
+                    <a href="https://www.economist.com/leaders/2026/03/19/africa-after-aid-is-more-resilient-than-you-might-think" class="original" target="_blank">📖 Original</a>
+                    <a href="https://archive.ph/?run=1&q=https://www.economist.com/leaders/2026/03/19/africa-after-aid-is-more-resilient-than-you-might-think" class="archive" target="_blank">📸 archive.ph</a>
+                </div>
+            </div>
+            <div class="article">
+                <span class="article-number">4.</span>
+                <a href="https://www.economist.com/leaders/2026/03/18/a-dirty-deal-with-cuba-would-be-better-than-the-alternatives" class="article-title" target="_blank">A dirty deal with Cuba would be better than the alternatives</a>
+                <div class="article-links">
+                    <a href="https://www.economist.com/leaders/2026/03/18/a-dirty-deal-with-cuba-would-be-better-than-the-alternatives" class="original" target="_blank">📖 Original</a>
+                    <a href="https://archive.ph/?run=1&q=https://www.economist.com/leaders/2026/03/18/a-dirty-deal-with-cuba-would-be-better-than-the-alternatives" class="archive" target="_blank">📸 archive.ph</a>
+                </div>
+            </div>
+            <div class="article">
+                <span class="article-number">5.</span>
+                <a href="https://www.economist.com/leaders/2026/03/19/gas-will-not-be-killed-off-by-renewables-any-time-soon" class="article-title" target="_blank">Gas will not be killed off by renewables any time soon</a>
+                <div class="article-links">
+                    <a href="https://www.economist.com/leaders/2026/03/19/gas-will-not-be-killed-off-by-renewables-any-time-soon" class="original" target="_blank">📖 Original</a>
+                    <a href="https://archive.ph/?run=1&q=https://www.economist.com/leaders/2026/03/19/gas-will-not-be-killed-off-by-renewables-any-time-soon" class="archive" target="_blank">📸 archive.ph</a>
+                </div>
+            </div>
         </div>
 
         <div class="section">
@@ -225,6 +286,10 @@
         <footer>
             <p><strong>The Economist Archive - GameWorld Magazine</strong></p>
             <p>March 21-27, 2026 Edition | 72 Articles</p>
+            <p style="margin-top: 15px; font-size: 0.9rem; color: #666;">
+                📸 <strong>archive.ph links:</strong> Click to view archived version or create new archive if not exists.<br>
+                🔒 Some articles may require Economist subscription for full access.
+            </p>
             <p style="margin-top: 10px;">
                 <a href="https://www.economist.com/weeklyedition/2026-03-21" target="_blank">📖 Official Issue Page →</a>
             </p>
