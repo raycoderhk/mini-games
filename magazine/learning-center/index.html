@@ -330,6 +330,68 @@
             font-size: 1.2em;
         }
 
+        /* Games Section */
+        .games-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .games-section h2 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .game-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 25px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+        }
+
+        .game-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .game-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .game-desc {
+            font-size: 1em;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .game-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-top: 15px;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .header-top {
@@ -419,6 +481,25 @@
             <button onclick="startReview()" class="btn-review" id="btn-start-review">
                 Start Review Session
             </button>
+        </div>
+
+        <!-- Games Section -->
+        <div class="games-section">
+            <h2>🎮 Learning Games</h2>
+            <div class="games-grid">
+                <a href="quiz/" class="game-card">
+                    <div class="game-icon">🎯</div>
+                    <div class="game-title">香港地標猜猜猜</div>
+                    <div class="game-desc">測試下你對香港嘅認識！睇相猜地名，學下每個地標嘅小知識。</div>
+                    <div class="game-badge">3 題 · 免費玩</div>
+                </a>
+                <a href="#" class="game-card" style="opacity: 0.6; pointer-events: none;">
+                    <div class="game-icon">🔜</div>
+                    <div class="game-title">更多遊戲即將推出</div>
+                    <div class="game-desc">Word Quiz, Vocabulary Battle...</div>
+                    <div class="game-badge">Coming Soon</div>
+                </a>
+            </div>
         </div>
 
         <!-- Recent Articles -->
