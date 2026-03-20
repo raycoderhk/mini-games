@@ -6,7 +6,7 @@ let salaryData = [];
 // Load salary data from JSON
 async function loadSalaryData() {
     try {
-        const response = await fetch('../data/salary-data.json');
+        const response = await fetch('data/salary-data.json');
         const data = await response.json();
         salaryData = data.industries;
         
