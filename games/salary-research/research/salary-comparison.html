@@ -16,30 +16,50 @@
             <p class="description">探索不同行業的薪金、工時、壓力和前景，幫助你做出明智的職業選擇</p>
         </header>
 
+        <!-- DSE Subject Filter -->
+        <section class="filter-section">
+            <div id="dseFilter"></div>
+        </section>
+
         <!-- Main Chart -->
         <section class="chart-section">
             <h2>💰 薪金比較 (Salary Comparison)</h2>
-            <p class="chart-description">按行业中位數薪金由低到高排序，顯示 10%/25%/50%/75%/90% 分位數</p>
+            <p class="chart-description">按行业中位數薪金由低到高排序，顯示入行起薪、累積經驗後、頂尖收入</p>
             <div class="chart-container">
                 <canvas id="salaryChart"></canvas>
             </div>
             <div class="chart-legend">
                 <div class="legend-item">
                     <span class="legend-symbol">🔵</span>
-                    <span>IQR (25th-75th) - 中間 50%</span>
+                    <span>中間 50% (25th-75th)</span>
                 </div>
                 <div class="legend-item">
                     <span class="legend-symbol">🔴</span>
-                    <span>Median (50th) - 中位數</span>
+                    <span>中位數 (50th)</span>
                 </div>
                 <div class="legend-item">
                     <span class="legend-symbol">🟠</span>
-                    <span>Bottom (10th-25th)</span>
+                    <span>入行起薪 (10th)</span>
                 </div>
                 <div class="legend-item">
                     <span class="legend-symbol">🟣</span>
-                    <span>Top (75th-90th)</span>
+                    <span>頂尖收入 (90th)</span>
                 </div>
+            </div>
+        </section>
+
+        <!-- ROI Scatter Plot -->
+        <section class="chart-section">
+            <h2>🎯 性價比分析 (ROI Analysis)</h2>
+            <p class="chart-description">找出「高薪低壓」的理想職業 (左上角綠色區域)</p>
+            <div class="chart-container">
+                <canvas id="scatterChart"></canvas>
+            </div>
+            <div class="quadrant-legend">
+                <div class="legend-item"><span class="legend-box" style="background:#27ae60"></span> 高薪低壓 (理想)</div>
+                <div class="legend-item"><span class="legend-box" style="background:#f1c40f"></span> 高薪高壓 (值得)</div>
+                <div class="legend-item"><span class="legend-box" style="background:#3498db"></span> 低薪低壓 (輕鬆)</div>
+                <div class="legend-item"><span class="legend-box" style="background:#e74c3c"></span> 低薪高壓 (避免)</div>
             </div>
         </section>
 

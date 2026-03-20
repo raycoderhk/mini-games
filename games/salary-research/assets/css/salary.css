@@ -75,6 +75,80 @@ h3 {
 }
 
 /* Chart Section */
+/* Filter Section */
+.filter-section {
+    background: white;
+    padding: 30px 40px;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    border: 2px solid #3498db;
+    background: white;
+    color: #3498db;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    background: #ebf5fb;
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: #3498db;
+    color: white;
+}
+
+.filter-btn.filter-reset {
+    border-color: #95a5a6;
+    color: #95a5a6;
+}
+
+.filter-btn.filter-reset:hover {
+    background: #ecf0f1;
+}
+
+.filter-btn.filter-reset.active {
+    background: #95a5a6;
+    color: white;
+}
+
+/* Quadrant Legend */
+.quadrant-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.quadrant-legend .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9em;
+    color: #7f8c8d;
+}
+
+.quadrant-legend .legend-box {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+}
+
+/* Chart Section */
 .chart-section {
     background: #f8f9fa;
 }
@@ -406,6 +480,26 @@ footer a:hover {
     .chart-legend {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    /* Mobile filter buttons */
+    .filter-buttons {
+        gap: 8px;
+    }
+
+    .filter-btn {
+        padding: 8px 16px;
+        font-size: 0.85em;
+    }
+
+    .quadrant-legend {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Mobile card view for major cards */
+    .major-card {
+        padding: 20px;
     }
 }
 
