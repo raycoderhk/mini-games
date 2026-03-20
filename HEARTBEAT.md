@@ -461,3 +461,48 @@ If nothing needs attention, reply HEARTBEAT_OK.
   }
 }
 ```
+
+---
+
+### 🎬 YouTube Monitor (每次 Heartbeat 檢查)
+**目標:** 自動監控 YouTube 頻道新片並發送 Discord 通知  
+**頻率:** 每次 Heartbeat (約 30 分鐘)  
+**位置:** `skills/youtube-monitor/check_videos.py`  
+**通知:** Discord #youtube-alert (1484466586445287434)
+
+**監控頻道:**
+| 頻道 | Channel ID | 內容類型 |
+|------|-----------|---------|
+| Alex Finn | UCfQNB91qRP_5ILeu_S_bSkg | OpenClaw / AI Productivity |
+| Alan Chen | UCaIIFXfdQUYf3OHPIFNDdrQ | 財經 / 地緣政治 / AI |
+
+**檢查步驟:**
+1. 運行 `cd skills/youtube-monitor && python3 check_videos.py`
+2. 檢測新片 → 自動發送 Discord 通知
+3. 記錄已通知視頻 (避免重複)
+4. 更新 `memory/youtube-state.json`
+
+**通知格式:**
+```
+## 🎬 YouTube 新片通知！
+
+**頻道:** [頻道名稱]
+**標題:** [視頻標題]
+**發布:** [時間]
+
+**簡介:**
+[視頻描述]
+
+[📺 觀看視頻](連結)
+```
+
+**狀態追蹤:**
+```json
+// memory/youtube-state.json
+{
+  "lastCheck": "2026-03-20T08:43:05Z",
+  "checkedVideos": ["video_id_1", "video_id_2", ...]
+}
+```
+
+**睡眠時間:** 23:00-08:00 HKT 仍然檢查，但可選靜音通知
