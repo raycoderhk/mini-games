@@ -241,7 +241,6 @@ function createSalaryBoxPlot() {
         type: 'scatter',
         data: pointData,
         options: {
-            indexAxis: 'y',
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
@@ -284,13 +283,16 @@ function createSalaryBoxPlot() {
                     grid: { color: 'rgba(0, 0, 0, 0.05)' }
                 },
                 y: {
+                    type: 'category',
                     title: {
                         display: true,
                         text: '職位',
                         font: { size: 14, weight: 'bold' }
                     },
+                    labels: labels,
                     ticks: { autoSkip: false, font: { size: 11 } },
-                    grid: { color: 'rgba(0, 0, 0, 0.05)' }
+                    grid: { color: 'rgba(0, 0, 0, 0.05)' },
+                    reverse: false
                 }
             }
         }
