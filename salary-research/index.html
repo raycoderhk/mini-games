@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>香港大學畢業生薪金比較 | HK Graduate Salary Comparison</title>
+    <link rel="stylesheet" href="assets/css/salary.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>📊 香港大學畢業生薪金比較</h1>
+            <p class="subtitle">HK Graduate Salary Comparison by Industry & Role</p>
+            <p class="description">探索不同行業的薪金、工時、壓力和前景，幫助你做出明智的職業選擇</p>
+        </header>
+
+        <!-- Main Chart -->
+        <section class="chart-section">
+            <h2>💰 薪金比較 (Salary Comparison)</h2>
+            <p class="chart-description">按行业中位數薪金由低到高排序，顯示 10%/25%/50%/75%/90% 分位數</p>
+            <div class="chart-container">
+                <canvas id="salaryChart"></canvas>
+            </div>
+            <div class="chart-legend">
+                <div class="legend-item">
+                    <span class="legend-box top"></span>
+                    <span>Top (90th percentile) - 高收入者</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-box upper"></span>
+                    <span>Upper Quartile (75th) - 中上水平</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-box median"></span>
+                    <span>Median (50th) - 中位數</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-box lower"></span>
+                    <span>Lower Quartile (25th) - 中下水平</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-box bottom"></span>
+                    <span>Bottom (10th percentile) - 入行起薪</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Metrics -->
+        <section class="metrics-section">
+            <h2>📊 其他重要指標 (Other Metrics)</h2>
+            
+            <!-- Working Hours -->
+            <div class="metric-category">
+                <h3>⏰ 每週工時 (Working Hours/Week)</h3>
+                <p class="metric-description">中位數工時，越低越好</p>
+                <div class="chart-container-small">
+                    <canvas id="hoursChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Stress Level -->
+            <div class="metric-category">
+                <h3>😰 壓力指數 (Stress Level)</h3>
+                <p class="metric-description">1-10 分，越低壓力越小</p>
+                <div class="chart-container-small">
+                    <canvas id="stressChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Career Prospects -->
+            <div class="metric-category">
+                <h3>📈 行業前景 (Career Prospects)</h3>
+                <p class="metric-description">1-10 分，越高前景越好</p>
+                <div class="chart-container-small">
+                    <canvas id="prospectsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- University Major Mapping -->
+        <section class="major-section">
+            <h2>🎓 大學科系對應 (University Major → Career Path)</h2>
+            <p class="section-description">選擇你感興趣的科系，了解相關職業出路</p>
+            
+            <div class="major-grid">
+                <!-- Computer Science -->
+                <div class="major-card" data-major="cs">
+                    <h3>💻 Computer Science (電腦科學)</h3>
+                    <ul class="career-paths">
+                        <li data-role="software-dev">Software Developer (軟件開發)</li>
+                        <li data-role="web-dev">Web Developer (網頁開發)</li>
+                        <li data-role="mobile-dev">Mobile Developer (手機應用開發)</li>
+                        <li data-role="data-analyst">Data Analyst (數據分析師)</li>
+                        <li data-role="data-scientist">Data Scientist (數據科學家)</li>
+                        <li data-role="ai-ml-engineer">AI/ML Engineer (人工智能工程師)</li>
+                        <li data-role="devops">DevOps/Cloud Engineer (運維/雲端工程師)</li>
+                        <li data-role="security">Security Engineer (網絡安全工程師)</li>
+                        <li data-role="game-dev">Game Developer (遊戲開發)</li>
+                    </ul>
+                    <div class="avg-salary">平均起薪：$25,000-$35,000/月</div>
+                    <div class="prospects-badge good">前景：⭐⭐⭐⭐⭐</div>
+                </div>
+
+                <!-- Information Engineering -->
+                <div class="major-card" data-major="ie">
+                    <h3>📡 Information Engineering (資訊工程)</h3>
+                    <ul class="career-paths">
+                        <li data-role="it-support">IT Support (技術支援)</li>
+                        <li data-role="devops">Cloud Engineer (雲端工程師)</li>
+                        <li data-role="security">Security Engineer (網絡安全)</li>
+                        <li data-role="software-dev">Software Developer (軟件開發)</li>
+                        <li data-role="web-dev">Web Developer (網頁開發)</li>
+                    </ul>
+                    <div class="avg-salary">平均起薪：$22,000-$32,000/月</div>
+                    <div class="prospects-badge good">前景：⭐⭐⭐⭐</div>
+                </div>
+
+                <!-- Game Design / Digital Media -->
+                <div class="major-card" data-major="game">
+                    <h3>🎮 Game Design / Digital Media (遊戲設計/數碼媒體)</h3>
+                    <ul class="career-paths">
+                        <li data-role="game-dev">Game Developer (遊戲開發) ⭐</li>
+                        <li data-role="indie-game-dev">Indie Game Developer (獨立遊戲開發) ⚠️</li>
+                        <li data-role="design">UI/UX Designer (界面/體驗設計師)</li>
+                        <li data-role="design">3D Artist (3D 美術師)</li>
+                        <li data-role="design">Animator (動畫師)</li>
+                        <li data-role="web-dev">Web Developer (網頁開發)</li>
+                    </ul>
+                    <div class="avg-salary">平均起薪：$18,000-$28,000/月</div>
+                    <div class="prospects-badge medium">前景：⭐⭐⭐</div>
+                    <div class="warning-note">⚠️ Indie Game Developer 高風險，建議先累積全職經驗</div>
+                </div>
+
+                <!-- Mathematics / Statistics -->
+                <div class="major-card" data-major="math">
+                    <h3>📐 Mathematics / Statistics (數學/統計)</h3>
+                    <ul class="career-paths">
+                        <li data-role="data-analyst">Data Analyst (數據分析師)</li>
+                        <li data-role="data-scientist">Data Scientist (數據科學家)</li>
+                        <li data-role="ai-ml-engineer">AI/ML Engineer (人工智能工程師)</li>
+                        <li data-role="finance">Quantitative Analyst (量化分析師)</li>
+                        <li data-role="accounting">Actuary (精算師)</li>
+                        <li data-role="education">教師 (Teacher)</li>
+                    </ul>
+                    <div class="avg-salary">平均起薪：$25,000-$40,000/月</div>
+                    <div class="prospects-badge good">前景：⭐⭐⭐⭐⭐</div>
+                </div>
+
+                <!-- Finance / Business -->
+                <div class="major-card" data-major="finance">
+                    <h3>💼 Finance / Business (金融/商業)</h3>
+                    <ul class="career-paths">
+                        <li data-role="finance">Investment Banking (投資銀行) 💰</li>
+                        <li data-role="accounting">Accounting/Audit (會計/審計)</li>
+                        <li data-role="marketing">Marketing (市場營銷)</li>
+                        <li data-role="retail">Management Trainee (管理見習生)</li>
+                        <li data-role="retail">Retail Management (零售管理)</li>
+                    </ul>
+                    <div class="avg-salary">平均起薪：$20,000-$35,000/月</div>
+                    <div class="prospects-badge good">前景：⭐⭐⭐⭐</div>
+                </div>
+
+                <!-- Engineering -->
+                <div class="major-card" data-major="eng">
+                    <h3>⚙️ Engineering (工程)</h3>
+                    <ul class="career-paths">
+                        <li data-role="engineering">Engineer (工程師)</li>
+                        <li data-role="software-dev">Software Developer (軟件開發)</li>
+                        <li data-role="ai-ml-engineer">AI/ML Engineer (人工智能工程師)</li>
+                        <li data-role="data-analyst">Data Analyst (數據分析師)</li>
+                    </ul>
+                    <div class="avg-salary">平均起薪：$22,000-$30,000/月</div>
+                    <div class="prospects-badge medium">前景：⭐⭐⭐</div>
+                </div>
+
+                <!-- Education / Social Sciences -->
+                <div class="major-card" data-major="edu">
+                    <h3>📚 Education / Social Sciences (教育/社會科學)</h3>
+                    <ul class="career-paths">
+                        <li data-role="education">教師 (Teacher) ⭐</li>
+                        <li data-role="social-worker">社會工作者 (Social Worker)</li>
+                        <li data-role="media">傳媒/記者 (Media/Journalist)</li>
+                        <li data-role="marketing">Marketing (市場營銷)</li>
+                        <li data-role="retail">Management (管理)</li>
+                    </ul>
+                    <div class="avg-salary">平均起薪：$18,000-$28,000/月</div>
+                    <div class="prospects-badge medium">前景：⭐⭐⭐</div>
+                </div>
+
+                <!-- Healthcare -->
+                <div class="major-card" data-major="health">
+                    <h3>🏥 Healthcare (醫療)</h3>
+                    <ul class="career-paths">
+                        <li data-role="healthcare">護士 (Nurse)</li>
+                        <li data-role="healthcare">醫學化驗師 (Medical Lab Scientist)</li>
+                        <li data-role="healthcare">物理治療師 (Physiotherapist)</li>
+                        <li data-role="healthcare">藥劑師 (Pharmacist)</li>
+                    </ul>
+                    <div class="avg-salary">平均起薪：$25,000-$35,000/月</div>
+                    <div class="prospects-badge good">前景：⭐⭐⭐⭐⭐</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Sources -->
+        <section class="sources-section">
+            <h2>📚 數據來源 (Data Sources)</h2>
+            
+            <div class="sources-grid">
+                <!-- Government/Official -->
+                <div class="source-category">
+                    <h3>🏛️ 政府/官方機構</h3>
+                    <ul>
+                        <li><a href="https://www.censtatd.gov.hk/" target="_blank">政府統計處</a> - 收入及工時按年統計調查</li>
+                        <li><a href="https://www.ugc.edu.hk/" target="_blank">教資會 (UGC)</a> - 大學畢業生就業調查</li>
+                        <li><a href="https://www.labour.gov.hk/" target="_blank">勞工處</a> - 職位空缺及薪金統計</li>
+                        <li><a href="https://www.hkie.org.hk/" target="_blank">香港工程師學會</a> - 工程師薪酬調查</li>
+                        <li><a href="https://www.hkicpa.org.hk/" target="_blank">香港會計師公會</a> - 會計業界薪酬</li>
+                    </ul>
+                </div>
+
+                <!-- Job Platforms -->
+                <div class="source-category">
+                    <h3>💼 招聘平台</h3>
+                    <ul>
+                        <li><a href="https://www.jobsdb.com/" target="_blank">JobsDB</a> - 香港職位薪金數據</li>
+                        <li><a href="https://www.ctgoodjobs.hk/" target="_blank">CTgoodjobs</a> - 薪金指數及職位數據</li>
+                        <li><a href="https://www.linkedin.com/salary/" target="_blank">LinkedIn Salary</a> - 全球薪金數據 (香港區)</li>
+                        <li><a href="https://www.glassdoor.com/" target="_blank">Glassdoor</a> - 員工自報薪金數據</li>
+                        <li><a href="https://www.efinancialcareers.com/" target="_blank">eFinancialCareers</a> - 金融業薪酬</li>
+                    </ul>
+                </div>
+
+                <!-- Industry Reports -->
+                <div class="source-category">
+                    <h3>📈 行業報告</h3>
+                    <ul>
+                        <li><a href="https://hktdc.com/" target="_blank">HKTDC</a> - 香港行業發展報告</li>
+                        <li><a href="https://www.investhk.gov.hk/" target="_blank">InvestHK</a> - 科技行業薪金調查</li>
+                        <li><a href="https://www.hkstp.org/" target="_blank">HKSTP</a> - 創科行業報告</li>
+                        <li><a href="https://www.ha.org.hk/" target="_blank">醫院管理局</a> - 醫療業界薪酬</li>
+                    </ul>
+                </div>
+
+                <!-- Developer Communities -->
+                <div class="source-category">
+                    <h3>💻 開發者社群</h3>
+                    <ul>
+                        <li><a href="https://survey.stackoverflow.co/" target="_blank">Stack Overflow Survey</a> - 全球開發者薪金調查 (2024)</li>
+                        <li><a href="https://github.com/octoverse" target="_blank">GitHub Octoverse</a> - 開發者趨勢報告</li>
+                        <li><a href="https://hkusua.org/" target="_blank">HKUSUA</a> - 香港大學生會調查</li>
+                    </ul>
+                </div>
+
+                <!-- Game Industry -->
+                <div class="source-category">
+                    <h3>🎮 遊戲行業特定</h3>
+                    <ul>
+                        <li><a href="https://www.gamedeveloper.com/annual-salary-survey" target="_blank">Game Developer Salary Survey</a> - 全球遊戲開發者薪金 (2024)</li>
+                        <li><a href="https://itch.io/" target="_blank">itch.io</a> - Indie 遊戲開發者收入數據</li>
+                        <li><a href="https://store.steampowered.com/" target="_blank">Steam</a> - 遊戲銷售數據</li>
+                        <li><a href="https://www.gamedeveloper.com/" target="_blank">Game Developer Magazine</a> - 行業報告</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Usage Notes -->
+        <section class="notes-section">
+            <h2>ℹ️ 使用說明 (How to Use This Data)</h2>
+            <ul>
+                <li><strong>薪金數據：</strong>以上數據僅供參考，實際薪金因應個人能力、經驗、公司規模、行業而異</li>
+                <li><strong>畢業生薪金：</strong>指 0-3 年經驗的起薪範圍</li>
+                <li><strong>中位數 (Median)：</strong>代表行業中間水平，唔係平均數 (50% 人高於此數，50% 人低於此數)</li>
+                <li><strong>分位數：</strong>Bottom (10%) = 入行起薪，Top (90%) = 高收入者</li>
+                <li><strong>Indie Game Developer：</strong>⚠️ 數據波動極大，1-5% 成功，大部分失敗或需要兼職，請謹慎參考</li>
+                <li><strong>工時：</strong>每週工作小時，包括正常工時 + 加班</li>
+                <li><strong>壓力指數：</strong>1-10 分，綜合工作壓力、責任、工作環境等因素</li>
+                <li><strong>行業前景：</strong>1-10 分，考慮行業增長、需求、晉升空間等因素</li>
+            </ul>
+        </section>
+
+        <!-- Disclaimer -->
+        <section class="disclaimer-section">
+            <h2>📝 免責聲明 (Disclaimer)</h2>
+            <p>本頁面數據來自公開來源，僅供教育和參考用途。</p>
+            <p>實際就業情況和薪金會因市場變化、個人能力、經濟環境等因素而有所不同。</p>
+            <p>建議在選擇職業道路時，綜合考慮個人興趣、能力、價值觀、行業前景等多方面因素，而不僅僅是薪金。</p>
+            <p>Indie Game Developer 屬於高風險職業選擇，建議在追求夢想之前，先累積相關經驗和財務儲備。</p>
+            <p class="last-updated"><strong>最後更新：</strong> 2026 年 3 月 20 日</p>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>Created with ❤️ for career exploration</p>
+            <p><a href="https://github.com/raycoderhk/openclaw-workspace" target="_blank">GitHub Repo</a></p>
+            <p class="tip">💡 提示：點擊任何職位可以查看詳細信息</p>
+        </footer>
+    </div>
+
+    <script src="data/salary-data.js"></script>
+    <script src="assets/js/salary-chart.js"></script>
+</body>
+</html>

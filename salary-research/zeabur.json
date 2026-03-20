@@ -1,0 +1,15 @@
+{
+  "$schema": "https://zeabur.com/schema.json",
+  "name": "gameworld",
+  "type": "static",
+  "static": {
+    "root": ".",
+    "index": "index.html"
+  },
+  "build": {
+    "command": "echo 'Static site - no build needed'"
+  },
+  "deploy": {
+    "startCommand": "echo 'Serving static files'"
+  }
+}

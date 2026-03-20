@@ -1,0 +1,912 @@
+{
+  "lastUpdated": "2026-03-15",
+  "currency": "HKD",
+  "experienceLevel": "0-3 years (Fresh Graduate)",
+  "industries": [
+    {
+      "id": "social-worker",
+      "name": "社會工作者 (Social Worker)",
+      "category": "Social Services",
+      "salary": {
+        "bottom": 150000,
+        "lowerQuartile": 180000,
+        "median": 240000,
+        "upperQuartile": 300000,
+        "top": 400000
+      },
+      "workingHours": {
+        "min": 40,
+        "max": 55,
+        "median": 45,
+        "note": "視乎機構，有時需要加班處理個案"
+      },
+      "stressLevel": {
+        "score": 7,
+        "max": 10,
+        "note": "情緒壓力大，工作量大"
+      },
+      "prospects": {
+        "score": 5,
+        "max": 10,
+        "growth": "穩定",
+        "note": "社會需求穩定，但晉升空間有限"
+      },
+      "relatedDegrees": [
+        "Social Work (社會工作)",
+        "Psychology (心理學)",
+        "Sociology (社會學)"
+      ],
+      "skills": [
+        "溝通技巧",
+        "同理心",
+        "個案管理",
+        "危機處理"
+      ],
+      "notes": "幫助他人，有意義但壓力大",
+      "source": "政府統計處 / 社福界薪酬調查"
+    },
+    {
+      "id": "education",
+      "name": "教師 (Teacher)",
+      "category": "Education",
+      "salary": {
+        "bottom": 180000,
+        "lowerQuartile": 240000,
+        "median": 300000,
+        "upperQuartile": 400000,
+        "top": 500000
+      },
+      "workingHours": {
+        "min": 40,
+        "max": 60,
+        "median": 50,
+        "note": "包括備課、改簿、家長會"
+      },
+      "stressLevel": {
+        "score": 6,
+        "max": 10,
+        "note": "教學壓力 + 行政工作 + 家長溝通"
+      },
+      "prospects": {
+        "score": 6,
+        "max": 10,
+        "growth": "穩定",
+        "note": "穩定但競爭大，需要 PGDE"
+      },
+      "relatedDegrees": [
+        "Education (教育)",
+        "Any Degree + PGDE",
+        "Subject Specialization (科目專修)"
+      ],
+      "skills": [
+        "教學技巧",
+        "課堂管理",
+        "溝通能力",
+        "耐心"
+      ],
+      "notes": "穩定，有暑假，但工作量大",
+      "source": "教育局 / 政府統計處"
+    },
+    {
+      "id": "indie-game-dev",
+      "name": "Indie Game Developer (獨立遊戲開發) 🎮",
+      "category": "Game Development",
+      "salary": {
+        "bottom": 0,
+        "lowerQuartile": 50000,
+        "median": 120000,
+        "upperQuartile": 300000,
+        "top": 800000
+      },
+      "workingHours": {
+        "min": 40,
+        "max": 80,
+        "median": 60,
+        "note": "極不固定，視乎項目進度"
+      },
+      "stressLevel": {
+        "score": 9,
+        "max": 10,
+        "note": "財務壓力 + 項目壓力 + 市場競爭 + 不穩定"
+      },
+      "prospects": {
+        "score": 3,
+        "max": 10,
+        "growth": "極不穩定",
+        "note": "極少數成功 (1-5%)，大部分失敗或需要兼職"
+      },
+      "relatedDegrees": [
+        "Computer Science (電腦科學)",
+        "Digital Media (數碼媒體)",
+        "Game Design (遊戲設計)",
+        "Self-taught (自學)"
+      ],
+      "skills": [
+        "Programming (C#/C++/Unity)",
+        "Game Design",
+        "Art/Animation",
+        "Marketing",
+        "Business Management"
+      ],
+      "notes": "⚠️ 高風險：大部分失敗，少數成功。建議先做全職 Game Dev 累積經驗",
+      "source": "itch.io / Steam Developer Survey / Game Developer Magazine"
+    },
+    {
+      "id": "game-dev",
+      "name": "Game Developer (遊戲開發) 🎮",
+      "category": "Game Development",
+      "salary": {
+        "bottom": 180000,
+        "lowerQuartile": 240000,
+        "median": 360000,
+        "upperQuartile": 480000,
+        "top": 720000
+      },
+      "workingHours": {
+        "min": 45,
+        "max": 60,
+        "median": 50,
+        "note": "項目尾聲可能 OT (Crunch Time)"
+      },
+      "stressLevel": {
+        "score": 6,
+        "max": 10,
+        "note": "項目 deadlines + 技術挑戰"
+      },
+      "prospects": {
+        "score": 6,
+        "max": 10,
+        "growth": "穩定",
+        "note": "香港遊戲產業細，但穩定增長"
+      },
+      "relatedDegrees": [
+        "Computer Science (電腦科學)",
+        "Software Engineering (軟件工程)",
+        "Game Design (遊戲設計)",
+        "Digital Entertainment (數碼娛樂)"
+      ],
+      "skills": [
+        "Programming (C++/C#/Unity/Unreal)",
+        "Game Engine",
+        "3D Math",
+        "Problem Solving",
+        "Teamwork"
+      ],
+      "notes": "全職遊戲公司，比 Indie 穩定",
+      "source": "JobsDB / LinkedIn / HK Game Industry Survey"
+    },
+    {
+      "id": "retail",
+      "name": "零售/店務管理 (Retail)",
+      "category": "Retail",
+      "salary": {
+        "bottom": 150000,
+        "lowerQuartile": 180000,
+        "median": 240000,
+        "upperQuartile": 300000,
+        "top": 420000
+      },
+      "workingHours": {
+        "min": 45,
+        "max": 60,
+        "median": 50,
+        "note": "輪班工作，週末假日需上班"
+      },
+      "stressLevel": {
+        "score": 5,
+        "max": 10,
+        "note": "客戶服務壓力 + 銷售目標"
+      },
+      "prospects": {
+        "score": 4,
+        "max": 10,
+        "growth": "一般",
+        "note": "電商衝擊，傳統零售增長慢"
+      },
+      "relatedDegrees": [
+        "Business Administration (工商管理)",
+        "Marketing (市場營銷)",
+        "Any Degree (任何學位)"
+      ],
+      "skills": [
+        "客戶服務",
+        "銷售技巧",
+        "溝通能力",
+        "團隊合作"
+      ],
+      "notes": "入行門檻低，晉升空間有限",
+      "source": "政府統計處 / 零售業薪酬調查"
+    },
+    {
+      "id": "media",
+      "name": "傳媒/記者 (Media/Journalist)",
+      "category": "Media",
+      "salary": {
+        "bottom": 150000,
+        "lowerQuartile": 180000,
+        "median": 240000,
+        "upperQuartile": 320000,
+        "top": 480000
+      },
+      "workingHours": {
+        "min": 45,
+        "max": 70,
+        "median": 55,
+        "note": "不定時，突發新聞需隨時出勤"
+      },
+      "stressLevel": {
+        "score": 7,
+        "max": 10,
+        "note": "截稿壓力 + 工作時間不定"
+      },
+      "prospects": {
+        "score": 4,
+        "max": 10,
+        "growth": "收縮",
+        "note": "傳統傳媒收縮，新媒體興起"
+      },
+      "relatedDegrees": [
+        "Journalism (新聞學)",
+        "Communication (傳播學)",
+        "English/Chinese (英文/中文)"
+      ],
+      "skills": [
+        "寫作能力",
+        "採訪技巧",
+        "多媒體技能",
+        "語言能力"
+      ],
+      "notes": "有意義但行業前景不明",
+      "source": "香港記者協會 / 政府統計處"
+    },
+    {
+      "id": "design",
+      "name": "設計師 (Designer)",
+      "category": "Creative",
+      "salary": {
+        "bottom": 150000,
+        "lowerQuartile": 180000,
+        "median": 240000,
+        "upperQuartile": 320000,
+        "top": 480000
+      },
+      "workingHours": {
+        "min": 45,
+        "max": 60,
+        "median": 50,
+        "note": "項目制，截稿前需 OT"
+      },
+      "stressLevel": {
+        "score": 6,
+        "max": 10,
+        "note": "客戶要求 + 截稿壓力"
+      },
+      "prospects": {
+        "score": 5,
+        "max": 10,
+        "growth": "穩定",
+        "note": "需求穩定，競爭大"
+      },
+      "relatedDegrees": [
+        "Graphic Design (平面設計)",
+        "Digital Media (數碼媒體)",
+        "Visual Arts (視覺藝術)"
+      ],
+      "skills": [
+        "Adobe Creative Suite",
+        "UI/UX Design",
+        "Creativity",
+        "Communication"
+      ],
+      "notes": "創意行業，需要作品集",
+      "source": "設計業界薪酬調查 / JobsDB"
+    },
+    {
+      "id": "it-support",
+      "name": "IT Support (技術支援)",
+      "category": "Technology",
+      "salary": {
+        "bottom": 150000,
+        "lowerQuartile": 180000,
+        "median": 240000,
+        "upperQuartile": 300000,
+        "top": 420000
+      },
+      "workingHours": {
+        "min": 40,
+        "max": 50,
+        "median": 45,
+        "note": "大部分 5 天工作，有時需 On-call"
+      },
+      "stressLevel": {
+        "score": 5,
+        "max": 10,
+        "note": "用戶問題 + 系統故障"
+      },
+      "prospects": {
+        "score": 5,
+        "max": 10,
+        "growth": "穩定",
+        "note": "需求穩定，但晉升空間有限"
+      },
+      "relatedDegrees": [
+        "Information Engineering (資訊工程)",
+        "Computer Science (電腦科學)",
+        "IT Related (IT 相關)"
+      ],
+      "skills": [
+        "Windows/Linux",
+        "Network",
+        "Troubleshooting",
+        "Customer Service"
+      ],
+      "notes": "入行門檻較低，可進修向上",
+      "source": "JobsDB / CTgoodjobs"
+    },
+    {
+      "id": "web-dev",
+      "name": "Web Developer (網頁開發)",
+      "category": "Technology",
+      "salary": {
+        "bottom": 180000,
+        "lowerQuartile": 240000,
+        "median": 360000,
+        "upperQuartile": 500000,
+        "top": 800000
+      },
+      "workingHours": {
+        "min": 40,
+        "max": 55,
+        "median": 45,
+        "note": "大部分 5 天工作，彈性工時"
+      },
+      "stressLevel": {
+        "score": 5,
+        "max": 10,
+        "note": "項目 deadlines + 技術更新"
+      },
+      "prospects": {
+        "score": 7,
+        "max": 10,
+        "growth": "快速增長",
+        "note": "需求大，Remote 工作機會多"
+      },
+      "relatedDegrees": [
+        "Computer Science (電腦科學)",
+        "Software Engineering (軟件工程)",
+        "Information Engineering (資訊工程)",
+        "Self-taught (自學)"
+      ],
+      "skills": [
+        "HTML/CSS/JavaScript",
+        "React/Vue/Angular",
+        "Node.js/Python",
+        "Database",
+        "Git"
+      ],
+      "notes": "需求大，入行門檻相對低",
+      "source": "JobsDB / CTgoodjobs / Stack Overflow Survey"
+    },
+    {
+      "id": "mobile-dev",
+      "name": "Mobile Developer (手機應用開發)",
+      "category": "Technology",
+      "salary": {
+        "bottom": 200000,
+        "lowerQuartile": 260000,
+        "median": 380000,
+        "upperQuartile": 520000,
+        "top": 850000
+      },
+      "workingHours": {
+        "min": 40,
+        "max": 55,
+        "median": 45,
+        "note": "大部分 5 天工作"
+      },
+      "stressLevel": {
+        "score": 5,
+        "max": 10,
+        "note": "App Store 審核 + 項目壓力"
+      },
+      "prospects": {
+        "score": 7,
+        "max": 10,
+        "growth": "穩定增長",
+        "note": "智能手機普及，需求穩定"
+      },
+      "relatedDegrees": [
+        "Computer Science (電腦科學)",
+        "Software Engineering (軟件工程)"
+      ],
+      "skills": [
+        "iOS (Swift) / Android (Kotlin)",
+        "Mobile UI/UX",
+        "API Integration",
+        "App Store Deployment"
+      ],
+      "notes": "專科發展，需求穩定",
+      "source": "JobsDB / LinkedIn"
+    },
+    {
+      "id": "software-dev",
+      "name": "Software Developer (軟件開發)",
+      "category": "Technology",
+      "salary": {
+        "bottom": 240000,
+        "lowerQuartile": 300000,
+        "median": 420000,
+        "upperQuartile": 600000,
+        "top": 900000
+      },
+      "workingHours": {
+        "min": 40,
+        "max": 55,
+        "median": 45,
+        "note": "大部分 5 天工作，彈性工時"
+      },
+      "stressLevel": {
+        "score": 5,
+        "max": 10,
+        "note": "視乎公司文化"
+      },
+      "prospects": {
+        "score": 8,
+        "max": 10,
+        "growth": "快速增長",
+        "note": "需求最大，前景最好"
+      },
+      "relatedDegrees": [
+        "Computer Science (電腦科學)",
+        "Software Engineering (軟件工程)",
+        "Information Engineering (資訊工程)",
+        "Computer Engineering (電腦工程)"
+      ],
+      "skills": [
+        "Programming (Java/Python/JavaScript)",
+        "System Design",
+        "Database",
+        "Cloud (AWS/Azure/GCP)",
+        "Agile/Scrum"
+      ],
+      "notes": "需求最大，選擇最多",
+      "source": "JobsDB / CTgoodjobs / LinkedIn"
+    },
+    {
+      "id": "data-analyst",
+      "name": "Data Analyst (數據分析師)",
+      "category": "Technology",
+      "salary": {
+        "bottom": 240000,
+        "lowerQuartile": 300000,
+        "median": 400000,
+        "upperQuartile": 550000,
+        "top": 850000
+      },
+      "workingHours": {
+        "min": 40,
+        "max": 55,
+        "median": 45,
+        "note": "大部分 5 天工作"
+      },
+      "stressLevel": {
+        "score": 5,
+        "max": 10,
+        "note": "項目壓力 + 數據準確性"
+      },
+      "prospects": {
+        "score": 8,
+        "max": 10,
+        "growth": "快速增長",
+        "note": "數據驅動決策，需求大增"
+      },
+      "relatedDegrees": [
+        "Data Science (數據科學)",
+        "Statistics (統計)",
+        "Mathematics (數學)",
+        "Computer Science (電腦科學)"
+      ],
+      "skills": [
+        "SQL",
+        "Python/R",
+        "Excel",
+        "Tableau/PowerBI",
+        "Statistics"
+      ],
+      "notes": "跨行業需求，前景好",
+      "source": "JobsDB / LinkedIn / Data Science Survey"
+    },
+    {
+      "id": "data-scientist",
+      "name": "Data Scientist (數據科學家)",
+      "category": "Technology",
+      "salary": {
+        "bottom": 300000,
+        "lowerQuartile": 400000,
+        "median": 550000,
+        "upperQuartile": 750000,
+        "top": 1000000
+      },
+      "workingHours": {
+        "min": 40,
+        "max": 60,
+        "median": 48,
+        "note": "研發崗位較彈性"
+      },
+      "stressLevel": {
+        "score": 6,
+        "max": 10,
+        "note": "研究壓力 + 技術更新快"
+      },
+      "prospects": {
+        "score": 9,
+        "max": 10,
+        "growth": "快速增長",
+        "note": "AI/ML 興起，需求大增"
+      },
+      "relatedDegrees": [
+        "Data Science (數據科學)",
+        "Statistics (統計)",
+        "Mathematics (數學)",
+        "Computer Science (電腦科學)",
+        "PhD preferred (博士優先)"
+      ],
+      "skills": [
+        "Python/R",
+        "Machine Learning",
+        "Deep Learning",
+        "Big Data (Spark/Hadoop)",
+        "Research"
+      ],
+      "notes": "高門檻，高回報",
+      "source": "LinkedIn / JobsDB / Data Science Survey"
+    },
+    {
+      "id": "ai-ml-engineer",
+      "name": "AI/ML Engineer (人工智能工程師)",
+      "category": "Technology",
+      "salary": {
+        "bottom": 350000,
+        "lowerQuartile": 450000,
+        "median": 600000,
+        "upperQuartile": 850000,
+        "top": 1200000
+      },
+      "workingHours": {
+        "min": 40,
+        "max": 60,
+        "median": 48,
+        "note": "研發崗位較彈性"
+      },
+      "stressLevel": {
+        "score": 6,
+        "max": 10,
+        "note": "技術更新快 + 項目壓力"
+      },
+      "prospects": {
+        "score": 9,
+        "max": 10,
+        "growth": "快速增長",
+        "note": "AI 係未來趨勢，需求大增"
+      },
+      "relatedDegrees": [
+        "Computer Science (電腦科學)",
+        "Data Science (數據科學)",
+        "Mathematics (數學)",
+        "Engineering (工程)",
+        "Master/PhD preferred (碩士/博士優先)"
+      ],
+      "skills": [
+        "Python",
+        "TensorFlow/PyTorch",
+        "Machine Learning",
+        "Deep Learning",
+        "NLP/CV",
+        "Cloud (AWS/GCP/Azure)"
+      ],
+      "notes": "🔥 熱門領域，薪金最高之一",
+      "source": "LinkedIn / JobsDB / Stack Overflow Survey"
+    },
+    {
+      "id": "devops",
+      "name": "DevOps/Cloud Engineer (運維/雲端工程師)",
+      "category": "Technology",
+      "salary": {
+        "bottom": 280000,
+        "lowerQuartile": 360000,
+        "median": 500000,
+        "upperQuartile": 700000,
+        "top": 1000000
+      },
+      "workingHours": {
+        "min": 40,
+        "max": 55,
+        "median": 45,
+        "note": "有時需 On-call"
+      },
+      "stressLevel": {
+        "score": 6,
+        "max": 10,
+        "note": "系統穩定性壓力"
+      },
+      "prospects": {
+        "score": 8,
+        "max": 10,
+        "growth": "快速增長",
+        "note": "雲端遷移趨勢，需求大"
+      },
+      "relatedDegrees": [
+        "Computer Science (電腦科學)",
+        "Information Engineering (資訊工程)",
+        "Engineering (工程)"
+      ],
+      "skills": [
+        "Linux",
+        "Docker/Kubernetes",
+        "AWS/Azure/GCP",
+        "CI/CD",
+        "Infrastructure as Code"
+      ],
+      "notes": "雲端趨勢，需求大增",
+      "source": "JobsDB / LinkedIn / Cloud Survey"
+    },
+    {
+      "id": "security",
+      "name": "Security Engineer (網絡安全工程師)",
+      "category": "Technology",
+      "salary": {
+        "bottom": 300000,
+        "lowerQuartile": 400000,
+        "median": 550000,
+        "upperQuartile": 750000,
+        "top": 1100000
+      },
+      "workingHours": {
+        "min": 40,
+        "max": 55,
+        "median": 45,
+        "note": "有時需 On-call 處理安全事件"
+      },
+      "stressLevel": {
+        "score": 7,
+        "max": 10,
+        "note": "安全責任重大"
+      },
+      "prospects": {
+        "score": 9,
+        "max": 10,
+        "growth": "快速增長",
+        "note": "網絡攻擊增加，需求大增"
+      },
+      "relatedDegrees": [
+        "Computer Science (電腦科學)",
+        "Information Security (資訊安全)",
+        "Engineering (工程)"
+      ],
+      "skills": [
+        "Network Security",
+        "Penetration Testing",
+        "Security Certifications (CISSP/CEH)",
+        "Incident Response"
+      ],
+      "notes": "高需求，高回報",
+      "source": "JobsDB / LinkedIn / Security Survey"
+    },
+    {
+      "id": "accounting",
+      "name": "會計/審計 (Accounting/Audit)",
+      "category": "Finance",
+      "salary": {
+        "bottom": 180000,
+        "lowerQuartile": 220000,
+        "median": 300000,
+        "upperQuartile": 400000,
+        "top": 600000
+      },
+      "workingHours": {
+        "min": 45,
+        "max": 70,
+        "median": 55,
+        "note": "忙季 (1-4 月) 嚴重 OT"
+      },
+      "stressLevel": {
+        "score": 7,
+        "max": 10,
+        "note": "忙季壓力大 + 客戶要求"
+      },
+      "prospects": {
+        "score": 7,
+        "max": 10,
+        "growth": "穩定",
+        "note": "穩定，考 HKICPA 後晉升快"
+      },
+      "relatedDegrees": [
+        "Accounting (會計)",
+        "Finance (金融)",
+        "Business Administration (工商管理)"
+      ],
+      "skills": [
+        "會計知識",
+        "Excel",
+        "Audit",
+        "HKICPA/ACCA"
+      ],
+      "notes": "穩定，但忙季辛苦",
+      "source": "HKICPA / JobsDB"
+    },
+    {
+      "id": "finance",
+      "name": "金融/投資銀行 (Finance/IB)",
+      "category": "Finance",
+      "salary": {
+        "bottom": 300000,
+        "lowerQuartile": 400000,
+        "median": 600000,
+        "upperQuartile": 900000,
+        "top": 1500000
+      },
+      "workingHours": {
+        "min": 50,
+        "max": 80,
+        "median": 65,
+        "note": "嚴重 OT，有時通宵"
+      },
+      "stressLevel": {
+        "score": 9,
+        "max": 10,
+        "note": "高壓力 + 長工時 + 業績壓力"
+      },
+      "prospects": {
+        "score": 8,
+        "max": 10,
+        "growth": "穩定",
+        "note": "高薪但高壓，晉升快"
+      },
+      "relatedDegrees": [
+        "Finance (金融)",
+        "Economics (經濟)",
+        "Mathematics (數學)",
+        "Business Administration (工商管理)",
+        "Top University (頂尖大學優先)"
+      ],
+      "skills": [
+        "Financial Modeling",
+        "Excel",
+        "Analysis",
+        "Communication",
+        "CFA preferred"
+      ],
+      "notes": "💰 高薪但高壓，工時極長",
+      "source": "eFinancialCareers / JobsDB / LinkedIn"
+    },
+    {
+      "id": "marketing",
+      "name": "市場營銷 (Marketing)",
+      "category": "Business",
+      "salary": {
+        "bottom": 180000,
+        "lowerQuartile": 220000,
+        "median": 300000,
+        "upperQuartile": 420000,
+        "top": 650000
+      },
+      "workingHours": {
+        "min": 45,
+        "max": 60,
+        "median": 50,
+        "note": "活動期間需 OT"
+      },
+      "stressLevel": {
+        "score": 6,
+        "max": 10,
+        "note": "KPI 壓力 + 活動壓力"
+      },
+      "prospects": {
+        "score": 6,
+        "max": 10,
+        "growth": "穩定",
+        "note": "數碼營銷興起，傳統營銷收縮"
+      },
+      "relatedDegrees": [
+        "Marketing (市場營銷)",
+        "Business Administration (工商管理)",
+        "Communication (傳播學)"
+      ],
+      "skills": [
+        "Digital Marketing",
+        "Social Media",
+        "Analytics",
+        "Creativity",
+        "Communication"
+      ],
+      "notes": "數碼營銷需求大",
+      "source": "JobsDB / Marketing Survey"
+    },
+    {
+      "id": "engineering",
+      "name": "工程師 (Engineer)",
+      "category": "Engineering",
+      "salary": {
+        "bottom": 200000,
+        "lowerQuartile": 260000,
+        "median": 360000,
+        "upperQuartile": 480000,
+        "top": 720000
+      },
+      "workingHours": {
+        "min": 45,
+        "max": 60,
+        "median": 50,
+        "note": "地盤/項目制，視乎進度"
+      },
+      "stressLevel": {
+        "score": 6,
+        "max": 10,
+        "note": "項目壓力 + 安全責任"
+      },
+      "prospects": {
+        "score": 6,
+        "max": 10,
+        "growth": "穩定",
+        "note": "基建項目穩定，但行業增長慢"
+      },
+      "relatedDegrees": [
+        "Civil Engineering (土木工程)",
+        "Electronic Engineering (電子工程)",
+        "Mechanical Engineering (機械工程)",
+        "Building Services (屋宇設備)"
+      ],
+      "skills": [
+        "Engineering Knowledge",
+        "CAD",
+        "Project Management",
+        "HKIE Membership"
+      ],
+      "notes": "穩定，需要 HKIE 認證",
+      "source": "HKIE / 政府統計處"
+    },
+    {
+      "id": "healthcare",
+      "name": "醫療/護理 (Healthcare/Nurse)",
+      "category": "Healthcare",
+      "salary": {
+        "bottom": 240000,
+        "lowerQuartile": 300000,
+        "median": 400000,
+        "upperQuartile": 520000,
+        "top": 720000
+      },
+      "workingHours": {
+        "min": 45,
+        "max": 60,
+        "median": 50,
+        "note": "輪班工作，包括夜班"
+      },
+      "stressLevel": {
+        "score": 8,
+        "max": 10,
+        "note": "人命關天 + 工作量大 + 輪班"
+      },
+      "prospects": {
+        "score": 8,
+        "max": 10,
+        "growth": "快速增長",
+        "note": "人口老化，需求大增"
+      },
+      "relatedDegrees": [
+        "Nursing (護理學)",
+        "Medical Laboratory Science (醫學化驗)",
+        "Physiotherapy (物理治療)",
+        "Pharmacy (藥劑學)"
+      ],
+      "skills": [
+        "醫療知識",
+        "溝通技巧",
+        "應變能力",
+        "同理心"
+      ],
+      "notes": "穩定，有意義，但壓力大",
+      "source": "衞生署 / 醫院管理局"
+    }
+  ]
+}
