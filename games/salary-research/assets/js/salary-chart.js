@@ -37,56 +37,51 @@ function createSalaryBoxPlot() {
         return emoji + ind.name.split(' (')[0];
     });
     
-    // Box plot data
+    // Create segmented bar data - one bar per industry with colored segments
+    const bottomData = salaryData.map(ind => ind.salary.bottom / 1000);
+    const lowerData = salaryData.map(ind => (ind.salary.lowerQuartile - ind.salary.bottom) / 1000);
+    const medianData = salaryData.map(ind => (ind.salary.median - ind.salary.lowerQuartile) / 1000);
+    const upperData = salaryData.map(ind => (ind.salary.upperQuartile - ind.salary.median) / 1000);
+    const topData = salaryData.map(ind => (ind.salary.top - ind.salary.upperQuartile) / 1000);
+    
+    // Box plot data - stacked bars
     const boxData = {
         labels: labels,
         datasets: [
             {
-                label: 'Top (90th percentile)',
-                data: salaryData.map(ind => ind.salary.top / 1000),
-                backgroundColor: 'rgba(52, 152, 219, 0.8)',
-                borderColor: 'rgba(52, 152, 219, 1)',
-                borderWidth: 1,
-                type: 'bar',
-                order: 5
+                label: 'Bottom (10th) - 入行起薪',
+                data: bottomData,
+                backgroundColor: 'rgba(212, 230, 241, 1)',
+                borderColor: 'rgba(180, 200, 220, 1)',
+                borderWidth: 1
             },
             {
-                label: 'Upper Quartile (75th)',
-                data: salaryData.map(ind => ind.salary.upperQuartile / 1000),
-                backgroundColor: 'rgba(93, 173, 226, 0.8)',
-                borderColor: 'rgba(93, 173, 226, 1)',
-                borderWidth: 1,
-                type: 'bar',
-                order: 4
+                label: 'Lower (25th) - 中下水平',
+                data: lowerData,
+                backgroundColor: 'rgba(174, 214, 241, 1)',
+                borderColor: 'rgba(140, 180, 210, 1)',
+                borderWidth: 1
             },
             {
-                label: 'Median (50th)',
-                data: salaryData.map(ind => ind.salary.median / 1000),
-                backgroundColor: 'rgba(133, 193, 233, 0.9)',
-                borderColor: 'rgba(133, 193, 233, 1)',
-                borderWidth: 2,
-                type: 'line',
-                order: 3,
-                pointRadius: 4,
-                pointHoverRadius: 6
+                label: 'Median (50th) - 中位數',
+                data: medianData,
+                backgroundColor: 'rgba(133, 193, 233, 1)',
+                borderColor: 'rgba(100, 160, 200, 1)',
+                borderWidth: 1
             },
             {
-                label: 'Lower Quartile (25th)',
-                data: salaryData.map(ind => ind.salary.lowerQuartile / 1000),
-                backgroundColor: 'rgba(174, 214, 241, 0.8)',
-                borderColor: 'rgba(174, 214, 241, 1)',
-                borderWidth: 1,
-                type: 'bar',
-                order: 2
+                label: 'Upper (75th) - 中上水平',
+                data: upperData,
+                backgroundColor: 'rgba(93, 173, 226, 1)',
+                borderColor: 'rgba(60, 140, 190, 1)',
+                borderWidth: 1
             },
             {
-                label: 'Bottom (10th percentile)',
-                data: salaryData.map(ind => ind.salary.bottom / 1000),
-                backgroundColor: 'rgba(212, 230, 241, 0.8)',
-                borderColor: 'rgba(212, 230, 241, 1)',
-                borderWidth: 1,
-                type: 'bar',
-                order: 1
+                label: 'Top (90th) - 高收入者',
+                data: topData,
+                backgroundColor: 'rgba(52, 152, 219, 1)',
+                borderColor: 'rgba(40, 120, 180, 1)',
+                borderWidth: 1
             }
         ]
     };
@@ -104,12 +99,23 @@ function createSalaryBoxPlot() {
                         label: function(context) {
                             const label = context.dataset.label || '';
                             const value = context.parsed.x;
-                            return `${label}: HK$${value.toLocaleString()}K/年 (HK$${(value * 1000 / 12).toLocaleString(undefined, {maximumFractionDigits: 0})}/月)`;
+                            const ind = salaryData[context.dataIndex];
+                            
+                            // Calculate cumulative value for this segment
+                            let cumulative = 0;
+                            const datasets = context.chart.data.datasets;
+                            for (let i = 0; i <= context.dataIndex; i++) {
+                                // This is simplified - tooltip will show segment value
+                            }
+                            
+                            return `${label}: HK$${value.toLocaleString(undefined, {maximumFractionDigits: 1})}K`;
                         },
                         afterLabel: function(context) {
                             const index = context.dataIndex;
                             const ind = salaryData[index];
+                            const monthlyMedian = (ind.salary.median / 12).toLocaleString(undefined, {maximumFractionDigits: 0});
                             return [
+                                `中位數：HK$${monthlyMedian}/月`,
                                 `工時：${ind.workingHours.median} 小時/週`,
                                 `壓力：${ind.stressLevel.score}/10`,
                                 `前景：${ind.prospects.score}/10`
@@ -121,17 +127,15 @@ function createSalaryBoxPlot() {
                     position: 'top',
                     labels: {
                         usePointStyle: true,
-                        padding: 15
+                        padding: 15,
+                        boxWidth: 20
                     }
-                },
-                title: {
-                    display: false
                 }
             },
             scales: {
                 x: {
                     beginAtZero: true,
-                    stacked: false,
+                    stacked: true,
                     title: {
                         display: true,
                         text: '年薪 (HKD 千)',
@@ -147,7 +151,7 @@ function createSalaryBoxPlot() {
                     }
                 },
                 y: {
-                    stacked: false,
+                    stacked: true,
                     title: {
                         display: true,
                         text: '職位',
