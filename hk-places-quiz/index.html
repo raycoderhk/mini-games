@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 香港地標猜猜猜 | Learning Center</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Game Container */
+        .game-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Start Screen */
+        .start-screen {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .start-screen .icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+        }
+
+        .start-screen h2 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .start-screen p {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .game-rules {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .game-rules h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .game-rules ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .game-rules li {
+            padding: 8px 0;
+            color: #555;
+        }
+
+        .game-rules li:before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .btn-start {
+            padding: 20px 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.5em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-start:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.6);
+        }
+
+        /* Quiz Screen */
+        .quiz-screen {
+            display: none;
+        }
+
+        .progress-bar {
+            background: #f0f0f0;
+            border-radius: 10px;
+            height: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            transition: width 0.3s;
+        }
+
+        .question-counter {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        .question-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            background: #f8f9fa;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .option-btn {
+            padding: 20px;
+            background: #f8f9fa;
+            border: 3px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .option-btn:hover {
+            border-color: #667eea;
+            background: #f0f0ff;
+        }
+
+        .option-btn.correct {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .option-btn.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .option-btn.disabled {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .feedback-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .feedback-section.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feedback-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .feedback-fact {
+            font-size: 1.1em;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        .btn-next {
+            margin-top: 20px;
+            padding: 15px 40px;
+            background: white;
+            color: #667eea;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-next:hover {
+            transform: scale(1.05);
+        }
+
+        /* Result Screen */
+        .result-screen {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .result-icon {
+            font-size: 6em;
+            margin-bottom: 20px;
+        }
+
+        .result-title {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .result-score {
+            font-size: 4em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .result-message {
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .result-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #888;
+            font-size: 1em;
+        }
+
+        .btn-retry {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px;
+        }
+
+        .btn-retry:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-home {
+            padding: 15px 40px;
+            background: #f0f0f0;
+            color: #333;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px;
+        }
+
+        .btn-home:hover {
+            background: #e0e0e0;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .result-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">← 返回 Learning Center</a>
+
+        <div class="header">
+            <h1>🎯 香港地標猜猜猜</h1>
+            <p>測試下你對香港嘅認識！</p>
+        </div>
+
+        <div class="game-container">
+            <!-- Start Screen -->
+            <div class="start-screen" id="start-screen">
+                <div class="icon">🇭🇰</div>
+                <h2>準備好未？</h2>
+                <p>你將看到 3 張香港地標嘅相<br/>揀出正確嘅名！</p>
+
+                <div class="game-rules">
+                    <h3>📋 遊戲規則</h3>
+                    <ul>
+                        <li>共 3 條題目，每題 15 秒作答時間</li>
+                        <li>每題 4 個選項，揀一個你認為正確嘅</li>
+                        <li>答完每題會有小知識</li>
+                        <li>答啱 2 題或以上就合格！</li>
+                    </ul>
+                </div>
+
+                <button onclick="startGame()" class="btn-start">開始遊戲 🎮</button>
+            </div>
+
+            <!-- Quiz Screen -->
+            <div class="quiz-screen" id="quiz-screen">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="question-counter" id="question-counter">Question 1 of 3</div>
+
+                <img src="" alt="Question" class="question-image" id="question-image">
+
+                <div class="options-grid" id="options-grid">
+                    <!-- Options will be populated by JavaScript -->
+                </div>
+
+                <div class="feedback-section" id="feedback-section">
+                    <div class="feedback-title" id="feedback-title">✅ 正確！</div>
+                    <div class="feedback-fact" id="feedback-fact"></div>
+                    <button onclick="nextQuestion()" class="btn-next">下一題 →</button>
+                </div>
+            </div>
+
+            <!-- Result Screen -->
+            <div class="result-screen" id="result-screen">
+                <div class="result-icon" id="result-icon">🏆</div>
+                <div class="result-title">完成！</div>
+                <div class="result-score" id="result-score">2/3</div>
+                <div class="result-message" id="result-message"></div>
+
+                <div class="result-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="stat-correct">0</div>
+                        <div class="stat-label">正確</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="stat-wrong">0</div>
+                        <div class="stat-label">錯誤</div>
+                    </div>
+                </div>
+
+                <button onclick="retryGame()" class="btn-retry">再玩一次 🔄</button>
+                <button onclick="goHome()" class="btn-home">返回主頁 🏠</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let quizData = null;
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let correctCount = 0;
+        let wrongCount = 0;
+
+        // Load quiz data
+        async function loadQuizData() {
+            try {
+                const response = await fetch('quiz-data.json');
+                quizData = await response.json();
+            } catch (error) {
+                console.error('Error loading quiz data:', error);
+                alert('載入題目失敗，請刷新頁面重试');
+            }
+        }
+
+        // Start game
+        function startGame() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('quiz-screen').style.display = 'block';
+            currentQuestionIndex = 0;
+            score = 0;
+            correctCount = 0;
+            wrongCount = 0;
+            showQuestion();
+        }
+
+        // Show question
+        function showQuestion() {
+            const question = quizData.questions[currentQuestionIndex];
+            
+            // Update progress
+            const progress = ((currentQuestionIndex) / quizData.questions.length) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('question-counter').textContent = 
+                `Question ${currentQuestionIndex + 1} of ${quizData.questions.length}`;
+
+            // Set image
+            document.getElementById('question-image').src = question.image;
+
+            // Create options
+            const optionsGrid = document.getElementById('options-grid');
+            optionsGrid.innerHTML = '';
+            
+            // Shuffle options
+            const shuffledOptions = [...question.options].sort(() => Math.random() - 0.5);
+            
+            shuffledOptions.forEach(option => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = option;
+                btn.onclick = () => selectAnswer(option, btn);
+                optionsGrid.appendChild(btn);
+            });
+
+            // Hide feedback
+            document.getElementById('feedback-section').classList.remove('show');
+        }
+
+        // Select answer
+        function selectAnswer(selected, btnElement) {
+            const question = quizData.questions[currentQuestionIndex];
+            const isCorrect = selected === question.correctAnswer;
+
+            // Disable all buttons
+            const allButtons = document.querySelectorAll('.option-btn');
+            allButtons.forEach(btn => {
+                btn.classList.add('disabled');
+                if (btn.textContent === question.correctAnswer) {
+                    btn.classList.add('correct');
+                } else if (btn === btnElement && !isCorrect) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            // Update score
+            if (isCorrect) {
+                correctCount++;
+            } else {
+                wrongCount++;
+            }
+
+            // Show feedback
+            const feedbackSection = document.getElementById('feedback-section');
+            const feedbackTitle = document.getElementById('feedback-title');
+            const feedbackFact = document.getElementById('feedback-fact');
+
+            if (isCorrect) {
+                feedbackTitle.textContent = '✅ 正確！';
+                feedbackTitle.style.color = '#d4edda';
+            } else {
+                feedbackTitle.textContent = `❌ 錯啦！正確答案係：${question.correctAnswer}`;
+                feedbackTitle.style.color = '#f8d7da';
+            }
+
+            feedbackFact.textContent = question.fact;
+            feedbackSection.classList.add('show');
+        }
+
+        // Next question
+        function nextQuestion() {
+            currentQuestionIndex++;
+            
+            if (currentQuestionIndex < quizData.questions.length) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        // Show results
+        function showResults() {
+            document.getElementById('quiz-screen').style.display = 'none';
+            document.getElementById('result-screen').style.display = 'block';
+
+            const percentage = Math.round((correctCount / quizData.questions.length) * 100);
+            document.getElementById('result-score').textContent = `${correctCount}/${quizData.questions.length}`;
+            document.getElementById('stat-correct').textContent = correctCount;
+            document.getElementById('stat-wrong').textContent = wrongCount;
+
+            const resultIcon = document.getElementById('result-icon');
+            const resultMessage = document.getElementById('result-message');
+
+            if (correctCount === quizData.questions.length) {
+                resultIcon.textContent = '🏆';
+                resultMessage.textContent = '勁啊！全對！你係香港通！';
+            } else if (correctCount >= quizData.settings.passingScore) {
+                resultIcon.textContent = '🎉';
+                resultMessage.textContent = `好嘢！合格啦！繼續努力！`;
+            } else {
+                resultIcon.textContent = '💪';
+                resultMessage.textContent = '唔緊要，再試多次啦！';
+            }
+        }
+
+        // Retry game
+        function retryGame() {
+            document.getElementById('result-screen').style.display = 'none';
+            document.getElementById('start-screen').style.display = 'block';
+        }
+
+        // Go home
+        function goHome() {
+            window.location.href = '../';
+        }
+
+        // Initialize
+        loadQuizData().then(() => {
+            console.log('Quiz loaded!');
+        });
+    </script>
+</body>
+</html>
