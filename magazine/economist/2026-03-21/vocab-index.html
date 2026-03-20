@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📖 ESL Vocabulary - Economist March 21, 2026</title>
+    <style>
+        :root { --economist-red: #cc0000; --bg-color: #f5f5f5; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif; background-color: var(--bg-color); color: #333; line-height: 1.6; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .back-link { display: inline-block; margin-bottom: 20px; padding: 10px 20px; background: #333; color: white; text-decoration: none; border-radius: 5px; }
+        .back-link:hover { background: #555; }
+        header { background: linear-gradient(135deg, var(--economist-red), #990000); color: white; padding: 30px; border-radius: 10px; margin-bottom: 30px; }
+        h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .progress { margin-top: 15px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 5px; }
+        .progress-bar { height: 10px; background: rgba(255,255,255,0.2); border-radius: 5px; overflow: hidden; margin-top: 10px; }
+        .progress-fill { height: 100%; background: #4ade80; width: 0%; transition: width 0.3s; }
+        .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; }
+        .vocab-card { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: all 0.3s; }
+        .vocab-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .vocab-card h3 { color: var(--economist-red); margin-bottom: 10px; font-size: 1.2rem; }
+        .vocab-card .section { color: #666; font-size: 0.9rem; margin-bottom: 10px; }
+        .vocab-card .stats { display: flex; gap: 15px; margin: 15px 0; }
+        .vocab-card .stat { background: #f5f5f5; padding: 8px 12px; border-radius: 5px; font-size: 0.85rem; }
+        .vocab-card .btn { display: inline-block; padding: 10px 20px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 10px; }
+        .vocab-card .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); }
+        .vocab-card .btn.locked { background: #ccc; cursor: not-allowed; }
+        .status { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
+        .status.done { background: #4ade80; color: #064e3b; }
+        .status.pending { background: #fbbf24; color: #78350f; }
+        footer { text-align: center; padding: 30px; color: #666; margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">← Back to Issue</a>
+        <a href="../../" class="back-link" style="margin-left: 10px;">← Back to Economist</a>
+        
+        <header>
+            <h1>📖 ESL Vocabulary Pages</h1>
+            <p>March 21-27, 2026 Edition - "Operation Blind Fury"</p>
+            <div class="progress">
+                <strong>Progress:</strong> <span id="progress-text">0/12</span> vocab pages completed
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+        </header>
+
+        <h2 style="margin-bottom: 20px; color: var(--economist-red);">📚 Vocabulary Pages by Section</h2>
+        
+        <div class="vocab-grid">
+            <!-- Leaders Section -->
+            <div class="vocab-card">
+                <h3>War in Iran is making Donald Trump weaker—and angrier</h3>
+                <div class="section">📝 Leaders</div>
+                <div class="stats">
+                    <span class="stat">📚 10 words</span>
+                    <span class="stat">📝 3 quizzes</span>
+                </div>
+                <span class="status done">✅ Done</span>
+                <a href="vocab-iran-war-trump.html" class="btn">📖 Start Learning</a>
+            </div>
+
+            <div class="vocab-card">
+                <h3>Lebanon's leaders must take on Hizbullah</h3>
+                <div class="section">📝 Leaders</div>
+                <div class="stats">
+                    <span class="stat">📚 10 words</span>
+                    <span class="stat">📝 3 quizzes</span>
+                </div>
+                <span class="status pending">⏳ Pending</span>
+                <a href="#" class="btn locked">🔒 Coming Soon</a>
+            </div>
+
+            <div class="vocab-card">
+                <h3>Lebanon's leaders must take on Hizbullah</h3>
+                <div class="section">📝 Leaders</div>
+                <div class="stats">
+                    <span class="stat">📚 10 words</span>
+                    <span class="stat">📝 3 quizzes</span>
+                </div>
+                <span class="status pending">⏳ Pending</span>
+                <a href="#" class="btn locked">🔒 Coming Soon</a>
+            </div>
+
+            <div class="vocab-card">
+                <h3>Africa after aid is more resilient than you might think</h3>
+                <div class="section">📝 Leaders</div>
+                <div class="stats">
+                    <span class="stat">📚 10 words</span>
+                    <span class="stat">📝 3 quizzes</span>
+                </div>
+                <span class="status pending">⏳ Pending</span>
+                <a href="#" class="btn locked">🔒 Coming Soon</a>
+            </div>
+
+            <!-- Business Section -->
+            <div class="vocab-card">
+                <h3>Nvidia is expanding its empire</h3>
+                <div class="section">💼 Business</div>
+                <div class="stats">
+                    <span class="stat">📚 10 words</span>
+                    <span class="stat">📝 3 quizzes</span>
+                </div>
+                <span class="status pending">⏳ Pending</span>
+                <a href="#" class="btn locked">🔒 Coming Soon</a>
+            </div>
+
+            <div class="vocab-card">
+                <h3>How Zara fought off H&M and Shein</h3>
+                <div class="section">💼 Business</div>
+                <div class="stats">
+                    <span class="stat">📚 10 words</span>
+                    <span class="stat">📝 3 quizzes</span>
+                </div>
+                <span class="status pending">⏳ Pending</span>
+                <a href="#" class="btn locked">🔒 Coming Soon</a>
+            </div>
+
+            <!-- China Section -->
+            <div class="vocab-card">
+                <h3>Is cheap energy the key to China gaining AI supremacy?</h3>
+                <div class="section">🇨🇳 China</div>
+                <div class="stats">
+                    <span class="stat">📚 10 words</span>
+                    <span class="stat">📝 3 quizzes</span>
+                </div>
+                <span class="status pending">⏳ Pending</span>
+                <a href="#" class="btn locked">🔒 Coming Soon</a>
+            </div>
+
+            <!-- Science & Technology -->
+            <div class="vocab-card">
+                <h3>China is a serious contender in the race for fusion energy</h3>
+                <div class="section">🔬 Science & Technology</div>
+                <div class="stats">
+                    <span class="stat">📚 10 words</span>
+                    <span class="stat">📝 3 quizzes</span>
+                </div>
+                <span class="status pending">⏳ Pending</span>
+                <a href="#" class="btn locked">🔒 Coming Soon</a>
+            </div>
+
+            <div class="vocab-card">
+                <h3>The next phase of artificial intelligence may require very different processors</h3>
+                <div class="section">🔬 Science & Technology</div>
+                <div class="stats">
+                    <span class="stat">📚 10 words</span>
+                    <span class="stat">📝 3 quizzes</span>
+                </div>
+                <span class="status pending">⏳ Pending</span>
+                <a href="#" class="btn locked">🔒 Coming Soon</a>
+            </div>
+
+            <!-- Finance & Economics -->
+            <div class="vocab-card">
+                <h3>America may be a petrostate. But the energy shock still hurts</h3>
+                <div class="section">💰 Finance & Economics</div>
+                <div class="stats">
+                    <span class="stat">📚 10 words</span>
+                    <span class="stat">📝 3 quizzes</span>
+                </div>
+                <span class="status pending">⏳ Pending</span>
+                <a href="#" class="btn locked">🔒 Coming Soon</a>
+            </div>
+
+            <div class="vocab-card">
+                <h3>The new economics of sex work</h3>
+                <div class="section">💰 Finance & Economics</div>
+                <div class="stats">
+                    <span class="stat">📚 10 words</span>
+                    <span class="stat">📝 3 quizzes</span>
+                </div>
+                <span class="status pending">⏳ Pending</span>
+                <a href="#" class="btn locked">🔒 Coming Soon</a>
+            </div>
+
+            <!-- Culture -->
+            <div class="vocab-card">
+                <h3>Which is the best sparkling water?</h3>
+                <div class="section">🎭 Culture</div>
+                <div class="stats">
+                    <span class="stat">📚 10 words</span>
+                    <span class="stat">📝 3 quizzes</span>
+                </div>
+                <span class="status pending">⏳ Pending</span>
+                <a href="#" class="btn locked">🔒 Coming Soon</a>
+            </div>
+
+            <!-- Obituary -->
+            <div class="vocab-card">
+                <h3>Jürgen Habermas hoped rational discussion could save the world</h3>
+                <div class="section">🕯️ Obituary</div>
+                <div class="stats">
+                    <span class="stat">📚 10 words</span>
+                    <span class="stat">📝 3 quizzes</span>
+                </div>
+                <span class="status pending">⏳ Pending</span>
+                <a href="#" class="btn locked">🔒 Coming Soon</a>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>The Economist Archive - ESL Vocabulary</strong></p>
+            <p>March 21-27, 2026 Edition | 72 Total Articles | 12 Vocab Pages Planned</p>
+        </footer>
+    </div>
+
+    <script>
+        // Update progress bar
+        const done = 1;
+        const total = 12;
+        const percent = (done / total) * 100;
+        document.getElementById('progress-fill').style.width = percent + '%';
+        document.getElementById('progress-text').textContent = `${done}/${total}`;
+    </script>
+</body>
+</html>
