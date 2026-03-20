@@ -1,16 +1,16 @@
 {
   "$schema": "https://zeabur.com/schema/project.json",
   "name": "gameworld",
-  "description": "Classic mini-games collection - 6 games hub",
+  "description": "HK Graduate Salary Comparison Tool + Mini-games",
   "services": [
     {
       "name": "gameworld-web",
       "type": "static",
       "source": {
         "provider": "github",
-        "repo": "raycoderhk/2048-game",
+        "repo": "raycoderhk/mini-games",
         "branch": "main",
-        "rootDirectory": "games/2048-game"
+        "rootDirectory": "gameworld-zeabur"
       },
       "domains": [
         {
