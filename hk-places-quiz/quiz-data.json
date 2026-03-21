@@ -290,10 +290,30 @@
         "history": "1936 年建成→香港第 12 個水塘→二戰時期用作軍事防禦→而家係郊遊熱點"
       },
       "dateAdded": "2026-03-21"
+    },
+    {
+      "id": 15,
+      "image": "assets/ting-kau-bridge.jpg",
+      "correctAnswer": "汀九橋",
+      "options": [
+        "汀九橋",
+        "青馬大橋",
+        "汲水門大橋",
+        "西九龍公路"
+      ],
+      "hint": "連接青衣同屯門，三塔式斜拉橋",
+      "fact": "汀九橋位於青衣島西北面，1998 年 5 月通車，係全球首條三塔式斜拉橋。橋長 1177 米，主跨長 448 米，兩座主塔高 200 米。汀九橋係 3 號幹線一部分，連接青衣同屯門，每日車流量極大。橋身設計優美，係香港地標之一。",
+      "extra": {
+        "height": "橋長 1177 米，主塔高 200 米",
+        "location": "青衣島西北面",
+        "features": ["全球首條三塔式斜拉橋", "1998 年通車", "3 號幹線一部分", "連接青衣同屯門"],
+        "history": "1995 年動工→1998 年 5 月通車→獲國際橋樑大獎"
+      },
+      "dateAdded": "2026-03-21"
     }
   ],
   "settings": {
-    "passingScore": 8,
+    "passingScore": 9,
     "timePerQuestion": 15,
     "showFactAfterAnswer": true,
     "showExtraInfo": true
