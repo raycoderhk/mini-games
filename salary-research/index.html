@@ -23,27 +23,75 @@
 
         <!-- Main Chart -->
         <section class="chart-section">
-            <h2>💰 薪金比較 (Salary Comparison)</h2>
-            <p class="chart-description">按行业中位數薪金由低到高排序，顯示入行起薪、累積經驗後、頂尖收入</p>
+            <h2>💰 月薪比較 (Salary Comparison)</h2>
+            <p class="chart-description">按行业中位數月薪由低到高排序，顯示入行起薪、初級、中位數、資深、頂尖收入</p>
             <div class="chart-container">
                 <canvas id="salaryChart"></canvas>
             </div>
+            <p class="chart-hint">💡 提示：點擊任何行業查看詳細資訊</p>
             <div class="chart-legend">
                 <div class="legend-item">
-                    <span class="legend-symbol">🔵</span>
-                    <span>中間 50% (25th-75th)</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-symbol">🔴</span>
-                    <span>中位數 (50th)</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-symbol">🟠</span>
+                    <span class="legend-point" style="background:#e67e22"></span>
                     <span>入行起薪 (10th)</span>
                 </div>
                 <div class="legend-item">
-                    <span class="legend-symbol">🟣</span>
+                    <span class="legend-point" style="background:#f1c40f"></span>
+                    <span>初級水平 (25th)</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-point" style="background:#2ecc71"></span>
+                    <span>中位數 (50th) 🔗</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-point" style="background:#3498db"></span>
+                    <span>資深水平 (75th)</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-point" style="background:#9b59b6"></span>
                     <span>頂尖收入 (90th)</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Industry Insights Box -->
+        <section class="insights-section" id="insightsSection" style="display: none;">
+            <h2>📋 行業詳細資訊</h2>
+            <button class="close-btn" onclick="closeInsights()">✕ 關閉</button>
+            
+            <div class="insights-grid">
+                <div class="insights-card">
+                    <h3 id="insightName">-</h3>
+                    <div class="insight-emoji" id="insightEmoji">💼</div>
+                </div>
+                
+                <div class="insights-card">
+                    <h4>💰 薪金詳情</h4>
+                    <ul class="salary-details" id="insightSalary"></ul>
+                </div>
+                
+                <div class="insights-card">
+                    <h4>⏰ 工作情況</h4>
+                    <ul class="work-details" id="insightWork"></ul>
+                </div>
+                
+                <div class="insights-card">
+                    <h4>📈 行業前景</h4>
+                    <ul class="prospect-details" id="insightProspect"></ul>
+                </div>
+                
+                <div class="insights-card full-width">
+                    <h4>🎓 相關大學科系</h4>
+                    <div class="degree-list" id="insightDegrees"></div>
+                </div>
+                
+                <div class="insights-card full-width">
+                    <h4>💪 所需技能</h4>
+                    <div class="skill-tags" id="insightSkills"></div>
+                </div>
+                
+                <div class="insights-card full-width">
+                    <h4>📚 數據來源</h4>
+                    <p class="source-text" id="insightSource"></p>
                 </div>
             </div>
         </section>
