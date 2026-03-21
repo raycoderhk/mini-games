@@ -3,6 +3,7 @@
 
 let salaryData = [];
 let filteredData = [];
+let currentExperience = 'junior'; // Default to fresh graduates
 
 // DSE Subject to Major Mapping
 const dseSubjectMapping = {
@@ -62,7 +63,7 @@ async function loadSalaryData() {
         filteredData = [...salaryData];
         
         // Sort by median salary (low to high)
-        filteredData.sort((a, b) => a.salary.median - b.salary.median);
+        updateFilteredData();
         
         initCharts();
         initDSEFilter();
@@ -71,6 +72,36 @@ async function loadSalaryData() {
         alert('無法載入薪金數據，請稍後再試');
     }
 }
+
+// Update filtered data with current experience level
+function updateFilteredData() {
+    filteredData = salaryData.map(ind => {
+        const salary = ind.salaries[currentExperience];
+        return {
+            ...ind,
+            salary: salary,
+            experienceLevel: currentExperience
+        };
+    });
+    
+    // Sort by median salary (low to high)
+    filteredData.sort((a, b) => a.salary.median - b.salary.median);
+}
+
+// Filter by Experience Level
+window.filterByExperience = function(expLevel) {
+    currentExperience = expLevel;
+    updateFilteredData();
+    updateCharts();
+    
+    // Update button states
+    document.querySelectorAll('#experienceFilter .filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.exp === expLevel) {
+            btn.classList.add('active');
+        }
+    });
+};
 
 // Initialize DSE Subject Filter
 function initDSEFilter() {
@@ -313,11 +344,13 @@ window.showIndustryInsights = function(index) {
     
     if (!section) return;
     
+    const expLabel = document.querySelector(`#experienceFilter .filter-btn.active`)?.textContent || '';
+    
     // Name & Emoji
     document.getElementById('insightName').textContent = ind.name;
     document.getElementById('insightEmoji').textContent = ind.id.includes('game') ? '🎮' : '💼';
     
-    // Salary Details
+    // Salary Details for current experience
     const salaryHTML = `
         <li><span class="salary-label">入行起薪</span><span class="salary-value">$${(ind.salary.bottom/12).toFixed(0)}K</span></li>
         <li><span class="salary-label">初級水平</span><span class="salary-value">$${(ind.salary.lowerQuartile/12).toFixed(0)}K</span></li>
@@ -327,15 +360,44 @@ window.showIndustryInsights = function(index) {
     `;
     document.getElementById('insightSalary').innerHTML = salaryHTML;
     
+    // Career Progression
+    const progressionHTML = `
+        <div class="progression-grid">
+            <div class="progression-item">
+                <div class="progression-label">🎓 畢業生</div>
+                <div class="progression-value">$${(ind.salaries.junior.median/12).toFixed(0)}K</div>
+            </div>
+            <div class="progression-item">
+                <div class="progression-label">💼 中級</div>
+                <div class="progression-value">$${(ind.salaries.mid.median/12).toFixed(0)}K</div>
+            </div>
+            <div class="progression-item">
+                <div class="progression-label">👔 資深</div>
+                <div class="progression-value">$${(ind.salaries.senior.median/12).toFixed(0)}K</div>
+            </div>
+        </div>
+    `;
+    
     // Work Details
     const prospectInfo = getProspectInfo(ind.prospects.score);
     const workHTML = `
+        <li><span class="salary-label">經驗年資</span><span class="work-value">${expLabel}</span></li>
         <li><span class="salary-label">每週工時</span><span class="work-value">${ind.workingHours.median} 小時</span></li>
         <li><span class="salary-label">工時範圍</span><span class="work-value">${ind.workingHours.min}-${ind.workingHours.max} 小時</span></li>
         <li><span class="salary-label">壓力指數</span><span class="work-value">${ind.stressLevel.score}/10</span></li>
         <li><span class="salary-label">前景評分</span><span class="prospect-badge" style="background:${prospectInfo.bg};color:${prospectInfo.color}">${prospectInfo.text}</span></li>
     `;
     document.getElementById('insightWork').innerHTML = workHTML;
+    
+    // Add career progression section
+    const progressionSection = document.createElement('div');
+    progressionSection.className = 'insights-card full-width';
+    progressionSection.innerHTML = `
+        <h4>📈 職業發展路徑</h4>
+        ${progressionHTML}
+    `;
+    const prospectCard = document.getElementById('insightProspect').parentElement;
+    prospectCard.parentNode.insertBefore(progressionSection, prospectCard.nextSibling);
     
     // Prospect Details
     const prospectHTML = `

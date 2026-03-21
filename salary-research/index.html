@@ -16,6 +16,26 @@
             <p class="description">探索不同行業的薪金、工時、壓力和前景，幫助你做出明智的職業選擇</p>
         </header>
 
+        <!-- Disclaimer Banner -->
+        <section class="disclaimer-banner">
+            <div class="disclaimer-content">
+                <span class="disclaimer-icon">⚠️</span>
+                <div>
+                    <strong>數據說明：</strong>數據綜合多個公開來源估算，標註 ⭐ 為畢業生數據，無標註為行業整體估算。實際薪金因應個人能力、公司規模、經濟環境而異。
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Level Filter -->
+        <section class="filter-section">
+            <h3 style="color: #2c3e50; margin-bottom: 15px;">🎓 選擇經驗年資：</h3>
+            <div class="filter-buttons" id="experienceFilter">
+                <button class="filter-btn active" data-exp="junior" onclick="filterByExperience('junior')">🎓 應屆畢業生 (0-3 年)</button>
+                <button class="filter-btn" data-exp="mid" onclick="filterByExperience('mid')">💼 中級 (4-9 年)</button>
+                <button class="filter-btn" data-exp="senior" onclick="filterByExperience('senior')">👔 資深 (10+ 年)</button>
+            </div>
+        </section>
+
         <!-- DSE Subject Filter -->
         <section class="filter-section">
             <div id="dseFilter"></div>
