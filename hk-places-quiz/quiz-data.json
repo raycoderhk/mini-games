@@ -249,10 +249,31 @@
         "history": "香港高爾夫球會 1889 年成立→粉嶺為主要球場→石澳設衛星場地"
       },
       "dateAdded": "2026-03-21"
+    },
+    {
+      "id": 13,
+      "image": "assets/avenue-of-stars.jpg",
+      "correctAnswer": "星光大道",
+      "options": [
+        "星光大道",
+        "金紫荊廣場",
+        "維多利亞公園",
+        "添馬公園"
+      ],
+      "hint": "尖沙咀海傍，有明星手印同銅像",
+      "fact": "星光大道位於尖沙咀海傍，2004 年啟用，仿效荷里活星光大道而建。大道上有超過 100 個電影界名人嘅手印同銅像，包括李小龍、梅艷芳、劉德華等。2015 年開始翻新，2019 年重新開放。係遊客打卡熱點，可以欣賞維港景色同燈光音樂匯演。",
+      "extra": {
+        "height": "全長 440 米",
+        "location": "九龍尖沙咀海傍",
+        "features": ["100+ 明星手印", "李小龍銅像", "梅艷芳銅像", "維港海景", "燈光音樂匯演"],
+        "history": "2004 年啟用→2015 年翻新→2019 年重新開放",
+        "organization": "香港旅遊發展局管理"
+      },
+      "dateAdded": "2026-03-21"
     }
   ],
   "settings": {
-    "passingScore": 7,
+    "passingScore": 8,
     "timePerQuestion": 15,
     "showFactAfterAnswer": true,
     "showExtraInfo": true
