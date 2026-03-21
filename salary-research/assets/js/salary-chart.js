@@ -257,10 +257,8 @@ function createSalaryBoxPlot() {
                             const ind = filteredData[context.dataIndex];
                             const datasetLabel = context.dataset.label || '';
                             const value = context.parsed.x;
-                            const annualValue = value * 12;
                             return [
                                 `${datasetLabel}: HK$${value.toFixed(0)}K/月`,
-                                `(年薪：HK$${annualValue.toFixed(0)}K)`,
                                 ``,
                                 `⏰ 工時：${ind.workingHours.median} 小時/週`,
                                 `😰 壓力：${ind.stressLevel.score}/10`,
@@ -321,11 +319,11 @@ window.showIndustryInsights = function(index) {
     
     // Salary Details
     const salaryHTML = `
-        <li><span class="salary-label">入行起薪 (10th)</span><span class="salary-value">$${(ind.salary.bottom/12).toFixed(0)}K/月</span></li>
-        <li><span class="salary-label">初級水平 (25th)</span><span class="salary-value">$${(ind.salary.lowerQuartile/12).toFixed(0)}K/月</span></li>
-        <li><span class="salary-label">中位數 (50th)</span><span class="salary-value">$${(ind.salary.median/12).toFixed(0)}K/月</span></li>
-        <li><span class="salary-label">資深水平 (75th)</span><span class="salary-value">$${(ind.salary.upperQuartile/12).toFixed(0)}K/月</span></li>
-        <li><span class="salary-label">頂尖收入 (90th)</span><span class="salary-value">$${(ind.salary.top/12).toFixed(0)}K/月</span></li>
+        <li><span class="salary-label">入行起薪</span><span class="salary-value">$${(ind.salary.bottom/12).toFixed(0)}K</span></li>
+        <li><span class="salary-label">初級水平</span><span class="salary-value">$${(ind.salary.lowerQuartile/12).toFixed(0)}K</span></li>
+        <li><span class="salary-label">中位數</span><span class="salary-value">$${(ind.salary.median/12).toFixed(0)}K</span></li>
+        <li><span class="salary-label">資深水平</span><span class="salary-value">$${(ind.salary.upperQuartile/12).toFixed(0)}K</span></li>
+        <li><span class="salary-label">頂尖收入</span><span class="salary-value">$${(ind.salary.top/12).toFixed(0)}K</span></li>
     `;
     document.getElementById('insightSalary').innerHTML = salaryHTML;
     
@@ -424,8 +422,7 @@ function createScatterPlot() {
                     callbacks: {
                         label: function(context) {
                             const d = context.raw;
-                            const annualSalary = d.y * 12;
-                            return `${d.label}\n月薪：HK$${d.y.toLocaleString(undefined, {maximumFractionDigits: 0})}\n年薪：HK$${annualSalary.toLocaleString(undefined, {maximumFractionDigits: 0})}\n壓力：${d.x}/10`;
+                            return `${d.label}\n月薪：HK$${d.y.toLocaleString(undefined, {maximumFractionDigits: 0})}\n壓力：${d.x}/10`;
                         }
                     }
                 },

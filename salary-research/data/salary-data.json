@@ -429,6 +429,133 @@
       "source": "JobsDB / LinkedIn"
     },
     {
+      "id": "doctor",
+      "name": "醫生 (Doctor) 🏥",
+      "category": "Healthcare",
+      "salary": {
+        "bottom": 600000,
+        "lowerQuartile": 900000,
+        "median": 1500000,
+        "upperQuartile": 2400000,
+        "top": 3600000
+      },
+      "workingHours": {
+        "min": 50,
+        "max": 80,
+        "median": 60,
+        "note": "輪班工作，包括夜班、on-call"
+      },
+      "stressLevel": {
+        "score": 9,
+        "max": 10,
+        "note": "人命關天 + 工作量大 + 高壓環境"
+      },
+      "prospects": {
+        "score": 10,
+        "max": 10,
+        "growth": "極高需求",
+        "note": "人口老化，醫生長期短缺"
+      },
+      "relatedDegrees": [
+        "Medicine (醫學)",
+        "MBBS / MD"
+      ],
+      "skills": [
+        "臨床診斷",
+        "病人溝通",
+        "醫療知識",
+        "應變能力",
+        "同理心"
+      ],
+      "notes": "高收入但高壓，需要 10+ 年培訓",
+      "source": "醫管局 / 衞生署"
+    },
+    {
+      "id": "dentist",
+      "name": "牙醫 (Dentist) 🦷",
+      "category": "Healthcare",
+      "salary": {
+        "bottom": 480000,
+        "lowerQuartile": 720000,
+        "median": 1200000,
+        "upperQuartile": 1800000,
+        "top": 3000000
+      },
+      "workingHours": {
+        "min": 40,
+        "max": 60,
+        "median": 48,
+        "note": "診所時間，較少夜班"
+      },
+      "stressLevel": {
+        "score": 7,
+        "max": 10,
+        "note": "病人疼痛管理 + 精細操作壓力"
+      },
+      "prospects": {
+        "score": 9,
+        "max": 10,
+        "growth": "高需求",
+        "note": "人口老化，牙科服務需求增加"
+      },
+      "relatedDegrees": [
+        "Dental Surgery (牙醫學)",
+        "BDS / DDS"
+      ],
+      "skills": [
+        "牙科手術",
+        "病人溝通",
+        "精細操作",
+        "X 光判讀",
+        "診所管理"
+      ],
+      "notes": "收入高，工時較醫生彈性，可自設診所",
+      "source": "牙醫管理委員會 / 衞生署"
+    },
+    {
+      "id": "lawyer",
+      "name": "律師 (Lawyer) ⚖️",
+      "category": "Legal",
+      "salary": {
+        "bottom": 360000,
+        "lowerQuartile": 600000,
+        "median": 1000000,
+        "upperQuartile": 1800000,
+        "top": 3000000
+      },
+      "workingHours": {
+        "min": 50,
+        "max": 80,
+        "median": 60,
+        "note": "案件為本，截稿前嚴重 OT"
+      },
+      "stressLevel": {
+        "score": 8,
+        "max": 10,
+        "note": "案件壓力 + 客戶要求 + 法庭壓力"
+      },
+      "prospects": {
+        "score": 8,
+        "max": 10,
+        "growth": "高需求",
+        "note": "商業活動增加，法律服務需求穩定"
+      },
+      "relatedDegrees": [
+        "Law (法律)",
+        "LLB / JD",
+        "PCLL (香港)"
+      ],
+      "skills": [
+        "法律研究",
+        "辯論技巧",
+        "書面表達",
+        "談判技巧",
+        "客戶溝通"
+      ],
+      "notes": "高收入但高壓，需要 PCLL + 實習",
+      "source": "香港律師會 / 大律師公會"
+    },
+    {
       "id": "software-dev",
       "name": "Software Developer (軟件開發)",
       "category": "Technology",
