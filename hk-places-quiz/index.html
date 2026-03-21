@@ -415,15 +415,15 @@
             <div class="start-screen" id="start-screen">
                 <div class="icon">🇭🇰</div>
                 <h2>準備好未？</h2>
-                <p>你將看到 3 張香港地標嘅相<br/>揀出正確嘅名！</p>
+                <p>你將看到 <span id="total-questions-display" style="font-weight:bold;color:#667eea;">5</span> 張香港地標嘅相<br/>揀出正確嘅名！</p>
 
                 <div class="game-rules">
                     <h3>📋 遊戲規則</h3>
                     <ul>
-                        <li>共 3 條題目，每題 15 秒作答時間</li>
+                        <li>共 <span id="total-questions-rules">5</span> 條題目，每題 15 秒作答時間</li>
                         <li>每題 4 個選項，揀一個你認為正確嘅</li>
                         <li>答完每題會有小知識</li>
-                        <li>答啱 2 題或以上就合格！</li>
+                        <li>答啱 <span id="passing-score-rules">3</span> 題或以上就合格！</li>
                     </ul>
                 </div>
 
@@ -480,24 +480,49 @@
 
     <script>
         let quizData = null;
+        let selectedQuestions = [];
         let currentQuestionIndex = 0;
         let score = 0;
         let correctCount = 0;
         let wrongCount = 0;
+        const MAX_QUESTIONS = 10; // Maximum questions per game session
 
         // Load quiz data
         async function loadQuizData() {
             try {
                 const response = await fetch('quiz-data.json?v=' + Date.now());
                 quizData = await response.json();
+                
+                // Update start screen with dynamic counts
+                const totalQuestions = Math.min(quizData.questions.length, MAX_QUESTIONS);
+                const passingScore = Math.ceil(totalQuestions * 0.6); // 60% to pass
+                
+                document.getElementById('total-questions-display').textContent = totalQuestions;
+                document.getElementById('total-questions-rules').textContent = totalQuestions;
+                document.getElementById('passing-score-rules').textContent = passingScore;
+                
             } catch (error) {
                 console.error('Error loading quiz data:', error);
                 alert('載入題目失敗，請刷新頁面重试');
             }
         }
 
+        // Shuffle array (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
         // Start game
         function startGame() {
+            // Randomly select questions (max MAX_QUESTIONS)
+            const shuffledQuestions = shuffleArray(quizData.questions);
+            selectedQuestions = shuffledQuestions.slice(0, Math.min(shuffledQuestions.length, MAX_QUESTIONS));
+            
             document.getElementById('start-screen').style.display = 'none';
             document.getElementById('quiz-screen').style.display = 'block';
             currentQuestionIndex = 0;
@@ -509,13 +534,13 @@
 
         // Show question
         function showQuestion() {
-            const question = quizData.questions[currentQuestionIndex];
+            const question = selectedQuestions[currentQuestionIndex];
             
             // Update progress
-            const progress = ((currentQuestionIndex) / quizData.questions.length) * 100;
+            const progress = ((currentQuestionIndex) / selectedQuestions.length) * 100;
             document.getElementById('progress-fill').style.width = progress + '%';
             document.getElementById('question-counter').textContent = 
-                `Question ${currentQuestionIndex + 1} of ${quizData.questions.length}`;
+                `Question ${currentQuestionIndex + 1} of ${selectedQuestions.length}`;
 
             // Set image
             document.getElementById('question-image').src = question.image;
@@ -541,7 +566,7 @@
 
         // Select answer
         function selectAnswer(selected, btnElement) {
-            const question = quizData.questions[currentQuestionIndex];
+            const question = selectedQuestions[currentQuestionIndex];
             const isCorrect = selected === question.correctAnswer;
 
             // Disable all buttons
@@ -613,7 +638,7 @@
         function nextQuestion() {
             currentQuestionIndex++;
             
-            if (currentQuestionIndex < quizData.questions.length) {
+            if (currentQuestionIndex < selectedQuestions.length) {
                 showQuestion();
             } else {
                 showResults();
@@ -625,18 +650,21 @@
             document.getElementById('quiz-screen').style.display = 'none';
             document.getElementById('result-screen').style.display = 'block';
 
-            const percentage = Math.round((correctCount / quizData.questions.length) * 100);
-            document.getElementById('result-score').textContent = `${correctCount}/${quizData.questions.length}`;
+            const totalQuestions = selectedQuestions.length;
+            const passingScore = Math.ceil(totalQuestions * 0.6); // 60% to pass
+            const percentage = Math.round((correctCount / totalQuestions) * 100);
+            
+            document.getElementById('result-score').textContent = `${correctCount}/${totalQuestions}`;
             document.getElementById('stat-correct').textContent = correctCount;
             document.getElementById('stat-wrong').textContent = wrongCount;
 
             const resultIcon = document.getElementById('result-icon');
             const resultMessage = document.getElementById('result-message');
 
-            if (correctCount === quizData.questions.length) {
+            if (correctCount === totalQuestions) {
                 resultIcon.textContent = '🏆';
                 resultMessage.textContent = '勁啊！全對！你係香港通！';
-            } else if (correctCount >= quizData.settings.passingScore) {
+            } else if (correctCount >= passingScore) {
                 resultIcon.textContent = '🎉';
                 resultMessage.textContent = `好嘢！合格啦！繼續努力！`;
             } else {
