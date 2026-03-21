@@ -248,6 +248,31 @@
             font-size: 1.1em;
             line-height: 1.6;
             opacity: 0.95;
+            margin-bottom: 15px;
+        }
+
+        .feedback-extra {
+            background: rgba(255,255,255,0.15);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .feedback-extra h4 {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .extra-item {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .extra-label {
+            font-weight: bold;
+            color: #ffeb3b;
         }
 
         .btn-next {
@@ -421,6 +446,10 @@
                 <div class="feedback-section" id="feedback-section">
                     <div class="feedback-title" id="feedback-title">✅ 正確！</div>
                     <div class="feedback-fact" id="feedback-fact"></div>
+                    <div class="feedback-extra" id="feedback-extra" style="display: none;">
+                        <h4>📚 更多資料</h4>
+                        <div id="feedback-extra-content"></div>
+                    </div>
                     <button onclick="nextQuestion()" class="btn-next">下一題 →</button>
                 </div>
             </div>
@@ -547,6 +576,36 @@
             }
 
             feedbackFact.textContent = question.fact;
+            
+            // Show extra info if available
+            const extraDiv = document.getElementById('feedback-extra');
+            const extraContent = document.getElementById('feedback-extra-content');
+            if (question.extra) {
+                let extraHTML = '';
+                if (question.extra.height) {
+                    extraHTML += `<div class="extra-item"><span class="extra-label">📏 高度/長度：</span>${question.extra.height}</div>`;
+                }
+                if (question.extra.location) {
+                    extraHTML += `<div class="extra-item"><span class="extra-label">📍 位置：</span>${question.extra.location}</div>`;
+                }
+                if (question.extra.features) {
+                    extraHTML += `<div class="extra-item"><span class="extra-label">⭐ 特點：</span>${question.extra.features.join(', ')}</div>`;
+                }
+                if (question.extra.view) {
+                    extraHTML += `<div class="extra-item"><span class="extra-label">👁️ 景觀：</span>${question.extra.view}</div>`;
+                }
+                if (question.extra.legend) {
+                    extraHTML += `<div class="extra-item"><span class="extra-label">📖 傳說：</span>${question.extra.legend}</div>`;
+                }
+                if (question.extra.history) {
+                    extraHTML += `<div class="extra-item"><span class="extra-label">📜 歷史：</span>${question.extra.history}</div>`;
+                }
+                extraContent.innerHTML = extraHTML;
+                extraDiv.style.display = 'block';
+            } else {
+                extraDiv.style.display = 'none';
+            }
+            
             feedbackSection.classList.add('show');
         }
 
