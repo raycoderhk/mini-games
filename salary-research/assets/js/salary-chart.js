@@ -349,7 +349,7 @@ function createScatterPlot() {
                         label: function(context) {
                             const d = context.raw;
                             const annualSalary = d.y * 12;
-                            return `${d.label}\n月薪：HK$${d.y.toLocaleString(undefined, {maximumFractionDigits: 0})}\n年薪：HK$${annualSalary.toLocaleString(undefined, {maximumFractionDigits: 0)})\n壓力：${d.x}/10`;
+                            return `${d.label}\n月薪：HK$${d.y.toLocaleString(undefined, {maximumFractionDigits: 0})}\n年薪：HK$${annualSalary.toLocaleString(undefined, {maximumFractionDigits: 0})}\n壓力：${d.x}/10`;
                         }
                     }
                 },
