@@ -59,6 +59,58 @@
             background: rgba(255,255,255,0.3);
         }
 
+        /* Date Filter Section */
+        .filter-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .filter-section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #555;
+        }
+
+        .filter-btn:hover {
+            border-color: #667eea;
+            background: #f0f0ff;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .filter-count {
+            margin-top: 15px;
+            padding: 10px 15px;
+            background: #e7f3ff;
+            border-radius: 8px;
+            color: #0066cc;
+            font-size: 0.95em;
+        }
+
         /* Game Container */
         .game-container {
             background: white;
@@ -417,6 +469,20 @@
                 <h2>準備好未？</h2>
                 <p>你將看到 <span id="total-questions-display" style="font-weight:bold;color:#667eea;">5</span> 張香港地標嘅相<br/>揀出正確嘅名！</p>
 
+                <!-- Date Filter -->
+                <div class="filter-section">
+                    <h3>📅 篩選題目（可選）</h3>
+                    <div class="filter-options">
+                        <button class="filter-btn active" onclick="setDateFilter('all', this)">全部題目</button>
+                        <button class="filter-btn" onclick="setDateFilter('3months', this)">最近 3 個月</button>
+                        <button class="filter-btn" onclick="setDateFilter('6months', this)">最近 6 個月</button>
+                        <button class="filter-btn" onclick="setDateFilter('newest', this)">最新 5 條</button>
+                    </div>
+                    <div class="filter-count" id="filter-count">
+                        📊 當前篩選：全部 8 條題目
+                    </div>
+                </div>
+
                 <div class="game-rules">
                     <h3>📋 遊戲規則</h3>
                     <ul>
@@ -481,11 +547,13 @@
     <script>
         let quizData = null;
         let selectedQuestions = [];
+        let filteredQuestions = [];
         let currentQuestionIndex = 0;
         let score = 0;
         let correctCount = 0;
         let wrongCount = 0;
         const MAX_QUESTIONS = 10; // Maximum questions per game session
+        let currentDateFilter = 'all'; // Current date filter
 
         // Load quiz data
         async function loadQuizData() {
@@ -493,13 +561,18 @@
                 const response = await fetch('quiz-data.json?v=' + Date.now());
                 quizData = await response.json();
                 
+                // Initialize filtered questions to all
+                filteredQuestions = [...quizData.questions];
+                
                 // Update start screen with dynamic counts
-                const totalQuestions = Math.min(quizData.questions.length, MAX_QUESTIONS);
+                const totalQuestions = Math.min(filteredQuestions.length, MAX_QUESTIONS);
                 const passingScore = Math.ceil(totalQuestions * 0.6); // 60% to pass
                 
                 document.getElementById('total-questions-display').textContent = totalQuestions;
                 document.getElementById('total-questions-rules').textContent = totalQuestions;
                 document.getElementById('passing-score-rules').textContent = passingScore;
+                document.getElementById('filter-count').textContent = 
+                    `📊 當前篩選：全部題目 ${quizData.questions.length} 條題目`;
                 
             } catch (error) {
                 console.error('Error loading quiz data:', error);
@@ -517,10 +590,65 @@
             return shuffled;
         }
 
+        // Date filter function
+        function setDateFilter(filter, btnElement) {
+            currentDateFilter = filter;
+            
+            // Update button styles
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            btnElement.classList.add('active');
+            
+            // Filter questions by date
+            const today = new Date();
+            let filtered = [...quizData.questions];
+            
+            if (filter === '3months') {
+                const threeMonthsAgo = new Date(today.getFullYear(), today.getMonth() - 3, today.getDate());
+                filtered = quizData.questions.filter(q => {
+                    const qDate = new Date(q.dateAdded);
+                    return qDate >= threeMonthsAgo;
+                });
+            } else if (filter === '6months') {
+                const sixMonthsAgo = new Date(today.getFullYear(), today.getMonth() - 6, today.getDate());
+                filtered = quizData.questions.filter(q => {
+                    const qDate = new Date(q.dateAdded);
+                    return qDate >= sixMonthsAgo;
+                });
+            } else if (filter === 'newest') {
+                // Sort by date descending and take newest 5
+                filtered = [...quizData.questions].sort((a, b) => {
+                    return new Date(b.dateAdded) - new Date(a.dateAdded);
+                }).slice(0, 5);
+            }
+            // 'all' shows all questions
+            
+            filteredQuestions = filtered;
+            
+            // Update filter count display
+            const filterLabels = {
+                'all': '全部題目',
+                '3months': '最近 3 個月',
+                '6months': '最近 6 個月',
+                'newest': '最新 5 條'
+            };
+            document.getElementById('filter-count').textContent = 
+                `📊 當前篩選：${filterLabels[filter]} ${filtered.length} 條題目`;
+            
+            // Update start screen with filtered counts
+            const totalQuestions = Math.min(filtered.length, MAX_QUESTIONS);
+            const passingScore = Math.ceil(totalQuestions * 0.6);
+            
+            document.getElementById('total-questions-display').textContent = totalQuestions;
+            document.getElementById('total-questions-rules').textContent = totalQuestions;
+            document.getElementById('passing-score-rules').textContent = passingScore;
+        }
+
         // Start game
         function startGame() {
-            // Randomly select questions (max MAX_QUESTIONS)
-            const shuffledQuestions = shuffleArray(quizData.questions);
+            // Randomly select questions from filtered list (max MAX_QUESTIONS)
+            const shuffledQuestions = shuffleArray(filteredQuestions);
             selectedQuestions = shuffledQuestions.slice(0, Math.min(shuffledQuestions.length, MAX_QUESTIONS));
             
             document.getElementById('start-screen').style.display = 'none';
@@ -677,6 +805,14 @@
         function retryGame() {
             document.getElementById('result-screen').style.display = 'none';
             document.getElementById('start-screen').style.display = 'block';
+            
+            // Update counts based on current filter
+            const totalQuestions = Math.min(filteredQuestions.length, MAX_QUESTIONS);
+            const passingScore = Math.ceil(totalQuestions * 0.6);
+            
+            document.getElementById('total-questions-display').textContent = totalQuestions;
+            document.getElementById('total-questions-rules').textContent = totalQuestions;
+            document.getElementById('passing-score-rules').textContent = passingScore;
         }
 
         // Go home
