@@ -359,11 +359,11 @@
                 <span>🔀 排序：</span>
                 <label>
                     <input type="radio" name="sort" value="date" checked onchange="sortGallery()"> 
-                    📅 日期（最新）
+                    📅 日期（最新排最前）
                 </label>
                 <label>
                     <input type="radio" name="sort" value="votes" onchange="sortGallery()"> 
-                    🔥 票數（最多）
+                    🔥 票數（最多排最前）
                 </label>
                 <label>
                     <input type="radio" name="sort" value="name" onchange="sortGallery()"> 
@@ -402,6 +402,9 @@
                         q.userVoted = true;
                     }
                 });
+                
+                // Sort by date descending (newest first) - default sort
+                galleryData.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
                 
                 // Populate category filters
                 populateCategoryFilters();
@@ -462,6 +465,15 @@
             renderGallery();
         }
 
+        // Format date to Hong Kong format (DD/MM/YYYY)
+        function formatHKDate(dateString) {
+            const date = new Date(dateString);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+
         // Render gallery
         function renderGallery() {
             const grid = document.getElementById('gallery-grid');
@@ -481,7 +493,7 @@
                         <div class="gallery-name">${q.correctAnswer}</div>
                         <div class="gallery-category">${q.category}</div>
                         <div class="gallery-location">📍 ${q.extra?.location || '位置不詳'}</div>
-                        <div class="gallery-date">📅 加入日期：${q.dateAdded}</div>
+                        <div class="gallery-date">📅 加入日期：${formatHKDate(q.dateAdded)}</div>
                         <div class="vote-section">
                             <button class="vote-btn ${q.userVoted ? 'voted' : ''}" 
                                     onclick="vote(${q.id}, this)" 
