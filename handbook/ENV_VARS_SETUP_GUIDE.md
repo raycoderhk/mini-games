@@ -22,7 +22,7 @@
     "discord": {
       "accounts": {
         "default": {
-          "token": "MTQ3NjUwMTI4Nzc0MTk1MjEwMA.xxxx"  // ❌ 危險！
+          "token": "your-discord-bot-token-here"  // ❌ 危險！
         }
       }
     }
