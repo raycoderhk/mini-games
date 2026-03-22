@@ -16,8 +16,8 @@ NEW_VIDEOS_FILE = MEMORY_DIR / "youtube-new-videos.json"
 SENT_VIDEOS_FILE = MEMORY_DIR / "youtube-sent.json"
 
 # Discord Configuration
-DISCORD_BOT_TOKEN = "***REMOVED***.jsSkxiXWYrcCUAkrP7PiBUHVeYDaCAMvmo_h1c"
-DISCORD_CHANNEL_ID = "1484466586445287434"  # #youtube-alert
+DISCORD_BOT_TOKEN = "${DISCORD_BOT_TOKEN}"  # Set via environment variable
+DISCORD_CHANNEL_ID = "${DISCORD_CHANNEL_ID}"  # Set via environment variable
 
 def load_json(path, default=None):
     if default is None:
