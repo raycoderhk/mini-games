@@ -239,7 +239,135 @@
             color: #37b24d;
         }
 
-        /* Stats Section */
+        .action-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .details-btn {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .details-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Details Modal */
+        .details-modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .details-modal.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .details-modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        .details-modal-header {
+            position: sticky;
+            top: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 30px;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .details-modal-header h2 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+
+        .details-modal-close {
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: none;
+            border: none;
+            color: white;
+        }
+
+        .details-modal-close:hover {
+            color: #f0f0f0;
+            transform: scale(1.2);
+        }
+
+        .details-modal-body {
+            padding: 30px;
+        }
+
+        .details-section {
+            margin-bottom: 25px;
+        }
+
+        .details-section h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 8px;
+        }
+
+        .details-section p {
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .details-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .details-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .details-list li:last-child {
+            border-bottom: none;
+        }
+
+        .details-tag {
+            display: inline-block;
+            background: #f0f0ff;
+            color: #667eea;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin: 3px;
+        }
         .stats-section {
             background: white;
             border-radius: 20px;
@@ -401,6 +529,19 @@
         <img class="image-modal-content" id="image-modal-content">
     </div>
 
+    <!-- Details Modal -->
+    <div class="details-modal" id="details-modal" onclick="closeDetailsModal(event)">
+        <div class="details-modal-content">
+            <div class="details-modal-header">
+                <h2 id="details-title">地標詳情</h2>
+                <button class="details-modal-close" onclick="closeDetailsModal()">&times;</button>
+            </div>
+            <div class="details-modal-body" id="details-body">
+                <!-- Details content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
     <script>
         let galleryData = [];
         let currentFilter = 'all';
@@ -555,13 +696,14 @@
                         <div class="gallery-category">${q.category}</div>
                         <div class="gallery-location">📍 ${q.extra?.location || '位置不詳'}</div>
                         <div class="gallery-date">📅 加入日期：${formatDate(q.dateAdded)}</div>
-                        <div class="vote-section">
+                        <div class="action-section">
                             <button class="vote-btn ${q.userVoted ? 'voted' : ''}" 
                                     onclick="vote(${q.id}, this)" 
                                     ${q.userVoted ? 'disabled' : ''}>
                                 ${q.userVoted ? '✓ 已投票' : '❤️ 投票'}
                             </button>
                             <span class="vote-count ${q.userVoted ? 'voted' : ''}" id="vote-count-${q.id}">${q.votes} 票</span>
+                            <button class="details-btn" onclick="showDetails(${q.id})">📋 Details</button>
                         </div>
                     </div>
                 `;
@@ -637,8 +779,104 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeImageModal();
+                closeDetailsModal();
             }
         });
+
+        // Details modal functions
+        function showDetails(questionId) {
+            const question = galleryData.find(q => q.id === questionId);
+            if (!question) return;
+
+            const modal = document.getElementById('details-modal');
+            const title = document.getElementById('details-title');
+            const body = document.getElementById('details-body');
+
+            title.textContent = question.correctAnswer;
+
+            // Build details HTML
+            let html = `
+                <div class="details-section">
+                    <h3>📍 位置</h3>
+                    <p>${question.extra?.location || '位置不詳'}</p>
+                </div>
+
+                <div class="details-section">
+                    <h3>📖 簡介</h3>
+                    <p>${question.fact}</p>
+                </div>
+
+                <div class="details-section">
+                    <h3>💡 提示</h3>
+                    <p>${question.hint}</p>
+                </div>
+            `;
+
+            // Add extra info if available
+            if (question.extra) {
+                html += `<div class="details-section"><h3>📊 詳細資料</h3><ul class="details-list">`;
+                
+                if (question.extra.height) {
+                    html += `<li><strong>高度/規模：</strong>${question.extra.height}</li>`;
+                }
+                if (question.extra.features) {
+                    html += `<li><strong>特色：</strong><br>`;
+                    question.extra.features.forEach(f => {
+                        html += `<span class="details-tag">${f}</span>`;
+                    });
+                    html += `</li>`;
+                }
+                if (question.extra.history) {
+                    html += `<li><strong>歷史：</strong>${question.extra.history}</li>`;
+                }
+                if (question.extra.developer) {
+                    html += `<li><strong>發展商：</strong>${question.extra.developer}</li>`;
+                }
+                if (question.extra.architect) {
+                    html += `<li><strong>建築師：</strong>${question.extra.architect}</li>`;
+                }
+                if (question.extra.designer) {
+                    html += `<li><strong>設計師：</strong>${question.extra.designer}</li>`;
+                }
+                if (question.extra.organization) {
+                    html += `<li><strong>機構：</strong>${question.extra.organization}</li>`;
+                }
+                if (question.extra.view) {
+                    html += `<li><strong>景觀：</strong>${question.extra.view}</li>`;
+                }
+                if (question.extra.legend) {
+                    html += `<li><strong>傳說：</strong>${question.extra.legend}</li>`;
+                }
+                if (question.extra.beaches) {
+                    html += `<li><strong>海灘：</strong>${question.extra.beaches}</li>`;
+                }
+                
+                html += `</ul></div>`;
+            }
+
+            // Add category and date
+            html += `
+                <div class="details-section">
+                    <h3>🏷️ 分類</h3>
+                    <span class="details-tag">${question.category}</span>
+                </div>
+
+                <div class="details-section">
+                    <h3>📅 加入日期</h3>
+                    <p>${formatDate(question.dateAdded)}</p>
+                </div>
+            `;
+
+            body.innerHTML = html;
+            modal.classList.add('show');
+        }
+
+        function closeDetailsModal(event) {
+            if (!event || event.target.id === 'details-modal') {
+                const modal = document.getElementById('details-modal');
+                modal.classList.remove('show');
+            }
+        }
 
         // Initialize
         loadGalleryData();
