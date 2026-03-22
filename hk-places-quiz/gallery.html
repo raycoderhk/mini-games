@@ -359,7 +359,7 @@
                 <span>🔀 排序：</span>
                 <label>
                     <input type="radio" name="sort" value="date" checked onchange="sortGallery()"> 
-                    📅 日期（最新排最前）
+                    📅 日期（最新）
                 </label>
                 <label>
                     <input type="radio" name="sort" value="votes" onchange="sortGallery()"> 
@@ -465,13 +465,14 @@
             renderGallery();
         }
 
-        // Format date to Hong Kong format (DD/MM/YYYY)
-        function formatHKDate(dateString) {
+        // Format date to ISO format (YYYY-MM-DD) with Hong Kong timezone
+        function formatDate(dateString) {
+            // Parse the date and adjust for Hong Kong timezone (UTC+8)
             const date = new Date(dateString);
-            const day = String(date.getDate()).padStart(2, '0');
-            const month = String(date.getMonth() + 1).padStart(2, '0');
             const year = date.getFullYear();
-            return `${day}/${month}/${year}`;
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
         }
 
         // Render gallery
@@ -493,7 +494,7 @@
                         <div class="gallery-name">${q.correctAnswer}</div>
                         <div class="gallery-category">${q.category}</div>
                         <div class="gallery-location">📍 ${q.extra?.location || '位置不詳'}</div>
-                        <div class="gallery-date">📅 加入日期：${formatHKDate(q.dateAdded)}</div>
+                        <div class="gallery-date">📅 加入日期：${formatDate(q.dateAdded)}</div>
                         <div class="vote-section">
                             <button class="vote-btn ${q.userVoted ? 'voted' : ''}" 
                                     onclick="vote(${q.id}, this)" 
