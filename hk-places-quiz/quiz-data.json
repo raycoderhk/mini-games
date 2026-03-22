@@ -495,10 +495,33 @@
       "dateAdded": "2026-03-21",
       "category": "交通設施",
       "votes": 0
+    },
+    {
+      "id": 19,
+      "image": "assets/clearwater-bay-golf.jpg",
+      "correctAnswer": "清水灣鄉村俱樂部高爾夫球場",
+      "options": [
+        "深水灣高爾夫球場",
+        "清水灣鄉村俱樂部高爾夫球場",
+        "石澳高爾夫球場",
+        "屯門高爾夫球場"
+      ],
+      "hint": "西貢清水灣，國際級高爾夫球場，有 27 洞",
+      "fact": "清水灣鄉村俱樂部高爾夫球場位於西貢清水灣，1987 年落成，係國際級高爾夫球場。球場有 27 洞，由著名設計師 Nelson, Wright, Haworth 設計。球場依山傍海，景色優美，係亞洲區最具挑戰性嘅高爾夫球場之一。清水灣鄉村俱樂部除咗高爾夫球場，仲有網球場、游泳池、餐廳等設施，係會員制私人會所。",
+      "extra": {
+        "height": "27 洞國際級球場",
+        "location": "西貢清水灣大埔仔",
+        "features": ["1987 年落成", "27 洞設計", "依山傍海", "亞洲區最具挑戰性", "會員制私人會所"],
+        "designer": "Nelson, Wright, Haworth（著名高爾夫球場設計師）",
+        "organization": "清水灣鄉村俱樂部 (Clearwater Bay Golf & Country Club)"
+      },
+      "dateAdded": "2026-03-21",
+      "category": "運動娛樂",
+      "votes": 0
     }
   ],
   "settings": {
-    "passingScore": 11,
+    "passingScore": 12,
     "timePerQuestion": 15,
     "showFactAfterAnswer": true,
     "showExtraInfo": true
