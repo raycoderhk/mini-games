@@ -237,6 +237,10 @@ async function getOrCreateUser(email, name, googleId, image) {
   - Department: General Surgery (Outpatient)
   - Time: 12:00 PM
 
+**September 22 (Tue):** 🏥 Grandma WONG T* M* medical appointment @ Princess Margaret Hospital
+  - Department: Urology (泌尿外科)
+  - Time: 11:30 AM
+
 ## 🎓 Son's DSE Exams (2026)
 **Status:** Critical exam period  
 **Oral Exam:** Next week (mid-March)  

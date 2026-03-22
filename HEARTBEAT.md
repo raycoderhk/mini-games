@@ -178,6 +178,12 @@ If nothing needs attention, reply HEARTBEAT_OK.
   - 🩺 外科 / General Surgery
   - 📋 門診 (Outpatient)
 
+**9 月 22 日 (星期二)** 🏥
+• 11:30 [Grandma] WONG T* M* 預約就診 @ 瑪嘉烈醫院
+  - 🏥 瑪嘉烈醫院 (Princess Margaret Hospital)
+  - 🩺 泌尿外科 / Urology
+  - 📋 門診 (Outpatient)
+
 **已完成 (Past Events):**
 • Hugging Face Token 申請
 • 營養師 App 配置 + 測試成功
