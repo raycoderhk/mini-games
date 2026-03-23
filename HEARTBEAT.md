@@ -514,6 +514,35 @@ If nothing needs attention, reply HEARTBEAT_OK.
 **位置:** `skills/youtube-monitor/check_videos.py`  
 **通知:** Discord #youtube-alert (1484466586445287434)
 
+---
+
+### 🥚 爛 Gag Discord Monitor (每次 Heartbeat 檢查)
+**目標:** 自動監察 #gag channel 新訊息，解析並提交爛 gag 到 GitHub  
+**頻率:** 每次 Heartbeat (約 30 分鐘)  
+**位置:** `scripts/add_gag_from_discord.py`  
+**Channel:** #gag (1485598655430918165)
+
+**檢查步驟:**
+1. 讀取 #gag channel 最近 10 條訊息
+2. 過濾未處理過嘅訊息
+3. 解析 gag 格式（題目 + 答案 + 出品人）
+4. 自動提交到 GitHub (`mini-games/gag/gags.json`)
+5. 記錄已處理訊息 ID（避免重複）
+
+**狀態追蹤:**
+```json
+// memory/gag-discord-state.json
+{
+  "lastCheck": "2026-03-23T12:00:00Z",
+  "processedMessages": ["msg_id_1", "msg_id_2", ...]
+}
+```
+
+**通知:** 成功提交後發送 Discord 通知到 #gag channel
+
+**環境變量:**
+- `GITHUB_TOKEN`: GitHub Personal Access Token (repo scope)
+
 **監控頻道:**
 | 頻道 | Channel ID | 內容類型 |
 |------|-----------|---------|
