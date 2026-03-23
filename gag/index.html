@@ -40,18 +40,24 @@
             opacity: 0.9;
         }
 
-        .add-gag-section {
+        .admin-link {
             background: white;
             border-radius: 15px;
-            padding: 25px;
+            padding: 20px;
             margin-bottom: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
         }
 
-        .add-gag-section h2 {
+        .admin-link a {
             color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .admin-link a:hover {
+            text-decoration: underline;
         }
 
         .form-group {
@@ -299,23 +305,9 @@
             <strong id="total-authors">0</strong> 位出品人
         </div>
 
-        <div class="add-gag-section">
-            <h2>➕ 加入新爛 gag</h2>
-            <form id="gag-form">
-                <div class="form-group">
-                    <label for="gag-question">題目：</label>
-                    <textarea id="gag-question" placeholder="例如：點解雞唔會打機？" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="gag-answer">答案：</label>
-                    <input type="text" id="gag-answer" placeholder="例如：因為佢驚食雞..." required>
-                </div>
-                <div class="form-group">
-                    <label for="gag-author">出品人（Tag）：</label>
-                    <input type="text" id="gag-author" placeholder="例如：@Raymond" required>
-                </div>
-                <button type="submit" class="btn">🎯 提交爛 gag</button>
-            </form>
+        <div class="admin-link">
+            <p style="margin-bottom: 10px; color: #666;">想提交新爛 gag？</p>
+            <a href="admin.html">🔐 前往 Admin Panel 提交</a>
         </div>
 
         <div class="filter-section">
@@ -453,38 +445,6 @@
             div.textContent = text;
             return div.innerHTML;
         }
-
-        // Form submission
-        document.getElementById('gag-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const question = document.getElementById('gag-question').value.trim();
-            const answer = document.getElementById('gag-answer').value.trim();
-            const author = document.getElementById('gag-author').value.trim();
-
-            if (!question || !answer || !author) {
-                alert('請填寫題目、答案同出品人！');
-                return;
-            }
-
-            const newGag = {
-                id: Date.now(),
-                question,
-                answer,
-                author,
-                date: new Date().toISOString()
-            };
-
-            gags.unshift(newGag);
-            saveGags();
-            renderGags();
-            updateFilterTags();
-            updateStats();
-
-            document.getElementById('gag-form').reset();
-
-            alert('✅ 爛 gag 已成功加入！');
-        });
 
         loadGags();
     </script>

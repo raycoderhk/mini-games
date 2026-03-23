@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔐 爛 Gag 收集所 - Admin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .login-section, .admin-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .login-section h2, .admin-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .btn-logout {
+            background: #666;
+            margin-top: 20px;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c00;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #c00;
+            display: none;
+        }
+
+        .success-message {
+            background: #efe;
+            color: #0a0;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #0a0;
+            display: none;
+        }
+
+        .gag-list {
+            margin-top: 30px;
+        }
+
+        .gag-list h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .gag-item {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .gag-item strong {
+            color: #667eea;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔐 爛 Gag Admin Panel</h1>
+            <p style="color: rgba(255,255,255,0.9);">管理員專屬頁面</p>
+        </header>
+
+        <!-- Login Section -->
+        <div class="login-section" id="login-section">
+            <h2>🔑 管理員登入</h2>
+            <div class="error-message" id="login-error"></div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">用戶名：</label>
+                    <input type="text" id="username" placeholder="輸入用戶名" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">密碼：</label>
+                    <input type="password" id="password" placeholder="輸入密碼" required>
+                </div>
+                <button type="submit" class="btn">🔓 登入</button>
+            </form>
+        </div>
+
+        <!-- Admin Section (Hidden by default) -->
+        <div class="admin-section hidden" id="admin-section">
+            <h2>➕ 提交新爛 gag</h2>
+            <div class="success-message" id="submit-success"></div>
+            <form id="gag-form">
+                <div class="form-group">
+                    <label for="gag-question">題目：</label>
+                    <textarea id="gag-question" placeholder="例如：點解雞唔會打機？" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="gag-answer">答案：</label>
+                    <input type="text" id="gag-answer" placeholder="例如：因為佢驚食雞..." required>
+                </div>
+                <div class="form-group">
+                    <label for="gag-author">出品人（Tag）：</label>
+                    <input type="text" id="gag-author" placeholder="例如：@Raymond" required>
+                </div>
+                <button type="submit" class="btn">🎯 提交爛 gag</button>
+            </form>
+
+            <div class="gag-list">
+                <h3>📋 現有爛 gag 清單</h3>
+                <div id="gag-list-content">
+                    <p style="color: #666;">載入中...</p>
+                </div>
+            </div>
+
+            <button class="btn btn-logout" onclick="logout()">🚪 登出</button>
+        </div>
+    </div>
+
+    <script>
+        // Simple auth (in production, use proper backend auth)
+        const VALID_USERNAME = 'mw';
+        const VALID_PASSWORD = '315107';
+
+        let gags = [];
+
+        // Check if already logged in
+        function checkAuth() {
+            const isLoggedIn = sessionStorage.getItem('gag-admin-logged-in');
+            if (isLoggedIn === 'true') {
+                showAdminPanel();
+                loadGags();
+            }
+        }
+
+        // Login
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorDiv = document.getElementById('login-error');
+
+            if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+                sessionStorage.setItem('gag-admin-logged-in', 'true');
+                errorDiv.style.display = 'none';
+                showAdminPanel();
+                loadGags();
+            } else {
+                errorDiv.textContent = '❌ 用戶名或密碼錯誤！';
+                errorDiv.style.display = 'block';
+            }
+        });
+
+        // Show admin panel
+        function showAdminPanel() {
+            document.getElementById('login-section').classList.add('hidden');
+            document.getElementById('admin-section').classList.remove('hidden');
+        }
+
+        // Logout
+        function logout() {
+            sessionStorage.removeItem('gag-admin-logged-in');
+            location.reload();
+        }
+
+        // Load gags
+        async function loadGags() {
+            try {
+                const response = await fetch('gags.json');
+                if (response.ok) {
+                    gags = await response.json();
+                    renderGagList();
+                } else {
+                    document.getElementById('gag-list-content').innerHTML = '<p style="color: #666;">暫無數據</p>';
+                }
+            } catch (error) {
+                document.getElementById('gag-list-content').innerHTML = '<p style="color: #666;">載入失敗</p>';
+            }
+        }
+
+        // Render gag list
+        function renderGagList() {
+            const content = document.getElementById('gag-list-content');
+            
+            if (gags.length === 0) {
+                content.innerHTML = '<p style="color: #666;">暫無爛 gag</p>';
+                return;
+            }
+
+            content.innerHTML = gags.map(gag => `
+                <div class="gag-item">
+                    <strong>題目：</strong> ${escapeHtml(gag.question)}<br>
+                    <strong>答案：</strong> ${escapeHtml(gag.answer)}<br>
+                    <strong>出品人：</strong> ${escapeHtml(gag.author)}<br>
+                    <strong>日期：</strong> ${formatDate(gag.date)}
+                </div>
+            `).join('');
+        }
+
+        // Submit new gag
+        document.getElementById('gag-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const question = document.getElementById('gag-question').value.trim();
+            const answer = document.getElementById('gag-answer').value.trim();
+            const author = document.getElementById('gag-author').value.trim();
+            const successDiv = document.getElementById('submit-success');
+
+            if (!question || !answer || !author) {
+                alert('請填寫所有欄位！');
+                return;
+            }
+
+            const newGag = {
+                id: Date.now(),
+                question,
+                answer,
+                author,
+                date: new Date().toISOString()
+            };
+
+            // Add to beginning of array
+            gags.unshift(newGag);
+
+            // Save to localStorage (for demo)
+            localStorage.setItem('lam-gag-gags', JSON.stringify(gags));
+
+            // In production, you would send to backend API
+            // For now, we'll just show success message
+            successDiv.textContent = '✅ 爛 gag 已成功提交！(請手動更新 gags.json 或聯絡管理員)';
+            successDiv.style.display = 'block';
+
+            // Reset form
+            document.getElementById('gag-form').reset();
+
+            // Refresh list
+            renderGagList();
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 5000);
+        });
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            return date.toLocaleDateString('zh-HK', options);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Check auth on page load
+        checkAuth();
+    </script>
+</body>
+</html>
