@@ -168,6 +168,11 @@ If nothing needs attention, reply HEARTBEAT_OK.
   - 💰 HK$50 電子現金券
   - ⚠️ 4 月 30 日到期
 
+**4 月 17 日 (星期五)**
+• 17:00-21:00 [Raymond] Bowling @ Pacific Club TST with Heidi
+  - 📍 Pacific Club, TST
+  - 👥 Raymond + Heidi
+
 **4 月 8 日 (星期三)**
 • [Raymond] 匹克球 @ 愉景新城會所 (TBD)
   - 👥 預報：Rex🐻 / 珠珠 / 鄧生 / 陳太 / ? / ?
