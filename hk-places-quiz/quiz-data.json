@@ -404,7 +404,7 @@
     {
       "id": 15,
       "image": "assets/ting-kau-bridge.jpg",
-      "audio": "assets/audio/ting-kau-bridge.mov",
+      "audio": "assets/audio/ting-kau-bridge.mp3",
       "correctAnswer": "汀九橋",
       "options": [
         "汀九橋",
@@ -623,7 +623,13 @@
       "extra": {
         "height": "紅磚建築校舍",
         "location": "九龍九龍塘牛津道",
-        "features": ["1925 年創校", "天主教學校", "紅磚建築", "中小學一條龍", "傳統名校"],
+        "features": [
+          "1925 年創校",
+          "天主教學校",
+          "紅磚建築",
+          "中小學一條龍",
+          "傳統名校"
+        ],
         "history": "1925 年美國瑪利諾修會創辦→最初係女校→發展成中小學一條龍",
         "organization": "瑪利諾修會 (Maryknoll Sisters)"
       },
@@ -646,7 +652,13 @@
       "extra": {
         "height": "傳統校舍建築",
         "location": "九龍旺角亞皆老街",
-        "features": ["1869 年創校", "傳統名校", "英語教學", "全人發展", "拔萃男書院附屬小學"],
+        "features": [
+          "1869 年創校",
+          "傳統名校",
+          "英語教學",
+          "全人發展",
+          "拔萃男書院附屬小學"
+        ],
         "history": "1869 年創校→香港歷史最悠久學校之一→培養眾多社會精英",
         "organization": "拔萃男書院 (Diocesan Boys' School)"
       },
