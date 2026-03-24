@@ -908,7 +908,7 @@
                             </button>
                             <span class="vote-count ${q.userVoted ? 'voted' : ''}" id="vote-count-${q.id}">${q.votes} 票</span>
                             <button class="details-btn" onclick="showDetails(${q.id})">📋 詳情</button>
-                            ${q.audio ? `<button class="audio-btn" onclick="playAudio(${q.id})">🎤 語音導航</button>` : ''}
+                            <button class="audio-btn" onclick="playAudio(${q.id})">🎤 語音導航</button>
                         </div>
                     </div>
                 `;
@@ -997,7 +997,13 @@
         // Audio player functions
         function playAudio(questionId) {
             const question = galleryData.find(q => q.id === questionId);
-            if (!question || !question.audio) return;
+            if (!question) return;
+            
+            // Check if audio file exists
+            if (!question.audio) {
+                alert('🚫 呢個地標暫時未有語音導航\n\n師兄可以上傳語音檔案到：\nassets/audio/ 文件夾\n\n然後更新 quiz-data.json 加 audio 欄位');
+                return;
+            }
 
             // Stop previous audio if playing
             if (currentAudio) {
