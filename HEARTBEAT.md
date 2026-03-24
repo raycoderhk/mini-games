@@ -10,9 +10,15 @@ If nothing needs attention, reply HEARTBEAT_OK.
 **恢復**: 08:00 HKT 恢復正常通知
 
 ## 即將到來的事件
-**今日 (3 月 12 日 星期四)** ⭐
-• 19:00 HKT - [Family] 晚餐 @ TST
-  - 朋友：Poke / Vincent / Sam
+**今日 (3 月 22 日 星期日)** ⭐
+• [Son] 醫健通 - 兒子滿 16 歲註冊 (截止)
+  - 📱 下載：App Store / Google Play 搜尋「醫健通」
+  - 🔢 醫健通號碼：391967263789
+  - ⚠️ 邀請有效期：30 日
+• 12:15 [Family] 家庭午餐 @ 荃灣紅茶
+  - 🎬 睇完戲之後 (right after movie)
+  - 📍 荃灣紅茶
+• 17:15 [Raymond] Gym
 
 **3 月 13 日 (星期五)**
 • 11:00-13:00 HKT - [Raymond] 匹克球 @ Pickleland
@@ -118,6 +124,7 @@ If nothing needs attention, reply HEARTBEAT_OK.
 
 **3 月 24 日 (星期二)** 💼
 • [Wife] 出差 第 2 日
+• 17:15 [Raymond] Gym
 
 **3 月 25 日 (星期三)** 💼
 • [Wife] 出差 第 3 日
@@ -125,6 +132,10 @@ If nothing needs attention, reply HEARTBEAT_OK.
 • 10:00-13:00 [Raymond] 匹克球 @ 愉景新城會所
   - 💰 會所費 $28 + 場租 $9/小時
   - 👥 8 人滿：Rex🐻 / 珠珠 / 鄧生 (10-11:30) / 陳太 / 黃生 / So / 君 / 文
+• 20:00-22:00 [Raymond] Pickleball with Ivan @ 深井碧堤會所羽毛球場 (Tentative)
+  - 📍 深井碧堤會所羽毛球場 (Sham Tseng Bayside Club)
+  - 🚌 交通：234A 巴士 (一個站)
+  - ⏳ 狀態：Ivan 聽朝 book 場，confirm 後通知
 
 **3 月 26 日 (星期四)** 📚💼
 • [Wife] 出差 第 4 日
@@ -135,6 +146,10 @@ If nothing needs attention, reply HEARTBEAT_OK.
 • [Wife] 出差 最後日 - ✈️ 返港 15:00
 • 08:15 [Daughter UT] 英文
 • 09:45 [Daughter UT] 地理
+• 13:00-16:00 [Raymond] 南昌維港滙會所2.75+ Social Play (3 hours)
+  - 📍 Grand Victoria II & III
+  - 🔗 RSVP: https://reclub.co/m/FDCEAX
+  - 📝 個 game 我會一點鐘就開始，然後有一個 player 打到三點左右會走，你介唔介意一點鐘嚟可以打一點至四點或者一點至三點都得
 
 **3 月 30 日 (星期一)** 📚
 • 08:15 [Daughter UT] 數學
@@ -156,6 +171,11 @@ If nothing needs attention, reply HEARTBEAT_OK.
 • [Raymond] 匹克球 @ 愉景新城會所 (TBD 10-12 或 10-13)
   - 👥 預報：Rex🐻 / 珠珠 / 陳太 / So / 黃生 / ?
 • 16:30-18:30 [Daughter] 武術補堂 🥋
+
+**4 月 4 日 (星期六)**
+• 12:00-13:00 [Raymond] 1hr 2.5+ 荃灣愉景新城BayPickle
+  - 📍 愉景新城
+  - 🔗 RSVP: https://reclub.co/m/GL5C7S
 
 **4 月 12 日 (星期日)**
 • [Raymond] AASFP X 中國香港新興運動協會高級匹克球教練 (體適能訓練) 證書課程
@@ -223,7 +243,7 @@ If nothing needs attention, reply HEARTBEAT_OK.
 2. 3 月 14 日同鄉會晚宴 - 確認 (Tentative 18:30 @North Point)
 3. Lunch with Chris - Reschedule to next week
 
-**🔴 今日待辦 (3 月 21 日)**
+**🔴 今日待辦 (3 月 22 日)**
 4. ⚠️ **預約深圳灣文化廣場** - 微信小程式「深圳灣文化廣場 DBAY」
    - 日期：3 月 17 日 (星期二) 11:00 時段
    - 人數：2 人 (夫婦)

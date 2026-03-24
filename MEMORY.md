@@ -255,6 +255,23 @@ async function getOrCreateUser(email, name, googleId, image) {
   - Department: Audiology / 聽力學
   - Time: 11:00 AM
 
+## 🏥 Family Health Records
+
+### Grandma WONG T* M* (嫲嫲)
+**March 22, 2026 (今日複診):**
+- **體重:** 38.4 kg (84.658 lbs)
+- **備註:** 今日複診記錄
+
+**Upcoming Appointments:**
+1. **May 15, 2026 (Fri) 12:00** - Yan Chai Hospital (General Surgery)
+2. **September 22, 2026 (Tue) 11:30** - Princess Margaret Hospital (Urology)
+
+### Son WONG T* Y*
+**Upcoming Appointments:**
+1. **May 5, 2026 (Tue) 10:15** - Caritas Medical Centre (ENT)
+2. **June 3, 2026 (Wed) 15:15** - Princess Margaret Hospital (Paediatrics)
+3. **October 28, 2026 (Wed) 11:00** - Caritas Medical Centre (Audiology)
+
 ## 🎓 Son's DSE Exams (2026)
 **Status:** Critical exam period  
 **Oral Exam:** Next week (mid-March)  
