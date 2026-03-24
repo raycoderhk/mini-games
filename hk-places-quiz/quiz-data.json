@@ -605,10 +605,33 @@
       "dateAdded": "2026-03-24",
       "category": "自然景觀",
       "votes": 0
+    },
+    {
+      "id": 22,
+      "image": "assets/maryknoll-school.jpg",
+      "correctAnswer": "瑪利諾修院中小學",
+      "options": [
+        "瑪利諾修院中小學",
+        "聖保羅男女中學",
+        "拔萃女書院",
+        "嘉諾撒聖心書院"
+      ],
+      "hint": "九龍塘，天主教學校，紅磚建築好經典",
+      "fact": "瑪利諾修院中小學 (Maryknoll Convent School) 位於九龍塘牛津道，1925 年創校，係香港著名嘅天主教學校。學校由美國瑪利諾修會創辦，最初只係女校，後來發展成中小學一條龍學校。校舍採用紅磚建築，係九龍塘區嘅地標。瑪利諾修院中小學以優質教育聞名，培養咗唔少社會精英。",
+      "extra": {
+        "height": "紅磚建築校舍",
+        "location": "九龍九龍塘牛津道",
+        "features": ["1925 年創校", "天主教學校", "紅磚建築", "中小學一條龍", "傳統名校"],
+        "history": "1925 年美國瑪利諾修會創辦→最初係女校→發展成中小學一條龍",
+        "organization": "瑪利諾修會 (Maryknoll Sisters)"
+      },
+      "dateAdded": "2026-03-24",
+      "category": "教育機構",
+      "votes": 0
     }
   ],
   "settings": {
-    "passingScore": 13,
+    "passingScore": 14,
     "timePerQuestion": 15,
     "showFactAfterAnswer": true,
     "showExtraInfo": true
