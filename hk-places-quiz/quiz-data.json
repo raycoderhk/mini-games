@@ -570,10 +570,33 @@
       "dateAdded": "2026-03-22",
       "category": "橋樑",
       "votes": 0
+    },
+    {
+      "id": 21,
+      "image": "assets/ma-on-shan.jpg",
+      "correctAnswer": "馬鞍山",
+      "options": [
+        "馬鞍山",
+        "獅子山",
+        "大帽山",
+        "八仙嶺"
+      ],
+      "hint": "沙田區，山形似馬鞍，有鐵礦歷史",
+      "fact": "馬鞍山 (Ma On Shan) 位於新界沙田區，海拔 702 米，係香港第九高山。因為山形似馬鞍而得名。馬鞍山曾經係香港重要嘅鐵礦場，1950-1970 年代係香港唯一嘅鐵礦產地。而家鐵礦場已經停產，但係礦洞遺址仍然存在。馬鞍山郊野公園係行山熱點，可以遠眺西貢海景。",
+      "extra": {
+        "height": "702 米（香港第九高）",
+        "location": "新界沙田區",
+        "features": ["馬鞍形山脈", "鐵礦場遺址", "馬鞍山郊野公園", "行山熱點", "遠眺西貢海景"],
+        "history": "1950-1970 年代香港唯一鐵礦場→1976 年停產→而家係郊遊熱點",
+        "organization": "漁農自然護理署管理（郊野公園）"
+      },
+      "dateAdded": "2026-03-22",
+      "category": "自然景觀",
+      "votes": 0
     }
   ],
   "settings": {
-    "passingScore": 12,
+    "passingScore": 13,
     "timePerQuestion": 15,
     "showFactAfterAnswer": true,
     "showExtraInfo": true
