@@ -754,7 +754,9 @@
         // Load gallery data
         async function loadGalleryData() {
             try {
-                const response = await fetch('quiz-data.json?v=' + Date.now());
+                // Force cache busting with random version
+                const cacheBuster = 'v=' + Date.now() + Math.random().toString(36).substring(7);
+                const response = await fetch('quiz-data.json?' + cacheBuster);
                 const data = await response.json();
                 galleryData = data.questions;
                 
@@ -997,11 +999,26 @@
         // Audio player functions
         function playAudio(questionId) {
             const question = galleryData.find(q => q.id === questionId);
-            if (!question) return;
+            if (!question) {
+                console.error('Question not found:', questionId);
+                return;
+            }
+            
+            // Debug: log audio field
+            console.log('Audio debug for Q' + questionId + ':', {
+                id: question.id,
+                name: question.correctAnswer,
+                hasAudio: 'audio' in question,
+                audioValue: question.audio,
+                audioType: typeof question.audio,
+                questionKeys: Object.keys(question)
+            });
             
             // Check if audio file exists
             if (!question.audio) {
-                alert('🚫 呢個地標暫時未有語音導航\n\n師兄可以上傳語音檔案到：\nassets/audio/ 文件夾\n\n然後更新 quiz-data.json 加 audio 欄位');
+                alert('🚫 呢個地標暫時未有語音導航\n\n地標：' + question.correctAnswer + 
+                      '\nAudio 欄位：' + (question.audio || '空/未定義') +
+                      '\n\n師兄可以上傳語音檔案到：\nassets/audio/ 文件夾\n\n然後更新 quiz-data.json 加 audio 欄位');
                 return;
             }
 
