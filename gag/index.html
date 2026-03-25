@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🥚 爛 Gag 收集所</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .admin-link {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .admin-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .admin-link a:hover {
+            text-decoration: underline;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-hint {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .filter-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .filter-section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .filter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-tag {
+            background: #f0f0f0;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .filter-tag:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .filter-tag.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .gag-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .gag-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .gag-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .gag-question {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            font-weight: 600;
+        }
+
+        .gag-answer {
+            font-size: 1.2rem;
+            color: #667eea;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            padding: 15px;
+            background: #f5f5ff;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            display: none;
+        }
+
+        .gag-answer.revealed {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+
+        .reveal-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(240, 147, 251, 0.4);
+        }
+
+        .reveal-btn.revealed {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #333;
+        }
+
+        .gag-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 2px solid #f0f0f0;
+            margin-top: 15px;
+        }
+
+        .gag-author {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .author-tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .gag-date {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .no-gags {
+            text-align: center;
+            color: white;
+            padding: 50px;
+            font-size: 1.2rem;
+        }
+
+        .stats {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        .stats strong {
+            font-size: 1.5rem;
+        }
+
+        .hint-text {
+            color: #999;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .gag-meta {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🥚 爛 Gag 收集所</h1>
+            <p>收集世上最爛嘅 gag，笑到喊出來！</p>
+            <p class="hint-text">💡 點擊卡片或「揭曉答案」按鈕顯示答案</p>
+        </header>
+
+        <div class="stats">
+            <strong id="total-gags">0</strong> 個爛 gag | 
+            <strong id="total-authors">0</strong> 位出品人
+        </div>
+
+        <div class="admin-link">
+            <p style="margin-bottom: 10px; color: #666;">想提交新爛 gag？</p>
+            <a href="admin.html">🔐 前往 Admin Panel 提交</a>
+        </div>
+
+        <div class="filter-section">
+            <h3>🏷️ 按出品人 Filter</h3>
+            <div class="filter-tags" id="filter-tags">
+                <span class="filter-tag active" data-author="all">全部</span>
+            </div>
+        </div>
+
+        <div class="gag-list" id="gag-list">
+            <!-- Gag cards will be inserted here -->
+        </div>
+
+        <div class="no-gags" id="no-gags" style="display: none;">
+            <p>仲未有任何爛 gag... 快啲加第一個啦！😄</p>
+        </div>
+    </div>
+
+    <script>
+        // Load gags from JSON file
+        let gags = [];
+
+        async function loadGags() {
+            try {
+                const response = await fetch('gags.json');
+                if (response.ok) {
+                    gags = await response.json();
+                }
+            } catch (error) {
+                console.log('No existing gags found, starting fresh');
+                gags = [];
+            }
+            renderGags();
+            updateFilterTags();
+            updateStats();
+        }
+
+        function saveGags() {
+            localStorage.setItem('lam-gag-gags', JSON.stringify(gags));
+        }
+
+        function renderGags(filterAuthor = 'all') {
+            const gagList = document.getElementById('gag-list');
+            const noGags = document.getElementById('no-gags');
+
+            const filteredGags = filterAuthor === 'all' 
+                ? gags 
+                : gags.filter(gag => gag.author === filterAuthor);
+
+            if (filteredGags.length === 0) {
+                gagList.style.display = 'none';
+                noGags.style.display = 'block';
+                return;
+            }
+
+            gagList.style.display = 'flex';
+            noGags.style.display = 'none';
+
+            gagList.innerHTML = filteredGags.map((gag, index) => `
+                <div class="gag-card" onclick="toggleAnswer(${index})">
+                    <div class="gag-question">❓ ${escapeHtml(gag.question)}</div>
+                    <div class="gag-answer" id="answer-${index}">
+                        💡 ${escapeHtml(gag.answer)}
+                    </div>
+                    <button class="reveal-btn" id="btn-${index}" onclick="event.stopPropagation(); toggleAnswer(${index})">
+                        👀 揭曉答案
+                    </button>
+                    <div class="gag-meta">
+                        <div class="gag-author">
+                            <span class="author-tag">${escapeHtml(gag.author)}</span>
+                        </div>
+                        <div class="gag-date">📅 ${formatDate(gag.date)}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleAnswer(index) {
+            const answer = document.getElementById(`answer-${index}`);
+            const btn = document.getElementById(`btn-${index}`);
+            
+            if (answer.classList.contains('revealed')) {
+                answer.classList.remove('revealed');
+                btn.textContent = '👀 揭曉答案';
+                btn.classList.remove('revealed');
+            } else {
+                answer.classList.add('revealed');
+                btn.textContent = '🙈 隱藏答案';
+                btn.classList.add('revealed');
+            }
+        }
+
+        function updateFilterTags() {
+            const filterTags = document.getElementById('filter-tags');
+            const authors = [...new Set(gags.map(gag => gag.author))];
+
+            const existingTags = filterTags.querySelectorAll('.filter-tag');
+            existingTags.forEach(tag => {
+                if (tag.dataset.author === 'all') return;
+                tag.remove();
+            });
+
+            authors.forEach(author => {
+                const tag = document.createElement('span');
+                tag.className = 'filter-tag';
+                tag.dataset.author = author;
+                tag.textContent = author;
+                tag.addEventListener('click', () => filterByAuthor(author));
+                filterTags.appendChild(tag);
+            });
+        }
+
+        function filterByAuthor(author) {
+            const tags = document.querySelectorAll('.filter-tag');
+            tags.forEach(tag => {
+                tag.classList.toggle('active', tag.dataset.author === author);
+            });
+            renderGags(author);
+        }
+
+        function updateStats() {
+            const authors = [...new Set(gags.map(gag => gag.author))];
+            document.getElementById('total-gags').textContent = gags.length;
+            document.getElementById('total-authors').textContent = authors.length;
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            return date.toLocaleDateString('zh-HK', options);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        loadGags();
+    </script>
+</body>
+</html>

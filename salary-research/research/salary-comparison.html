@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>香港大學畢業生薪金比較 | HK Graduate Salary Comparison</title>
-    <link rel="stylesheet" href="assets/css/salary.css">
+    <link rel="stylesheet" href="../assets/css/salary.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -16,34 +16,99 @@
             <p class="description">探索不同行業的薪金、工時、壓力和前景，幫助你做出明智的職業選擇</p>
         </header>
 
+        <!-- DSE Subject Filter -->
+        <section class="filter-section">
+            <div id="dseFilter"></div>
+        </section>
+
         <!-- Main Chart -->
         <section class="chart-section">
-            <h2>💰 薪金比較 (Salary Comparison)</h2>
-            <p class="chart-description">按行业中位數薪金由低到高排序，顯示 10%/25%/50%/75%/90% 分位數</p>
+            <h2>💰 月薪比較 (Salary Comparison)</h2>
+            <p class="chart-description">按行业中位數月薪由低到高排序，顯示入行起薪、初級、中位數、資深、頂尖收入</p>
             <div class="chart-container">
                 <canvas id="salaryChart"></canvas>
             </div>
+            <p class="chart-hint">💡 提示：點擊任何行業查看詳細資訊</p>
+        </section>
+
+        <!-- Industry Insights Box -->
+        <section class="insights-section" id="insightsSection" style="display: none;">
+            <h2>📋 行業詳細資訊</h2>
+            <button class="close-btn" onclick="closeInsights()">✕ 關閉</button>
+            
+            <div class="insights-grid">
+                <div class="insights-card">
+                    <h3 id="insightName">-</h3>
+                    <div class="insight-emoji" id="insightEmoji">💼</div>
+                </div>
+                
+                <div class="insights-card">
+                    <h4>💰 薪金詳情</h4>
+                    <ul class="salary-details" id="insightSalary"></ul>
+                </div>
+                
+                <div class="insights-card">
+                    <h4>⏰ 工作情況</h4>
+                    <ul class="work-details" id="insightWork"></ul>
+                </div>
+                
+                <div class="insights-card">
+                    <h4>📈 行業前景</h4>
+                    <ul class="prospect-details" id="insightProspect"></ul>
+                </div>
+                
+                <div class="insights-card full-width">
+                    <h4>🎓 相關大學科系</h4>
+                    <div class="degree-list" id="insightDegrees"></div>
+                </div>
+                
+                <div class="insights-card full-width">
+                    <h4>💪 所需技能</h4>
+                    <div class="skill-tags" id="insightSkills"></div>
+                </div>
+                
+                <div class="insights-card full-width">
+                    <h4>📚 數據來源</h4>
+                    <p class="source-text" id="insightSource"></p>
+                </div>
+            </div>
+        </section>
             <div class="chart-legend">
                 <div class="legend-item">
-                    <span class="legend-box top"></span>
-                    <span>Top (90th percentile) - 高收入者</span>
+                    <span class="legend-point" style="background:#e67e22"></span>
+                    <span>入行起薪 (10th)</span>
                 </div>
                 <div class="legend-item">
-                    <span class="legend-box upper"></span>
-                    <span>Upper Quartile (75th) - 中上水平</span>
+                    <span class="legend-point" style="background:#f1c40f"></span>
+                    <span>初級水平 (25th)</span>
                 </div>
                 <div class="legend-item">
-                    <span class="legend-box median"></span>
-                    <span>Median (50th) - 中位數</span>
+                    <span class="legend-point" style="background:#2ecc71"></span>
+                    <span>中位數 (50th) 🔗</span>
                 </div>
                 <div class="legend-item">
-                    <span class="legend-box lower"></span>
-                    <span>Lower Quartile (25th) - 中下水平</span>
+                    <span class="legend-point" style="background:#3498db"></span>
+                    <span>資深水平 (75th)</span>
                 </div>
                 <div class="legend-item">
-                    <span class="legend-box bottom"></span>
-                    <span>Bottom (10th percentile) - 入行起薪</span>
+                    <span class="legend-point" style="background:#9b59b6"></span>
+                    <span>頂尖收入 (90th)</span>
                 </div>
+            </div>
+        </section>
+
+        <!-- ROI Scatter Plot -->
+        <section class="chart-section">
+            <h2>🎯 性價比分析 (ROI Analysis)</h2>
+            <p class="chart-description">找出「高薪低壓」的理想職業 (左上角綠色區域)</p>
+            <div class="chart-container">
+                <canvas id="scatterChart"></canvas>
+            </div>
+            <div class="quadrant-legend">
+                <div class="legend-item"><span class="legend-box" style="background:#27ae60"></span> 高薪低壓 (理想)</div>
+                <div class="legend-item"><span class="legend-box" style="background:#f1c40f"></span> 高薪高壓 (值得)</div>
+                <div class="legend-item"><span class="legend-box" style="background:#3498db"></span> 低薪低壓 (輕鬆)</div>
+                <div class="legend-item"><span class="legend-box" style="background:#e74c3c"></span> 低薪高壓 (避免)</div>
             </div>
         </section>
 
@@ -289,18 +354,18 @@
             <p>實際就業情況和薪金會因市場變化、個人能力、經濟環境等因素而有所不同。</p>
             <p>建議在選擇職業道路時，綜合考慮個人興趣、能力、價值觀、行業前景等多方面因素，而不僅僅是薪金。</p>
             <p>Indie Game Developer 屬於高風險職業選擇，建議在追求夢想之前，先累積相關經驗和財務儲備。</p>
-            <p class="last-updated"><strong>最後更新：</strong> 2026 年 3 月 20 日</p>
+            <p class="last-updated"><strong>最後更新：</strong> 2026 年 3 月 15 日</p>
         </section>
 
         <!-- Footer -->
         <footer>
             <p>Created with ❤️ for career exploration</p>
-            <p><a href="https://github.com/raycoderhk/openclaw-workspace" target="_blank">GitHub Repo</a></p>
+            <p><a href="../index.html">← 返回 GameWorld 主頁</a></p>
             <p class="tip">💡 提示：點擊任何職位可以查看詳細信息</p>
         </footer>
     </div>
 
-    <script src="data/salary-data.js"></script>
-    <script src="assets/js/salary-chart.js"></script>
+    <script src="../data/salary-data.js"></script>
+    <script src="../assets/js/salary-chart.js"></script>
 </body>
 </html>

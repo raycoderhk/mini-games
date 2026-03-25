@@ -1,27 +1,15 @@
 {
-  "region": "hk",
-  "category": "static",
-  "domains": [
-    {
-      "domain": "gameworld.zeabur.app",
-      "type": "zeabur"
-    }
-  ],
-  "settings": {
-    "nodeVersion": "18",
-    "installCommand": "echo 'No install needed'",
-    "buildCommand": "echo 'Static site, no build'",
-    "startCommand": "echo 'Static site'",
-    "outputDirectory": "."
+  "$schema": "https://zeabur.com/schema.json",
+  "name": "gameworld",
+  "type": "static",
+  "static": {
+    "root": ".",
+    "index": "index.html"
   },
-  "env": {
-    "ALIYUN_API_KEY": "sk-92b75e89aa404648b08741885f191e6b"
+  "build": {
+    "command": "echo 'Static site - no build needed'"
   },
-  "functions": {
-    "api/*.js": {
-      "runtime": "@vercel/node@2",
-      "memory": 512,
-      "maxDuration": 30
-    }
+  "deploy": {
+    "startCommand": "echo 'Serving static files'"
   }
 }

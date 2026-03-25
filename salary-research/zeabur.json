@@ -4,7 +4,7 @@
   "type": "static",
   "static": {
     "root": ".",
-    "index": "research/salary-comparison.html"
+    "index": "index.html"
   },
   "build": {
     "command": "echo 'Static site - no build needed'"
