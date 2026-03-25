@@ -132,10 +132,6 @@ If nothing needs attention, reply HEARTBEAT_OK.
 • 10:00-13:00 [Raymond] 匹克球 @ 愉景新城會所
   - 💰 會所費 $28 + 場租 $9/小時
   - 👥 8 人滿：Rex🐻 / 珠珠 / 鄧生 (10-11:30) / 陳太 / 黃生 / So / 君 / 文
-• 20:00-22:00 [Raymond] Pickleball with Ivan @ 深井碧堤會所羽毛球場 (Tentative)
-  - 📍 深井碧堤會所羽毛球場 (Sham Tseng Bayside Club)
-  - 🚌 交通：234A 巴士 (一個站)
-  - ⏳ 狀態：Ivan 聽朝 book 場，confirm 後通知
 
 **3 月 26 日 (星期四)** 📚💼
 • [Wife] 出差 第 4 日
@@ -171,6 +167,10 @@ If nothing needs attention, reply HEARTBEAT_OK.
 • [Raymond] 匹克球 @ 愉景新城會所 (TBD 10-12 或 10-13)
   - 👥 預報：Rex🐻 / 珠珠 / 陳太 / So / 黃生 / ?
 • 16:30-18:30 [Daughter] 武術補堂 🥋
+• 20:00-22:00 [Raymond] Pickleball with Ivan @ 深井碧堤會所羽毛球場 (Tentative)
+  - 📍 深井碧堤會所羽毛球場 (Sham Tseng Bayside Club)
+  - 🚌 交通：234A 巴士 (一個站)
+  - ⏳ 狀態：Ivan 聽朝 book 場，confirm 後通知
 
 **4 月 4 日 (星期六)**
 • 12:00-13:00 [Raymond] 1hr 2.5+ 荃灣愉景新城BayPickle
