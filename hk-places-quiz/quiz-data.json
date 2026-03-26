@@ -665,10 +665,43 @@
       "dateAdded": "2026-03-24",
       "category": "教育機構",
       "votes": 0
+    },
+    {
+      "id": 24,
+      "image": "assets/green-egg-island.jpg",
+      "correctAnswer": "綠蛋島",
+      "options": [
+        "綠蛋島",
+        "東龍島",
+        "蒲台島",
+        "橋咀洲"
+      ],
+      "hint": "西貢清水灣對出，個島形似一隻綠色嘅蛋",
+      "fact": "綠蛋島（官方名稱：爛排）位於西貢清水灣對出海域，因島上長滿綠色植物，遠望似一隻綠色雞蛋而得名。島嶼面積細小，係香港熱門嘅獨木舟同浮潛地點。退潮時可以步行上島，島上有個小沙灘同埋可以環島遊。",
+      "extra": {
+        "location": "西貢清水灣對出海域",
+        "area": "約 0.01 平方公里",
+        "activities": [
+          "獨木舟",
+          "浮潛",
+          "環島遊",
+          "退潮步行上島"
+        ],
+        "features": [
+          "綠色植物覆蓋",
+          "蛋形狀島嶼",
+          "小沙灘",
+          "清澈海水"
+        ],
+        "access": "從清水灣或相思灣划獨木舟前往，退潮時可步行上島"
+      },
+      "dateAdded": "2026-03-25",
+      "category": "自然景觀",
+      "votes": 0
     }
   ],
   "settings": {
-    "passingScore": 14,
+    "passingScore": 15,
     "timePerQuestion": 15,
     "showFactAfterAnswer": true,
     "showExtraInfo": true
