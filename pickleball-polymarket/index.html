@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏓 Pickleball Polymarket</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --court-green: #2d8a4e;
+            --court-dark: #1a1a2e;
+            --ball-yellow: #d4e600;
+            --accent: #6c5ce7;
+            --card-bg: #16213e;
+            --card-border: #1e2d4d;
+        }
+
+        * { font-family: 'Outfit', sans-serif; }
+
+        body {
+            background: linear-gradient(135deg, var(--court-dark) 0%, #0f0f23 100%);
+            min-height: 100vh;
+            color: #e0e6ed;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--court-green) 0%, #1e5631 100%);
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 4px solid var(--ball-yellow);
+        }
+
+        .hero h1 { font-weight: 700; font-size: 2rem; }
+        .hero .subtitle { color: rgba(255,255,255,0.8); font-size: 0.95rem; }
+
+        .ball-icon {
+            width: 40px; height: 40px;
+            background: var(--ball-yellow);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(212, 230, 0, 0.4);
+        }
+
+        .card-custom {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .question-box {
+            background: linear-gradient(135deg, var(--accent) 0%, #5541d9 100%);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 20px rgba(108, 92, 231, 0.3);
+        }
+
+        .bet-options { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+
+        .bet-btn {
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            color: #e0e6ed;
+            padding: 0.6rem 1.25rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .bet-btn:hover, .bet-btn.selected {
+            border-color: var(--accent);
+            background: rgba(108, 92, 231, 0.2);
+            color: #fff;
+        }
+
+        .pushup-stepper {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .stepper-btn {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            background: transparent;
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stepper-btn:hover { background: var(--accent); color: #fff; }
+        .stepper-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--ball-yellow);
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .odds-table { width: 100%; }
+        .odds-table th {
+            color: rgba(255,255,255,0.5);
+            font-weight: 500;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.5rem;
+            border-bottom: 1px solid var(--card-border);
+        }
+        .odds-table td {
+            padding: 0.75rem 0.5rem;
+            border-bottom: 1px solid rgba(30, 45, 77, 0.5);
+            vertical-align: middle;
+        }
+
+        .color-dot {
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        .bettor-name { font-weight: 600; }
+        .bettor-pushups {
+            background: rgba(212, 230, 0, 0.15);
+            color: var(--ball-yellow);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .total-row { font-weight: 700; color: #fff; }
+        .total-row td { border-bottom: none !important; padding-top: 1rem !important; }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--court-green) 0%, #1e5631 100%);
+            border: none;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 0.85rem 2rem;
+            border-radius: 50px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 15px rgba(45, 138, 78, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(45, 138, 78, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .reveal-btn {
+            background: linear-gradient(135deg, var(--accent) 0%, #5541d9 100%);
+            border: none;
+            color: #fff;
+            font-weight: 700;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .reveal-btn:hover { transform: translateY(-2px); }
+
+        .winner-badge {
+            background: var(--court-green);
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: 8px;
+        }
+
+        .result-banner {
+            background: linear-gradient(135deg, var(--court-green) 0%, #1e5631 100%);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .result-banner.winners-found {
+            background: linear-gradient(135deg, var(--court-green) 0%, #1e5631 100%);
+            display: block;
+        }
+
+        .result-banner.no-winners {
+            background: linear-gradient(135deg, #c0392b 0%, #8e2424 100%);
+            display: block;
+        }
+
+        .result-banner h3 { margin: 0 0 0.5rem; font-size: 1.3rem; }
+        .result-banner p { margin: 0; opacity: 0.85; }
+
+        .admin-section {
+            background: rgba(108, 92, 231, 0.1);
+            border: 1px dashed rgba(108, 92, 231, 0.4);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .admin-section h6 {
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .admin-input {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--card-border);
+            color: #fff;
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .admin-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .refresh-hint {
+            text-align: center;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .name-input {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--card-border);
+            color: #fff;
+            padding: 0.6rem 0.75rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .name-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .name-input::placeholder { color: rgba(255,255,255,0.3); }
+
+        @media (max-width: 576px) {
+            .hero h1 { font-size: 1.5rem; }
+            .question-box { font-size: 1rem; padding: 1rem; }
+            .bet-btn { padding: 0.5rem 1rem; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="ball-icon">🏓</div>
+    <h1 class="mt-2 mb-1">Pickleball Polymarket</h1>
+    <p class="subtitle mb-0">Bet push-ups, not money 🏋️</p>
+</div>
+
+<div class="container py-4" style="max-width: 600px;">
+    <div class="question-box" id="questionBox">
+        🏸 新打球場墊係咩顏色？<br>
+        <small style="opacity:0.75;font-weight:400">What color is the new court mat?</small>
+    </div>
+
+    <div class="result-banner" id="resultBanner">
+        <h3 id="resultTitle">結果</h3>
+        <p id="resultText"></p>
+    </div>
+
+    <div class="card-custom" id="betCard">
+        <div class="mb-3">
+            <label class="form-label" style="color:rgba(255,255,255,0.6);font-size:0.85rem;">Your Name</label>
+            <input type="text" class="name-input" id="bettorName" placeholder="e.g. Raymond, Heidi..." maxlength="20">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" style="color:rgba(255,255,255,0.6);font-size:0.85rem;">Pick your color</label>
+            <div class="bet-options" id="betOptions">
+                <button class="bet-btn" data-color="Blue" style="--dot:#2196F3">🔵 Blue</button>
+                <button class="bet-btn" data-color="Purple" style="--dot:#9b59b6">🟣 Purple</button>
+                <button class="bet-btn" data-color="Green" style="--dot:#27ae60">🟢 Green</button>
+                <button class="bet-btn" data-color="Red" style="--dot:#e74c3c">🔴 Red</button>
+                <button class="bet-btn" data-color="Other" style="--dot:#95a5a6">⚪ Other</button>
+            </div>
+        </div>
+
+        <div class="mb-3 text-center">
+            <label class="form-label" style="color:rgba(255,255,255,0.6);font-size:0.85rem;">Push-ups to bet (1–10)</label>
+            <div class="pushup-stepper">
+                <button class="stepper-btn" id="decBtn">−</button>
+                <div class="stepper-value" id="pushupCount">5</div>
+                <button class="stepper-btn" id="incBtn">+</button>
+            </div>
+        </div>
+
+        <button class="submit-btn" id="submitBtn">Place My Bet 🏓</button>
+    </div>
+
+    <div class="card-custom">
+        <h6 style="color:rgba(255,255,255,0.5);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1rem;">
+            📊 Live Odds
+        </h6>
+        <table class="odds-table" id="oddsTable">
+            <thead>
+                <tr>
+                    <th>Option</th>
+                    <th class="text-center">Bettors</th>
+                    <th class="text-center">Total Push-ups</th>
+                    <th class="text-end">Odds</th>
+                </tr>
+            </thead>
+            <tbody id="oddsBody">
+                <tr><td colspan="4" style="text-align:center;color:rgba(255,255,255,0.3);padding:2rem;">No bets yet — be the first! 🏓</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="admin-section">
+        <h6>🔐 Admin (Reveal Result)</h6>
+        <div class="d-flex gap-2 mb-2">
+            <input type="password" class="admin-input flex-grow-1" id="adminPassword" placeholder="Admin password" style="max-width:200px;">
+            <select class="admin-input" id="winnerSelect" style="flex:1;">
+                <option value="">Select winning color...</option>
+                <option value="Blue">Blue</option>
+                <option value="Purple">Purple</option>
+                <option value="Green">Green</option>
+                <option value="Red">Red</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <button class="reveal-btn w-100" id="revealBtn">Reveal Result &amp; Pay Winners 🎉</button>
+    </div>
+
+    <p class="refresh-hint">💡 Refresh page to see latest bets. Data saved locally.</p>
+</div>
+
+<script>
+(function() {
+    const STORAGE_KEY = 'pickleball_bets_v1';
+    const ADMIN_PWD = 'pickle2024';
+
+    const COLORS = ['Blue', 'Purple', 'Green', 'Red', 'Other'];
+    const COLOR_DOTS = {
+        Blue: '#2196F3', Purple: '#9b59b6', Green: '#27ae60', Red: '#e74c3c', Other: '#95a5a6'
+    };
+
+    let state = {
+        selectedColor: null,
+        pushups: 5,
+        bets: [],
+        revealed: false,
+        winner: null
+    };
+
+    // Load
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            state.bets = parsed.bets || [];
+            state.revealed = parsed.revealed || false;
+            state.winner = parsed.winner || null;
+        }
+    } catch(e) {}
+
+    // DOM
+    const bettorName = document.getElementById('bettorName');
+    const betOptions = document.getElementById('betOptions');
+    const decBtn = document.getElementById('decBtn');
+    const incBtn = document.getElementById('incBtn');
+    const pushupCount = document.getElementById('pushupCount');
+    const submitBtn = document.getElementById('submitBtn');
+    const oddsBody = document.getElementById('oddsBody');
+    const adminPassword = document.getElementById('adminPassword');
+    const winnerSelect = document.getElementById('winnerSelect');
+    const revealBtn = document.getElementById('revealBtn');
+    const resultBanner = document.getElementById('resultBanner');
+    const resultTitle = document.getElementById('resultTitle');
+    const resultText = document.getElementById('resultText');
+    const betCard = document.getElementById('betCard');
+
+    // Color selection
+    betOptions.querySelectorAll('.bet-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            betOptions.querySelectorAll('.bet-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            state.selectedColor = btn.dataset.color;
+        });
+    });
+
+    // Stepper
+    decBtn.addEventListener('click', () => {
+        if (state.pushups > 1) { state.pushups--; pushupCount.textContent = state.pushups; }
+    });
+    incBtn.addEventListener('click', () => {
+        if (state.pushups < 10) { state.pushups++; pushupCount.textContent = state.pushups; }
+    });
+
+    // Submit
+    submitBtn.addEventListener('click', () => {
+        const name = bettorName.value.trim();
+        if (!name) { alert('Please enter your name!'); bettorName.focus(); return; }
+        if (!state.selectedColor) { alert('Please pick a color!'); return; }
+
+        state.bets.push({
+            name, color: state.selectedColor, pushups: state.pushups, timestamp: Date.now()
+        });
+        save();
+        bettorName.value = '';
+        bettorName.disabled = true;
+        submitBtn.disabled = true;
+        submitBtn.textContent = '✅ Bet Placed!';
+        renderOdds();
+    });
+
+    // Reveal
+    revealBtn.addEventListener('click', () => {
+        if (adminPassword.value !== ADMIN_PWD) {
+            alert('Wrong password! Ask the admin.');
+            return;
+        }
+        if (!winnerSelect.value) {
+            alert('Please select the winning color!');
+            return;
+        }
+
+        state.revealed = true;
+        state.winner = winnerSelect.value;
+        save();
+        renderReveal();
+    });
+
+    function save() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+            bets: state.bets,
+            revealed: state.revealed,
+            winner: state.winner
+        }));
+    }
+
+    function renderOdds() {
+        if (state.revealed) { renderReveal(); return; }
+
+        const totalPushups = state.bets.reduce((s, b) => s + b.pushups, 0);
+
+        if (state.bets.length === 0) {
+            oddsBody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:rgba(255,255,255,0.3);padding:2rem;">No bets yet — be the first! 🏓</td></tr>';
+            return;
+        }
+
+        let html = '';
+        COLORS.forEach(color => {
+            const colorBets = state.bets.filter(b => b.color === color);
+            const colorTotal = colorBets.reduce((s, b) => s + b.pushups, 0);
+            const pct = totalPushups > 0 ? Math.round((colorTotal / totalPushups) * 100) : 0;
+            const odds = pct > 0 ? Math.round(100 / pct) / 10 : 0;
+
+            html += `
+            <tr>
+                <td><span class="color-dot" style="background:${COLOR_DOTS[color]}"></span>${color}</td>
+                <td class="text-center" style="color:rgba(255,255,255,0.7)">${colorBets.length}</td>
+                <td class="text-center"><span class="bettor-pushups">${colorTotal}</span></td>
+                <td class="text-end" style="font-weight:600;color:${pct > 0 ? 'var(--ball-yellow)' : 'rgba(255,255,255,0.3)'}">${pct > 0 ? odds.toFixed(1) + 'x' : '—'}</td>
+            </tr>`;
+        });
+
+        html += `
+        <tr class="total-row">
+            <td>Total</td>
+            <td class="text-center">${state.bets.length}</td>
+            <td class="text-center"><span class="bettor-pushups">${totalPushups}</span></td>
+            <td class="text-end"></td>
+        </tr>`;
+
+        oddsBody.innerHTML = html;
+    }
+
+    function renderReveal() {
+        const winners = state.bets.filter(b => b.color === state.winner);
+        const totalPushups = state.bets.reduce((s, b) => s + b.pushups, 0);
+
+        if (winners.length > 0) {
+            const winnerPool = totalPushups;
+            const eachWin = Math.round(winnerPool / winners.length);
+            const winnerNames = winners.map(w => w.name).join(', ');
+
+            resultBanner.className = 'result-banner winners-found';
+            resultTitle.textContent = `🎉 ${state.winner} Wins!`;
+            resultText.innerHTML = `${winnerNames} guessed correctly!<br>Each winner collects <strong>${eachWin} push-ups</strong> from the pool of ${totalPushups}!`;
+            betCard.style.display = 'none';
+
+            let html = `<tr><td colspan="4" style="text-align:center;color:var(--court-green);font-weight:700;padding:0.5rem;">🏆 WINNERS</td></tr>`;
+            winners.forEach(w => {
+                html += `<tr><td><span class="color-dot" style="background:${COLOR_DOTS[w.color]}"></span>${w.name}</td><td class="text-center">1</td><td class="text-center"><span class="bettor-pushups">${w.pushups}</span></td><td class="text-end"><span class="winner-badge">+${eachWin} 🏆</span></td></tr>`;
+            });
+
+            html += `<tr><td colspan="4" style="height:0.5rem"></td></tr>`;
+            html += `<tr><td colspan="4" style="text-align:center;color:rgba(255,255,255,0.4);font-weight:700;padding:0.5rem;">Others</td></tr>`;
+            state.bets.filter(b => b.color !== state.winner).forEach(w => {
+                html += `<tr><td><span class="color-dot" style="background:${COLOR_DOTS[w.color]}"></span>${w.name}</td><td class="text-center">1</td><td class="text-center"><span class="bettor-pushups">${w.pushups}</span></td><td class="text-end" style="color:#e74c3c">−${w.pushups} 💪</td></tr>`;
+            });
+
+            html += `<tr class="total-row"><td>Total</td><td class="text-center">${state.bets.length}</td><td class="text-center"><span class="bettor-pushups">${totalPushups}</span></td><td class="text-end"></td></tr>`;
+            oddsBody.innerHTML = html;
+        } else {
+            resultBanner.className = 'result-banner no-winners';
+            resultTitle.textContent = `😅 No One Guessed ${state.winner}!`;
+            resultText.innerHTML = `Pool of <strong>${totalPushups} push-ups</strong> — nobody wins this round!<br>Better luck next time!`;
+            betCard.style.display = 'none';
+
+            let html = `<tr><td colspan="4" style="text-align:center;color:#e74c3c;font-weight:700;padding:0.5rem;">Everyone loses 💪</td></tr>`;
+            state.bets.forEach(w => {
+                html += `<tr><td><span class="color-dot" style="background:${COLOR_DOTS[w.color]}"></span>${w.name}</td><td class="text-center">1</td><td class="text-center"><span class="bettor-pushups">${w.pushups}</span></td><td class="text-end" style="color:#e74c3c">−${w.pushups}</td></tr>`;
+            });
+            html += `<tr class="total-row"><td>Total</td><td class="text-center">${state.bets.length}</td><td class="text-center"><span class="bettor-pushups">${totalPushups}</span></td><td class="text-end"></td></tr>`;
+            oddsBody.innerHTML = html;
+        }
+    }
+
+    // Init
+    if (state.revealed) {
+        bettorName.disabled = true;
+        submitBtn.disabled = true;
+        submitBtn.textContent = '✅ Betting Closed';
+    }
+    renderOdds();
+    if (state.revealed) renderReveal();
+})();
+</script>
+</body>
+</html>
