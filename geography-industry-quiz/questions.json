@@ -1,0 +1,709 @@
+{
+  "title": "Industry and Manufacturing",
+  "description": "Geography - Industry and Manufacturing (50 questions)",
+  "subject": "Geography",
+  "topic": "Industry and Manufacturing",
+  "totalQuestions": 50,
+  "questions": [
+    {
+      "id": 1,
+      "topic": "Types of Industry",
+      "difficulty": "Easy",
+      "question": "Which type of industry involves extracting and obtaining natural resources such as farming and mining?",
+      "options": ["A. Primary industry", "B. Secondary industry", "C. Tertiary industry", "D. Quaternary industry"],
+      "correct": 0,
+      "explanation": "The primary industry involves extracting and obtaining natural resources, with typical examples being farming and mining.",
+      "wrongExplanations": {
+        "B": "Secondary industry involves turning raw materials into finished products.",
+        "C": "Tertiary industry provides services for customers or other industries.",
+        "D": "Quaternary industry involves research and development and information services."
+      }
+    },
+    {
+      "id": 2,
+      "topic": "Types of Industry",
+      "difficulty": "Easy",
+      "question": "Which of the following is an example of the tertiary industry?",
+      "options": ["A. Iron and steel industry", "B. Retail and banking", "C. Software development", "D. Cotton farming"],
+      "correct": 1,
+      "explanation": "The tertiary industry is the economic sector that provides services, such as retail and banking.",
+      "wrongExplanations": {
+        "A": "This is part of the secondary industry.",
+        "C": "This is part of the quaternary industry.",
+        "D": "This is part of the primary industry."
+      }
+    },
+    {
+      "id": 3,
+      "topic": "Types of Industry",
+      "difficulty": "Medium",
+      "question": "The quaternary industry is primarily concerned with which activities?",
+      "options": ["A. Manufacturing garments", "B. Harvesting raw materials", "C. Providing transportation services", "D. Research and development (R&D) and information services"],
+      "correct": 3,
+      "explanation": "The quaternary industry involves research and development (R&D) and information services, including IT and media.",
+      "wrongExplanations": {
+        "A": "This is a secondary industry activity.",
+        "B": "This is a primary industry activity.",
+        "C": "This is a tertiary industry activity."
+      }
+    },
+    {
+      "id": 4,
+      "topic": "Manufacturing system",
+      "difficulty": "Easy",
+      "question": "In the manufacturing system of the garment industry, what are 'cutting' and 'sewing' classified as?",
+      "options": ["A. Inputs", "B. Processes", "C. Outputs", "D. Investments"],
+      "correct": 1,
+      "explanation": "Production processes involve turning raw materials into finished products; in the garment industry, this includes cutting and sewing.",
+      "wrongExplanations": {
+        "A": "Inputs include resources like land, labour, and raw materials.",
+        "C": "Outputs are the results like shirts, pants, or waste products.",
+        "D": "Investment is an input of money into the system."
+      }
+    },
+    {
+      "id": 5,
+      "topic": "Manufacturing system",
+      "difficulty": "Medium",
+      "question": "Which of the following would be considered a 'useless output' in a garment manufacturing system?",
+      "options": ["A. Shirts", "B. Sewage", "C. Machinery", "D. Capital"],
+      "correct": 1,
+      "explanation": "The system produces useful outputs to be sold and useless outputs, such as fabric scraps, sewage, and air pollutants.",
+      "wrongExplanations": {
+        "A": "Shirts are useful outputs sold on the market.",
+        "C": "Machinery is a physical input.",
+        "D": "Capital (money) is an input."
+      }
+    },
+    {
+      "id": 6,
+      "topic": "Classification of manufacturing",
+      "difficulty": "Medium",
+      "question": "How is the shipbuilding industry typically classified based on inputs?",
+      "options": ["A. Labour-intensive industry", "B. Capital-intensive industry", "C. Low-tech industry", "D. Light industry"],
+      "correct": 1,
+      "explanation": "A capital-intensive industry has a higher input of capital; shipbuilding is provided as a typical example.",
+      "wrongExplanations": {
+        "A": "Labour-intensive industries, like garments, require more labour.",
+        "C": "Shipbuilding involves significant technology and investment, unlike low-tech industries like plastics.",
+        "D": "Shipbuilding deals with heavy products and materials, making it a heavy industry."
+      }
+    },
+    {
+      "id": 7,
+      "topic": "Classification of manufacturing",
+      "difficulty": "Easy",
+      "question": "An industry that uses higher biotechnology and information technology is called a:",
+      "options": ["A. High-tech industry", "B. Low-tech industry", "C. Light industry", "D. Heavy industry"],
+      "correct": 0,
+      "explanation": "Industries with higher levels of technology, such as the IT industry or biotechnology, are high-tech industries.",
+      "wrongExplanations": {
+        "B": "Low-tech industries use lower levels of technology, like the plastics industry.",
+        "C": "Light industry refers to the weight of products, not the level of technology.",
+        "D": "Heavy industry refers to the weight of raw materials and products."
+      }
+    },
+    {
+      "id": 8,
+      "topic": "Locational factors",
+      "difficulty": "Hard",
+      "question": "Why is the sugar industry typically located near the sources of raw materials?",
+      "options": ["A. Because sugar is fragile", "B. Because sugar cane is bulky and loses 90% of its weight during production", "C. Because sugar requires a large market", "D. Because it needs the specific climate of a coastal area"],
+      "correct": 1,
+      "explanation": "In sugar production, 90% of the weight of sugar cane is lost. To reduce transport costs of bulky raw materials, factories are located near the source.",
+      "wrongExplanations": {
+        "A": "Fragility is a factor for market-oriented industries like glass, not sugar cane.",
+        "C": "Market proximity is for market-oriented industries; sugar is raw material-oriented.",
+        "D": "Coastal location is often preferred for land availability or transport, but the primary reason for the sugar industry is weight loss in raw materials."
+      }
+    },
+    {
+      "id": 9,
+      "topic": "Locational factors",
+      "difficulty": "Medium",
+      "question": "Industries that consume large amounts of energy and are located near coal mines or stable power supplies are:",
+      "options": ["A. Market-oriented industries", "B. Raw material-oriented industries", "C. Power-oriented industries", "D. Labour-intensive industries"],
+      "correct": 2,
+      "explanation": "Power-oriented industries consume large amounts of energy and are located near energy sources (like coal mines) to reduce transport costs.",
+      "wrongExplanations": {
+        "A": "These are located near consumers.",
+        "B": "These are located near bulky raw materials.",
+        "D": "These are located near abundant cheap labour."
+      }
+    },
+    {
+      "id": 10,
+      "topic": "Locational factors",
+      "difficulty": "Medium",
+      "question": "Which of the following is an example of a market-oriented industry?",
+      "options": ["A. Iron and steel", "B. Dairy products", "C. Mining", "D. Sugar production"],
+      "correct": 1,
+      "explanation": "Market-oriented industries produce bulky, fragile, or perishable goods like dairy products and cars, which must be near the market to reduce loss.",
+      "wrongExplanations": {
+        "A": "This is often power-oriented or raw material-oriented.",
+        "C": "This is a primary industry located at the source.",
+        "D": "This is a raw material-oriented industry."
+      }
+    },
+    {
+      "id": 11,
+      "topic": "Hong Kong's manufacturing industry",
+      "difficulty": "Easy",
+      "question": "Where were industrial areas in Hong Kong primarily concentrated in the 1950s?",
+      "options": ["A. New towns", "B. Urban fringe", "C. Both sides of Victoria Harbour", "D. Pok Fu Lam and Sha Tin"],
+      "correct": 2,
+      "explanation": "In the 1950s, factories in Hong Kong were mostly found along both sides of Victoria Harbour.",
+      "wrongExplanations": {
+        "A": "New towns became significant industrial locations from the mid-1970s onwards.",
+        "B": "Expansion to the urban fringe occurred in the 1960s to mid-1970s.",
+        "D": "These locations are associated with high-tech industries in later periods."
+      }
+    },
+    {
+      "id": 12,
+      "topic": "Hong Kong's manufacturing industry",
+      "difficulty": "Medium",
+      "question": "What major manufacturing activity prospered in Hong Kong during the 1950s due to immigrants?",
+      "options": ["A. Electronics", "B. Textile and plastics", "C. Artificial intelligence", "D. Shipbuilding"],
+      "correct": 1,
+      "explanation": "In the 1950s, Chinese immigrants brought labour, capital, and technology, causing the textile and plastics industries to prosper.",
+      "wrongExplanations": {
+        "A": "Electronics developed later, between the 1960s and mid-1970s.",
+        "C": "AI and biotechnology are part of recent high-tech developments since the late 1990s.",
+        "D": "Shipbuilding is a capital-intensive industry but was not the primary light industry highlighted for the 1950s."
+      }
+    },
+    {
+      "id": 13,
+      "topic": "Hong Kong's manufacturing industry",
+      "difficulty": "Medium",
+      "question": "Why did the Hong Kong government build industrial estates in new towns like Yuen Long and Sha Tin in the mid-1970s?",
+      "options": ["A. To be closer to the airport", "B. To provide larger space at lower rents", "C. To promote primary industries like farming", "D. Because Victoria Harbour became too shallow for ships"],
+      "correct": 1,
+      "explanation": "Industrial zones and estates in new towns provided larger space at lower rents for industries that needed more room.",
+      "wrongExplanations": {
+        "A": "While transport is a factor, the primary reason for new town estates was space and rent costs.",
+        "C": "These were for manufacturing (secondary industry), not primary industry.",
+        "D": "The move was driven by land needs, not harbour depth issues."
+      }
+    },
+    {
+      "id": 14,
+      "topic": "Industrial relocation",
+      "difficulty": "Medium",
+      "question": "In the 'front shop, back factory' production mode, what is the role of the headquarters in Hong Kong?",
+      "options": ["A. Assembling and packaging", "B. Production processes", "C. Management, design, and marketing", "D. Extracting raw materials"],
+      "correct": 2,
+      "explanation": "In multi-point production, the Hong Kong headquarters are responsible for management, design, marketing, and logistics.",
+      "wrongExplanations": {
+        "A": "Assembling and packaging are carried out in the 'back factory' in the ZDR.",
+        "B": "Production is done in the factories in the ZDR.",
+        "D": "Raw material extraction is a primary industry task, not the role of the HK headquarters."
+      }
+    },
+    {
+      "id": 15,
+      "topic": "Industrial relocation",
+      "difficulty": "Easy",
+      "question": "By 2020, what was the share of manufacturing in Hong Kong's Gross Domestic Product (GDP)?",
+      "options": ["A. 31%", "B. 17%", "C. 5%", "D. 1%"],
+      "correct": 3,
+      "explanation": "The share of manufacturing in GDP decreased from over 30% in 1970 to only 1% in 2020.",
+      "wrongExplanations": {
+        "A": "This was the peak share in 1970.",
+        "B": "This was the share in 1990.",
+        "C": "This was the share in 2000."
+      }
+    },
+    {
+      "id": 16,
+      "topic": "Industrial relocation",
+      "difficulty": "Medium",
+      "question": "Which of these is a 'push factor' that motivated industries to leave Hong Kong?",
+      "options": ["A. Abundant cheap labour in the ZDR", "B. Rising wages and high rents in Hong Kong", "C. Special Economic Zones in Shenzhen", "D. Loose pollution control in Guangdong"],
+      "correct": 1,
+      "explanation": "Push factors are unfavourable factors like rising wages, limited land supply (high rents), and strict pollution control in Hong Kong.",
+      "wrongExplanations": {
+        "A": "This is a pull factor from the ZDR.",
+        "C": "This is a pull factor (government support) from the Mainland.",
+        "D": "This is a pull factor from the ZDR."
+      }
+    },
+    {
+      "id": 17,
+      "topic": "Industrial relocation",
+      "difficulty": "Medium",
+      "question": "The 'Special Economic Zones' in Shenzhen provided which incentives to Hong Kong manufacturers?",
+      "options": ["A. Higher tax rates to boost government revenue", "B. Lower tax rates and interest-free loans", "C. Compulsory sewage facility installation", "D. Restrictions on the scale of production"],
+      "correct": 1,
+      "explanation": "Incentives in the ZDR included lower tax rates, discounted rents, and 5-year interest-free loans.",
+      "wrongExplanations": {
+        "A": "Lower tax rates were offered as an incentive.",
+        "C": "Pollution control was loose and sewage facilities were not required, lowering costs.",
+        "D": "The ZDR provided extensive land for expansion, not restrictions."
+      }
+    },
+    {
+      "id": 18,
+      "topic": "Global shift of manufacturing",
+      "difficulty": "Medium",
+      "question": "Where is the 'industrial belt' of traditional industrial regions primarily located?",
+      "options": ["A. Mid-latitudes of the northern hemisphere", "B. Equator in the southern hemisphere", "C. High latitudes of the Arctic", "D. Tropical regions of South America"],
+      "correct": 0,
+      "explanation": "The traditional industrial belt is mainly found in the mid-latitudes of the northern hemisphere, spanning Europe, East Asia, and North America.",
+      "wrongExplanations": {
+        "B": "The belt is in the northern hemisphere mid-latitudes.",
+        "C": "Industrial regions are clustered in mid-latitudes, not high latitudes.",
+        "D": "While new regions are emerging, the traditional belt is in the north."
+      }
+    },
+    {
+      "id": 19,
+      "topic": "Global shift of manufacturing",
+      "difficulty": "Hard",
+      "question": "What are 'agglomeration economies'?",
+      "options": ["A. Costs incurred when moving a factory to a new country", "B. Benefits enjoyed by similar industries when they cluster in an area", "C. Penalties for high pollution levels", "D. Regulations that prevent industries from sharing infrastructure"],
+      "correct": 1,
+      "explanation": "Agglomeration economies are benefits industries enjoy when they cluster, such as sharing infrastructure and saving production costs.",
+      "wrongExplanations": {
+        "A": "This refers more to relocation costs or FDI risks.",
+        "C": "These are related to pollution control policies.",
+        "D": "Agglomeration specifically allows industries to share infrastructure like power and transport."
+      }
+    },
+    {
+      "id": 20,
+      "topic": "Global shift of manufacturing",
+      "difficulty": "Medium",
+      "question": "The phenomenon where industries remain in an area even after locational advantages disappear is known as:",
+      "options": ["A. Industrial relocation", "B. Industrial inertia", "C. Agglomeration economies", "D. Global shift"],
+      "correct": 1,
+      "explanation": "Industrial inertia occurs when industries stay in an area due to existing markets, facilities, and labour, even if previous advantages have faded.",
+      "wrongExplanations": {
+        "A": "This is the movement of factories to new locations.",
+        "C": "This is the benefit of clustering in an area.",
+        "D": "This is the change in the global distribution of manufacturing."
+      }
+    },
+    {
+      "id": 21,
+      "topic": "Global shift of manufacturing",
+      "difficulty": "Medium",
+      "question": "In the global shift of manufacturing, low-skilled production processes have mostly moved from:",
+      "options": ["A. LDCs to MDCs", "B. MDCs to LDCs", "C. Rural areas to coastal areas", "D. High-tech hubs to universities"],
+      "correct": 1,
+      "explanation": "In general, many low-skilled production processes have moved from More Developed Countries (MDCs) to Less Developed Countries (LDCs).",
+      "wrongExplanations": {
+        "A": "The trend is the opposite; LDCs are the 'host countries' for these processes.",
+        "C": "While rural-to-urban shifts occur, the global shift is defined by MDC to LDC movement.",
+        "D": "High-tech hubs and universities usually attract R&D, not low-skilled processes."
+      }
+    },
+    {
+      "id": 22,
+      "topic": "Global shift of manufacturing",
+      "difficulty": "Easy",
+      "question": "Which country overtook the USA, Japan and Germany in the late 2000s to become the 'world's factory'?",
+      "options": ["A. India", "B. Thailand", "C. Mexico", "D. China"],
+      "correct": 3,
+      "explanation": "China became the fastest growing nation among new industrial centres and became the 'world's factory' in the late 2000s.",
+      "wrongExplanations": {
+        "A": "India is a new industrial region but has not overtaken the others to be called the 'world's factory' in this context.",
+        "B": "Thailand is an emerging industrial region.",
+        "C": "Mexico is an emerging industrial region."
+      }
+    },
+    {
+      "id": 23,
+      "topic": "Global shift of manufacturing",
+      "difficulty": "Medium",
+      "question": "What technological advancement has allowed heavy industries to no longer be strictly bounded by the sources of raw materials?",
+      "options": ["A. High-speed railways", "B. Modern container ships with large capacity", "C. Video conferencing", "D. Refrigeration technology"],
+      "correct": 1,
+      "explanation": "Modern container ships can carry bulk amounts of raw materials and goods at low costs, reducing the dependency on being near the sources.",
+      "wrongExplanations": {
+        "A": "Railways are important but container ships are the primary means for bulk low-cost global transport.",
+        "C": "Video conferencing speeds up information exchange but doesn't transport heavy materials.",
+        "D": "Refrigeration allows food processing to be further from markets, not heavy industry raw materials."
+      }
+    },
+    {
+      "id": 24,
+      "topic": "Global shift of manufacturing",
+      "difficulty": "Medium",
+      "question": "How did the capacity of container ships change between 1980 and 2019?",
+      "options": ["A. It decreased by 50%", "B. It remained the same", "C. It increased from 4,100 to 24,000 standard containers", "D. It reached a limit of 10,000 containers"],
+      "correct": 2,
+      "explanation": "The capacity of container ships increased significantly from 4,100 standard containers in 1980 to 24,000 in 2019.",
+      "wrongExplanations": {
+        "A": "Capacity increased, not decreased.",
+        "B": "There was a massive increase in capacity.",
+        "D": "It surpassed 10,000 containers by 2006."
+      }
+    },
+    {
+      "id": 25,
+      "topic": "Global shift of manufacturing",
+      "difficulty": "Medium",
+      "question": "Why do many high-tech companies set up R&D centres in LDCs like India?",
+      "options": ["A. To be closer to the coal mines", "B. To take advantage of lower wages for well-educated professionals", "C. To avoid using computers", "D. Because India has stricter pollution controls"],
+      "correct": 1,
+      "explanation": "In some LDCs like India, the wages of well-educated professionals are lower, attracting companies to set up R&D centres there.",
+      "wrongExplanations": {
+        "A": "R&D is not dependent on coal mines.",
+        "C": "IT professionals in R&D centres rely heavily on computers.",
+        "D": "LDCs often have more relaxed pollution controls compared to MDCs."
+      }
+    },
+    {
+      "id": 26,
+      "topic": "Transnational corporations (TNCs)",
+      "difficulty": "Easy",
+      "question": "Transnational corporations (TNCs) typically locate their headquarters and R&D centres in:",
+      "options": ["A. Host countries", "B. More developed countries (MDCs)", "C. Special Economic Zones", "D. Rural villages"],
+      "correct": 1,
+      "explanation": "The headquarters of TNCs are located in MDCs (home countries), along with regional offices and R&D centres.",
+      "wrongExplanations": {
+        "A": "Host countries (LDCs) are typically where factories are located for production.",
+        "C": "These are areas in LDCs set up to attract factories, not the primary location for global headquarters.",
+        "D": "TNC offices are generally in MDCs or major regional cities."
+      }
+    },
+    {
+      "id": 27,
+      "topic": "Transnational corporations (TNCs)",
+      "difficulty": "Medium",
+      "question": "What is 'Foreign Direct Investment' (FDI) in the context of TNCs?",
+      "options": ["A. Buying products from a local shop", "B. Investing in domestic government bonds", "C. Buying or building factories in host countries (LDCs)", "D. The movement of refugees between countries"],
+      "correct": 2,
+      "explanation": "FDI involves TNCs buying or building factories in LDCs (host countries) for production processes.",
+      "wrongExplanations": {
+        "A": "FDI refers to corporate investment in production facilities abroad.",
+        "B": "This is a different type of financial investment, not related to building global manufacturing networks.",
+        "D": "FDI relates to capital and technology transfer, not the movement of refugees."
+      }
+    },
+    {
+      "id": 28,
+      "topic": "Transnational corporations (TNCs)",
+      "difficulty": "Medium",
+      "question": "Nike relocated its factories from Japan and Korea to Thailand and Vietnam primarily due to:",
+      "options": ["A. Increasing production costs", "B. A lack of water in Japan", "C. The end of the footwear industry", "D. Government bans on factories in Korea"],
+      "correct": 0,
+      "explanation": "Nike relocated factories further into LDCs where labour costs are lower due to increasing production costs in places like Japan and Korea.",
+      "wrongExplanations": {
+        "A": "Water supply is not the reason cited for Nike's relocation; it was labour costs.",
+        "C": "Nike continues to grow and relocate its footwear manufacturing.",
+        "D": "Relocation was driven by economic factors (costs), not government bans."
+      }
+    },
+    {
+      "id": 29,
+      "topic": "Transnational corporations (TNCs)",
+      "difficulty": "Medium",
+      "question": "How do TNCs benefit LDCs (host countries)?",
+      "options": ["A. By increasing trade barriers", "B. By promoting capital flow and technology transfer", "C. By making management more difficult", "D. By moving all high-skilled jobs to the LDCs"],
+      "correct": 1,
+      "explanation": "TNCs promote global capital flow and technology transfer, which boosts the industrial development of LDCs.",
+      "wrongExplanations": {
+        "A": "TNCs often seek to overcome or reduce trade barriers.",
+        "C": "Multi-point production is designed to make use of locational advantages to improve efficiency.",
+        "D": "High-skilled jobs like R&D and management often remain in MDCs or regional offices."
+      }
+    },
+    {
+      "id": 30,
+      "topic": "Types of Industry",
+      "difficulty": "Medium",
+      "question": "The making and selling of clothes involves which types of industry?",
+      "options": ["A. Only primary and secondary", "B. Only secondary and tertiary", "C. Only tertiary and quaternary", "D. All four: primary, secondary, tertiary, and quaternary"],
+      "correct": 3,
+      "explanation": "The making and selling of clothes involves all four industries: growing cotton (primary), turning it into clothes (secondary), selling them (tertiary), and using software to study habits (quaternary).",
+      "wrongExplanations": {
+        "A": "It also involves selling (tertiary) and research (quaternary).",
+        "B": "It starts with raw materials (primary) and uses IT (quaternary).",
+        "C": "It requires the actual production of the garment (secondary) and raw materials (primary)."
+      }
+    },
+    {
+      "id": 31,
+      "topic": "Classification of manufacturing",
+      "difficulty": "Easy",
+      "question": "Which criterion is used to classify an industry as 'light' or 'heavy'?",
+      "options": ["A. The number of workers", "B. The weight of raw materials and products", "C. The amount of money invested", "D. The level of education of the professionals"],
+      "correct": 1,
+      "explanation": "Manufacturing industries can be classified by the weight of raw materials and products into light and heavy industries.",
+      "wrongExplanations": {
+        "A": "This relates to labour intensity.",
+        "C": "This relates to capital intensity.",
+        "D": "This relates to the level of technology."
+      }
+    },
+    {
+      "id": 32,
+      "topic": "Locational factors",
+      "difficulty": "Medium",
+      "question": "Which locational factor is particularly important to heavy industries and often found in coastal areas?",
+      "options": ["A. Cheap labour", "B. Flat and extensive land", "C. Nearby universities", "D. Fragile raw materials"],
+      "correct": 1,
+      "explanation": "Land is important to heavy industries, which are often located in coastal areas where extensive, cheap, and flat land is available.",
+      "wrongExplanations": {
+        "A": "Labour is more critical for labour-intensive light industries.",
+        "C": "Universities are important for high-tech industries.",
+        "D": "Heavy industries typically deal with heavy and bulky materials, not necessarily fragile ones."
+      }
+    },
+    {
+      "id": 33,
+      "topic": "Industrial relocation",
+      "difficulty": "Easy",
+      "question": "What does 'industrial relocation' refer to in the context of Hong Kong?",
+      "options": ["A. Moving factories within the same building", "B. Moving factories from Hong Kong to other regions like the ZDR", "C. Changing from the garment industry to the toy industry", "D. Closing all factories to become a primary industry hub"],
+      "correct": 1,
+      "explanation": "Since the 1980s, industrial relocation refers to manufacturers moving their factories from Hong Kong to cities in the ZDR and Guangdong.",
+      "wrongExplanations": {
+        "A": "Relocation involves moving to different geographic regions.",
+        "C": "This is a change in industry type, not necessarily a relocation of site.",
+        "D": "Hong Kong shifted towards the tertiary industry, not primary."
+      }
+    },
+    {
+      "id": 34,
+      "topic": "Locational factors",
+      "difficulty": "Easy",
+      "question": "Which of these is a human locational factor for industries?",
+      "options": ["A. Raw materials", "B. Land", "C. Government policy", "D. Energy"],
+      "correct": 2,
+      "explanation": "Human factors include labour, transport, market, and government policy.",
+      "wrongExplanations": {
+        "A": "This is a physical factor.",
+        "B": "This is a physical factor.",
+        "D": "This is a physical factor."
+      }
+    },
+    {
+      "id": 35,
+      "topic": "Hong Kong's manufacturing industry",
+      "difficulty": "Medium",
+      "question": "The development of 'Science Park' and 'Cyberport' in Hong Kong is an example of the government supporting:",
+      "options": ["A. Primary industry", "B. Labour-intensive industry", "C. High-tech industry", "D. Heavy industry"],
+      "correct": 2,
+      "explanation": "Science Park and Cyberport were built to support the development of high-tech industries like ICT and biotechnology.",
+      "wrongExplanations": {
+        "A": "These are for advanced technology, not farming or mining.",
+        "B": "These hubs focus on R&D and high technology, which are usually capital-intensive and skill-based.",
+        "D": "Science Park and Cyberport are not for traditional heavy industries like steel making."
+      }
+    },
+    {
+      "id": 36,
+      "topic": "Industrial relocation",
+      "difficulty": "Medium",
+      "question": "What was the 'single-point production' mode used in Hong Kong in the past?",
+      "options": ["A. Factories and headquarters were in different countries", "B. Both headquarters and factories were located in the same place", "C. Only one worker was used for the entire production process", "D. All raw materials came from a single mine"],
+      "correct": 1,
+      "explanation": "In the past, manufacturing in Hong Kong used a single-point production mode where both headquarters and factories were in the same place.",
+      "wrongExplanations": {
+        "A": "This describes multi-point production.",
+        "C": "Production mode refers to the location of components, not the number of workers.",
+        "D": "Single-point refers to the location of business operations, not just the raw material source."
+      }
+    },
+    {
+      "id": 37,
+      "topic": "Locational factors",
+      "difficulty": "Easy",
+      "question": "Why are container terminals and airports important to industries?",
+      "options": ["A. They provide raw materials", "B. They act as energy sources", "C. They allow for efficient transport of materials and products", "D. They are used to house factory workers"],
+      "correct": 2,
+      "explanation": "A good transport network, including container terminals and airports, is important to transport raw materials and products efficiently.",
+      "wrongExplanations": {
+        "A": "Raw materials are physical inputs sourced separately.",
+        "B": "Energy is a physical factor provided by power plants or mines.",
+        "D": "While they provide jobs, their primary industrial function is logistics and transport."
+      }
+    },
+    {
+      "id": 38,
+      "topic": "Industrial relocation",
+      "difficulty": "Hard",
+      "question": "In 1990, how many times higher were the wages in Hong Kong compared to Guangdong?",
+      "options": ["A. 2 times", "B. 5 times", "C. 10 times", "D. Over 20 times"],
+      "correct": 3,
+      "explanation": "Based on the comparison between HK$5,520 and HK$250, Hong Kong wages were more than 22 times higher in 1990.",
+      "wrongExplanations": {
+        "A": "The difference was much more significant than 2 times.",
+        "B": "The difference was much higher.",
+        "C": "The difference was more than double 10 times."
+      }
+    },
+    {
+      "id": 39,
+      "topic": "Industrial relocation",
+      "difficulty": "Medium",
+      "question": "The 'Special Economic Zones' were established in China in which year as part of economic reform?",
+      "options": ["A. 1950", "B. 1970", "C. 1978", "D. 1990"],
+      "correct": 2,
+      "explanation": "The Chinese government set up Special Economic Zones in 1978 when economic reform was carried out.",
+      "wrongExplanations": {
+        "A": "This was the early stage of HK's industrial development.",
+        "B": "HK manufacturing peaked in the 1970s.",
+        "D": "By 1990, relocation was already well underway."
+      }
+    },
+    {
+      "id": 40,
+      "topic": "Locational factors",
+      "difficulty": "Easy",
+      "question": "Which industry cluster is known as a power-oriented industry?",
+      "options": ["A. Garment industry", "B. Iron and steel industry", "C. Toy industry", "D. Retail industry"],
+      "correct": 1,
+      "explanation": "The iron and steel industry is a typical example of a power-oriented industry.",
+      "wrongExplanations": {
+        "A": "The garment industry is labour-intensive.",
+        "C": "The toy industry is light and low-tech.",
+        "D": "The retail industry is a tertiary industry."
+      }
+    },
+    {
+      "id": 41,
+      "topic": "Global shift of manufacturing",
+      "difficulty": "Medium",
+      "question": "Which technology allows the food processing industry to be located further from its market?",
+      "options": ["A. Video conferencing", "B. Air transport", "C. Refrigeration and preservation", "D. Software development"],
+      "correct": 2,
+      "explanation": "Refrigeration and preservation technologies keep food fresh longer, allowing the industry to be located further away from the market.",
+      "wrongExplanations": {
+        "A": "This helps communication between headquarters and offices.",
+        "B": "While air transport is fast, the ability to store food without spoiling is specifically due to refrigeration.",
+        "D": "Software is used for habits and quaternary tasks."
+      }
+    },
+    {
+      "id": 42,
+      "topic": "Transnational corporations (TNCs)",
+      "difficulty": "Medium",
+      "question": "What is the role of a 'host country' in the TNC production mode?",
+      "options": ["A. Home to the global headquarters", "B. Location of the primary R&D centres", "C. Location for factories and low-skilled production", "D. Responsible for final decision-making"],
+      "correct": 2,
+      "explanation": "Host countries (LDCs) are where factories are built or bought to carry out low-skilled production processes like assembling.",
+      "wrongExplanations": {
+        "A": "Headquarters are in MDCs (home countries).",
+        "B": "R&D centres are usually in MDCs or regional offices.",
+        "D": "Decision-making and management are handled by headquarters in home countries."
+      }
+    },
+    {
+      "id": 43,
+      "topic": "Global shift of manufacturing",
+      "difficulty": "Medium",
+      "question": "Which of these is a 'political consideration' that causes the global shift of manufacturing?",
+      "options": ["A. Reduction of trade barriers", "B. Improving container ship capacity", "C. Breakthroughs in ICT", "D. Rising income levels in LDCs"],
+      "correct": 0,
+      "explanation": "Political considerations include favourable policies and the reduction of trade barriers (tariffs and quotas).",
+      "wrongExplanations": {
+        "A": "This is a technological advancement in transport.",
+        "B": "This is a technological advancement in information.",
+        "C": "This is a factor for market expansion."
+      }
+    },
+    {
+      "id": 44,
+      "topic": "Global shift of manufacturing",
+      "difficulty": "Easy",
+      "question": "Tariffs and quotas imposed to protect local industries are examples of:",
+      "options": ["A. Agglomeration economies", "B. Trade barriers", "C. Subsidies", "D. Incentives"],
+      "correct": 1,
+      "explanation": "Trade barriers include tariffs or quotas imposed on imported goods to protect local industries.",
+      "wrongExplanations": {
+        "A": "These are benefits of clustering.",
+        "C": "These are financial aids given to industries, the opposite of barriers.",
+        "D": "Incentives encourage investment, while trade barriers restrict it."
+      }
+    },
+    {
+      "id": 45,
+      "topic": "Global shift of manufacturing",
+      "difficulty": "Hard",
+      "question": "What happened to the manufacturing output value of MDCs between 1992 and 2012?",
+      "options": ["A. It increased by 244%", "B. It stayed the same", "C. Its share in global output decreased", "D. It overtook China in output"],
+      "correct": 2,
+      "explanation": "While output value increased in total, the percentage share of MDCs in the global manufacturing output value was decreasing.",
+      "wrongExplanations": {
+        "A": "This was the increase value for LDCs.",
+        "B": "The value increased by 43%, but the share decreased.",
+        "D": "China overtook the USA, Japan, and Germany in the late 2000s."
+      }
+    },
+    {
+      "id": 46,
+      "topic": "Manufacturing system",
+      "difficulty": "Easy",
+      "question": "Which of the following is an input in the toy industry?",
+      "options": ["A. Packing", "B. Labour", "C. Finished toys", "D. Transporting to market"],
+      "correct": 1,
+      "explanation": "Inputs include land, labour, capital, and raw materials.",
+      "wrongExplanations": {
+        "A": "Packaging is a production process.",
+        "C": "Finished toys are the output.",
+        "D": "Transporting can be part of the process or logistics of the output."
+      }
+    },
+    {
+      "id": 47,
+      "topic": "Hong Kong's manufacturing industry",
+      "difficulty": "Medium",
+      "question": "How did the distribution of industrial areas in Hong Kong change between the 1950s and the mid-1990s?",
+      "options": ["A. They moved from the new towns back to Victoria Harbour", "B. They expanded from Victoria Harbour to the urban fringe and then to new towns", "C. They moved exclusively to the Science Park", "D. They completely disappeared from the coastline"],
+      "correct": 1,
+      "explanation": "Industrial areas gradually expanded from both sides of Victoria Harbour (1950s) to the urban fringe (1960s) and then to new towns (mid-1970s onwards).",
+      "wrongExplanations": {
+        "A": "The movement was outward from the harbour, not inward.",
+        "C": "Science Park is a late-stage development from the 1990s.",
+        "D": "While they expanded inland, some areas like Chai Wan and Shau Kei Wan are still near the coast."
+      }
+    },
+    {
+      "id": 48,
+      "topic": "Classification of manufacturing",
+      "difficulty": "Easy",
+      "question": "Which of these industries is described as a 'low-tech' industry in the sources?",
+      "options": ["A. Plastics industry", "B. Information technology", "C. Biotechnology", "D. Artificial intelligence"],
+      "correct": 0,
+      "explanation": "The plastics industry is provided as an example of a low-tech industry.",
+      "wrongExplanations": {
+        "B": "IT is a high-tech industry.",
+        "C": "Biotechnology is a high-tech industry.",
+        "D": "AI is a high-tech industry."
+      }
+    },
+    {
+      "id": 49,
+      "topic": "Industrial relocation",
+      "difficulty": "Medium",
+      "question": "What is the relationship between the 'ZDR' and 'Hong Kong' in the 'front shop, back factory' model?",
+      "options": ["A. Both have factories only", "B. ZDR handles management, HK handles production", "C. HK handles management, ZDR handles production", "D. They compete to see who can produce more cotton"],
+      "correct": 2,
+      "explanation": "Hong Kong (front shop) is responsible for management and design, while the ZDR (back factory) is responsible for production processes like assembling.",
+      "wrongExplanations": {
+        "A": "The model splits roles between two locations.",
+        "B": "The roles are reversed in this option.",
+        "D": "Cotton is a raw material for primary industry; the model is about manufacturing (secondary)."
+      }
+    },
+    {
+      "id": 50,
+      "topic": "Locational factors",
+      "difficulty": "Easy",
+      "question": "Which transport means is cited as having a low cost for transporting goods in bulk globally?",
+      "options": ["A. Air transport", "B. Container ship", "C. High-speed train", "D. Trucking on highways"],
+      "correct": 1,
+      "explanation": "Container ships are a low-cost transport means used to carry bulk amounts of goods efficiently.",
+      "wrongExplanations": {
+        "A": "Air transport is fast but generally more expensive for bulk goods.",
+        "C": "Trains are effective but ships are the primary bulk global transport for international trade.",
+        "D": "Highways are important for efficiency but are more limited for bulk international transport compared to ships."
+      }
+    }
+  ]
+}

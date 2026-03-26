@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 Industry & Manufacturing Quiz | Study Set</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Outfit', sans-serif; box-sizing: border-box; }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #e0e6ed;
+            padding: 20px;
+        }
+
+        .container { max-width: 700px; margin: 0 auto; }
+
+        .hero {
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .hero p { opacity: 0.7; font-size: 0.95rem; }
+
+        .progress-bar-container {
+            background: rgba(255,255,255,0.1);
+            border-radius: 50px;
+            padding: 3px;
+            margin-bottom: 1.5rem;
+        }
+        .progress-bar-fill {
+            height: 8px;
+            border-radius: 50px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.4s ease;
+        }
+
+        .question-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .topic-badge {
+            display: inline-block;
+            background: rgba(102, 126, 234, 0.2);
+            color: #a5b4fc;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .difficulty-easy { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+        .difficulty-medium { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+        .difficulty-hard { background: rgba(248, 113, 113, 0.2); color: #f87171; }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.5;
+            margin-bottom: 1.25rem;
+        }
+
+        .options-list { list-style: none; padding: 0; margin: 0; }
+        .options-list li { margin-bottom: 0.6rem; }
+        
+        .option-btn {
+            width: 100%;
+            text-align: left;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 0.85rem 1rem;
+            color: #e0e6ed;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: rgba(102, 126, 234, 0.5);
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .option-btn.correct {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+        }
+
+        .option-btn.wrong {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+        }
+
+        .option-btn:disabled { cursor: default; opacity: 0.7; }
+        .option-btn.correct:disabled, .option-btn.wrong:disabled { opacity: 1; }
+
+        .option-letter {
+            background: rgba(255,255,255,0.1);
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .option-btn.correct .option-letter { background: rgba(34, 197, 94, 0.3); }
+        .option-btn.wrong .option-letter { background: rgba(239, 68, 68, 0.3); }
+
+        .explanation-box {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            display: none;
+        }
+        .explanation-box.show { display: block; }
+
+        .nav-buttons {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-nav {
+            flex: 1;
+            padding: 0.85rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .btn-prev {
+            background: rgba(255,255,255,0.1);
+            color: #e0e6ed;
+        }
+        .btn-prev:hover { background: rgba(255,255,255,0.15); }
+
+        .btn-next {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+        }
+        .btn-next:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); }
+        .btn-next:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        .btn-reveal {
+            background: rgba(102, 126, 234, 0.2);
+            color: #a5b4fc;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            margin-top: 0.75rem;
+            transition: all 0.2s;
+        }
+        .btn-reveal:hover { background: rgba(102, 126, 234, 0.3); }
+
+        /* Results */
+        .result-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .result-score {
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .result-label { font-size: 1.1rem; opacity: 0.7; margin-bottom: 1.5rem; }
+        .result-breakdown { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; }
+        .result-item { text-align: center; }
+        .result-item .num { font-size: 1.8rem; font-weight: 700; }
+        .result-item .label { font-size: 0.85rem; opacity: 0.6; }
+        .result-correct .num { color: #4ade80; }
+        .result-wrong .num { color: #f87171; }
+
+        @media (max-width: 576px) {
+            .hero h1 { font-size: 1.4rem; }
+            .question-text { font-size: 1rem; }
+            .result-breakdown { gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <h1>📚 Industry & Manufacturing</h1>
+            <p>Geography — 50 Questions</p>
+        </div>
+
+        <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
+        </div>
+
+        <div id="questionCard" class="question-card">
+            <span class="topic-badge" id="topicBadge">Loading...</span>
+            <span class="topic-badge difficulty-easy" id="difficultyBadge">Easy</span>
+            <p class="question-text" id="questionText">Loading question...</p>
+            <ul class="options-list" id="optionsList"></ul>
+            <div class="explanation-box" id="explanationBox"></div>
+            <div class="nav-buttons">
+                <button class="btn-nav btn-prev" id="prevBtn" disabled>← Previous</button>
+                <button class="btn-nav btn-next" id="nextBtn" disabled>Next →</button>
+            </div>
+            <button class="btn-reveal" id="revealBtn" style="display:none;">📖 Show Explanation</button>
+        </div>
+
+        <div id="resultCard" class="result-card" style="display:none;">
+            <div class="result-score" id="resultScore">0%</div>
+            <p class="result-label">Your Score</p>
+            <div class="result-breakdown">
+                <div class="result-item result-correct">
+                    <div class="num" id="correctCount">0</div>
+                    <div class="label">Correct</div>
+                </div>
+                <div class="result-item result-wrong">
+                    <div class="num" id="wrongCount">0</div>
+                    <div class="label">Wrong</div>
+                </div>
+            </div>
+            <button class="btn-nav btn-next" onclick="restartQuiz()" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;">🔄 Try Again</button>
+        </div>
+    </div>
+
+<script>
+(async function() {
+    let questions = [];
+    let current = 0;
+    let answers = [];
+    let revealed = false;
+
+    // Load questions
+    try {
+        const res = await fetch('questions.json');
+        const data = await res.json();
+        questions = data.questions;
+        answers = new Array(questions.length).fill(null);
+    } catch(e) {
+        document.getElementById('questionText').textContent = 'Failed to load questions.json';
+        return;
+    }
+
+    const questionCard = document.getElementById('questionCard');
+    const resultCard = document.getElementById('resultCard');
+    const topicBadge = document.getElementById('topicBadge');
+    const difficultyBadge = document.getElementById('difficultyBadge');
+    const questionText = document.getElementById('questionText');
+    const optionsList = document.getElementById('optionsList');
+    const explanationBox = document.getElementById('explanationBox');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const revealBtn = document.getElementById('revealBtn');
+    const progressBar = document.getElementById('progressBar');
+
+    const LETTERS = ['A', 'B', 'C', 'D'];
+    const DIFF_CLASSES = { Easy: 'difficulty-easy', Medium: 'difficulty-medium', Hard: 'difficulty-hard' };
+
+    function render() {
+        const q = questions[current];
+        const answered = answers[current] !== null;
+
+        progressBar.style.width = ((current + 1) / questions.length * 100) + '%';
+        topicBadge.textContent = q.topic;
+        difficultyBadge.className = 'topic-badge ' + DIFF_CLASSES[q.difficulty];
+        difficultyBadge.textContent = q.difficulty;
+        questionText.textContent = q.question;
+
+        optionsList.innerHTML = '';
+        q.options.forEach((opt, i) => {
+            const li = document.createElement('li');
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerHTML = `<span class="option-letter">${LETTERS[i]}</span><span>${opt}</span>`;
+
+            if (answered) {
+                btn.disabled = true;
+                if (i === q.correct) btn.classList.add('correct');
+                else if (i === answers[current]) btn.classList.add('wrong');
+            } else {
+                btn.onclick = () => selectAnswer(i);
+            }
+            li.appendChild(btn);
+            optionsList.appendChild(li);
+        });
+
+        if (answered) {
+            explanationBox.innerHTML = `<strong>Explanation:</strong> ${q.explanation}`;
+            explanationBox.classList.add('show');
+            revealBtn.style.display = 'none';
+        } else {
+            explanationBox.classList.remove('show');
+            revealBtn.style.display = 'block';
+        }
+
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = !answered;
+        nextBtn.textContent = current === questions.length - 1 ? (answered ? 'See Results 🎉' : 'Next →') : 'Next →';
+    }
+
+    function selectAnswer(idx) {
+        answers[current] = idx;
+        revealed = false;
+        render();
+    }
+
+    function showResults() {
+        const correct = answers.filter((a, i) => a === questions[i].correct).length;
+        const total = questions.length;
+        const pct = Math.round(correct / total * 100);
+
+        questionCard.style.display = 'none';
+        resultCard.style.display = 'block';
+        progressBar.style.width = '100%';
+
+        document.getElementById('resultScore').textContent = pct + '%';
+        document.getElementById('correctCount').textContent = correct;
+        document.getElementById('wrongCount').textContent = total - correct;
+    }
+
+    function restartQuiz() {
+        current = 0;
+        answers = new Array(questions.length).fill(null);
+        questionCard.style.display = 'block';
+        resultCard.style.display = 'none';
+        render();
+    }
+
+    prevBtn.onclick = () => { current--; render(); };
+    nextBtn.onclick = () => {
+        if (current < questions.length - 1) { current++; render(); }
+        else showResults();
+    };
+
+    revealBtn.onclick = () => {
+        revealed = !revealed;
+        if (revealed) {
+            answers[current] = -1; // mark as revealed without answering
+            render();
+        }
+    };
+
+    render();
+})();
+</script>
+</body>
+</html>
