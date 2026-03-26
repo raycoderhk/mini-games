@@ -137,6 +137,7 @@ If nothing needs attention, reply HEARTBEAT_OK.
 • [Wife] 出差 第 4 日
 • 08:15 [Daughter UT] 中文
 • 09:45 [Daughter UT] CES
+• 17:15 [Raymond] Gym
 
 **3 月 27 日 (星期五)** 📚💼
 • [Wife] 出差 最後日 - ✈️ 返港 15:00
@@ -150,6 +151,9 @@ If nothing needs attention, reply HEARTBEAT_OK.
 **3 月 30 日 (星期一)** 📚
 • 08:15 [Daughter UT] 數學
 • 09:45 [Daughter UT] 歷史
+• 14:00-16:00 [Raymond] Indoor Social Play (6人@$83)
+  - 📍 Pick it up, 13B, Block 1, Wah Fung Industrial Centre, 33-39 Kwai Fung Cres, Kwai Chung, 香港
+  - 🔗 RSVP: https://reclub.co/m/LJMAMD
 
 **3 月 31 日 (星期二)** 📚
 • 08:15 [Daughter UT] 科學
@@ -164,13 +168,14 @@ If nothing needs attention, reply HEARTBEAT_OK.
   - 🏫 學校：待定
 
 **4 月 1 日 (星期三)**
-• [Raymond] 匹克球 @ 愉景新城會所 (TBD 10-12 或 10-13)
+• 13:00-16:00 [Raymond] 匹克球 @ 愉景新城會所
   - 👥 預報：Rex🐻 / 珠珠 / 陳太 / So / 黃生 / ?
 • 16:30-18:30 [Daughter] 武術補堂 🥋
-• 20:00-22:00 [Raymond] Pickleball with Ivan @ 深井碧堤會所羽毛球場 (Tentative)
-  - 📍 深井碧堤會所羽毛球場 (Sham Tseng Bayside Club)
-  - 🚌 交通：234A 巴士 (一個站)
-  - ⏳ 狀態：Ivan 聽朝 book 場，confirm 後通知
+
+**4 月 3 日 (星期五)**
+• 14:00-17:00 [Raymond] Pickle City Tsuen Wan with Pulley
+  - 📍 Pickle City at Cable TV tower 27/F
+  - 🔗 RSVP: https://reclub.co/m/F6P9WV
 
 **4 月 4 日 (星期六)**
 • 12:00-13:00 [Raymond] 1hr 2.5+ 荃灣愉景新城BayPickle
@@ -192,6 +197,19 @@ If nothing needs attention, reply HEARTBEAT_OK.
 • 17:00-21:00 [Raymond] Bowling @ Pacific Club TST with Heidi
   - 📍 Pacific Club, TST
   - 👥 Raymond + Heidi
+
+**4 月 28 日 (星期二)**
+• [Couple] 林憶蓮演唱會 - 攞飛
+  - 🎫 Sun Life Presents: SANDY LAM RESONANCE : Reconstructed Hong Kong Exclusive
+  - 📍 Ticket collection via kiosk/courier
+  - 🔢 Transaction No.: 771005620000181
+
+**5 月 17 日 (星期日)**
+• 19:00 [Couple] 林憶蓮演唱會 @ Kai Tak Stadium
+  - 🎫 Sun Life Presents: SANDY LAM RESONANCE : Reconstructed Hong Kong Exclusive
+  - 📍 Kai Tak Stadium, Kai Tak Sports Park
+  - 👥 2 tickets (夫婦)
+  - 🔢 Transaction No.: 771005620000181
 
 **4 月 8 日 (星期三)**
 • [Raymond] 匹克球 @ 愉景新城會所 (TBD)

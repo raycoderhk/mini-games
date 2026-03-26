@@ -1,0 +1,42 @@
+🚀 Aliyun Coding Plan 訂購指南 (¥40 RMB/月)
+
+💰 計劃詳情
+- 名稱: 阿里雲編程計劃
+- 價格: ¥40 RMB/月 (約 HK$44)
+- API: Qwen 3.5/4.0
+- 節省: 相比 $500+/月，慳 99%
+
+📋 訂購步驟
+1. 註冊: https://www.alibabacloud.com/ (用 Gmail)
+2. 實名認證: 護照/身份證照片
+3. 購買: https://www.alibabacloud.com/product/coding-plan
+4. 付款: ¥40 RMB/月 (PayPal 最簡單)
+5. 獲取 API Key: 控制台 → Model Studio
+
+🔧 OpenClaw 配置
+ALIYUN_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx
+MODEL_PROVIDER=aliyun
+MODEL_NAME=qwen-plus
+
+⚠️ 注意
+- 用國際版 (唔好中國版)
+- 實名認證必須完成
+- API Key 保存好 (唔好 commit GitHub)
+- 每月配額足夠個人使用
+
+💡 建議
+1. 先用 PayPal 付款
+2. 買完試 API 先配置 OpenClaw
+3. 有問題隨時問我！
+
+📊 價格對比
+Aliyun: ¥40 RMB/月
+OpenAI: ~$50-100 USD (慳 95-98%)
+其他: $100-500 USD (慳 98-99%)
+
+每月節省: ¥40 RMB vs $500 USD = 慳 99% 🎉
+
+---
+發送時間: 2026-03-22
+發送者: Jarvis (OpenClaw Assistant)
+目的: 分享給 Sheng - Aliyun Coding Plan

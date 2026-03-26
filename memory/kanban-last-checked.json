@@ -1,5 +1,5 @@
 {
-  "lastChecked": "2026-03-25T01:00:00Z",
+  "lastChecked": "2026-03-26T00:19:00Z",
   "lastUpdated": "2026-03-23T09:42:31Z",
   "projectCount": 4,
   "completedProjects": 2,
@@ -7,7 +7,20 @@
   "todoProjects": 1,
   "blockedProjects": 0,
   "lastChange": "proj-003 added and marked as done (🎉 MILESTONE [Battle] Quiz Battle Mode - Production Ready)",
-  "notes": "Heartbeat check at 09:00 HKT March 25. Kanban board: no updates since March 23. URGENT: Pickleball at 9:45 AM HKT (45 minutes) - within 2-hour threshold. Sleep time ended, normal notifications active. Wife business trip Day 3. Morning newspaper delivered earlier.",
+  "notes": "Heartbeat check at 08:19 HKT March 26 - DAYTIME ACTIVE (sleep time ended). Kanban board: no updates since March 23. Last email check: 18 minutes ago (12:01 AM UTC, showed 0 unread emails - 7th consecutive check with script bug). Morning Newspaper cron job completed successfully at 08:01 HKT (already delivered). Today's events (March 26): 08:15 [Daughter UT] 中文 (4 minutes ago - EVENT IN PROGRESS/MISSED), 09:45 [Daughter UT] CES (1h 26m - URGENT ALERT <2h), 17:15 [Raymond] Gym (8h 56m), [Wife] 出差第 4 日. URGENT EVENT DETECTED: 09:45 [Daughter UT] CES starts in 1h 26m (within 2h). Sleep time has ended, normal notifications active.",
   "sleepTimeCheck": false,
-  "urgentAlert": true
+  "sleepTimeActive": false,
+  "sleepTimeStarted": "2026-03-25T15:00:00Z",
+  "sleepTimeEnded": "2026-03-26T00:00:00Z",
+  "daytimeActive": true,
+  "urgentAlert": true,
+  "urgentEvents": [
+    "09:45 [Daughter UT] CES (1h 26m from now)"
+  ],
+  "missedEvent": "08:15 [Daughter UT] 中文 (4 minutes ago)",
+  "emailCheckStatus": "Last check 18 minutes ago, showed 0 unread emails (script bug persists)",
+  "nextEmailCheck": "12:30 AM UTC (8:30 AM HKT)",
+  "todaysEvents": "March 26: 08:15 [Daughter UT] 中文 (MISSED - 4m ago), 09:45 [Daughter UT] CES (1h 26m - URGENT), 17:15 [Raymond] Gym (8h 56m), [Wife] 出差第 4 日",
+  "timeToNextEvent": "1 hour 26 minutes until next event (09:45 CES) - URGENT ALERT",
+  "systemStatus": "Morning Newspaper cron job restored, email checker bug persists, sleep time ended"
 }
