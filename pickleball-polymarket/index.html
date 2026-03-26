@@ -316,7 +316,11 @@
                 <button class="bet-btn" data-color="Purple" style="--dot:#9b59b6">🟣 Purple</button>
                 <button class="bet-btn" data-color="Green" style="--dot:#27ae60">🟢 Green</button>
                 <button class="bet-btn" data-color="Red" style="--dot:#e74c3c">🔴 Red</button>
-                <button class="bet-btn" data-color="Other" style="--dot:#95a5a6">⚪ Other</button>
+                <button class="bet-btn" data-color="Orange" style="--dot:#e67e22">🟠 Orange</button>
+                <button class="bet-btn" data-color="Pink" style="--dot:#fd79a8">🩷 Pink</button>
+                <button class="bet-btn" data-color="White" style="--dot:#ecf0f1">⚪ White</button>
+                <button class="bet-btn" data-color="Yellow" style="--dot:#f1c40f">🟡 Yellow</button>
+                <button class="bet-btn" data-color="Other" style="--dot:#95a5a6">⚫ Other</button>
             </div>
         </div>
 
@@ -361,6 +365,10 @@
                 <option value="Purple">Purple</option>
                 <option value="Green">Green</option>
                 <option value="Red">Red</option>
+                <option value="Orange">Orange</option>
+                <option value="Pink">Pink</option>
+                <option value="White">White</option>
+                <option value="Yellow">Yellow</option>
                 <option value="Other">Other</option>
             </select>
         </div>
@@ -375,9 +383,9 @@
     const STORAGE_KEY = 'pickleball_bets_v1';
     const ADMIN_PWD = 'pickle2024';
 
-    const COLORS = ['Blue', 'Purple', 'Green', 'Red', 'Other'];
+    const COLORS = ['Blue', 'Purple', 'Green', 'Red', 'Orange', 'Pink', 'White', 'Yellow', 'Other'];
     const COLOR_DOTS = {
-        Blue: '#2196F3', Purple: '#9b59b6', Green: '#27ae60', Red: '#e74c3c', Other: '#95a5a6'
+        Blue: '#2196F3', Purple: '#9b59b6', Green: '#27ae60', Red: '#e74c3c', Orange: '#e67e22', Pink: '#fd79a8', White: '#ecf0f1', Yellow: '#f1c40f', Other: '#95a5a6'
     };
 
     let state = {
