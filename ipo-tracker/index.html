@@ -350,27 +350,41 @@
         let stockPrices = {};
         let currentStock = '1021';
 
-        // CORS proxy
-        const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+        // CORS proxies - try multiple
+        const CORS_PROXIES = [
+            'https://corsproxy.io/?',
+            'https://api.codetabs.com/v1/proxy?quest='
+        ];
+        let proxyIndex = 0;
         
         // Fetch prices from Yahoo Finance via CORS proxy
         async function fetchYahooPrice(symbol) {
             try {
-                // Use Yahoo Finance quote API
-                const yahooUrl = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${symbol}&fields=regularMarketPrice,regularMarketChange,regularMarketChangePercent,regularMarketTime`;
-                const response = await fetch(CORS_PROXY + encodeURIComponent(yahooUrl));
-                const data = await response.json();
+                const yahooUrl = `https://query2.finance.yahoo.com/v7/finance/quote?symbols=${symbol}&fields=regularMarketPrice,regularMarketChange,regularMarketChangePercent,regularMarketTime`;
                 
-                if (data.quoteResponse && data.quoteResponse.result && data.quoteResponse.result[0]) {
-                    const result = data.quoteResponse.result[0];
-                    return {
-                        price: result.regularMarketPrice || result.previousClose || 0,
-                        change: result.regularMarketChange || 0,
-                        changePercent: result.regularMarketChangePercent || 0,
-                        marketTime: result.regularMarketTime
-                    };
+                // Try each proxy
+                for (let i = 0; i < CORS_PROXIES.length; i++) {
+                    try {
+                        const proxy = CORS_PROXIES[i];
+                        const response = await fetch(proxy + encodeURIComponent(yahooUrl), { timeout: 5000 });
+                        if (!response.ok) continue;
+                        const data = await response.json();
+                        
+                        if (data.quoteResponse && data.quoteResponse.result && data.quoteResponse.result[0]) {
+                            const result = data.quoteResponse.result[0];
+                            return {
+                                price: result.regularMarketPrice || result.previousClose || 0,
+                                change: result.regularMarketChange || 0,
+                                changePercent: result.regularMarketChangePercent || 0,
+                                marketTime: result.regularMarketTime
+                            };
+                        }
+                    } catch (e) {
+                        console.warn(`Proxy ${i} failed, trying next...`);
+                        continue;
+                    }
                 }
-                throw new Error('No data');
+                throw new Error('All proxies failed');
             } catch (error) {
                 console.error(`Failed to fetch ${symbol}:`, error);
                 return null;
