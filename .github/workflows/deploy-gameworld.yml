@@ -5,6 +5,7 @@ on:
     branches: [ main ]
     paths:
       - 'games/2048-game/**'
+      - 'games/ipo-tracker/**'
   workflow_dispatch:
 
 jobs:
