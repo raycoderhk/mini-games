@@ -350,21 +350,24 @@
         let stockPrices = {};
         let currentStock = '1021';
 
-        // Fetch prices from Yahoo Finance
+        // CORS proxy
+        const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+        
+        // Fetch prices from Yahoo Finance via CORS proxy
         async function fetchYahooPrice(symbol) {
             try {
-                // Yahoo Finance quote API
-                const url = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1d`;
-                const response = await fetch(url);
+                // Use Yahoo Finance quote API
+                const yahooUrl = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${symbol}&fields=regularMarketPrice,regularMarketChange,regularMarketChangePercent,regularMarketTime`;
+                const response = await fetch(CORS_PROXY + encodeURIComponent(yahooUrl));
                 const data = await response.json();
                 
-                if (data.chart && data.chart.result && data.chart.result[0]) {
-                    const meta = data.chart.result[0].meta;
+                if (data.quoteResponse && data.quoteResponse.result && data.quoteResponse.result[0]) {
+                    const result = data.quoteResponse.result[0];
                     return {
-                        price: meta.regularMarketPrice || meta.previousClose,
-                        change: meta.regularMarketChange || 0,
-                        changePercent: meta.regularMarketChangePercent || 0,
-                        marketTime: meta.regularMarketTime
+                        price: result.regularMarketPrice || result.previousClose || 0,
+                        change: result.regularMarketChange || 0,
+                        changePercent: result.regularMarketChangePercent || 0,
+                        marketTime: result.regularMarketTime
                     };
                 }
                 throw new Error('No data');
