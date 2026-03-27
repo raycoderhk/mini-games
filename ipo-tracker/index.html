@@ -24,12 +24,6 @@
             min-height: 100vh;
             color: #ffffff;
         }
-        .text-muted {
-            color: #d1d5db !important;
-        }
-        .text-info {
-            color: #60a5fa !important;
-        }
         .navbar {
             background: rgba(10, 15, 26, 0.95) !important;
             backdrop-filter: blur(10px);
@@ -80,6 +74,17 @@
         .real-ipo { border-left: 3px solid var(--hk-green); }
         .upcoming-ipo { border-left: 3px solid var(--hk-gold); }
         .data-source {
+            font-size: 0.8rem;
+            color: #9ca3af;
+        }
+        .price-loading {
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .last-updated {
             font-size: 0.75rem;
             color: #6b7280;
         }
@@ -102,13 +107,24 @@
     </nav>
 
     <div class="container py-4">
+        <!-- Header with Timestamp -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+                <h5 class="mb-0"><i class="bi bi-clock me-1"></i>暗盤行情</h5>
+                <small class="last-updated">最後更新：<span id="last-updated">載入中...</span></small>
+            </div>
+            <button class="btn btn-sm btn-outline-primary" onclick="refreshPrices()">
+                <i class="bi bi-arrow-clockwise"></i> 刷新
+            </button>
+        </div>
+
         <!-- Stats Bar -->
         <div class="row g-3 mb-4">
             <div class="col-6 col-md-3">
                 <div class="card text-center py-3">
                     <div class="card-body p-0">
                         <h3 class="mb-0 text-white">30</h3>
-                        <small class="text-muted">本年新股</small>
+                        <small class="text-secondary">本年新股</small>
                     </div>
                 </div>
             </div>
@@ -116,7 +132,7 @@
                 <div class="card text-center py-3">
                     <div class="card-body p-0">
                         <h3 class="mb-0 text-white">$100.5B</h3>
-                        <small class="text-muted">集资总额</small>
+                        <small class="text-secondary">集资总额</small>
                     </div>
                 </div>
             </div>
@@ -124,7 +140,7 @@
                 <div class="card text-center py-3">
                     <div class="card-body p-0">
                         <h3 class="mb-0 text-warning">5</h3>
-                        <small class="text-muted">本月上市</small>
+                        <small class="text-secondary">本月上市</small>
                     </div>
                 </div>
             </div>
@@ -132,39 +148,38 @@
                 <div class="card text-center py-3">
                     <div class="card-body p-0">
                         <h3 class="mb-0 text-success">+24</h3>
-                        <small class="text-muted">首日上涨</small>
+                        <small class="text-secondary">首日上涨</small>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Upcoming IPOs -->
-        <section id="upcoming" class="mb-5">
-            <h4 class="section-title mb-3"><i class="bi bi-calendar-event me-2"></i>即將上市新股</h4>
-            <p class="data-source mb-2">數據來源：HKEX、AASTOCKS（更新日期：2026-03-27）</p>
-            <div class="row g-3" id="upcoming-ipo-list"></div>
-        </section>
-
-        <!-- Grey Market -->
+        <!-- Grey Market Table with Real Prices -->
         <section id="grey-market" class="mb-5">
-            <h4 class="section-title mb-3"><i class="bi bi-moon-stars me-2"></i>暗盤行情</h4>
+            <h4 class="section-title mb-3"><i class="bi bi-moon-stars me-2"></i>實時暗盤行情</h4>
             <div class="card">
                 <div class="table-responsive">
                     <table class="table table-dark table-hover mb-0">
                         <thead>
                             <tr>
                                 <th>股票</th>
-                                <th>暗盘价</th>
-                                <th>暗盘涨跌</th>
-                                <th>发行价</th>
+                                <th>發行價</th>
+                                <th>暗盤價</th>
+                                <th>升跌</th>
                                 <th>升跌幅</th>
                                 <th>上市日</th>
                             </tr>
                         </thead>
-                        <tbody id="grey-market-table"></tbody>
+                        <tbody id="grey-market-table">
+                            <tr><td colspan="6" class="text-center py-4"><i class="bi bi-hourglass-split price-loading"></i> 載入價格中...</td></tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
+            <p class="data-source mt-2">
+                <i class="bi bi-info-circle me-1"></i>
+                價格由 Yahoo Finance 提供 · 僅供參考
+            </p>
         </section>
 
         <!-- Holdings -->
@@ -185,11 +200,12 @@
                     
                     <!-- Stock Selector -->
                     <div class="mb-3">
-                        <label class="form-label text-muted small">选择新股：</label>
+                        <label class="form-label text-secondary small">选择新股：</label>
                         <div id="stock-chips" class="d-flex flex-wrap gap-2">
-                            <span class="stock-chip active" data-stock="01021">🤖 華沿機器人 01021</span>
-                            <span class="stock-chip" data-stock="02726">📊 瀚天天成 02726</span>
-                            <span class="stock-chip" data-stock="06636">👁️ 極視角 06636</span>
+                            <span class="stock-chip active" data-stock="1021">🤖 華沿機器人 01021</span>
+                            <span class="stock-chip" data-stock="2729">📦 凱樂士科技 02729</span>
+                            <span class="stock-chip" data-stock="2632">🚗 澤景股份 02632</span>
+                            <span class="stock-chip" data-stock="3355">💻 飛速創新 03355</span>
                         </div>
                     </div>
 
@@ -222,9 +238,9 @@
 
                     <!-- Custom Query -->
                     <div class="mt-3 pt-3 border-top border-secondary">
-                        <label class="form-label text-muted small">问 AI 问题：</label>
+                        <label class="form-label text-secondary small">问 AI 问题：</label>
                         <div class="input-group">
-                            <input type="text" class="form-control form-control-sm bg-dark text-light border-secondary" 
+                            <input type="text" class="form-control form-control-sm bg-dark text-white border-secondary" 
                                    id="ai-query" placeholder="例如：華沿機器人值得认购吗？">
                             <button class="btn btn-sm btn-primary" onclick="askAI()">
                                 <i class="bi bi-send"></i>
@@ -236,21 +252,27 @@
             </div>
         </section>
 
+        <!-- Upcoming IPOs -->
+        <section id="upcoming" class="mb-5">
+            <h4 class="section-title mb-3"><i class="bi bi-calendar-event me-2"></i>即將上市新股</h4>
+            <div class="row g-3" id="upcoming-ipo-list"></div>
+        </section>
+
         <!-- Footer -->
-        <footer class="text-center text-muted py-4">
-            <small>📈 IPO 追蹤器 | 數據來源：公開市場資料 | 僅供參考，不構成投資建議</small>
+        <footer class="text-center text-secondary py-4">
+            <small>📈 IPO 追蹤器 | 僅供參考，不構成投資建議</small>
         </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Real IPO Data (sourced from HKEX, AASTOCKS - 2026-03-27)
+        // IPO Data
         const ipoData = [
             {
-                code: '01021',
+                code: '1021',
                 name: '華沿機器人',
                 nameEn: 'Huayan Robotics',
-                price: 'HK$5.50',
+                issuePrice: 5.50,
                 lots: 2,
                 status: '🔥 今日暗盘!',
                 heat: 95,
@@ -258,181 +280,261 @@
                 icon: '🤖',
                 listingDate: '2026-03-28',
                 heatText: '🔥🔥🔥🔥🔥 (5/5) 今日暗盘！极高热度',
-                pros: ['AI/机器人概念，当前市场最热板块', '保荐人背景强劲', '公开发售反应热烈', '集资规模适中(约2亿美金)'],
-                cons: ['行业竞争激烈', '估值偏高', '依赖单一市场'],
-                advice: '今日暗盘！关注开盘价。若涨幅 <15% 可考虑持有，涨幅 >30% 注意回凋风险。'
+                pros: ['AI/机器人概念，当前市场最热板块', '保荐人背景强劲', '公开发售反应热烈'],
+                cons: ['行业竞争激烈', '估值偏高'],
+                advice: '今日暗盘！关注开盘价。若涨幅 <15% 可考虑持有。'
             },
             {
-                code: '02726',
-                name: '瀚天天成',
-                nameEn: 'Hantian Tech',
-                price: 'HK$76.26',
+                code: '2729',
+                name: '凱樂士科技',
+                nameEn: 'Galaxis Tech',
+                issuePrice: 18.20,
                 lots: 0,
-                status: '即将上市',
+                status: '已上市',
                 heat: 68,
-                industry: '半导体',
-                icon: '💎',
-                listingDate: '2026-03-30',
+                industry: '物流/自動化',
+                icon: '📦',
+                listingDate: '2026-03-24',
                 heatText: '🔥🔥🔥 (3/5) 热度中等',
-                pros: ['半导体国产替代概念', '碳化硅材料龙头'],
-                cons: ['行业周期性较强', '近期板块走势疲软'],
-                advice: '谨慎认购，关注定价。'
+                pros: ['物流自动化赛道', '国策支持'],
+                cons: ['集资规模较大', '竞争加剧'],
+                advice: '暗盘表现平稳，观望为主。'
             },
             {
-                code: '06636',
-                name: '極視角',
-                nameEn: 'Extreme Vision',
-                price: 'HK$40.00',
+                code: '2632',
+                name: '澤景股份',
+                nameEn: 'New Vision Auto',
+                issuePrice: 45.00,
                 lots: 0,
-                status: '即将上市',
+                status: '已上市',
                 heat: 72,
-                industry: 'AI/计算机视觉',
-                icon: '👁️',
-                listingDate: '2026-03-30',
+                industry: '汽車電子',
+                icon: '🚗',
+                listingDate: '2026-03-24',
                 heatText: '🔥🔥🔥🔥 (4/5) 热度较高',
-                pros: ['AI视觉概念', '市场份额领先'],
-                cons: ['竞争加剧', '技术迭代风险'],
-                advice: 'AI概念持续，可考虑认购。'
+                pros: ['新能源车概念', '市场份额领先'],
+                cons: ['行业周期性强', '毛利率承压'],
+                advice: '汽车电子赛道，可关注。'
             },
             {
-                code: '02526',
-                name: '德適-B',
-                nameEn: 'Debut Bio',
-                price: '待定',
+                code: '3355',
+                name: '飛速創新',
+                nameEn: 'Fs Com',
+                issuePrice: 38.00,
                 lots: 0,
-                status: '即将上市',
-                heat: 55,
-                industry: '生物科技',
-                icon: '🧬',
-                listingDate: '2026-03-30',
-                heatText: '🔥🔥 (2/5) 热度较低',
-                pros: ['创新器械', '医疗器械赛道'],
-                cons: ['研发风险大', '商业化进度慢'],
-                advice: '高风险标的，观望为主。'
+                status: '已上市',
+                heat: 78,
+                industry: '軟件服務',
+                icon: '💻',
+                listingDate: '2026-03-23',
+                heatText: '🔥🔥🔥🔥 (4/5) 热度较高',
+                pros: ['网络解决方案龙头', '业绩增长稳定'],
+                cons: ['估值偏高', '应收账款较高'],
+                advice: '业绩稳健，可长线持有。'
             }
-        ];
-
-        // Real Grey Market Data (2026-03-27) - 華沿機器人 TODAY!
-        const greyMarketData = [
-            { code: '01021', name: '華沿機器人', greyPrice: '🔥暗盘中', change: '今日暗盘!', issuePrice: 'HK$5.50', spread: '-', listingDate: '03/28' },
-            { code: '02729', name: '凱樂士科技', greyPrice: 'HK$19.20', change: '+8.0%', issuePrice: 'HK$16.40-20.40', spread: '+8.0%', listingDate: '03/24' },
-            { code: '02632', name: '澤景股份', greyPrice: 'HK$45.50', change: '-3.2%', issuePrice: 'HK$42-48', spread: '-3.2%', listingDate: '03/24' },
-            { code: '03355', name: '飛速創新', greyPrice: 'HK$42.00', change: '+9.5%', issuePrice: 'HK$35.20-41.60', spread: '+9.5%', listingDate: '03/23' }
         ];
 
         // Holdings - Ray's actual holdings
         const holdingsData = [
-            { code: '01021', name: '華沿機器人', lots: 2, avgCost: 5.50, currentPrice: '🔥 暗盘中!' }
+            { code: '1021', name: '華沿機器人', lots: 2, avgCost: 5.50 }
         ];
 
-        let currentStock = '01021';
+        // Stock data for Yahoo Finance
+        const stockSymbols = {
+            '1021': { symbol: '1021.HK', name: '華沿機器人', issuePrice: 5.50 },
+            '2729': { symbol: '2729.HK', name: '凱樂士科技', issuePrice: 18.20 },
+            '2632': { symbol: '2632.HK', name: '澤景股份', issuePrice: 45.00 },
+            '3355': { symbol: '3355.HK', name: '飛速創新', issuePrice: 38.00 }
+        };
 
-        function renderIPOs() {
-            document.getElementById('upcoming-ipo-list').innerHTML = ipoData.map(ipo => `
-                <div class="col-md-6 col-lg-6">
-                    <div class="card ipo-card h-100 ${ipo.code === '01021' ? 'border-warning border-2 real-ipo' : 'upcoming-ipo'}">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between mb-2">
-                                <div>
-                                    <span class="badge bg-primary">${ipo.code}.HK</span>
-                                    <h5 class="mt-2 mb-0">${ipo.icon} ${ipo.name}</h5>
-                                    <small class="text-muted">${ipo.nameEn}</small>
-                                </div>
-                                <span class="badge ${ipo.lots > 0 ? 'bg-warning text-dark' : ipo.status.includes('暗盘') ? 'bg-danger' : 'bg-secondary'}">${ipo.status}</span>
-                            </div>
-                            <div class="mt-3">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <small class="text-muted">发行价</small><span>${ipo.price}</span>
-                                </div>
-                                <div class="d-flex justify-content-between mb-1">
-                                    <small class="text-muted">行业</small><span>${ipo.industry}</span>
-                                </div>
-                                <div class="d-flex justify-content-between mb-1">
-                                    <small class="text-muted">上市日</small><span>${ipo.listingDate}</span>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-muted">热度</small>
-                                    <div class="heat-bar" style="width:80px">
-                                        <div class="heat-fill" style="width:${ipo.heat}%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            ${ipo.lots > 0 ? `<div class="mt-2 pt-2 border-top"><small class="text-success"><i class="bi bi-check-circle"></i> 你中了 ${ipo.lots} 手</small></div>` : ''}
-                        </div>
-                    </div>
-                </div>
-            `).join('');
+        let stockPrices = {};
+        let currentStock = '1021';
+
+        // Fetch prices from Yahoo Finance
+        async function fetchYahooPrice(symbol) {
+            try {
+                // Yahoo Finance quote API
+                const url = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1d`;
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data.chart && data.chart.result && data.chart.result[0]) {
+                    const meta = data.chart.result[0].meta;
+                    return {
+                        price: meta.regularMarketPrice || meta.previousClose,
+                        change: meta.regularMarketChange || 0,
+                        changePercent: meta.regularMarketChangePercent || 0,
+                        marketTime: meta.regularMarketTime
+                    };
+                }
+                throw new Error('No data');
+            } catch (error) {
+                console.error(`Failed to fetch ${symbol}:`, error);
+                return null;
+            }
         }
 
-        function renderGreyMarket() {
-            document.getElementById('grey-market-table').innerHTML = greyMarketData.map(s => {
-                const isUp = s.change.startsWith('+');
-                const isPending = s.change.includes('待') || s.change.includes('明天');
-                const cls = isPending ? 'text-muted' : (isUp ? 'price-up' : 'price-down');
+        // Fetch all prices
+        async function fetchAllPrices() {
+            document.getElementById('last-updated').textContent = '載入中...';
+            document.getElementById('grey-market-table').innerHTML = 
+                '<tr><td colspan="6" class="text-center py-4"><i class="bi bi-hourglass-split price-loading"></i> 載入價格中...</td></tr>';
+            
+            const promises = Object.keys(stockSymbols).map(async (code) => {
+                const stock = stockSymbols[code];
+                const data = await fetchYahooPrice(stock.symbol);
+                if (data) {
+                    stockPrices[code] = {
+                        ...data,
+                        issuePrice: stock.issuePrice,
+                        name: stock.name
+                    };
+                }
+            });
+
+            await Promise.all(promises);
+            
+            renderPrices();
+            
+            // Update timestamp
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('zh-HK', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            const dateStr = now.toLocaleDateString('zh-HK', {
+                month: '2-digit',
+                day: '2-digit'
+            });
+            document.getElementById('last-updated').textContent = `${dateStr} ${timeStr}`;
+        }
+
+        function renderPrices() {
+            const tbody = document.getElementById('grey-market-table');
+            
+            if (Object.keys(stockPrices).length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-warning"><i class="bi bi-exclamation-triangle"></i> 無法載入價格，請檢查網絡</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = Object.keys(stockSymbols).map(code => {
+                const stock = stockSymbols[code];
+                const priceData = stockPrices[code];
+                
+                if (!priceData) {
+                    return `<tr>
+                        <td><span class="badge bg-primary">${stock.symbol}</span> <strong>${stock.name}</strong></td>
+                        <td>HK$${stock.issuePrice.toFixed(2)}</td>
+                        <td colspan="4" class="text-muted"><i class="bi bi-hourglass"></i> 無價格數據</td>
+                    </tr>`;
+                }
+
+                const change = priceData.price - stock.issuePrice;
+                const changePercent = (change / stock.issuePrice) * 100;
+                const isUp = change >= 0;
+                const cls = isUp ? 'price-up' : 'price-down';
+                const changeStr = isUp ? `+${change.toFixed(2)}` : change.toFixed(2);
+                const percentStr = isUp ? `+${changePercent.toFixed(2)}%` : `${changePercent.toFixed(2)}%`;
+
+                const ipo = ipoData.find(i => i.code === code);
+                
                 return `<tr>
-                    <td><span class="badge bg-primary me-2">${s.code}</span><strong>${s.name}</strong></td>
-                    <td><strong>${s.greyPrice}</strong></td>
-                    <td class="${cls}">${s.change}</td>
-                    <td>${s.issuePrice}</td>
-                    <td class="${cls}">${s.spread}</td>
-                    <td>${s.listingDate}</td>
+                    <td>
+                        <span class="badge bg-primary">${stock.symbol}</span>
+                        <strong>${stock.name}</strong>
+                        ${code === '1021' ? '<span class="badge bg-warning text-dark ms-1">2手</span>' : ''}
+                    </td>
+                    <td>HK$${stock.issuePrice.toFixed(2)}</td>
+                    <td class="fw-bold ${cls}">HK$${priceData.price.toFixed(2)}</td>
+                    <td class="${cls}">${changeStr}</td>
+                    <td class="${cls}">${percentStr}</td>
+                    <td>${ipo ? ipo.listingDate : '-'}</td>
                 </tr>`;
             }).join('');
         }
 
+        function refreshPrices() {
+            fetchAllPrices();
+        }
+
+        // Holdings
         function renderHoldings() {
             const el = document.getElementById('holdings-list');
-            if (!holdingsData.length) { el.innerHTML = '<div class="col-12 text-center text-muted py-4"><i class="bi bi-inbox fs-1"></i><p class="mt-2">暂无持仓</p></div>'; return; }
-            el.innerHTML = holdingsData.map(h => `
-                <div class="col-md-6 col-lg-4">
+            if (!holdingsData.length) { 
+                el.innerHTML = '<div class="col-12 text-center text-secondary py-4"><i class="bi bi-inbox fs-1"></i><p class="mt-2">暂无持仓</p></div>'; 
+                return; 
+            }
+            
+            el.innerHTML = holdingsData.map(h => {
+                const priceData = stockPrices[h.code];
+                const currentPrice = priceData ? `HK$${priceData.price.toFixed(2)}` : '載入中...';
+                const pnl = priceData ? ((priceData.price - h.avgCost) / h.avgCost * 100).toFixed(1) : '--';
+                const pnlClass = priceData && priceData.price >= h.avgCost ? 'text-success' : 'text-danger';
+                const pnlPrefix = priceData && priceData.price >= h.avgCost ? '+' : '';
+                
+                return `<div class="col-md-6 col-lg-4">
                     <div class="card border-warning border-2">
                         <div class="card-header d-flex justify-content-between">
-                            <strong>${h.name}</strong>
+                            <strong>🤖 ${h.name}</strong>
                             <span class="badge bg-warning text-dark">${h.lots} 手</span>
                         </div>
                         <div class="card-body">
                             <div class="row text-center">
-                                <div class="col-4"><small class="text-muted">成本</small><br><strong>HK$${h.avgCost.toFixed(2)}</strong></div>
-                                <div class="col-4"><small class="text-muted">当前</small><br><strong>${h.currentPrice}</strong></div>
-                                <div class="col-4"><small class="text-muted">盈亏</small><br><strong class="text-warning">--</strong></div>
+                                <div class="col-4"><small class="text-secondary">成本</small><br><strong>HK$${h.avgCost.toFixed(2)}</strong></div>
+                                <div class="col-4"><small class="text-secondary">当前</small><br><strong>${currentPrice}</strong></div>
+                                <div class="col-4"><small class="text-secondary">盈亏</small><br><strong class="${pnlClass}">${pnlPrefix}${pnl}%</strong></div>
                             </div>
                         </div>
                         <div class="card-footer text-center bg-dark bg-opacity-50">
                             <small class="text-danger fw-bold"><i class="bi bi-calendar-event"></i> 🔥 今日暗盘!</small>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                </div>`;
+            }).join('');
         }
 
+        // AI Analysis
         function renderAIAnalysis(stockCode) {
             const data = ipoData.find(s => s.code === stockCode) || ipoData[0];
-            const a = data;
+            const priceData = stockPrices[stockCode];
             
-            document.getElementById('ai-stock-name').textContent = `${data.name} (${data.code}.HK)`;
+            document.getElementById('ai-stock-name').textContent = `${data.name} (${data.code}21.HK)`;
+            
+            let priceInfo = '';
+            if (priceData) {
+                const change = priceData.price - data.issuePrice;
+                const changePercent = (change / data.issuePrice) * 100;
+                const isUp = change >= 0;
+                const cls = isUp ? 'price-up' : 'price-down';
+                priceInfo = `<div class="mb-2">
+                    <span class="${cls} fw-bold">暗盤價：HK$${priceData.price.toFixed(2)} (${isUp ? '+' : ''}${changePercent.toFixed(1)}%)</span>
+                </div>`;
+            }
             
             document.getElementById('heat-content').innerHTML = `
-                <p class="mb-2">${a.heatText}</p>
+                ${priceInfo}
+                <p class="mb-2">${data.heatText}</p>
                 <div class="small">
-                    <div class="mb-1"><strong class="text-muted">发行价：</strong>${data.price}</div>
-                    <div class="mb-1"><strong class="text-muted">行业：</strong>${data.industry}</div>
-                    <div class="mb-1"><strong class="text-muted">上市日期：</strong>${data.listingDate}</div>
-                    <div><strong class="text-muted">状态：</strong><span class="badge ${data.lots > 0 ? 'bg-warning text-dark' : 'bg-secondary'}">${data.status}</span></div>
+                    <div class="mb-1"><strong class="text-secondary">發行價：</strong>HK$${data.issuePrice.toFixed(2)}</div>
+                    <div class="mb-1"><strong class="text-secondary">行業：</strong>${data.industry}</div>
+                    <div class="mb-1"><strong class="text-secondary">上市日期：</strong>${data.listingDate}</div>
+                    <div><strong class="text-secondary">狀態：</strong><span class="badge ${data.lots > 0 ? 'bg-warning text-dark' : 'bg-secondary'}">${data.status}</span></div>
                 </div>`;
             
             document.getElementById('advice-content').innerHTML = `
-                <p class="mb-2">${a.advice}</p>
+                <p class="mb-2">${data.advice}</p>
                 <div class="small">
                     <strong class="pros"><i class="bi bi-plus-circle"></i> 利好因素：</strong>
-                    <ul class="mb-2">${a.pros.map(p => `<li>${p}</li>`).join('')}</ul>
+                    <ul class="mb-2">${data.pros.map(p => `<li>${p}</li>`).join('')}</ul>
                     <strong class="cons"><i class="bi bi-dash-circle"></i> 利空因素：</strong>
-                    <ul class="mb-0">${a.cons.map(c => `<li>${c}</li>`).join('')}</ul>
+                    <ul class="mb-0">${data.cons.map(c => `<li>${c}</li>`).join('')}</ul>
                 </div>`;
             
             document.getElementById('risk-content').innerHTML = `
                 <ul class="mb-0 small">
-                    ${a.cons.map(c => `<li class="text-danger">${c}</li>`).join('')}
-                    <li class="text-muted">以上分析仅供参考，不构成投资建议</li>
+                    ${data.cons.map(c => `<li class="text-danger">${c}</li>`).join('')}
+                    <li class="text-secondary">以上分析仅供参考，不构成投资建议</li>
                 </ul>`;
         }
 
@@ -453,26 +555,32 @@
             
             const answerEl = document.getElementById('ai-answer');
             answerEl.style.display = 'block';
-            answerEl.innerHTML = '<span class="text-muted">AI 分析中...</span>';
+            answerEl.innerHTML = '<span class="text-secondary"><i class="bi bi-hourglass-split"></i> AI 分析中...</span>';
             
-            // Simulated AI response
             setTimeout(() => {
                 const data = ipoData.find(s => s.code === currentStock) || ipoData[0];
+                const priceData = stockPrices[currentStock];
+                
+                let priceContext = '';
+                if (priceData) {
+                    const change = priceData.price - data.issuePrice;
+                    const changePercent = (change / data.issuePrice) * 100;
+                    priceContext = `目前暗盤價 HK$${priceData.price.toFixed(2)}，較發行價 ${changePercent >= 0 ? '+' : ''}${changePercent.toFixed(1)}%。`;
+                }
+                
                 const responses = [
-                    `根據市場數據，${data.name}（${data.code}.HK）暗盤表現值得期待。
+                    `${data.name}（${data.code}21.HK）分析：
 
-分析重點：
-• ${data.industry} 概念持續發酵
-• 發行價 ${data.price}，集資規模適中
-• 熱度指數 ${data.heat}/100
+${priceContext}
 
-操作建議：
-• 若暗盤漲幅 <15%：可考慮持有
-• 若漲幅 15-30%：分批獲利
-• 若漲幅 >30%：注意回調風險
+行業：${data.industry}
+熱度：${data.heatText}
+
+認購建議：
+${data.advice}
 
 ⚠️ 風險提示：以上分析僅供參考，請根據個人風險承受能力做出投資決定。`,
-                    `關於 ${data.name}（${data.code}.HK）的认购建议：
+                    `關於 ${data.name}（${data.code}21.HK）：
 
 ✅ 利好因素：
 ${data.pros.map(p => '• ' + p).join('\n')}
@@ -480,19 +588,67 @@ ${data.pros.map(p => '• ' + p).join('\n')}
 ⚠️ 利空因素：
 ${data.cons.map(c => '• ' + c).join('\n')}
 
+${priceContext}
+
 💡 綜合建議：${data.advice}`
                 ];
+                
                 answerEl.innerHTML = responses[Math.floor(Math.random() * responses.length)];
                 document.getElementById('ai-query').value = '';
             }, 1500);
         }
 
+        // Upcoming IPOs
+        function renderUpcomingIPOs() {
+            const upcoming = ipoData.filter(ipo => ipo.status.includes('招股') || ipo.status.includes('截止'));
+            const container = document.getElementById('upcoming-ipo-list');
+            
+            if (upcoming.length === 0) {
+                container.innerHTML = '<div class="col-12 text-center text-secondary py-4"><i class="bi bi-calendar-check fs-1"></i><p class="mt-2">目前無正在招股的新股</p></div>';
+                return;
+            }
+            
+            container.innerHTML = upcoming.map(ipo => `
+                <div class="col-md-6 col-lg-4">
+                    <div class="card ipo-card h-100 upcoming-ipo">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <div>
+                                    <span class="badge bg-primary">${ipo.code}21.HK</span>
+                                    <h5 class="mt-2 mb-0">${ipo.icon} ${ipo.name}</h5>
+                                    <small class="text-secondary">${ipo.nameEn}</small>
+                                </div>
+                                <span class="badge ${ipo.status.includes('截止') ? 'bg-danger' : 'bg-warning text-dark'}">${ipo.status}</span>
+                            </div>
+                            <div class="mt-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <small class="text-secondary">發行價</small><span>HK$${ipo.issuePrice.toFixed(2)}</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <small class="text-secondary">行業</small><span>${ipo.industry}</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <small class="text-secondary">上市日</small><span>${ipo.listingDate}</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-secondary">熱度</small>
+                                    <div class="heat-bar" style="width:80px">
+                                        <div class="heat-fill" style="width:${ipo.heat}%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
         // Init
         document.addEventListener('DOMContentLoaded', () => {
-            renderIPOs();
-            renderGreyMarket();
             renderHoldings();
-            renderAIAnalysis('01021');
+            renderUpcomingIPOs();
+            renderAIAnalysis('1021');
+            fetchAllPrices();
         });
     </script>
 </body>
