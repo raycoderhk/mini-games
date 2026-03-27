@@ -5,7 +5,8 @@ on:
     branches: [ main ]
     paths:
       - 'games/2048-game/**'
-      - 'games/ipo-tracker/**'
+      - 'ipo-tracker/**'
+      - 'index.html'
   workflow_dispatch:
 
 jobs:
