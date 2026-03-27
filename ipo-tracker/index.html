@@ -340,53 +340,71 @@
         ];
 
         // Stock data for Yahoo Finance
+        // Note: 1021.HK is grey market today (2026-03-27), Yahoo may not have live price yet
         const stockSymbols = {
-            '1021': { symbol: '1021.HK', name: '華沿機器人', issuePrice: 5.50 },
-            '2729': { symbol: '2729.HK', name: '凱樂士科技', issuePrice: 18.20 },
-            '2632': { symbol: '2632.HK', name: '澤景股份', issuePrice: 45.00 },
-            '3355': { symbol: '3355.HK', name: '飛速創新', issuePrice: 38.00 }
+            '1021': { symbol: '1021.HK', name: '華沿機器人', issuePrice: 5.50, isGreyMarket: true },
+            '2729': { symbol: '2729.HK', name: '凱樂士科技', issuePrice: 18.20, isGreyMarket: false },
+            '2632': { symbol: '2632.HK', name: '澤景股份', issuePrice: 45.00, isGreyMarket: false },
+            '3355': { symbol: '3355.HK', name: '飛速創新', issuePrice: 38.00, isGreyMarket: false }
         };
 
         let stockPrices = {};
         let currentStock = '1021';
 
-        // CORS proxies - try multiple
-        const CORS_PROXIES = [
-            'https://corsproxy.io/?',
-            'https://api.codetabs.com/v1/proxy?quest='
-        ];
-        let proxyIndex = 0;
-        
-        // Fetch prices from Yahoo Finance via CORS proxy
+        // Direct Yahoo Finance fetch (works from browser)
         async function fetchYahooPrice(symbol) {
             try {
-                const yahooUrl = `https://query2.finance.yahoo.com/v7/finance/quote?symbols=${symbol}&fields=regularMarketPrice,regularMarketChange,regularMarketChangePercent,regularMarketTime`;
-                
-                // Try each proxy
-                for (let i = 0; i < CORS_PROXIES.length; i++) {
-                    try {
-                        const proxy = CORS_PROXIES[i];
-                        const response = await fetch(proxy + encodeURIComponent(yahooUrl), { timeout: 5000 });
-                        if (!response.ok) continue;
-                        const data = await response.json();
-                        
-                        if (data.quoteResponse && data.quoteResponse.result && data.quoteResponse.result[0]) {
-                            const result = data.quoteResponse.result[0];
-                            return {
-                                price: result.regularMarketPrice || result.previousClose || 0,
-                                change: result.regularMarketChange || 0,
-                                changePercent: result.regularMarketChangePercent || 0,
-                                marketTime: result.regularMarketTime
-                            };
-                        }
-                    } catch (e) {
-                        console.warn(`Proxy ${i} failed, trying next...`);
-                        continue;
+                // Try Yahoo Finance chart API
+                const url = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=5d`;
+                const response = await fetch(url, {
+                    headers: {
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
                     }
+                });
+                
+                if (!response.ok) {
+                    // Fallback to try query2
+                    const url2 = `https://query2.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=5d`;
+                    const response2 = await fetch(url2, {
+                        headers: {
+                            'User-Agent': 'Mozilla/5.0'
+                        }
+                    });
+                    if (!response2.ok) throw new Error('Yahoo rate limited');
+                    const data2 = await response2.json();
+                    return parseYahooChart(data2, symbol);
                 }
-                throw new Error('All proxies failed');
+                
+                const data = await response.json();
+                return parseYahooChart(data, symbol);
+                
             } catch (error) {
                 console.error(`Failed to fetch ${symbol}:`, error);
+                return null;
+            }
+        }
+        
+        function parseYahooChart(data, symbol) {
+            try {
+                const result = data.chart?.result?.[0];
+                if (!result) return null;
+                
+                const meta = result.meta;
+                const quote = result.indicators?.quote?.[0];
+                
+                // Get the last close price
+                const closes = quote?.close || [];
+                const lastClose = closes[closes.length - 1];
+                const prevClose = meta.previousClose || lastClose;
+                
+                return {
+                    price: meta.regularMarketPrice || lastClose || prevClose,
+                    change: meta.regularMarketChange || 0,
+                    changePercent: meta.regularMarketChangePercent || 0,
+                    marketTime: meta.regularMarketTime
+                };
+            } catch (e) {
+                console.error('Parse error:', e);
                 return null;
             }
         }
@@ -430,20 +448,32 @@
         function renderPrices() {
             const tbody = document.getElementById('grey-market-table');
             
-            if (Object.keys(stockPrices).length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-warning"><i class="bi bi-exclamation-triangle"></i> 無法載入價格，請檢查網絡</td></tr>';
-                return;
-            }
-
             tbody.innerHTML = Object.keys(stockSymbols).map(code => {
                 const stock = stockSymbols[code];
                 const priceData = stockPrices[code];
+                const ipo = ipoData.find(i => i.code === code);
                 
-                if (!priceData) {
+                // Grey market stocks (not yet listed) - show issue price and "暗盘"
+                if (stock.isGreyMarket) {
+                    return `<tr>
+                        <td>
+                            <span class="badge bg-primary">${stock.symbol}</span>
+                            <strong>${stock.name}</strong>
+                            ${code === '1021' ? '<span class="badge bg-warning text-dark ms-1">2手</span>' : ''}
+                        </td>
+                        <td>HK$${stock.issuePrice.toFixed(2)}</td>
+                        <td colspan="4" class="text-warning">
+                            <i class="bi bi-moon-stars"></i> 🔥 今日暗盘! 发行价: HK$${stock.issuePrice.toFixed(2)}
+                        </td>
+                    </tr>`;
+                }
+                
+                // Listed stocks - show live price
+                if (!priceData || !priceData.price) {
                     return `<tr>
                         <td><span class="badge bg-primary">${stock.symbol}</span> <strong>${stock.name}</strong></td>
                         <td>HK$${stock.issuePrice.toFixed(2)}</td>
-                        <td colspan="4" class="text-muted"><i class="bi bi-hourglass"></i> 無價格數據</td>
+                        <td colspan="4" class="text-muted"><i class="bi bi-hourglass"></i> 無法載入</td>
                     </tr>`;
                 }
 
@@ -454,13 +484,10 @@
                 const changeStr = isUp ? `+${change.toFixed(2)}` : change.toFixed(2);
                 const percentStr = isUp ? `+${changePercent.toFixed(2)}%` : `${changePercent.toFixed(2)}%`;
 
-                const ipo = ipoData.find(i => i.code === code);
-                
                 return `<tr>
                     <td>
                         <span class="badge bg-primary">${stock.symbol}</span>
                         <strong>${stock.name}</strong>
-                        ${code === '1021' ? '<span class="badge bg-warning text-dark ms-1">2手</span>' : ''}
                     </td>
                     <td>HK$${stock.issuePrice.toFixed(2)}</td>
                     <td class="fw-bold ${cls}">HK$${priceData.price.toFixed(2)}</td>
