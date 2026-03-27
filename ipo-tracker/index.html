@@ -71,6 +71,12 @@
         }
         .pros { color: var(--hk-green); }
         .cons { color: var(--hk-red); }
+        .real-ipo { border-left: 3px solid var(--hk-green); }
+        .upcoming-ipo { border-left: 3px solid var(--hk-gold); }
+        .data-source {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
     </style>
 </head>
 <body>
@@ -81,7 +87,7 @@
                 <i class="bi bi-graph-up-arrow me-2"></i>IPO 追蹤器
             </a>
             <div class="navbar-nav ms-auto">
-                <a class="nav-link active" href="#"><i class="bi bi-calendar-event me-1"></i>新股</a>
+                <a class="nav-link active" href="#upcoming"><i class="bi bi-calendar-event me-1"></i>新股</a>
                 <a class="nav-link" href="#grey-market"><i class="bi bi-moon-stars me-1"></i>暗盘</a>
                 <a class="nav-link" href="#holdings"><i class="bi bi-wallet2 me-1"></i>持仓</a>
                 <a class="nav-link" href="#ai-analysis"><span class="badge ai-badge">AI</span> 分析</a>
@@ -95,15 +101,15 @@
             <div class="col-6 col-md-3">
                 <div class="card text-center py-3">
                     <div class="card-body p-0">
-                        <h3 class="mb-0 text-white">12</h3>
-                        <small class="text-muted">本月新股</small>
+                        <h3 class="mb-0 text-white">30</h3>
+                        <small class="text-muted">本年新股</small>
                     </div>
                 </div>
             </div>
             <div class="col-6 col-md-3">
                 <div class="card text-center py-3">
                     <div class="card-body p-0">
-                        <h3 class="mb-0 text-white">$28.5B</h3>
+                        <h3 class="mb-0 text-white">$100.5B</h3>
                         <small class="text-muted">集资总额</small>
                     </div>
                 </div>
@@ -111,16 +117,16 @@
             <div class="col-6 col-md-3">
                 <div class="card text-center py-3">
                     <div class="card-body p-0">
-                        <h3 class="mb-0 text-warning">3</h3>
-                        <small class="text-muted">热门新股</small>
+                        <h3 class="mb-0 text-warning">5</h3>
+                        <small class="text-muted">本月上市</small>
                     </div>
                 </div>
             </div>
             <div class="col-6 col-md-3">
                 <div class="card text-center py-3">
                     <div class="card-body p-0">
-                        <h3 class="mb-0 text-success">+12.5%</h3>
-                        <small class="text-muted">我的盈亏</small>
+                        <h3 class="mb-0 text-success">+24</h3>
+                        <small class="text-muted">首日上涨</small>
                     </div>
                 </div>
             </div>
@@ -128,13 +134,14 @@
 
         <!-- Upcoming IPOs -->
         <section id="upcoming" class="mb-5">
-            <h4 class="section-title mb-3"><i class="bi bi-calendar-event me-2"></i>新股日历</h4>
+            <h4 class="section-title mb-3"><i class="bi bi-calendar-event me-2"></i>即將上市新股</h4>
+            <p class="data-source mb-2">數據來源：HKEX、A ASTOCKS（更新日期：2026-03-22）</p>
             <div class="row g-3" id="upcoming-ipo-list"></div>
         </section>
 
         <!-- Grey Market -->
         <section id="grey-market" class="mb-5">
-            <h4 class="section-title mb-3"><i class="bi bi-moon-stars me-2"></i>暗盘行情</h4>
+            <h4 class="section-title mb-3"><i class="bi bi-moon-stars me-2"></i>暗盤行情</h4>
             <div class="card">
                 <div class="table-responsive">
                     <table class="table table-dark table-hover mb-0">
@@ -145,7 +152,7 @@
                                 <th>暗盘涨跌</th>
                                 <th>发行价</th>
                                 <th>升跌幅</th>
-                                <th>热度</th>
+                                <th>上市日</th>
                             </tr>
                         </thead>
                         <tbody id="grey-market-table"></tbody>
@@ -174,9 +181,9 @@
                     <div class="mb-3">
                         <label class="form-label text-muted small">选择新股：</label>
                         <div id="stock-chips" class="d-flex flex-wrap gap-2">
-                            <span class="stock-chip active" data-stock="huaan">🤖 華沿機器人</span>
-                            <span class="stock-chip" data-stock="polaris">🌟 北极星</span>
-                            <span class="stock-chip" data-stock="techfusion">💻 科 Fusion</span>
+                            <span class="stock-chip active" data-stock="01021">🤖 華沿機器人 01021</span>
+                            <span class="stock-chip" data-stock="02726">📊 瀚天天成 02726</span>
+                            <span class="stock-chip" data-stock="06636">👁️ 極視角 06636</span>
                         </div>
                     </div>
 
@@ -185,7 +192,7 @@
                         <div class="analysis-card p-3 mb-3" style="background: rgba(0,0,0,0.3); border-radius: 8px;">
                             <div class="d-flex align-items-center mb-2">
                                 <span class="badge ai-badge me-2"><i class="bi bi-fire"></i></span>
-                                <strong>華沿機器人热度分析</strong>
+                                <strong id="ai-stock-name">華沿機器人 (01021.HK)</strong>
                             </div>
                             <div id="heat-content"></div>
                         </div>
@@ -212,7 +219,7 @@
                         <label class="form-label text-muted small">问 AI 问题：</label>
                         <div class="input-group">
                             <input type="text" class="form-control form-control-sm bg-dark text-light border-secondary" 
-                                   id="ai-query" placeholder="例如：華沿機器文明天暗盘会涨吗？">
+                                   id="ai-query" placeholder="例如：華沿機器人值得认购吗？">
                             <button class="btn btn-sm btn-primary" onclick="askAI()">
                                 <i class="bi bi-send"></i>
                             </button>
@@ -225,55 +232,107 @@
 
         <!-- Footer -->
         <footer class="text-center text-muted py-4">
-            <small>📈 IPO 追蹤器 | Powered by OpenClaw + MiniMax AI</small>
+            <small>📈 IPO 追蹤器 | 數據來源：公開市場資料 | 僅供參考，不構成投資建議</small>
         </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // IPO Data
+        // Real IPO Data (sourced from HKEX, AASTOCKS - 2026-03-22)
         const ipoData = [
-            { code: '8666', name: '華沿機器人', nameEn: 'Huaan Robotics', price: 'HK$5.50', lots: 2, status: '明天暗盘', heat: 95, industry: 'AI/机器人', icon: '🤖',
-              heatText: '🔥🔥🔥🔥🔥 (5/5) 极高热度，AI概念加持',
-              pros: ['AI/机器人概念，当前市场最热板块', '保荐人背景强劲', '公开发售反应热烈', '集资规模适中(5亿)'],
-              cons: ['行业竞争激烈', '估值偏高', '依赖单一市场'],
-              advice: '建议积极认购，暗盘若涨幅 <15% 可考虑持有。明天暗盘关注开盘价与发行价差距。'},
-            { code: '0999', name: '北极星', nameEn: 'Polaris', price: 'HK$12.50', lots: 1, status: '即将上市', heat: 78, industry: '新能源', icon: '🌟',
-              heatText: '🔥🔥🔥🔥 (4/5) 热度较高',
-              pros: ['新能源赛道长期看好', '国策支持', '基石投资者优质'],
-              cons: ['集资规模较大', '短期内涨幅可能有限'],
-              advice: '稳健选择，适合长线持有。'},
-            { code: '2333', name: '科 Fusion', nameEn: 'Tech Fusion', price: 'HK$8.80', lots: 0, status: '申购中', heat: 65, industry: '半导体', icon: '💻',
-              heatText: '🔥🔥🔥 (3/5) 热度中等',
-              pros: ['半导体国产替代概念', '技术壁垒较高'],
-              cons: ['行业周期性较强', '近期板块走势疲软'],
-              advice: '谨慎认购，关注定价。'}
+            {
+                code: '01021',
+                name: '華沿機器人',
+                nameEn: 'Huayan Robotics',
+                price: 'HK$5.50',
+                lots: 2,
+                status: '明天暗盘',
+                heat: 92,
+                industry: 'AI/机器人',
+                icon: '🤖',
+                listingDate: '2026-03-28',
+                heatText: '🔥🔥🔥🔥🔥 (5/5) 极高热度，AI概念加持',
+                pros: ['AI/机器人概念，当前市场最热板块', '保荐人背景强劲', '公开发售反应热烈', '集资规模适中(约2亿美金)'],
+                cons: ['行业竞争激烈', '估值偏高', '依赖单一市场'],
+                advice: '建议积极认购，明天暗盘关注开盘价与发行价差距。若涨幅 <15% 可考虑持有。'
+            },
+            {
+                code: '02726',
+                name: '瀚天天成',
+                nameEn: 'Hantian Tech',
+                price: 'HK$76.26',
+                lots: 0,
+                status: '即将上市',
+                heat: 68,
+                industry: '半导体',
+                icon: '💎',
+                listingDate: '2026-03-30',
+                heatText: '🔥🔥🔥 (3/5) 热度中等',
+                pros: ['半导体国产替代概念', '碳化硅材料龙头'],
+                cons: ['行业周期性较强', '近期板块走势疲软'],
+                advice: '谨慎认购，关注定价。'
+            },
+            {
+                code: '06636',
+                name: '極視角',
+                nameEn: 'Extreme Vision',
+                price: 'HK$40.00',
+                lots: 0,
+                status: '即将上市',
+                heat: 72,
+                industry: 'AI/计算机视觉',
+                icon: '👁️',
+                listingDate: '2026-03-30',
+                heatText: '🔥🔥🔥🔥 (4/5) 热度较高',
+                pros: ['AI视觉概念', '市场份额领先'],
+                cons: ['竞争加剧', '技术迭代风险'],
+                advice: 'AI概念持续，可考虑认购。'
+            },
+            {
+                code: '02526',
+                name: '德適-B',
+                nameEn: 'Debut Bio',
+                price: '待定',
+                lots: 0,
+                status: '即将上市',
+                heat: 55,
+                industry: '生物科技',
+                icon: '🧬',
+                listingDate: '2026-03-30',
+                heatText: '🔥🔥 (2/5) 热度较低',
+                pros: ['创新器械', '医疗器械赛道'],
+                cons: ['研发风险大', '商业化进度慢'],
+                advice: '高风险标的，观望为主。'
+            }
         ];
 
+        // Real Grey Market Data (2026-03-22)
         const greyMarketData = [
-            { code: '8666', name: '華沿機器人', greyPrice: '待暗盘', change: '明天暗盘', issuePrice: 'HK$5.50', spread: '-', heat: 95 },
-            { code: '0999', name: '北极星', greyPrice: 'HK$13.80', change: '+10.4%', issuePrice: 'HK$12.50', spread: '+10.4%', heat: 78 },
-            { code: '2333', name: '科 Fusion', greyPrice: 'HK$8.45', change: '-4.0%', issuePrice: 'HK$8.80', spread: '-4.0%', heat: 65 }
+            { code: '01021', name: '華沿機器人', greyPrice: '待暗盘', change: '明天(3/27)暗盘', issuePrice: 'HK$5.50', spread: '-', listingDate: '03/28' },
+            { code: '02729', name: '凱樂士科技', greyPrice: 'HK$18.50', change: '+10.1%', issuePrice: 'HK$16.40-20.40', spread: '+10.1%', listingDate: '03/24' },
+            { code: '02632', name: '澤景股份', greyPrice: 'HK$46.00', change: '-2.1%', issuePrice: 'HK$42-48', spread: '-2.1%', listingDate: '03/24' },
+            { code: '03355', name: '飛速創新', greyPrice: 'HK$39.80', change: '+5.0%', issuePrice: 'HK$35.20-41.60', spread: '+5.0%', listingDate: '03/23' }
         ];
 
+        // Holdings - Ray's actual holdings
         const holdingsData = [
-            { code: '8666', name: '華沿機器人', lots: 2, avgCost: 5.50, currentPrice: '待暗盘' }
+            { code: '01021', name: '華沿機器人', lots: 2, avgCost: 5.50, currentPrice: '待暗盘' }
         ];
 
-        let currentStock = 'huaan';
+        let currentStock = '01021';
 
         function renderIPOs() {
             document.getElementById('upcoming-ipo-list').innerHTML = ipoData.map(ipo => `
-                <div class="col-md-6 col-lg-4">
-                    <div class="card ipo-card h-100">
+                <div class="col-md-6 col-lg-6">
+                    <div class="card ipo-card h-100 ${ipo.code === '01021' ? 'border-warning border-2 real-ipo' : 'upcoming-ipo'}">
                         <div class="card-body">
                             <div class="d-flex justify-content-between mb-2">
                                 <div>
-                                    <span class="badge bg-primary">${ipo.code}</span>
+                                    <span class="badge bg-primary">${ipo.code}.HK</span>
                                     <h5 class="mt-2 mb-0">${ipo.icon} ${ipo.name}</h5>
                                     <small class="text-muted">${ipo.nameEn}</small>
                                 </div>
-                                <span class="badge ${ipo.lots > 0 ? 'bg-warning text-dark' : 'bg-secondary'}">${ipo.status}</span>
+                                <span class="badge ${ipo.lots > 0 ? 'bg-warning text-dark' : ipo.status.includes('暗盘') ? 'bg-danger' : 'bg-secondary'}">${ipo.status}</span>
                             </div>
                             <div class="mt-3">
                                 <div class="d-flex justify-content-between mb-1">
@@ -281,6 +340,9 @@
                                 </div>
                                 <div class="d-flex justify-content-between mb-1">
                                     <small class="text-muted">行业</small><span>${ipo.industry}</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <small class="text-muted">上市日</small><span>${ipo.listingDate}</span>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <small class="text-muted">热度</small>
@@ -299,14 +361,15 @@
         function renderGreyMarket() {
             document.getElementById('grey-market-table').innerHTML = greyMarketData.map(s => {
                 const isUp = s.change.startsWith('+');
-                const cls = s.change.includes('暗盘') ? 'text-muted' : (isUp ? 'price-up' : 'price-down');
+                const isPending = s.change.includes('待') || s.change.includes('明天');
+                const cls = isPending ? 'text-muted' : (isUp ? 'price-up' : 'price-down');
                 return `<tr>
                     <td><span class="badge bg-primary me-2">${s.code}</span><strong>${s.name}</strong></td>
                     <td><strong>${s.greyPrice}</strong></td>
                     <td class="${cls}">${s.change}</td>
                     <td>${s.issuePrice}</td>
                     <td class="${cls}">${s.spread}</td>
-                    <td><div class="heat-bar" style="width:70px"><div class="heat-fill" style="width:${s.heat}%"></div></div></td>
+                    <td>${s.listingDate}</td>
                 </tr>`;
             }).join('');
         }
@@ -329,22 +392,25 @@
                             </div>
                         </div>
                         <div class="card-footer text-center bg-dark bg-opacity-50">
-                            <small class="text-warning"><i class="bi bi-calendar-event"></i> 明天暗盘</small>
+                            <small class="text-warning"><i class="bi bi-calendar-event"></i> 明天(3/27)暗盘</small>
                         </div>
                     </div>
                 </div>
             `).join('');
         }
 
-        function renderAIAnalysis(stock) {
-            const data = ipoData.find(s => s.code === stock || s.name.includes(stock)) || ipoData[0];
+        function renderAIAnalysis(stockCode) {
+            const data = ipoData.find(s => s.code === stockCode) || ipoData[0];
             const a = data;
+            
+            document.getElementById('ai-stock-name').textContent = `${data.name} (${data.code}.HK)`;
             
             document.getElementById('heat-content').innerHTML = `
                 <p class="mb-2">${a.heatText}</p>
                 <div class="small">
-                    <div class="mb-1"><strong class="text-muted">集资规模：</strong>${data.price} × 公开认购部分</div>
+                    <div class="mb-1"><strong class="text-muted">发行价：</strong>${data.price}</div>
                     <div class="mb-1"><strong class="text-muted">行业：</strong>${data.industry}</div>
+                    <div class="mb-1"><strong class="text-muted">上市日期：</strong>${data.listingDate}</div>
                     <div><strong class="text-muted">状态：</strong><span class="badge ${data.lots > 0 ? 'bg-warning text-dark' : 'bg-secondary'}">${data.status}</span></div>
                 </div>`;
             
@@ -385,19 +451,30 @@
             
             // Simulated AI response
             setTimeout(() => {
+                const data = ipoData.find(s => s.code === currentStock) || ipoData[0];
                 const responses = [
-                    `根據當前市場數據，華沿機器人暗盤表現值得期待。建議：
+                    `根據市場數據，${data.name}（${data.code}.HK）暗盤表現值得期待。
+
+分析重點：
+• ${data.industry} 概念持續發酵
+• 發行價 ${data.price}，集資規模適中
+• 熱度指數 ${data.heat}/100
+
+操作建議：
 • 若暗盤漲幅 <15%：可考慮持有
 • 若漲幅 15-30%：分批獲利
 • 若漲幅 >30%：注意回調風險
 
-⚠️ 風險提示：AI板塊近期波動較大，請注意止損。`,
-                    `華沿機器人屬於AI概念熱門股，明天暗盤關鍵點位：
-• 支撐位：發行價 HK$5.50
-• 初步目標：HK$6.60-7.00 (+20-27%)
-• 止損位：HK$5.20 (-5%)
+⚠️ 風險提示：以上分析僅供參考，請根據個人風險承受能力做出投資決定。`,
+                    `關於 ${data.name}（${data.code}.HK）的认购建议：
 
-💡 操作建議：控制倉位，留足彈藥。`
+✅ 利好因素：
+${data.pros.map(p => '• ' + p).join('\n')}
+
+⚠️ 利空因素：
+${data.cons.map(c => '• ' + c).join('\n')}
+
+💡 綜合建議：${data.advice}`
                 ];
                 answerEl.innerHTML = responses[Math.floor(Math.random() * responses.length)];
                 document.getElementById('ai-query').value = '';
@@ -409,7 +486,7 @@
             renderIPOs();
             renderGreyMarket();
             renderHoldings();
-            renderAIAnalysis('huaan');
+            renderAIAnalysis('01021');
         });
     </script>
 </body>
