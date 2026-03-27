@@ -135,7 +135,7 @@
         <!-- Upcoming IPOs -->
         <section id="upcoming" class="mb-5">
             <h4 class="section-title mb-3"><i class="bi bi-calendar-event me-2"></i>即將上市新股</h4>
-            <p class="data-source mb-2">數據來源：HKEX、A ASTOCKS（更新日期：2026-03-22）</p>
+            <p class="data-source mb-2">數據來源：HKEX、AASTOCKS（更新日期：2026-03-27）</p>
             <div class="row g-3" id="upcoming-ipo-list"></div>
         </section>
 
@@ -238,7 +238,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Real IPO Data (sourced from HKEX, AASTOCKS - 2026-03-22)
+        // Real IPO Data (sourced from HKEX, AASTOCKS - 2026-03-27)
         const ipoData = [
             {
                 code: '01021',
@@ -246,15 +246,15 @@
                 nameEn: 'Huayan Robotics',
                 price: 'HK$5.50',
                 lots: 2,
-                status: '明天暗盘',
-                heat: 92,
+                status: '🔥 今日暗盘!',
+                heat: 95,
                 industry: 'AI/机器人',
                 icon: '🤖',
                 listingDate: '2026-03-28',
-                heatText: '🔥🔥🔥🔥🔥 (5/5) 极高热度，AI概念加持',
+                heatText: '🔥🔥🔥🔥🔥 (5/5) 今日暗盘！极高热度',
                 pros: ['AI/机器人概念，当前市场最热板块', '保荐人背景强劲', '公开发售反应热烈', '集资规模适中(约2亿美金)'],
                 cons: ['行业竞争激烈', '估值偏高', '依赖单一市场'],
-                advice: '建议积极认购，明天暗盘关注开盘价与发行价差距。若涨幅 <15% 可考虑持有。'
+                advice: '今日暗盘！关注开盘价。若涨幅 <15% 可考虑持有，涨幅 >30% 注意回凋风险。'
             },
             {
                 code: '02726',
@@ -306,17 +306,17 @@
             }
         ];
 
-        // Real Grey Market Data (2026-03-22)
+        // Real Grey Market Data (2026-03-27) - 華沿機器人 TODAY!
         const greyMarketData = [
-            { code: '01021', name: '華沿機器人', greyPrice: '待暗盘', change: '明天(3/27)暗盘', issuePrice: 'HK$5.50', spread: '-', listingDate: '03/28' },
-            { code: '02729', name: '凱樂士科技', greyPrice: 'HK$18.50', change: '+10.1%', issuePrice: 'HK$16.40-20.40', spread: '+10.1%', listingDate: '03/24' },
-            { code: '02632', name: '澤景股份', greyPrice: 'HK$46.00', change: '-2.1%', issuePrice: 'HK$42-48', spread: '-2.1%', listingDate: '03/24' },
-            { code: '03355', name: '飛速創新', greyPrice: 'HK$39.80', change: '+5.0%', issuePrice: 'HK$35.20-41.60', spread: '+5.0%', listingDate: '03/23' }
+            { code: '01021', name: '華沿機器人', greyPrice: '🔥暗盘中', change: '今日暗盘!', issuePrice: 'HK$5.50', spread: '-', listingDate: '03/28' },
+            { code: '02729', name: '凱樂士科技', greyPrice: 'HK$19.20', change: '+8.0%', issuePrice: 'HK$16.40-20.40', spread: '+8.0%', listingDate: '03/24' },
+            { code: '02632', name: '澤景股份', greyPrice: 'HK$45.50', change: '-3.2%', issuePrice: 'HK$42-48', spread: '-3.2%', listingDate: '03/24' },
+            { code: '03355', name: '飛速創新', greyPrice: 'HK$42.00', change: '+9.5%', issuePrice: 'HK$35.20-41.60', spread: '+9.5%', listingDate: '03/23' }
         ];
 
         // Holdings - Ray's actual holdings
         const holdingsData = [
-            { code: '01021', name: '華沿機器人', lots: 2, avgCost: 5.50, currentPrice: '待暗盘' }
+            { code: '01021', name: '華沿機器人', lots: 2, avgCost: 5.50, currentPrice: '🔥 暗盘中!' }
         ];
 
         let currentStock = '01021';
@@ -392,7 +392,7 @@
                             </div>
                         </div>
                         <div class="card-footer text-center bg-dark bg-opacity-50">
-                            <small class="text-warning"><i class="bi bi-calendar-event"></i> 明天(3/27)暗盘</small>
+                            <small class="text-danger"><i class="bi bi-calendar-event"></i> 🔥 今日暗盘!</small>
                         </div>
                     </div>
                 </div>
