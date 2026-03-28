@@ -44,7 +44,7 @@
                         <div class="card-body">
                             <h5 class="text-primary mb-3">測驗說明</h5>
                             <ul class="list-unstyled text-start text-muted">
-                                <li><i class="fas fa-check text-success me-2"></i>共 5 道选择题</li>
+                                <li><i class="fas fa-check text-success me-2"></i>共 <strong>5</strong> 道选择题（隨機抽出）</li>
                                 <li><i class="fas fa-check text-success me-2"></i>每題 20 分，滿分 100</li>
                                 <li><i class="fas fa-check text-success me-2"></i>完成後可查看答案</li>
                             </ul>
@@ -61,7 +61,7 @@
                     <div class="card bg-secondary">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <span class="text-primary fw-bold">
-                                <i class="fas fa-question-circle me-2"></i>問題 <span id="questionNumber">1</span>/5
+                                <i class="fas fa-question-circle me-2"></i>問題 <span id="questionNumber">1</span>/<span id="totalQuestions">5</span>
                             </span>
                             <span class="badge bg-primary">分數: <span id="score">0</span></span>
                         </div>
@@ -109,7 +109,8 @@
     </main>
 
     <script>
-        const questions = [
+        const allQuestions = [
+            // 製造業與全球供應鏈
             {
                 question: "全球製造業中心經歷過多次轉移，請問順序係乜嘢？",
                 options: [
@@ -127,6 +128,19 @@
                 correct: 2,
                 explanation: "中國是全球唯一擁有聯合國產業分類中全部41個工業大類、207個工業中類、666個工業小類的國家。"
             },
+            {
+                question: "「一帶一路」倡議主要覆蓋幾多個國家？",
+                options: ["50多個", "70多個", "100多個", "140多個"],
+                correct: 1,
+                explanation: "「一帶一路」倡議覆蓋超過70個國家，包括沿線的亞洲、非洲、歐洲和拉丁美洲國家。"
+            },
+            {
+                question: "邊個係中國最大貿易伙伴？",
+                options: ["美國", "日本", "東盟", "歐盟"],
+                correct: 2,
+                explanation: "東盟已成為中國最大貿易伙伴，超過了歐盟和美國。"
+            },
+            // 歐盟與地緣政治
             {
                 question: "歐盟對中國採取「三個支柱」策略，請問唔包括邊個？",
                 options: ["經濟伙伴", "軍事同盟", "競爭對手", "制度性對手"],
@@ -154,22 +168,138 @@
                 ],
                 correct: 0,
                 explanation: "歐盟的「戰略自主」概念旨在減少對美國軍事保護的依賴，增強自身防務能力，包括PESCO、歐洲防務基金等措施。"
+            },
+            {
+                question: "歐洲防務基金在2021-2027年間嘅預算係幾多？",
+                options: ["71億歐元", "131億歐元", "250億歐元", "500億歐元"],
+                correct: 1,
+                explanation: "歐洲防務基金在2021-2027年間嘅預算為131億歐元。"
+            },
+            // AI 與科技
+            {
+                question: "邊個係目前全球最大嘅 AI 模型開發公司之一？",
+                options: ["Google", "OpenAI", "兩者都是", "Amazon"],
+                correct: 2,
+                explanation: "Google (DeepMind) 和 OpenAI 都是全球最大嘅 AI 模型開發公司。"
+            },
+            {
+                question: "AI 技術對勞動力市場嘅最大影響係乜嘢？",
+                options: [
+                    "完全取代人類工作",
+                    "自動化重複性工作，改變工作性質",
+                    "完全冇影響",
+                    "只影響製造業"
+                ],
+                correct: 1,
+                explanation: "AI 主要自動化重複性工作，而非完全取代人類，同時會創造新嘅工作機會。"
+            },
+            {
+                question: "半導體產業中，邊個係最先進嘅光刻機製造商？",
+                options: ["美國應用材料", "荷蘭ASML", "日本東京威力科創", "韓國三星"],
+                correct: 1,
+                explanation: "荷蘭嘅ASML係全球唯一能夠製造最先進EUV光刻機嘅公司。"
+            },
+            // 美中關係
+            {
+                question: "中美貿易戰喺邊年正式開始？",
+                options: ["2016年", "2018年", "2020年", "2022年"],
+                correct: 1,
+                explanation: "中美貿易戰喺2018年正式開始，美國對中國進口商品加徵關稅。"
+            },
+            {
+                question: "《通脹削減法案》(IRA) 主要針對邊個產業？",
+                options: ["金融服務", "醫療保健", "清潔能源", "農業"],
+                correct: 2,
+                explanation: "《通脹削減法案》主要針對清潔能源產業，提供巨額補貼支持電動車和可再生能源。"
+            },
+            // 全球治理
+            {
+                question: "G20 峰會中，亞洲代表主要係邊幾個國家？",
+                options: [
+                    "日本、韓國",
+                    "中國、印度、日本",
+                    "中國、韓國、新加坡",
+                    "印度、印尼、泰國"
+                ],
+                correct: 1,
+                explanation: "G20中亞洲代表主要包括中國、印度和日本等主要經濟體。"
+            },
+            {
+                question: "聯合國安全理事會常任理事國有幾多個？",
+                options: ["3個", "5個", "7個", "10個"],
+                correct: 1,
+                explanation: "聯合國安全理事會有5個常任理事國：美國、中國、俄羅斯、英國、法國。"
+            },
+            // 能源與氣候
+            {
+                question: "全球最大嘅石油生產國係邊個國家？",
+                options: ["沙地阿拉伯", "俄羅斯", "美國", "中國"],
+                correct: 2,
+                explanation: "美國目前係全球最大嘅石油生產國，超過沙地阿拉伯和俄羅斯。"
+            },
+            {
+                question: "碳中和目標通常係喺邊一年實現？",
+                options: ["2030年", "2040年", "2050年", "2060年"],
+                correct: 2,
+                explanation: "大多數發達國家的碳中和目標係2050年實現。"
+            },
+            // 亞洲地緣政治
+            {
+                question: "四方安全對話 (Quad) 成員包括邊四個國家？",
+                options: [
+                    "美國、日本、韓國、澳洲",
+                    "美國、日本、印度、澳洲",
+                    "美國、英國、日本、印度",
+                    "日本、澳洲、印度、韓國"
+                ],
+                correct: 1,
+                explanation: "四方安全對話 (Quad) 包括美國、日本、印度和澳洲四個國家。"
+            },
+            {
+                question: "《區域全面經濟夥伴關係協定》(RCEP) 係亞洲最大嘅貿易協定，覆蓋幾多個國家？",
+                options: ["10個", "12個", "15個", "20個"],
+                correct: 2,
+                explanation: "RCEP覆蓋15個亞太國家，包括東盟十國和中國、日本、韓國、澳洲、紐西蘭。"
+            },
+            {
+                question: "晶片四方聯盟 (Chip 4 Alliance) 係為咗對抗邊個國家嘅晶片發展？",
+                options: ["俄羅斯", "中國", "印度", "北韓"],
+                correct: 1,
+                explanation: "晶片四方聯盟係美國、日本、韓國和台灣組成，旨在限制中國獲得先進半導體技術。"
             }
         ];
 
+        const QUESTIONS_PER_QUIZ = 5;
+        let quizQuestions = [];
         let currentQuestion = 0;
         let score = 0;
         let answered = false;
         let userAnswers = [];
 
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
         function startQuiz() {
+            // Randomly select 5 questions from the pool
+            quizQuestions = shuffleArray(allQuestions).slice(0, QUESTIONS_PER_QUIZ);
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = [];
+            
+            document.getElementById('totalQuestions').textContent = QUESTIONS_PER_QUIZ;
             document.getElementById('startScreen').classList.add('d-none');
             document.getElementById('quizScreen').classList.remove('d-none');
             showQuestion();
         }
 
         function showQuestion() {
-            const q = questions[currentQuestion];
+            const q = quizQuestions[currentQuestion];
             document.getElementById('questionNumber').textContent = currentQuestion + 1;
             document.getElementById('questionText').textContent = q.question;
             document.getElementById('score').textContent = score;
@@ -193,13 +323,18 @@
             if (answered) return;
             answered = true;
             
-            const q = questions[currentQuestion];
+            const q = quizQuestions[currentQuestion];
             const buttons = document.querySelectorAll('#optionsContainer button');
             
             userAnswers.push(index);
             
-            buttons.forEach((btn, i) => {
+            // Disable all buttons first (no highlight before selection)
+            buttons.forEach((btn) => {
                 btn.disabled = true;
+            });
+            
+            // Now highlight the correct and wrong answers AFTER selection
+            buttons.forEach((btn, i) => {
                 if (i === q.correct) {
                     btn.classList.remove('btn-outline-primary');
                     btn.classList.add('btn-success');
@@ -216,12 +351,12 @@
             
             document.getElementById('nextBtn').classList.remove('d-none');
             document.getElementById('nextBtn').textContent = 
-                currentQuestion === questions.length - 1 ? '查看結果' : '下一題';
+                currentQuestion === quizQuestions.length - 1 ? '查看結果' : '下一題';
         }
 
         function nextQuestion() {
             currentQuestion++;
-            if (currentQuestion < questions.length) {
+            if (currentQuestion < quizQuestions.length) {
                 showQuestion();
             } else {
                 showResults();
@@ -257,7 +392,7 @@
             const reviewContainer = document.getElementById('answerReview');
             reviewContainer.innerHTML = '<h4 class="text-primary mb-3"><i class="fas fa-check-circle me-2"></i>答案解析</h4>';
             
-            questions.forEach((q, i) => {
+            quizQuestions.forEach((q, i) => {
                 const isCorrect = userAnswers[i] === q.correct;
                 const div = document.createElement('div');
                 div.className = `card mb-3 ${isCorrect ? 'border-success' : 'border-danger'}`;
