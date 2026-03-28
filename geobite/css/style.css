@@ -1,0 +1,170 @@
+/* GeoBite - 地緣政治學習平台 樣式 */
+
+:root {
+    --bg-dark: #0f172a;
+    --bg-dark-light: #1e293b;
+    --bg-secondary: #334155;
+    --primary: #3b82f6;
+    --primary-dark: #1d4ed8;
+    --accent: #f59e0b;
+    --text-light: #f8fafc;
+    --text-muted: #94a3b8;
+    --border-blue: #3b82f6;
+    --border-gray: #475569;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans HK', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* Navigation */
+.navbar {
+    background-color: var(--bg-dark-light) !important;
+    border-bottom: 1px solid var(--border-gray);
+}
+
+.navbar-brand {
+    color: var(--primary) !important;
+    font-weight: 700;
+}
+
+.nav-link {
+    color: var(--text-light) !important;
+    transition: color 0.2s;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--primary) !important;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-dark-light) 100%);
+    border-bottom: 1px solid var(--border-gray);
+}
+
+.hero-section.display-4 {
+    font-weight: 700;
+}
+
+/* Cards */
+.card {
+    background-color: var(--bg-dark-light);
+    border: 1px solid var(--border-gray);
+    color: var(--text-light);
+}
+
+.card.bg-secondary {
+    background-color: var(--bg-secondary) !important;
+}
+
+.card.bg-dark-light {
+    background-color: var(--bg-dark-light) !important;
+}
+
+/* Text Colors */
+.text-primary { color: var(--primary) !important; }
+.text-accent { color: var(--accent) !important; }
+.text-muted { color: var(--text-muted) !important; }
+.text-success { color: #22c55e !important; }
+.text-info { color: #06b6d4 !important; }
+.text-warning { color: var(--accent) !important; }
+
+/* Borders */
+.border-primary { border-color: var(--primary) !important; }
+.border-blue { border-color: var(--border-blue) !important; }
+.border-gray { border-color: var(--border-gray) !important; }
+
+/* Badges */
+.badge.bg-primary { background-color: var(--primary) !important; }
+.badge.bg-secondary { background-color: var(--bg-secondary) !important; }
+.badge.bg-info { background-color: #06b6d4 !important; }
+.badge.bg-success { background-color: #22c55e !important; }
+.badge.bg-warning { background-color: var(--accent) !important; }
+.badge.bg-danger { background-color: #ef4444 !important; }
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.btn-accent {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg-dark);
+}
+
+.btn-accent:hover {
+    background-color: #d97706;
+    border-color: #d97706;
+    color: var(--bg-dark);
+}
+
+/* Tables */
+.table-dark {
+    background-color: var(--bg-dark-light);
+    color: var(--text-light);
+}
+
+.table-striped tbody tr:nth-child(odd) {
+    background-color: rgba(255,255,255,0.02);
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    background-color: transparent;
+}
+
+.breadcrumb-item a {
+    color: var(--primary);
+}
+
+.breadcrumb-item.active {
+    color: var(--text-muted);
+}
+
+/* Lesson Content */
+.lesson-content h2 {
+    color: var(--primary);
+    border-left: 4px solid var(--primary);
+    padding-left: 1rem;
+    margin-left: -1rem;
+}
+
+/* Quiz Card */
+.quiz-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.quiz-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+}
+
+/* Footer */
+footer {
+    background-color: var(--bg-dark-light);
+    border-top: 1px solid var(--border-gray);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .display-4 { font-size: 2rem !important; }
+    .fs-5 { font-size: 1rem !important; }
+}
