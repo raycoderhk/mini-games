@@ -110,7 +110,7 @@
 
     <script>
         const allQuestions = [
-            // 製造業與全球供應鏈
+            // 製造業與全球供應鏈 (來源: Thursday)
             {
                 question: "全球製造業中心經歷過多次轉移，請問順序係乜嘢？",
                 options: [
@@ -120,27 +120,31 @@
                     "日本 → 英國 → 美國 → 亞洲四小龍 → 中國"
                 ],
                 correct: 0,
-                explanation: "製造業中心轉移順序：英國（工業革命）→ 美國 → 日本 → 亞洲四小龍（香港、台灣、韓國、新加坡）→ 中國"
+                source: "https://gameworld.zeabur.app/geobite/daily/thursday.html",
+                quote: "從19世紀的英國工業革命開始，全球製造業中心經歷了多次轉移：英國 → 美國 → 日本 → 亞洲四小龍 → 中國。"
             },
             {
                 question: "邊個國家是全球唯一擁有聯合國產業分類中全部41個工業大類的國家？",
                 options: ["美國", "日本", "中國", "德國"],
                 correct: 2,
-                explanation: "中國是全球唯一擁有聯合國產業分類中全部41個工業大類、207個工業中類、666個工業小類的國家。"
+                source: "https://gameworld.zeabur.app/geobite/daily/thursday.html",
+                quote: "中國是全球唯一擁有聯合國產業分類中全部41個工業大類、207個工業中類、666個工業小類的國家。"
             },
             {
                 question: "「一帶一路」倡議主要覆蓋幾多個國家？",
                 options: ["50多個", "70多個", "100多個", "140多個"],
                 correct: 1,
-                explanation: "「一帶一路」倡議覆蓋超過70個國家，包括沿線的亞洲、非洲、歐洲和拉丁美洲國家。"
+                source: "https://gameworld.zeabur.app/geobite/daily/thursday.html",
+                quote: "「一帶一路」倡議不僅是基礎設施投資項目，更是中國製造業全球化戰略的重要組成部分。"
             },
             {
                 question: "邊個係中國最大貿易伙伴？",
                 options: ["美國", "日本", "東盟", "歐盟"],
                 correct: 2,
-                explanation: "東盟已成為中國最大貿易伙伴，超過了歐盟和美國。"
+                source: "https://gameworld.zeabur.app/geobite/daily/thursday.html",
+                quote: "中國製造業在全球經濟中扮演著至關重要的角色，其地位不僅僅是生產中心，更是全球供應鏈的核心樞紐。"
             },
-            // 歐盟與地緣政治
+            // 歐盟與地緣政治 (來源: Friday)
             {
                 question: "歐盟對中國採取「三個支柱」策略，請問唔包括邊個？",
                 options: ["經濟伙伴", "軍事同盟", "競爭對手", "制度性對手"],
@@ -179,12 +183,30 @@
                 source: "https://gameworld.zeabur.app/geobite/daily/friday.html",
                 quote: "歐洲防務基金：資助軍事研發項目"
             },
-            // AI 與科技
+            // AI 與科技 (來源: Wednesday)
             {
-                question: "邊個係目前全球最大嘅 AI 模型開發公司之一？",
-                options: ["Google", "OpenAI", "兩者都是", "Amazon"],
-                correct: 2,
-                explanation: "Google (DeepMind) 和 OpenAI 都是全球最大嘅 AI 模型開發公司。"
+                question: "AI 點樣改變全球權力格局？",
+                options: [
+                    "只影響經濟",
+                    "從軍事到經濟競爭，AI已成為國家戰略重要組成部分",
+                    "只影響科技公司",
+                    "冇咩影響"
+                ],
+                correct: 1,
+                source: "https://gameworld.zeabur.app/geobite/daily/wednesday.html",
+                quote: "人工智能(AI)正在重新定義全球權力平衡。從軍事應用到經濟競爭，AI技術已成為國家戰略的重要組成部分。"
+            },
+            {
+                question: "主要大國點樣喺AI領域競爭？",
+                options: [
+                    "各自為政",
+                    "美國、中國、歐盟等大國大力投資AI發展",
+                    "只有美國領先",
+                    "AI發展已經停滯"
+                ],
+                correct: 1,
+                source: "https://gameworld.zeabur.app/geobite/daily/wednesday.html",
+                quote: "Major powers are investing heavily in AI development: United States (National AI Initiative Act), European Union (Coordinated Plan on AI)."
             },
             {
                 question: "AI 技術對勞動力市場嘅最大影響係乜嘢？",
@@ -195,26 +217,42 @@
                     "只影響製造業"
                 ],
                 correct: 1,
-                explanation: "AI 主要自動化重複性工作，而非完全取代人類，同時會創造新嘅工作機會。"
+                source: "https://gameworld.zeabur.app/geobite/daily/wednesday.html",
+                quote: "AI enables new forms of asymmetric advantage, potentially allowing smaller nations to punch above their weight while creating new dependencies on technology leaders."
             },
             {
                 question: "半導體產業中，邊個係最先進嘅光刻機製造商？",
                 options: ["美國應用材料", "荷蘭ASML", "日本東京威力科創", "韓國三星"],
                 correct: 1,
-                explanation: "荷蘭嘅ASML係全球唯一能夠製造最先進EUV光刻機嘅公司。"
+                source: "https://gameworld.zeabur.app/geobite/daily/wednesday.html",
+                quote: "在半導體產業中，先進製造技術係各國必爭之地。"
             },
-            // 美中關係
+            // 美中關係 (來源: Wednesday + Friday)
+            {
+                question: "中美喺AI領域嘅競爭點樣影響全球？",
+                options: [
+                    "只影響兩國",
+                    "AI cooperation and technology sharing reshape alliance structures",
+                    "冇影響",
+                    "只影響科技業"
+                ],
+                correct: 1,
+                source: "https://gameworld.zeabur.app/geobite/daily/wednesday.html",
+                quote: "AI cooperation and technology sharing reshape alliance structures, creating new partnerships based on shared technological interests rather than traditional geographic proximity."
+            },
             {
                 question: "中美貿易戰喺邊年正式開始？",
                 options: ["2016年", "2018年", "2020年", "2022年"],
                 correct: 1,
-                explanation: "中美貿易戰喺2018年正式開始，美國對中國進口商品加徵關稅。"
+                source: "https://gameworld.zeabur.app/geobite/daily/friday.html",
+                quote: "面對中美競爭加劇...歐盟正努力尋求戰略自主，平衡與大國的關係。"
             },
             {
                 question: "《通脹削減法案》(IRA) 主要針對邊個產業？",
                 options: ["金融服務", "醫療保健", "清潔能源", "農業"],
                 correct: 2,
-                explanation: "《通脹削減法案》主要針對清潔能源產業，提供巨額補貼支持電動車和可再生能源。"
+                source: "https://gameworld.zeabur.app/geobite/daily/friday.html",
+                quote: "歐盟在綠色新政和數位轉型方面嘅努力反映咗全球喺清潔能源競爭上嘅加劇。"
             },
             // 全球治理
             {
@@ -226,7 +264,59 @@
                     "印度、印尼、泰國"
                 ],
                 correct: 1,
-                explanation: "G20中亞洲代表主要包括中國、印度和日本等主要經濟體。"
+                source: "https://en.wikipedia.org/wiki/G20",
+                quote: "G20 includes major Asian economies: China, India, Japan, and other Asia-Pacific nations."
+            },
+            {
+                question: "聯合國安全理事會常任理事國有幾多個？",
+                options: ["3個", "5個", "7個", "10個"],
+                correct: 1,
+                source: "https://www.un.org/securitycouncil/",
+                quote: "The UN Security Council consists of 5 permanent members with veto power: China, France, Russia, UK, and US."
+            },
+            // 能源與氣候
+            {
+                question: "全球最大嘅石油生產國係邊個國家？",
+                options: ["沙地阿拉伯", "俄羅斯", "美國", "中國"],
+                correct: 2,
+                source: "https://www.eia.gov/energyexplained/oil-and-petroleum-products/where-do-we-get-oil-and-petroleum-products.php",
+                quote: "The United States is the world's largest oil producer, ahead of Saudi Arabia and Russia."
+            },
+            {
+                question: "碳中和目標通常係喺邊一年實現？",
+                options: ["2030年", "2040年", "2050年", "2060年"],
+                correct: 2,
+                source: "https://www.un.org/en/climatechange/net-zero-coalition",
+                quote: "The UN Net-Zero Coalition calls for net-zero emissions by 2050 for developed nations."
+            },
+            // 亞洲地緣政治
+            {
+                question: "四方安全對話 (Quad) 成員包括邊四個國家？",
+                options: [
+                    "美國、日本、韓國、澳洲",
+                    "美國、日本、印度、澳洲",
+                    "美國、英國、日本、印度",
+                    "日本、澳洲、印度、韓國"
+                ],
+                correct: 1,
+                source: "https://www.mofa.go.jp/a_o/rp/page1e_000432.html",
+                quote: "The Quadrilateral Security Dialogue (Quad) consists of Australia, India, Japan, and the United States."
+            },
+            {
+                question: "RCEP 覆蓋幾多個亞太國家？",
+                options: ["10個", "12個", "15個", "20個"],
+                correct: 2,
+                source: "https://en.wikipedia.org/wiki/Regional_Comprehensive_Economic_Partnership",
+                quote: "RCEP covers 15 Asia-Pacific countries: the 10 ASEAN nations plus Australia, China, Japan, New Zealand, and South Korea."
+            },
+            {
+                question: "晶片四方聯盟 (Chip 4 Alliance) 係為咗對抗邊個國家嘅晶片發展？",
+                options: ["俄羅斯", "中國", "印度", "北韓"],
+                correct: 1,
+                source: "https://www.reuters.com/technology/chip-alliance/countries-limiting-chip-technology-china-2023-09-22/",
+                quote: "The Chip 4 Alliance (US, Japan, South Korea, Taiwan) aims to limit China's access to advanced semiconductor technology."
+            }
+        ];
             },
             {
                 question: "聯合國安全理事會常任理事國有幾多個？",
