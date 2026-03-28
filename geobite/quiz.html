@@ -328,15 +328,26 @@
             
             userAnswers.push(index);
             
-            // Disable all buttons after selection (no color highlighting)
-            buttons.forEach((btn) => {
+            // Disable all buttons and show text feedback
+            buttons.forEach((btn, i) => {
                 btn.disabled = true;
             });
+            
+            // Show feedback message
+            const feedbackDiv = document.createElement('div');
+            feedbackDiv.className = 'mt-3 p-3 rounded';
             
             if (index === q.correct) {
                 score += 20;
                 document.getElementById('score').textContent = score;
+                feedbackDiv.className += ' bg-success bg-opacity-20 border border-success';
+                feedbackDiv.innerHTML = `<i class="fas fa-check-circle text-success me-2"></i><strong>正確！</strong> +20分`;
+            } else {
+                feedbackDiv.className += ' bg-danger bg-opacity-20 border border-danger';
+                feedbackDiv.innerHTML = `<i class="fas fa-times-circle text-danger me-2"></i><strong>錯誤！</strong> 正確答案：${q.options[q.correct]}`;
             }
+            
+            document.getElementById('optionsContainer').appendChild(feedbackDiv);
             
             document.getElementById('nextBtn').classList.remove('d-none');
             document.getElementById('nextBtn').textContent = 
