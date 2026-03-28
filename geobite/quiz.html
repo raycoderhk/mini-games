@@ -328,20 +328,9 @@
             
             userAnswers.push(index);
             
-            // Disable all buttons first (no highlight before selection)
+            // Disable all buttons after selection (no color highlighting)
             buttons.forEach((btn) => {
                 btn.disabled = true;
-            });
-            
-            // Now highlight the correct and wrong answers AFTER selection
-            buttons.forEach((btn, i) => {
-                if (i === q.correct) {
-                    btn.classList.remove('btn-outline-primary');
-                    btn.classList.add('btn-success');
-                } else if (i === index && index !== q.correct) {
-                    btn.classList.remove('btn-outline-primary');
-                    btn.classList.add('btn-danger');
-                }
             });
             
             if (index === q.correct) {
