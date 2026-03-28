@@ -145,7 +145,8 @@
                 question: "歐盟對中國採取「三個支柱」策略，請問唔包括邊個？",
                 options: ["經濟伙伴", "軍事同盟", "競爭對手", "制度性對手"],
                 correct: 1,
-                explanation: "歐盟對中國的「三個支柱」策略包括：經濟伙伴、競爭對手、制度性對手，並不包括軍事同盟。"
+                source: "https://gameworld.zeabur.app/geobite/daily/friday.html",
+                quote: "歐盟對中國採取「三個支柱」策略：經濟伙伴、競爭對手、制度性對手，並不包括軍事同盟。"
             },
             {
                 question: "PESCO 代表什麼？",
@@ -156,7 +157,8 @@
                     "專業經濟服務委員會"
                 ],
                 correct: 1,
-                explanation: "PESCO (Permanent Structured Cooperation) 是歐盟的永久結構性合作框架，用於加強成員國之間的防務合作。"
+                source: "https://gameworld.zeabur.app/geobite/daily/friday.html",
+                quote: "PESCO（永久結構性合作）：加強防務合作框架"
             },
             {
                 question: "歐盟「戰略自主」(Strategic Autonomy) 的主要目標係乜嘢？",
@@ -167,13 +169,15 @@
                     "在科技領域完全自主，拒絕外國投資"
                 ],
                 correct: 0,
-                explanation: "歐盟的「戰略自主」概念旨在減少對美國軍事保護的依賴，增強自身防務能力，包括PESCO、歐洲防務基金等措施。"
+                source: "https://gameworld.zeabur.app/geobite/daily/friday.html",
+                quote: "歐盟的「戰略自主」（Strategic Autonomy）概念，旨在減少對美國軍事保護的依賴，增強自身防務能力。"
             },
             {
                 question: "歐洲防務基金在2021-2027年間嘅預算係幾多？",
                 options: ["71億歐元", "131億歐元", "250億歐元", "500億歐元"],
                 correct: 1,
-                explanation: "歐洲防務基金在2021-2027年間嘅預算為131億歐元。"
+                source: "https://gameworld.zeabur.app/geobite/daily/friday.html",
+                quote: "歐洲防務基金：資助軍事研發項目"
             },
             // AI 與科技
             {
@@ -345,6 +349,20 @@
             } else {
                 feedbackDiv.className += ' bg-danger bg-opacity-20 border border-danger';
                 feedbackDiv.innerHTML = `<i class="fas fa-times-circle text-danger me-2"></i><strong>錯誤！</strong> 正確答案：${q.options[q.correct]}`;
+            }
+            
+            // Add source link if available
+            if (q.source) {
+                const sourceDiv = document.createElement('div');
+                sourceDiv.className = 'mt-2 small';
+                sourceDiv.innerHTML = `<i class="fas fa-book me-1"></i><a href="${q.source}" target="_blank" class="text-muted">來源：${q.source}</a>`;
+                feedbackDiv.appendChild(sourceDiv);
+                if (q.quote) {
+                    const quoteDiv = document.createElement('div');
+                    quoteDiv.className = 'mt-2 p-2 bg-dark rounded small text-muted fst-italic';
+                    quoteDiv.innerHTML = `<i class="fas fa-quote-left me-1"></i>${q.quote}`;
+                    feedbackDiv.appendChild(quoteDiv);
+                }
             }
             
             document.getElementById('optionsContainer').appendChild(feedbackDiv);
