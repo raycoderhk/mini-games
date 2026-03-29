@@ -339,6 +339,8 @@
         let currentFilter = 'all';
         let currentAudioFilter = 'all';
         let currentSort = 'date_desc';
+        let currentAudio = null;
+        let currentAudioId = null;
         
         // ============ FINGERPRINT + STORAGE ============
         const STORAGE_KEY = 'hkplaces_votes';
@@ -592,7 +594,7 @@
                             </button>
                             <span class="vote-count ${userVoted ? 'voted' : ''}">${voteCount} 票</span>
                             <button class="details-btn" onclick="showDetails(${q.id})">📋 詳情</button>
-                            ${q.audio ? `<button class="audio-btn-item" onclick="playAudio(${q.id})">🎤 語音</button>` : ''}
+                            ${q.audio ? `<button class="audio-btn-item" data-audio-id="${q.id}" onclick="playAudio(${q.id})">🎤 語音</button>` : ''}
                         </div>
                     </div>
                 </div>
@@ -704,8 +706,49 @@
         function playAudio(placeId) {
             const q = galleryData.find(item => item.id === placeId);
             if (!q || !q.audio) return;
-            const audio = new Audio(q.audio);
-            audio.play();
+            
+            // If same audio is playing, stop it
+            if (currentAudioId === placeId && currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+                currentAudio = null;
+                currentAudioId = null;
+                updateAudioButtons();
+                return;
+            }
+            
+            // Stop any currently playing audio
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+            
+            // Start new audio
+            currentAudio = new Audio(q.audio);
+            currentAudioId = placeId;
+            currentAudio.loop = false;
+            
+            currentAudio.onended = () => {
+                currentAudio = null;
+                currentAudioId = null;
+                updateAudioButtons();
+            };
+            
+            currentAudio.play();
+            updateAudioButtons();
+        }
+        
+        function updateAudioButtons() {
+            document.querySelectorAll('.audio-btn-item').forEach(btn => {
+                const placeId = parseInt(btn.getAttribute('data-audio-id'));
+                if (placeId === currentAudioId) {
+                    btn.textContent = '⏹️ 停止';
+                    btn.style.background = '#d32f2f';
+                } else {
+                    btn.textContent = '🎤 語音';
+                    btn.style.background = '';
+                }
+            });
         }
         
         function formatDate(dateStr) {
