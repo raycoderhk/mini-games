@@ -49,6 +49,28 @@
         .progress { font-size: 1.2em; color: #4a9eff; margin: 10px 0; }
         .stats { display: flex; gap: 20px; font-size: 0.85em; color: #666; }
         .setting { display: flex; align-items: center; gap: 8px; font-size: 0.85em; color: #aaa; }
+        .stats-panel {
+            margin-top: 15px;
+            display: flex;
+            gap: 30px;
+            font-size: 1.1em;
+            align-items: center;
+        }
+        .stat-item { color: #aaa; }
+        .stat-item span { color: #4a9eff; }
+        .vote-btn {
+            padding: 8px 16px;
+            background: #e91e63;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.2s;
+        }
+        .vote-btn:hover { background: #d81b60; }
+        .vote-btn:disabled { background: #555; cursor: not-allowed; }
+        .vote-btn.voted { background: #ff4081; }
     </style>
 </head>
 <body>
@@ -81,9 +103,16 @@
     
     <div class="progress" id="progress">0%</div>
     <div class="stats">
-        <span id="iterations">0 / 20000 iterations</span>
-        <span id="fps">fps: 0</span>
+        <span id="iterationsDisplay">0 / 20000 iterations</span>
+        <span id="fpsDisplay">fps: 0</span>
     </div>
+    
+    <div class="stats-panel" id="statsPanel" style="display:none;">
+        <div class="stat-item">👁️ 觀看: <span id="viewCount">0</span></div>
+        <div class="stat-item">❤️ 投票: <span id="voteCount">0</span></div>
+        <button class="vote-btn" id="voteBtn">❤️ 投票</button>
+    </div>
+    
     <div class="info">
         💡 按住滑鼠 / 手指 或 任意鍵 加速渲染
     </div>
@@ -97,12 +126,16 @@
         const retryBtn = document.getElementById('retryBtn');
         const settingsPanel = document.getElementById('settingsPanel');
         const progressEl = document.getElementById('progress');
-        const iterationsEl = document.getElementById('iterations');
-        const fpsEl = document.getElementById('fps');
+        const iterationsEl = document.getElementById('iterationsDisplay');
+        const fpsEl = document.getElementById('fpsDisplay');
         const iterationsSlider = document.getElementById('iterationsSlider');
         const iterationsValue = document.getElementById('iterationsValue');
         const brushSlider = document.getElementById('brushSlider');
         const brushValue = document.getElementById('brushValue');
+        const statsPanel = document.getElementById('statsPanel');
+        const viewCountEl = document.getElementById('viewCount');
+        const voteCountEl = document.getElementById('voteCount');
+        const voteBtn = document.getElementById('voteBtn');
 
         let targetImg = null;
         let targetCanvas = document.createElement('canvas');
@@ -119,6 +152,67 @@
         let lastFrameTime = Date.now();
         let frameCount = 0;
         let fps = 0;
+        
+        // Vote/view tracking
+        let currentImageId = null;
+        let baseVoteCount = 0;
+
+        // Generate unique ID for image (based on file name + lastModified)
+        function getImageId() {
+            const file = imageInput.files[0];
+            return file ? file.name + '_' + file.lastModified : null;
+        }
+
+        // Load stats from localStorage
+        function loadStats() {
+            const id = getImageId();
+            if (!id) return;
+            
+            const stats = JSON.parse(localStorage.getItem('brushStrokeStats') || '{}');
+            const imgStats = stats[id] || { views: 0, voted: false, voteCount: Math.floor(Math.random() * 50) + 10 };
+            
+            // Increment view
+            imgStats.views++;
+            stats[id] = imgStats;
+            localStorage.setItem('brushStrokeStats', JSON.stringify(stats));
+            
+            viewCountEl.textContent = imgStats.views;
+            voteCountEl.textContent = imgStats.voteCount;
+            
+            if (imgStats.voted) {
+                voteBtn.disabled = true;
+                voteBtn.classList.add('voted');
+                voteBtn.textContent = '✓ 已投票';
+            }
+            
+            baseVoteCount = imgStats.voteCount;
+        }
+
+        // Cast vote
+        function castVote() {
+            const id = getImageId();
+            if (!id) return;
+            
+            const stats = JSON.parse(localStorage.getItem('brushStrokeStats') || '{}');
+            const imgStats = stats[id] || { views: 0, voted: false, voteCount: 0 };
+            
+            if (imgStats.voted) return; // Already voted
+            
+            // Vote!
+            imgStats.voted = true;
+            imgStats.voteCount++;
+            stats[id] = imgStats;
+            localStorage.setItem('brushStrokeStats', JSON.stringify(stats));
+            
+            voteCountEl.textContent = imgStats.voteCount;
+            voteBtn.disabled = true;
+            voteBtn.classList.add('voted');
+            voteBtn.textContent = '✓ 已投票';
+            
+            console.log('Vote recorded for:', id);
+        }
+
+        voteBtn.addEventListener('click', castVote);
 
         iterationsSlider.addEventListener('input', (e) => {
             TARGET_ITERATIONS = parseInt(e.target.value);
@@ -155,6 +249,8 @@
                     resetBtn.disabled = false;
                     retryBtn.style.display = 'none';
                     settingsPanel.style.display = 'flex';
+                    statsPanel.style.display = 'flex';
+                    loadStats();
                     updateUI();
                 };
                 img.src = evt.target.result;
@@ -177,9 +273,7 @@
         });
 
         resetBtn.addEventListener('click', () => {
-            if (originalImageData) {
-                ctx.putImageData(originalImageData, 0, 0);
-            }
+            if (originalImageData) ctx.putImageData(originalImageData, 0, 0);
             currentIterations = 0;
             isPainting = false;
             paintBtn.textContent = '▶️ 開始渲染';
@@ -189,9 +283,7 @@
         });
 
         retryBtn.addEventListener('click', () => {
-            if (originalImageData) {
-                ctx.putImageData(originalImageData, 0, 0);
-            }
+            if (originalImageData) ctx.putImageData(originalImageData, 0, 0);
             currentIterations = 0;
             isPainting = false;
             paintBtn.textContent = '▶️ 開始渲染';
