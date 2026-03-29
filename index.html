@@ -3,334 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎮 遊戲世界 | GameWorld</title>
+    <title>筆觸渲染器 Brush Stroke Renderer</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 40px 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .title {
-            font-size: 4em;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #1a1a1a;
             color: white;
-            margin-bottom: 10px;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .subtitle {
-            font-size: 1.5em;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 20px;
         }
-
-        .game-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-
-        .game-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-        }
-
-        .game-icon {
-            font-size: 5em;
-            margin-bottom: 20px;
-        }
-
-        .game-name {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .game-desc {
-            font-size: 1em;
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .game-tags {
+        h1 { font-size: 1.5em; margin-bottom: 10px; color: #e0e0e0; }
+        .controls {
+            margin-bottom: 15px;
             display: flex;
-            justify-content: center;
             gap: 10px;
             flex-wrap: wrap;
+            justify-content: center;
         }
-
-        .tag {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .controls input[type="file"] { display: none; }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.2s;
+        }
+        .btn-upload {
+            background: #4a9eff;
             color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: bold;
         }
-
-        .tag.new {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        .btn-upload:hover { background: #3a8eef; }
+        .btn-paint {
+            background: #ff6b6b;
+            color: white;
         }
-
-        .tag.hot {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-            color: #333;
+        .btn-paint:hover { background: #ff5252; }
+        .btn-paint:disabled {
+            background: #555;
+            cursor: not-allowed;
         }
-
-        .footer {
+        .btn-reset {
+            background: #555;
+            color: white;
+        }
+        .btn-reset:hover { background: #666; }
+        canvas {
+            border: 2px solid #333;
+            border-radius: 8px;
+            max-width: 100%;
+            cursor: crosshair;
+        }
+        .info {
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #888;
             text-align: center;
-            margin-top: 50px;
-            color: rgba(255, 255, 255, 0.8);
+        }
+        .progress {
             font-size: 1.2em;
+            color: #4a9eff;
+            margin: 10px 0;
         }
-
-        .footer a {
-            color: white;
-            text-decoration: underline;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .title {
-                font-size: 2.5em;
-            }
-
-            .subtitle {
-                font-size: 1.2em;
-            }
-
-            .game-icon {
-                font-size: 4em;
-            }
-
-            .game-name {
-                font-size: 1.5em;
-            }
-
-            .games-grid {
-                grid-template-columns: 1fr;
-            }
+        .stats {
+            display: flex;
+            gap: 20px;
+            font-size: 0.85em;
+            color: #666;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1 class="title">🎮 遊戲世界</h1>
-            <p class="subtitle">GameWorld - 經典小遊戲集合</p>
-        </div>
-
-        <div class="games-grid">
-            <!-- 2048 -->
-            <a href="2048/index.html" class="game-card">
-                <div class="game-icon">🔢</div>
-                <h2 class="game-name">2048</h2>
-                <p class="game-desc">合併數字到 2048！經典益智遊戲，考驗你嘅策略同規劃能力。</p>
-                <div class="game-tags">
-                    <span class="tag hot">🔥 熱門</span>
-                    <span class="tag">益智</span>
-                    <span class="tag">單人</span>
-                </div>
-            </a>
-
-            <!-- Snake -->
-            <a href="snake/index.html" class="game-card">
-                <div class="game-icon">🐍</div>
-                <h2 class="game-name">貪食蛇</h2>
-                <p class="game-desc">經典 Snake 遊戲！食蘋果變長，唔好撞到自己同牆壁。</p>
-                <div class="game-tags">
-                    <span class="tag new">✨ 新</span>
-                    <span class="tag">街機</span>
-                    <span class="tag">單人</span>
-                </div>
-            </a>
-
-            <!-- Tic Tac Toe -->
-            <a href="tictactoe/index.html" class="game-card">
-                <div class="game-icon">❌⭕</div>
-                <h2 class="game-name">井字過三關</h2>
-                <p class="game-desc">經典 Tic Tac Toe！同朋友或者 AI 對戰，三子連成一線就贏。</p>
-                <div class="game-tags">
-                    <span class="tag new">✨ 新</span>
-                    <span class="tag">益智</span>
-                    <span class="tag">雙人</span>
-                </div>
-            </a>
-
-            <!-- Breakout -->
-            <a href="breakout/index.html" class="game-card">
-                <div class="game-icon">🧱</div>
-                <h2 class="game-name">打磚塊</h2>
-                <p class="game-desc">經典 Breakout！控制擋板反彈個波，打爛所有磚塊。</p>
-                <div class="game-tags">
-                    <span class="tag new">✨ 新</span>
-                    <span class="tag">街機</span>
-                    <span class="tag">單人</span>
-                </div>
-            </a>
-
-            <!-- Memory Game -->
-            <a href="memory/index.html" class="game-card">
-                <div class="game-icon">🎨</div>
-                <h2 class="game-name">記憶配對</h2>
-                <p class="game-desc">Memory Match！翻開卡片配對相同圖案，考驗你嘅記憶力。</p>
-                <div class="game-tags">
-                    <span class="tag new">✨ 新</span>
-                    <span class="tag">益智</span>
-                    <span class="tag">單人</span>
-                </div>
-            </a>
-
-            <!-- Photo Hunt -->
-            <a href="photohunt/index.html" class="game-card">
-                <div class="game-icon">📸</div>
-                <h2 class="game-name">Photo Hunt</h2>
-                <p class="game-desc">找不同遊戲！仔細觀察兩張圖片，找出所有隱藏嘅差異。</p>
-                <div class="game-tags">
-                    <span class="tag new">✨ 新</span>
-                    <span class="tag">益智</span>
-                    <span class="tag">單人</span>
-                </div>
-            </a>
-
-            <!-- HK Places Quiz -->
-            <a href="hk-places-quiz/" class="game-card">
-                <div class="game-icon">🎯</div>
-                <h2 class="game-name">香港地標猜猜猜</h2>
-                <p class="game-desc">測試下你對香港嘅認識！睇相猜地名，學下每個地標嘅小知識。釣魚翁、望夫石、鴨脷洲大橋...</p>
-                <div class="game-tags">
-                    <span class="tag new">✨ 新</span>
-                    <span class="tag">🇭🇰 本地</span>
-                    <span class="tag">益智</span>
-                    <span class="tag">單人</span>
-                </div>
-            </a>
-
-            <!-- Pickleball -->
-            <a href="https://misson-dashboard.zeabur.app/pickleball" class="game-card" target="_blank">
-                <div class="game-icon">🏓</div>
-                <h2 class="game-name">匹克球大師</h2>
-                <p class="game-desc">Pickleball Master Pro！物理引擎 + AI 對手，專業級匹克球遊戲！</p>
-                <div class="game-tags">
-                    <span class="tag hot">🏆 專業</span>
-                    <span class="tag">運動</span>
-                    <span class="tag">單人</span>
-                </div>
-            </a>
-
-            <!-- The Economist Archive -->
-            <a href="economist.html" class="game-card">
-                <div class="game-icon">📰</div>
-                <h2 class="game-name">The Economist 存檔</h2>
-                <p class="game-desc">The Economist 雜誌文章目錄！18 篇文章 + Archive 鏡像連結，一鍵解鎖 Paywall。</p>
-                <div class="game-tags">
-                    <span class="tag new">✨ 新</span>
-                    <span class="tag">📚 知識</span>
-                    <span class="tag">免費</span>
-                </div>
-            </a>
-
-            <!-- Geography - Industry & Manufacturing -->
-            <a href="geography-industry-quiz/" class="game-card">
-                <div class="game-icon">🏭</div>
-                <h2 class="game-name">Industry & Manufacturing</h2>
-                <p class="game-desc">Geography 補習！50 條關於工業、製造業、工廠區位、工廠搬遷嘅題目。</p>
-                <div class="game-tags">
-                    <span class="tag new">✨ 新</span>
-                    <span class="tag">📚 地理</span>
-                    <span class="tag">DSE</span>
-                </div>
-            </a>
-
-            <!-- Pickleball Polymarket -->
-            <a href="pickleball-polymarket/" class="game-card">
-                <div class="game-icon">🏓</div>
-                <h2 class="game-name">Pickleball Polymarket</h2>
-                <p class="game-desc">投注掌上壓，估中顏色就贏！為你嘅 Pickleball 小組搞個預測市場。</p>
-                <div class="game-tags">
-                    <span class="tag new">✨ 新</span>
-                    <span class="tag">🏓 運動</span>
-                    <span class="tag">互動</span>
-                </div>
-            </a>
-
-            <!-- IPO Tracker -->
-            <a href="ipo-tracker/" class="game-card">
-                <div class="game-icon">📈</div>
-                <h2 class="game-name">IPO 追蹤器</h2>
-                <p class="game-desc">追蹤香港新股！暗盤行情、AI 分析、持倉管理。明日華沿機器人暗盤！</p>
-                <div class="game-tags">
-                    <span class="tag new">✨ 新</span>
-                    <span class="tag">📈 股票</span>
-                    <span class="tag">AI 分析</span>
-                </div>
-            </a>
-
-            <!-- 爛 Gag 收集所 -->
-            <a href="gag/" class="game-card">
-                <div class="game-icon">🥚</div>
-                <h2 class="game-name">爛 Gag 收集所</h2>
-                <p class="game-desc">收集世上最爛嘅 gag！加入日期 + 出品人 Tag，可以按人 Filter，笑到喊出來！</p>
-                <div class="game-tags">
-                    <span class="tag new">✨ 新</span>
-                    <span class="tag">😂 搞笑</span>
-                    <span class="tag">互動</span>
-                </div>
-            </a>
-
-            <!-- HK Graduate Salary Comparison -->
-            <a href="salary-research/" class="game-card">
-                <div class="game-icon">📊</div>
-                <h2 class="game-name">香港大學畢業生薪金比較</h2>
-                <p class="game-desc">22 個行業薪金數據！DSE 選科篩選 + ROI 分析 + 大學科系對應，幫助你做出明智嘅職業選擇。</p>
-                <div class="game-tags">
-                    <span class="tag hot">🎯 實用</span>
-                    <span class="tag new">✨ 新</span>
-                    <span class="tag">📚 升學就業</span>
-                    <span class="tag">DSE 學生適用</span>
-                </div>
-            </a>
-        </div>
-
-        <div class="footer">
-            <p>🎮 遊戲世界 © 2026 | Made with ❤️ by Jarvis</p>
-            <p style="margin-top: 10px;">
-                <a href="https://github.com/raycoderhk/mini-games" target="_blank">GitHub Repo</a>
-            </p>
-        </div>
+    <h1>🖌️ 筆觸渲染器 Brush Stroke Renderer</h1>
+    
+    <div class="controls">
+        <label class="btn btn-upload">
+            📁 上傳圖片
+            <input type="file" id="imageInput" accept="image/*">
+        </label>
+        <button class="btn btn-paint" id="paintBtn" disabled>▶️ 開始渲染</button>
+        <button class="btn btn-reset" id="resetBtn" disabled>🔄 重置</button>
     </div>
+    
+    <canvas id="canvas"></canvas>
+    
+    <div class="progress" id="progress">0%</div>
+    <div class="stats">
+        <span id="iterations">0 / 0 iterations</span>
+        <span id="fps">fps: 0</span>
+    </div>
+    <div class="info">
+        💡 按住滑鼠 / 手指 或 任意鍵 加速渲染
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+        const imageInput = document.getElementById('imageInput');
+        const paintBtn = document.getElementById('paintBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const progressEl = document.getElementById('progress');
+        const iterationsEl = document.getElementById('iterations');
+        const fpsEl = document.getElementById('fps');
+
+        let targetImg = null;
+        let targetCanvas = document.createElement('canvas');
+        let targetCtx = targetCanvas.getContext('2d', { willReadFrequently: true });
+        
+        // Settings
+        const TARGET_ITERATIONS = 5000;
+        const INITIAL_BRUSH_SIZE = 20;
+        const FINAL_BRUSH_SIZE = 2;
+        const COLOR_RANDOM_STRENGTH = 15;
+        
+        let currentIterations = 0;
+        let isPainting = false;
+        let lastFrameTime = Date.now();
+        let frameCount = 0;
+        let fps = 0;
+
+        // Load image
+        imageInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = (evt) => {
+                const img = new Image();
+                img.onload = () => {
+                    targetImg = img;
+                    
+                    // Size canvas to image
+                    const maxW = Math.min(window.innerWidth - 40, 900);
+                    const scale = maxW / img.width;
+                    canvas.width = img.width * scale;
+                    canvas.height = img.height * scale;
+                    targetCanvas.width = img.width;
+                    targetCanvas.height = img.height;
+                    
+                    // Draw to target canvas
+                    targetCtx.drawImage(img, 0, 0, targetCanvas.width, targetCanvas.height);
+                    
+                    // Draw scaled to display canvas
+                    ctx.drawImage(targetCanvas, 0, 0, canvas.width, canvas.height);
+                    
+                    // Reset state
+                    currentIterations = 0;
+                    paintBtn.disabled = false;
+                    resetBtn.disabled = false;
+                    updateUI();
+                };
+                img.src = evt.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // Paint button
+        paintBtn.addEventListener('click', () => {
+            if (!targetImg) return;
+            if (isPainting) {
+                isPainting = false;
+                paintBtn.textContent = '▶️ 繼續';
+            } else {
+                isPainting = true;
+                paintBtn.textContent = '⏸️ 暫停';
+                requestAnimationFrame(paintLoop);
+            }
+        });
+
+        // Reset
+        resetBtn.addEventListener('click', () => {
+            currentIterations = 0;
+            if (targetImg) {
+                ctx.drawImage(targetCanvas, 0, 0, canvas.width, canvas.height);
+            }
+            updateUI();
+        });
+
+        // Mouse/touch to accelerate
+        canvas.addEventListener('mousedown', () => { isPainting = true; paintBtn.textContent = '⏸️ 暫停'; requestAnimationFrame(paintLoop); });
+        canvas.addEventListener('touchstart', () => { isPainting = true; paintBtn.textContent = '⏸️ 暫停'; requestAnimationFrame(paintLoop); });
+        
+        // Any key to accelerate
+        document.addEventListener('keydown', () => {
+            if (targetImg && !isPainting) {
+                isPainting = true;
+                paintBtn.textContent = '⏸️ 暫停';
+                requestAnimationFrame(paintLoop);
+            }
+        });
+
+        function paintLoop() {
+            if (!isPainting || currentIterations >= TARGET_ITERATIONS) {
+                if (currentIterations >= TARGET_ITERATIONS) {
+                    paintBtn.disabled = true;
+                }
+                isPainting = false;
+                paintBtn.textContent = '▶️ 繼續';
+                return;
+            }
+
+            const frameStart = Date.now();
+            let iterationsThisFrame = 0;
+
+            while (Date.now() - frameStart < 33 && currentIterations < TARGET_ITERATIONS) {
+                iterate();
+                iterationsThisFrame++;
+            }
+
+            // Update FPS
+            frameCount++;
+            if (frameCount >= 10) {
+                fps = Math.round(10000 / (Date.now() - lastFrameTime));
+                lastFrameTime = Date.now();
+                frameCount = 0;
+            }
+
+            updateUI();
+            requestAnimationFrame(paintLoop);
+        }
+
+        function iterate() {
+            if (!targetImg) return;
+
+            // Pick random position
+            const pos = {
+                x: Math.floor(Math.random() * (targetCanvas.width - 2)) + 1,
+                y: Math.floor(Math.random() * (targetCanvas.height - 2)) + 1
+            };
+
+            // Calculate brush size based on progress
+            const progress = currentIterations / TARGET_ITERATIONS;
+            const brushSize = Math.ceil(map(Math.pow(1 - progress, 3), 0, 1, INITIAL_BRUSH_SIZE, FINAL_BRUSH_SIZE));
+
+            // Get average color in circle
+            let sumR = 0, sumG = 0, sumB = 0;
+            let count = 0;
+            const pixels = [];
+
+            for (let x = Math.max(0, pos.x - brushSize); x < Math.min(pos.x + brushSize, targetCanvas.width); x++) {
+                for (let y = Math.max(0, pos.y - brushSize); y < Math.min(pos.y + brushSize, targetCanvas.height); y++) {
+                    if (dist(x, y, pos.x, pos.y) <= brushSize) {
+                        const pixelIndex = (x + y * targetCanvas.width) * 4;
+                        sumR += targetCtx.getImageData(x, y, 1, 1).data[0];
+                        sumG += targetCtx.getImageData(x, y, 1, 1).data[1];
+                        sumB += targetCtx.getImageData(x, y, 1, 1).data[2];
+                        count++;
+                        pixels.push({ x, y });
+                    }
+                }
+            }
+
+            sumR /= count;
+            sumG /= count;
+            sumB /= count;
+
+            // Add color randomness
+            const cR = (Math.random() - 0.5) * 2 * COLOR_RANDOM_STRENGTH;
+            sumR += cR;
+            sumG += cR;
+            sumB += cR;
+
+            // Clamp
+            sumR = Math.max(0, Math.min(255, sumR));
+            sumG = Math.max(0, Math.min(255, sumG));
+            sumB = Math.max(0, Math.min(255, sumB));
+
+            // Draw brush stroke (circle)
+            const scaleX = canvas.width / targetCanvas.width;
+            const scaleY = canvas.height / targetCanvas.height;
+
+            ctx.fillStyle = `rgb(${Math.round(sumR)},${Math.round(sumG)},${Math.round(sumB)})`;
+            ctx.beginPath();
+            ctx.arc(pos.x * scaleX, pos.y * scaleY, brushSize * scaleX, 0, Math.PI * 2);
+            ctx.fill();
+
+            currentIterations++;
+        }
+
+        function dist(x1, y1, x2, y2) {
+            return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+        }
+
+        function map(value, inMin, inMax, outMin, outMax) {
+            return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
+        }
+
+        function updateUI() {
+            const pct = Math.round((currentIterations / TARGET_ITERATIONS) * 100);
+            progressEl.textContent = pct + '%';
+            iterationsEl.textContent = `${currentIterations.toLocaleString()} / ${TARGET_ITERATIONS.toLocaleString()} iterations`;
+            fpsEl.textContent = `fps: ${fps}`;
+        }
+    </script>
 </body>
 </html>
-# Redeploy trigger: Tue Mar 10 14:10:00 UTC 2026 - Economist Archive Added
