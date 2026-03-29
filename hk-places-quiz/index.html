@@ -591,6 +591,7 @@
                 <div class="question-counter" id="question-counter">Question 1 of 3</div>
 
                 <img src="" alt="Question" class="question-image" id="question-image" onclick="openImageModal(this.src)">
+                <button id="ink-toggle-btn" class="btn-ink-toggle" onclick="toggleInkImage()" style="display:none; margin:10px auto; padding:8px 16px; background:#333; color:white; border:none; border-radius:20px; cursor:pointer; font-size:0.9em;">🖌️ 水墨畫版本</button>
 
                 <div class="question-text" id="question-text" style="display:none; margin-bottom:20px; font-size:1.3em; font-weight:bold; color:#333; text-align:center;"></div>
 
@@ -646,6 +647,7 @@
         let filteredQuestions = [];
         let currentQuestionIndex = 0;
         let score = 0;
+        let currentInkMode = false;
         let correctCount = 0;
         let wrongCount = 0;
         const MAX_QUESTIONS = 10; // Maximum questions per game session
@@ -795,6 +797,18 @@
 
             // Set image
             document.getElementById('question-image').src = question.image;
+
+            // Show ink toggle button if ink image available
+            const inkBtn = document.getElementById('ink-toggle-btn');
+            if (question.inkImage) {
+                inkBtn.style.display = 'block';
+                inkBtn.dataset.inkImage = question.inkImage;
+                inkBtn.dataset.originalImage = question.image;
+                currentInkMode = false;
+                inkBtn.textContent = '🖌️ 水墨畫版本';
+            } else {
+                inkBtn.style.display = 'none';
+            }
 
             // Set question text if available
             const questionTextEl = document.getElementById('question-text');
@@ -967,6 +981,24 @@
                 const modal = document.getElementById('image-modal');
                 modal.classList.remove('show');
                 document.body.style.overflow = 'auto'; // Restore scrolling
+            }
+        }
+
+        // Toggle between original and ink wash image
+        function toggleInkImage() {
+            const inkBtn = document.getElementById('ink-toggle-btn');
+            const img = document.getElementById('question-image');
+            
+            if (currentInkMode) {
+                // Switch to original
+                img.src = inkBtn.dataset.originalImage;
+                currentInkMode = false;
+                inkBtn.textContent = '🖌️ 水墨畫版本';
+            } else {
+                // Switch to ink wash
+                img.src = inkBtn.dataset.inkImage;
+                currentInkMode = true;
+                inkBtn.textContent = '📷 原本相片';
             }
         }
 
