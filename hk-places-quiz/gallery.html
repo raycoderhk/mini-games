@@ -1032,7 +1032,7 @@
                 item.innerHTML = `
                     <div class="gallery-image-container">
                         <img src="${q.image}" alt="${q.correctAnswer}" class="gallery-image" onclick="openImageModal(this.src)">
-                        ${q.inkImage ? `<button class="ink-toggle-btn" onclick="toggleInkImage(this, '${q.image}', '${q.inkImage}')">🖌️ 水墨畫</button>` : ''}
+                        ${q.inkImage ? `<button class="ink-toggle-btn" data-original="${q.image}" data-ink="${q.inkImage}" onclick="toggleInkImage(this)">🖌️ 水墨畫</button>` : ''}
                     </div>
                     <div class="gallery-info">
                         <div class="gallery-name">${q.correctAnswer}</div>
@@ -1156,9 +1156,11 @@
         });
 
         // Toggle between original and ink wash image
-        function toggleInkImage(btn, originalSrc, inkSrc) {
+        function toggleInkImage(btn) {
             const container = btn.parentElement;
             const img = container.querySelector('img');
+            const originalSrc = btn.dataset.original;
+            const inkSrc = btn.dataset.ink;
             
             if (btn.dataset.inkMode === 'true') {
                 // Switch to original
