@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>筆觸渲染器 Brush Stroke Renderer</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #1a1a1a;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        h1 { font-size: 1.5em; margin-bottom: 10px; color: #e0e0e0; }
+        .controls {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .controls input[type="file"] { display: none; }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.2s;
+        }
+        .btn-upload { background: #4a9eff; color: white; }
+        .btn-upload:hover { background: #3a8eef; }
+        .btn-paint { background: #ff6b6b; color: white; }
+        .btn-paint:hover { background: #ff5252; }
+        .btn-paint:disabled { background: #555; cursor: not-allowed; }
+        .btn-reset { background: #555; color: white; }
+        .btn-reset:hover { background: #666; }
+        canvas { border: 2px solid #333; border-radius: 8px; max-width: 100%; cursor: crosshair; }
+        .info { margin-top: 15px; font-size: 0.9em; color: #888; text-align: center; }
+        .progress { font-size: 1.2em; color: #4a9eff; margin: 10px 0; }
+        .stats { display: flex; gap: 20px; font-size: 0.85em; color: #666; }
+    </style>
+</head>
+<body>
+    <h1>🖌️ 筆觸渲染器 Brush Stroke Renderer</h1>
+    
+    <div class="controls">
+        <label class="btn btn-upload">
+            📁 上傳圖片
+            <input type="file" id="imageInput" accept="image/*">
+        </label>
+        <button class="btn btn-paint" id="paintBtn" disabled>▶️ 開始渲染</button>
+        <button class="btn btn-reset" id="resetBtn" disabled>🔄 重置</button>
+    </div>
+    
+    <canvas id="canvas"></canvas>
+    
+    <div class="progress" id="progress">0%</div>
+    <div class="stats">
+        <span id="iterations">0 / 5000 iterations</span>
+        <span id="fps">fps: 0</span>
+    </div>
+    <div class="info">
+        💡 按住滑鼠 / 手指 或 任意鍵 加速渲染
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+        const imageInput = document.getElementById('imageInput');
+        const paintBtn = document.getElementById('paintBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const progressEl = document.getElementById('progress');
+        const iterationsEl = document.getElementById('iterations');
+        const fpsEl = document.getElementById('fps');
+
+        let targetImg = null;
+        let targetCanvas = document.createElement('canvas');
+        let targetCtx = targetCanvas.getContext('2d', { willReadFrequently: true });
+        
+        const TARGET_ITERATIONS = 5000;
+        const INITIAL_BRUSH_SIZE = 20;
+        const FINAL_BRUSH_SIZE = 2;
+        const COLOR_RANDOM_STRENGTH = 15;
+        
+        let currentIterations = 0;
+        let isPainting = false;
+        let lastFrameTime = Date.now();
+        let frameCount = 0;
+        let fps = 0;
+
+        imageInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (evt) => {
+                const img = new Image();
+                img.onload = () => {
+                    targetImg = img;
+                    const maxW = Math.min(window.innerWidth - 40, 900);
+                    const scale = maxW / img.width;
+                    canvas.width = img.width * scale;
+                    canvas.height = img.height * scale;
+                    targetCanvas.width = img.width;
+                    targetCanvas.height = img.height;
+                    targetCtx.drawImage(img, 0, 0, targetCanvas.width, targetCanvas.height);
+                    ctx.drawImage(targetCanvas, 0, 0, canvas.width, canvas.height);
+                    currentIterations = 0;
+                    paintBtn.disabled = false;
+                    resetBtn.disabled = false;
+                    updateUI();
+                };
+                img.src = evt.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        paintBtn.addEventListener('click', () => {
+            if (!targetImg) return;
+            if (isPainting) {
+                isPainting = false;
+                paintBtn.textContent = '▶️ 繼續';
+            } else {
+                isPainting = true;
+                paintBtn.textContent = '⏸️ 暫停';
+                requestAnimationFrame(paintLoop);
+            }
+        });
+
+        resetBtn.addEventListener('click', () => {
+            currentIterations = 0;
+            if (targetImg) ctx.drawImage(targetCanvas, 0, 0, canvas.width, canvas.height);
+            updateUI();
+        });
+
+        canvas.addEventListener('mousedown', () => { isPainting = true; paintBtn.textContent = '⏸️ 暫停'; requestAnimationFrame(paintLoop); });
+        canvas.addEventListener('touchstart', () => { isPainting = true; paintBtn.textContent = '⏸️ 暫停'; requestAnimationFrame(paintLoop); });
+        document.addEventListener('keydown', () => {
+            if (targetImg && !isPainting) {
+                isPainting = true;
+                paintBtn.textContent = '⏸️ 暫停';
+                requestAnimationFrame(paintLoop);
+            }
+        });
+
+        function paintLoop() {
+            if (!isPainting || currentIterations >= TARGET_ITERATIONS) {
+                if (currentIterations >= TARGET_ITERATIONS) paintBtn.disabled = true;
+                isPainting = false;
+                paintBtn.textContent = '▶️ 繼續';
+                return;
+            }
+            const frameStart = Date.now();
+            while (Date.now() - frameStart < 33 && currentIterations < TARGET_ITERATIONS) iterate();
+            frameCount++;
+            if (frameCount >= 10) {
+                fps = Math.round(10000 / (Date.now() - lastFrameTime));
+                lastFrameTime = Date.now();
+                frameCount = 0;
+            }
+            updateUI();
+            requestAnimationFrame(paintLoop);
+        }
+
+        function iterate() {
+            if (!targetImg) return;
+            const pos = {
+                x: Math.floor(Math.random() * (targetCanvas.width - 2)) + 1,
+                y: Math.floor(Math.random() * (targetCanvas.height - 2)) + 1
+            };
+            const progress = currentIterations / TARGET_ITERATIONS;
+            const brushSize = Math.ceil(map(Math.pow(1 - progress, 3), 0, 1, INITIAL_BRUSH_SIZE, FINAL_BRUSH_SIZE));
+            let sumR = 0, sumG = 0, sumB = 0, count = 0;
+            const pixels = [];
+            for (let x = Math.max(0, pos.x - brushSize); x < Math.min(pos.x + brushSize, targetCanvas.width); x++) {
+                for (let y = Math.max(0, pos.y - brushSize); y < Math.min(pos.y + brushSize, targetCanvas.height); y++) {
+                    if (dist(x, y, pos.x, pos.y) <= brushSize) {
+                        const d = targetCtx.getImageData(x, y, 1, 1).data;
+                        sumR += d[0]; sumG += d[1]; sumB += d[2];
+                        count++;
+                        pixels.push({ x, y });
+                    }
+                }
+            }
+            sumR /= count; sumG /= count; sumB /= count;
+            const cR = (Math.random() - 0.5) * 2 * COLOR_RANDOM_STRENGTH;
+            sumR = Math.max(0, Math.min(255, sumR + cR));
+            sumG = Math.max(0, Math.min(255, sumG + cR));
+            sumB = Math.max(0, Math.min(255, sumB + cR));
+            const scaleX = canvas.width / targetCanvas.width;
+            const scaleY = canvas.height / targetCanvas.height;
+            ctx.fillStyle = `rgb(${Math.round(sumR)},${Math.round(sumG)},${Math.round(sumB)})`;
+            ctx.beginPath();
+            ctx.arc(pos.x * scaleX, pos.y * scaleY, brushSize * scaleX, 0, Math.PI * 2);
+            ctx.fill();
+            currentIterations++;
+        }
+
+        function dist(x1, y1, x2, y2) { return Math.sqrt((x2-x1)**2 + (y2-y1)**2); }
+        function map(v, iMin, iMax, oMin, oMax) { return oMin + (oMax-oMin) * (v-iMin) / (iMax-iMin); }
+        function updateUI() {
+            progressEl.textContent = Math.round((currentIterations/TARGET_ITERATIONS)*100) + '%';
+            iterationsEl.textContent = `${currentIterations.toLocaleString()} / ${TARGET_ITERATIONS.toLocaleString()} iterations`;
+            fpsEl.textContent = `fps: ${fps}`;
+        }
+    </script>
+</body>
+</html>
