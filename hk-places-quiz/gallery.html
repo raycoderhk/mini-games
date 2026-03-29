@@ -5,204 +5,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>📸 香港地標圖庫 | HK Places Gallery</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft JhengHei', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #0f0f1a;
+            color: #fff;
             min-height: 100vh;
-            padding: 20px;
         }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
         .header {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .header h1 { font-size: 1.8em; margin-bottom: 5px; }
+        .header p { opacity: 0.9; font-size: 0.95em; }
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .stat-item {
             text-align: center;
         }
-
-        .header h1 {
-            font-size: 2.5em;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            color: #666;
-            font-size: 1.2em;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: white;
-            text-decoration: none;
-            font-size: 1.1em;
-            padding: 10px 20px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 10px;
-            transition: all 0.3s;
-        }
-
-        .back-link:hover {
-            background: rgba(255,255,255,0.3);
-        }
-
-        /* Filter Section */
-        .filter-section {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .filter-section h3 {
+        .stat-number {
+            font-size: 1.5em;
+            font-weight: bold;
             color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.3em;
         }
-
-        .audio-filter-section {
-            margin: 25px 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%);
-            border-radius: 12px;
-            border-left: 5px solid #ff6b6b;
+        .stat-label {
+            font-size: 0.8em;
+            opacity: 0.7;
         }
-
-        .audio-filter-section h3 {
-            color: #ff6b6b;
-            margin-bottom: 12px;
-        }
-
-        .audio-filter-btn {
-            background: white;
-            border: 2px solid #ffcccc;
-            color: #ff6b6b;
-        }
-
-        .audio-filter-btn:hover {
-            border-color: #ff6b6b;
-            background: #fff0f0;
-        }
-
-        .audio-filter-btn.active {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-            color: white;
-            border-color: #ff6b6b;
-        }
-
-        .filter-options {
+        .filters {
+            padding: 15px;
             display: flex;
-            flex-wrap: wrap;
             gap: 10px;
-            margin-bottom: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: rgba(255,255,255,0.03);
         }
-
         .filter-btn {
-            padding: 10px 20px;
-            background: #f8f9fa;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 1em;
+            padding: 8px 16px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: transparent;
+            color: #fff;
+            border-radius: 20px;
             cursor: pointer;
-            transition: all 0.3s;
-            color: #555;
+            font-size: 0.9em;
+            transition: all 0.2s;
         }
-
-        .filter-btn:hover {
-            border-color: #667eea;
-            background: #f0f0ff;
-        }
-
+        .filter-btn:hover { background: rgba(255,255,255,0.1); }
         .filter-btn.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: #667eea;
             border-color: #667eea;
         }
-
-        .sort-options {
+        .audio-filters {
+            display: flex;
+            gap: 10px;
+            padding: 10px 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .audio-btn {
+            padding: 6px 14px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: transparent;
+            color: #aaa;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.85em;
+        }
+        .audio-btn.active { background: #764ba2; border-color: #764ba2; color: #fff; }
+        .sort-bar {
+            padding: 10px 15px;
             display: flex;
             gap: 15px;
             align-items: center;
-            color: #666;
-            flex-wrap: wrap;
+            justify-content: center;
+            font-size: 0.9em;
+            color: #888;
         }
-
-        .sort-options label {
-            cursor: pointer;
-        }
-
-        #sort-order-btn {
-            padding: 6px 12px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            background: white;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-
-        #sort-order-btn:hover {
-            border-color: #667eea;
-            background: #f8f9ff;
-        }
-
-        /* Gallery Grid */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 20px;
         }
-
         .gallery-item {
-            background: white;
-            border-radius: 15px;
+            background: #1a1a2e;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-            transition: all 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-
         .gallery-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         }
-
-        .gallery-image {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .gallery-image:hover {
-            transform: scale(1.05);
-        }
-
         .gallery-image-container {
             position: relative;
             overflow: hidden;
         }
-
-        .gallery-image-container .gallery-image {
+        .gallery-image {
             width: 100%;
-            height: 250px;
+            height: 200px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s;
         }
-
+        .gallery-image:hover { transform: scale(1.05); }
         .ink-toggle-btn {
             position: absolute;
             bottom: 10px;
@@ -214,1215 +128,591 @@
             border-radius: 15px;
             cursor: pointer;
             font-size: 0.85em;
-            transition: background 0.2s;
+            opacity: 0;
+            transition: opacity 0.2s;
         }
-
-        .ink-toggle-btn:hover {
-            background: rgba(0,0,0,0.9);
-        }
-
-        .gallery-info {
-            padding: 20px;
-        }
-
-        .gallery-name {
-            font-size: 1.4em;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 8px;
-        }
-
+        .gallery-image-container:hover .ink-toggle-btn { opacity: 1; }
+        .gallery-info { padding: 15px; }
+        .gallery-name { font-size: 1.1em; font-weight: bold; margin-bottom: 5px; }
         .gallery-category {
             display: inline-block;
-            padding: 5px 12px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 20px;
-            font-size: 0.85em;
-            margin-bottom: 10px;
+            padding: 3px 10px;
+            background: #667eea;
+            border-radius: 12px;
+            font-size: 0.75em;
+            margin-bottom: 8px;
         }
-
-        .gallery-location {
-            color: #666;
-            font-size: 0.95em;
-            margin-bottom: 10px;
-        }
-
-        .gallery-date {
-            color: #999;
-            font-size: 0.85em;
-            margin-bottom: 15px;
-        }
-
-        /* Vote Button */
-        .vote-section {
+        .gallery-location { font-size: 0.85em; color: #888; margin-bottom: 5px; }
+        .gallery-date { font-size: 0.8em; color: #666; margin-bottom: 10px; }
+        .gallery-stats {
             display: flex;
-            align-items: center;
-            gap: 10px;
-            padding-top: 15px;
-            border-top: 2px solid #f0f0f0;
+            gap: 15px;
+            font-size: 0.85em;
+            color: #888;
+            margin-bottom: 10px;
         }
-
+        .gallery-stat { display: flex; align-items: center; gap: 4px; }
+        .gallery-stat span { color: #667eea; }
+        .action-section { display: flex; gap: 8px; flex-wrap: wrap; }
         .vote-btn {
-            padding: 8px 20px;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            padding: 8px 16px;
+            background: #e91e63;
             color: white;
             border: none;
-            border-radius: 25px;
-            font-size: 1em;
+            border-radius: 20px;
             cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            font-size: 0.85em;
+            transition: all 0.2s;
         }
-
-        .vote-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-        }
-
-        .vote-btn.voted {
-            background: linear-gradient(135deg, #51cf66 0%, #37b24d 100%);
-            cursor: not-allowed;
-        }
-
-        .vote-count {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #ff6b6b;
-        }
-
-        .vote-count.voted {
-            color: #37b24d;
-        }
-
-        .action-section {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
+        .vote-btn:hover { background: #d81b60; }
+        .vote-btn:disabled { background: #444; cursor: not-allowed; }
+        .vote-btn.voted { background: #ff4081; }
+        .vote-count { display: flex; align-items: center; font-size: 0.85em; color: #e91e63; }
+        .vote-count.voted { color: #ff4081; }
         .details-btn {
             padding: 8px 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #764ba2;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 20px;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
+            font-size: 0.85em;
         }
-
-        .details-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .audio-btn {
+        .audio-btn-item {
             padding: 8px 16px;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            background: #4caf50;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 20px;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
+            font-size: 0.85em;
         }
-
-        .audio-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-        }
-
-        .audio-btn.playing {
-            background: linear-gradient(135deg, #51cf66 0%, #37b24d 100%);
-        }
-
-        /* Details Modal */
-        .details-modal {
+        .modal {
             display: none;
             position: fixed;
-            z-index: 1001;
+            top: 0;
             left: 0;
-            top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            animation: fadeIn 0.3s ease;
-        }
-
-        .details-modal.show {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .details-modal-content {
-            background: white;
-            border-radius: 20px;
-            max-width: 700px;
-            width: 90%;
-            max-height: 85vh;
-            overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideUp 0.3s ease;
-        }
-
-        .details-modal-header {
-            position: sticky;
-            top: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px 30px;
-            border-radius: 20px 20px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .details-modal-header h2 {
-            margin: 0;
-            font-size: 1.8em;
-        }
-
-        .details-modal-close {
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            background: none;
-            border: none;
-            color: white;
-        }
-
-        .details-modal-close:hover {
-            color: #f0f0f0;
-            transform: scale(1.2);
-        }
-
-        .details-modal-body {
-            padding: 30px;
-        }
-
-        .details-section {
-            margin-bottom: 25px;
-        }
-
-        .details-section h3 {
-            color: #667eea;
-            margin-bottom: 10px;
-            font-size: 1.3em;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 8px;
-        }
-
-        .details-section p {
-            line-height: 1.8;
-            color: #333;
-        }
-
-        .details-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .details-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid #f5f5f5;
-        }
-
-        .details-list li:last-child {
-            border-bottom: none;
-        }
-
-        .details-tag {
-            display: inline-block;
-            background: #f0f0ff;
-            color: #667eea;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.9em;
-            margin: 3px;
-        }
-
-        /* Audio Modal */
-        .audio-modal {
-            display: none;
-            position: fixed;
-            z-index: 1002;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            animation: fadeIn 0.3s ease;
-        }
-
-        .audio-modal.show {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .audio-modal-content {
-            background: white;
-            border-radius: 20px;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideUp 0.3s ease;
-        }
-
-        .audio-modal-header {
-            position: sticky;
-            top: 0;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-            color: white;
-            padding: 25px 30px;
-            border-radius: 20px 20px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .audio-modal-header h2 {
-            margin: 0;
-            font-size: 1.8em;
-        }
-
-        .audio-modal-close {
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            background: none;
-            border: none;
-            color: white;
-        }
-
-        .audio-modal-close:hover {
-            color: #f0f0f0;
-            transform: scale(1.2);
-        }
-
-        .audio-modal-body {
-            padding: 30px;
-        }
-
-        .audio-player {
-            text-align: center;
-        }
-
-        .audio-info {
-            margin-bottom: 25px;
-        }
-
-        .audio-info h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.5em;
-        }
-
-        .audio-progress {
-            width: 100%;
-            height: 8px;
-            background: #f0f0f0;
-            border-radius: 4px;
-            margin: 15px 0;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-            width: 0%;
-            transition: width 0.1s;
-        }
-
-        .audio-time {
-            display: flex;
-            justify-content: space-between;
-            color: #666;
-            font-size: 0.9em;
-        }
-
-        .audio-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .audio-control-btn {
-            background: #f0f0f0;
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            font-size: 24px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .audio-control-btn:hover {
-            background: #e0e0e0;
-            transform: scale(1.1);
-        }
-
-        .play-btn {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-            color: white;
-            width: 80px;
-            height: 80px;
-            font-size: 32px;
-        }
-
-        .volume-slider {
-            width: 100px;
-            height: 8px;
-            -webkit-appearance: none;
-            background: #f0f0f0;
-            border-radius: 4px;
-            outline: none;
-        }
-
-        .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #ff6b6b;
-            cursor: pointer;
-        }
-        .stats-section {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5em;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            font-size: 1em;
-            opacity: 0.9;
-        }
-
-        /* Audio Stats */
-        .audio-stats-section {
-            background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%);
-            border-radius: 12px;
-            padding: 20px;
-            margin: 20px 0;
-            border-left: 5px solid #ff6b6b;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .audio-stat {
-            text-align: center;
-            padding: 10px 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(255, 107, 107, 0.1);
-            min-width: 150px;
-        }
-
-        .audio-stat .stat-label {
-            color: #ff6b6b;
-            font-weight: bold;
-            font-size: 0.9em;
-            margin-bottom: 5px;
-        }
-
-        .audio-stat .stat-value {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #333;
-        }
-
-        /* Image Modal */
-        .image-modal {
-            display: none;
-            position: fixed;
+            background: rgba(0,0,0,0.9);
             z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            animation: fadeIn 0.3s ease;
-        }
-
-        .image-modal.show {
-            display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
         }
-
-        .image-modal-content {
+        .modal.show { display: flex; }
+        .modal img {
             max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-            border-radius: 10px;
+            max-height: 80%;
+            border-radius: 8px;
         }
-
-        .image-modal-close {
+        .modal-close {
             position: absolute;
             top: 20px;
-            right: 40px;
-            color: white;
-            font-size: 50px;
-            font-weight: bold;
+            right: 20px;
+            font-size: 2em;
+            color: #fff;
             cursor: pointer;
-            transition: all 0.3s;
+            background: none;
+            border: none;
         }
-
-        .image-modal-close:hover {
-            color: #667eea;
-            transform: scale(1.2);
+        .details-modal .modal-content {
+            background: #1a1a2e;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 25px;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .details-modal h2 { color: #667eea; margin-bottom: 15px; }
+        .details-modal p { margin-bottom: 15px; line-height: 1.6; }
+        .details-modal ul { margin: 10px 0; padding-left: 20px; }
+        .details-modal li { margin-bottom: 5px; }
+        .details-modal .history { background: rgba(102,126,234,0.1); padding: 10px; border-radius: 8px; margin: 10px 0; }
+        .details-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5em;
+            color: #888;
+            cursor: pointer;
+            background: none;
+            border: none;
         }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8em;
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
+        .top-ranked {
+            background: rgba(102,126,234,0.1);
+            border: 1px solid rgba(102,126,234,0.3);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px;
+        }
+        .top-ranked h3 { color: #667eea; margin-bottom: 10px; font-size: 1em; }
+        .top-list { display: flex; flex-direction: column; gap: 8px; }
+        .top-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            font-size: 0.9em;
+        }
+        .top-item .name { flex: 1; }
+        .top-item .count { color: #e91e63; font-weight: bold; margin-left: 10px; }
+        .top-item.view-item .count { color: #667eea; }
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #666;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="./" class="back-link">← 返回 Quiz 遊戲</a>
-
-        <div class="header">
-            <h1>📸 香港地標圖庫</h1>
-            <p>瀏覽所有地標，投俾你鍾意嘅相！</p>
+    <div class="header">
+        <h1>📸 香港地標圖庫 | HK Places Gallery</h1>
+        <p>探索香港各地標嘅靚相同故事</p>
+    </div>
+    
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-number" id="total-landmarks">0</div>
+            <div class="stat-label">地標總數</div>
         </div>
-
-        <!-- Stats -->
-        <div class="stats-section">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number" id="total-landmarks">0</div>
-                    <div class="stat-label">地標總數</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="total-votes">0</div>
-                    <div class="stat-label">總投票數</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="total-categories">0</div>
-                    <div class="stat-label">分類數量</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="top-voted">0</div>
-                    <div class="stat-label">最高票數</div>
-                </div>
-            </div>
+        <div class="stat-item">
+            <div class="stat-number" id="total-views">0</div>
+            <div class="stat-label">總瀏覽次數</div>
         </div>
-
-        <!-- Audio Stats -->
-        <div class="audio-stats-section" id="audio-stats">
-            <!-- Will be populated by JavaScript -->
+        <div class="stat-item">
+            <div class="stat-number" id="total-votes">0</div>
+            <div class="stat-label">總投票次數</div>
         </div>
-
-        <!-- Filter Section -->
-        <div class="filter-section">
-            <h3>📑 篩選分類</h3>
-            <div class="filter-options" id="category-filters">
-                <button class="filter-btn active" onclick="filterByCategory('all', this)">全部</button>
-                <!-- Categories will be populated by JavaScript -->
-            </div>
-            
-            <!-- Audio Filter -->
-            <div class="audio-filter-section">
-                <h3>🎤 語音導航篩選</h3>
-                <div class="filter-options">
-                    <button class="filter-btn audio-filter-btn active" onclick="filterByAudio('all', this)">全部地標</button>
-                    <button class="filter-btn audio-filter-btn" onclick="filterByAudio('with_audio', this)">有語音導航</button>
-                    <button class="filter-btn audio-filter-btn" onclick="filterByAudio('without_audio', this)">未有語音</button>
-                </div>
-            </div>
-            
-            <div class="sort-options">
-                <span>🔀 排序：</span>
-                <label>
-                    <input type="radio" name="sort" value="date" checked onchange="sortGallery()"> 
-                    📅 日期
-                </label>
-                <label>
-                    <input type="radio" name="sort" value="votes" onchange="sortGallery()"> 
-                    🔥 票數
-                </label>
-                <label>
-                    <input type="radio" name="sort" value="name" onchange="sortGallery()"> 
-                    🔤 名稱
-                </label>
-                <button class="filter-btn" id="sort-order-btn" onclick="toggleSortOrder()">🔽 倒序</button>
-            </div>
-        </div>
-
-        <!-- Gallery Grid -->
-        <div class="gallery-grid" id="gallery-grid">
-            <!-- Gallery items will be populated by JavaScript -->
+        <div class="stat-item">
+            <div class="stat-number" id="top-voted">-</div>
+            <div class="stat-label">人氣王</div>
         </div>
     </div>
-
-    <!-- Image Modal -->
-    <div class="image-modal" id="image-modal" onclick="closeImageModal(event)">
-        <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
-        <img class="image-modal-content" id="image-modal-content">
-    </div>
-
-    <!-- Details Modal -->
-    <div class="details-modal" id="details-modal" onclick="closeDetailsModal(event)">
-        <div class="details-modal-content">
-            <div class="details-modal-header">
-                <h2 id="details-title">地標詳情</h2>
-                <button class="details-modal-close" onclick="closeDetailsModal()">&times;</button>
+    
+    <div class="top-ranked">
+        <h3>🏆 你嘅統計 (本地儲存)</h3>
+        <div class="top-list" id="your-stats">
+            <div class="top-item view-item">
+                <span class="name">👁️ 最多瀏覽</span>
+                <span class="count" id="your-most-viewed">-</span>
             </div>
-            <div class="details-modal-body" id="details-body">
-                <!-- Details content will be populated by JavaScript -->
+            <div class="top-item">
+                <span class="name">❤️ 最多投票</span>
+                <span class="count" id="your-most-liked">-</span>
             </div>
         </div>
     </div>
-
-    <!-- Audio Player Modal -->
-    <div class="audio-modal" id="audio-modal" onclick="closeAudioModal(event)">
-        <div class="audio-modal-content">
-            <div class="audio-modal-header">
-                <h2 id="audio-title">車長語音導航</h2>
-                <button class="audio-modal-close" onclick="closeAudioModal()">&times;</button>
-            </div>
-            <div class="audio-modal-body">
-                <div class="audio-player">
-                    <div class="audio-info">
-                        <h3 id="audio-landmark">地標名稱</h3>
-                        <div class="audio-progress">
-                            <div class="progress-bar" id="progress-bar"></div>
-                        </div>
-                        <div class="audio-time">
-                            <span id="current-time">0:00</span> / <span id="total-time">0:00</span>
-                        </div>
-                    </div>
-                    <div class="audio-controls">
-                        <button class="audio-control-btn" onclick="skipBackward()">⏮️</button>
-                        <button class="audio-control-btn play-btn" id="play-btn" onclick="togglePlay()">▶️</button>
-                        <button class="audio-control-btn" onclick="skipForward()">⏭️</button>
-                        <button class="audio-control-btn" onclick="toggleMute()" id="mute-btn">🔊</button>
-                        <input type="range" min="0" max="100" value="100" class="volume-slider" id="volume-slider" oninput="changeVolume(this.value)">
-                    </div>
-                </div>
-            </div>
-        </div>
+    
+    <div class="filters" id="category-filters"></div>
+    <div class="audio-filters">
+        <button class="audio-btn active" data-filter="all">🎵 全部地標</button>
+        <button class="audio-btn" data-filter="with_audio">🎤 有語音導航</button>
+        <button class="audio-btn" data-filter="without_audio">🔇 未有語音</button>
+    </div>
+    <div class="sort-bar">
+        <span>🔀 排序：</span>
+        <button class="filter-btn active" data-sort="date_desc">📅 日期 (新→舊)</button>
+        <button class="filter-btn" data-sort="date_asc">📅 日期 (舊→新)</button>
+        <button class="filter-btn" data-sort="votes_desc">🔥 人氣 (高→低)</button>
+        <button class="filter-btn" data-sort="votes_asc">🔥 人氣 (低→高)</button>
+        <button class="filter-btn" data-sort="name_asc">🔤 名稱 (A→Z)</button>
+    </div>
+    
+    <div class="gallery-grid" id="gallery-grid"></div>
+    
+    <div class="modal" id="image-modal" onclick="closeImageModal(event)">
+        <button class="modal-close" onclick="closeImageModal()">&times;</button>
+        <img id="image-modal-content" src="">
+    </div>
+    
+    <div class="modal details-modal" id="details-modal">
+        <button class="details-close" onclick="closeDetailsModal()">&times;</button>
+        <div class="modal-content" id="details-content"></div>
     </div>
 
     <script>
         let galleryData = [];
         let currentFilter = 'all';
-        let currentAudioFilter = 'all'; // 'all', 'with_audio', 'without_audio'
-        let currentSortOrder = 'desc'; // 'desc' = 倒序（排最前）, 'asc' = 順序（排最後）
-
-        // Load gallery data
+        let currentAudioFilter = 'all';
+        let currentSort = 'date_desc';
+        
+        // ============ FINGERPRINT + STORAGE ============
+        const STORAGE_KEY = 'hkplaces_votes';
+        const VOTES_PER_PLACE = 1;
+        const COOLDOWN_HOURS = 24;
+        
+        // Simple fingerprint (browser characteristics)
+        function getFingerprint() {
+            const fp = [
+                navigator.userAgent,
+                navigator.language,
+                screen.width,
+                screen.height,
+                screen.colorDepth,
+                new Date().getTimezoneOffset()
+            ].join('|');
+            let hash = 0;
+            for (let i = 0; i < fp.length; i++) {
+                const char = fp.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return 'fp_' + Math.abs(hash).toString(36);
+        }
+        
+        function getUserId() {
+            let uid = localStorage.getItem('hkplaces_uid');
+            if (!uid) {
+                uid = getFingerprint();
+                localStorage.setItem('hkplaces_uid', uid);
+            }
+            return uid;
+        }
+        
+        function getAllVotes() {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+        }
+        
+        function saveAllVotes(data) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+        
+        function canVote(placeId) {
+            const votes = getAllVotes();
+            const userId = getUserId();
+            const placeVotes = votes[placeId] || {};
+            const userVote = placeVotes[userId];
+            
+            if (!userVote) return true;
+            
+            const lastVote = userVote.lastVote;
+            const hoursSince = (Date.now() - lastVote) / (1000 * 60 * 60);
+            return hoursSince >= COOLDOWN_HOURS;
+        }
+        
+        function getCooldownRemaining(placeId) {
+            const votes = getAllVotes();
+            const userId = getUserId();
+            const placeVotes = votes[placeId] || {};
+            const userVote = placeVotes[userId];
+            
+            if (!userVote) return 0;
+            
+            const lastVote = userVote.lastVote;
+            const hoursSince = (Date.now() - lastVote) / (1000 * 60 * 60);
+            const remaining = COOLDOWN_HOURS - hoursSince;
+            return remaining > 0 ? remaining : 0;
+        }
+        
+        function castVote(placeId, placeName) {
+            if (!canVote(placeId)) {
+                const remaining = getCooldownRemaining(placeId);
+                alert(`你需要等 ${Math.ceil(remaining)} 小時後才能再為「${placeName}」投票`);
+                return false;
+            }
+            
+            const votes = getAllVotes();
+            const userId = getUserId();
+            
+            if (!votes[placeId]) votes[placeId] = {};
+            votes[placeId][userId] = {
+                lastVote: Date.now(),
+                count: (votes[placeId][userId]?.count || 0) + 1
+            };
+            
+            saveAllVotes(votes);
+            return true;
+        }
+        
+        function getVoteCount(placeId) {
+            const votes = getAllVotes();
+            if (!votes[placeId]) return 0;
+            let total = 0;
+            for (const uid in votes[placeId]) {
+                total += votes[placeId][uid].count || 0;
+            }
+            return total;
+        }
+        
+        function getUserVoteCount(placeId) {
+            const votes = getAllVotes();
+            const userId = getUserId();
+            return votes[placeId]?.[userId]?.count || 0;
+        }
+        
+        function getTotalViews(placeId) {
+            const views = JSON.parse(localStorage.getItem('hkplaces_views') || '{}');
+            return views[placeId] || 0;
+        }
+        
+        function incrementViews(placeId) {
+            const views = JSON.parse(localStorage.getItem('hkplaces_views') || '{}');
+            views[placeId] = (views[placeId] || 0) + 1;
+            localStorage.setItem('hkplaces_views', JSON.stringify(views));
+        }
+        
+        function getYourMostViewed() {
+            const views = JSON.parse(localStorage.getItem('hkplaces_views') || '{}');
+            let maxViews = 0, maxPlace = '-';
+            for (const placeId in views) {
+                if (views[placeId] > maxViews) {
+                    maxViews = views[placeId];
+                    const place = galleryData.find(q => q.id == placeId);
+                    maxPlace = place?.correctAnswer || maxPlace;
+                }
+            }
+            return maxViews > 0 ? `${maxPlace} (${maxViews})` : '-';
+        }
+        
+        function getYourMostLiked() {
+            const votes = getAllVotes();
+            let maxVotes = 0, maxPlace = '-';
+            for (const placeId in votes) {
+                const total = getVoteCount(placeId);
+                if (total > maxVotes) {
+                    maxVotes = total;
+                    const place = galleryData.find(q => q.id == placeId);
+                    maxPlace = place?.correctAnswer || maxPlace;
+                }
+            }
+            return maxVotes > 0 ? `${maxPlace} (${maxVotes})` : '-';
+        }
+        
+        // ============ GALLERY ============
         async function loadGalleryData() {
             try {
-                // Force cache busting with random version
                 const cacheBuster = 'v=' + Date.now() + Math.random().toString(36).substring(7);
                 const response = await fetch('quiz-data.json?' + cacheBuster);
                 const data = await response.json();
                 galleryData = data.questions;
-                
-                // Load votes from localStorage
-                galleryData.forEach(q => {
-                    const savedVotes = localStorage.getItem(`vote_${q.id}`);
-                    if (savedVotes) {
-                        q.userVoted = true;
-                    }
-                });
-                
-                // Sort by date descending (newest first) - default sort
-                galleryData.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
-                currentSortOrder = 'desc'; // Initialize order state
-                
-                // Populate category filters
                 populateCategoryFilters();
-                
-                // Update stats
-                updateStats();
-                
-                // Render gallery
                 renderGallery();
-                
+                updateStats();
+                updateYourStats();
             } catch (error) {
-                console.error('Error loading gallery data:', error);
-                alert('載入圖庫失敗，請刷新頁面重試');
+                console.error('Failed to load gallery data:', error);
             }
         }
-
-        // Populate category filters
+        
         function populateCategoryFilters() {
+            const container = document.getElementById('category-filters');
             const categories = [...new Set(galleryData.map(q => q.category))];
-            const filterContainer = document.getElementById('category-filters');
+            container.innerHTML = `
+                <button class="filter-btn active" data-category="all">全部類別</button>
+                ${categories.map(c => `<button class="filter-btn" data-category="${c}">${c}</button>`).join('')}
+            `;
             
-            categories.forEach(cat => {
-                const btn = document.createElement('button');
-                btn.className = 'filter-btn';
-                btn.textContent = cat;
-                btn.onclick = () => filterByCategory(cat, btn);
-                filterContainer.appendChild(btn);
+            container.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentFilter = btn.dataset.category;
+                    container.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderGallery();
+                });
             });
-            
-            document.getElementById('total-categories').textContent = categories.length;
         }
-
-        // Filter by category
-        function filterByCategory(category, btnElement) {
-            currentFilter = category;
-            
-            // Update button styles
-            document.querySelectorAll('#category-filters .filter-btn').forEach(btn => {
-                btn.classList.remove('active');
+        
+        document.querySelectorAll('.audio-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentAudioFilter = btn.dataset.filter;
+                document.querySelectorAll('.audio-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderGallery();
             });
-            btnElement.classList.add('active');
-            
-            renderGallery();
-        }
-
-        // Filter by audio availability
-        function filterByAudio(filterType, btnElement) {
-            currentAudioFilter = filterType;
-            
-            // Update button styles
-            document.querySelectorAll('.audio-filter-btn').forEach(btn => {
-                btn.classList.remove('active');
+        });
+        
+        document.querySelectorAll('.sort-bar .filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentSort = btn.dataset.sort;
+                document.querySelectorAll('.sort-bar .filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderGallery();
             });
-            btnElement.classList.add('active');
-            
-            renderGallery();
-        }
-
-        // Toggle sort order (desc/asc) for all sort types
-        function toggleSortOrder() {
-            currentSortOrder = currentSortOrder === 'desc' ? 'asc' : 'desc';
-            
-            const btn = document.getElementById('sort-order-btn');
-            const sortType = document.querySelector('input[name="sort"]:checked').value;
-            
-            // Update button text based on current sort type
-            if (currentSortOrder === 'desc') {
-                if (sortType === 'date') btn.textContent = '🔽 倒序';
-                else if (sortType === 'votes') btn.textContent = '🔽 倒序';
-                else if (sortType === 'name') btn.textContent = '🔽 倒序';
-            } else {
-                if (sortType === 'date') btn.textContent = '🔼 順序';
-                else if (sortType === 'votes') btn.textContent = '🔼 順序';
-                else if (sortType === 'name') btn.textContent = '🔼 順序';
-            }
-            
-            sortGallery();
-        }
-
-        // Sort gallery
-        function sortGallery() {
-            const sortType = document.querySelector('input[name="sort"]:checked').value;
-            
-            if (sortType === 'date') {
-                if (currentSortOrder === 'desc') {
-                    galleryData.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
-                } else {
-                    galleryData.sort((a, b) => new Date(a.dateAdded) - new Date(b.dateAdded));
-                }
-            } else if (sortType === 'votes') {
-                if (currentSortOrder === 'desc') {
-                    galleryData.sort((a, b) => b.votes - a.votes);
-                } else {
-                    galleryData.sort((a, b) => a.votes - b.votes);
-                }
-            } else if (sortType === 'name') {
-                if (currentSortOrder === 'desc') {
-                    galleryData.sort((a, b) => b.correctAnswer.localeCompare(a.correctAnswer, 'zh-HK'));
-                } else {
-                    galleryData.sort((a, b) => a.correctAnswer.localeCompare(b.correctAnswer, 'zh-HK'));
-                }
-            }
-            
-            // Update button text
-            const btn = document.getElementById('sort-order-btn');
-            if (currentSortOrder === 'desc') {
-                btn.textContent = '🔽 倒序';
-            } else {
-                btn.textContent = '🔼 順序';
-            }
-            
-            renderGallery();
-        }
-
-        // Format date to ISO format (YYYY-MM-DD) with Hong Kong timezone
-        function formatDate(dateString) {
-            // Parse the date and adjust for Hong Kong timezone (UTC+8)
-            const date = new Date(dateString);
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
-        }
-
-        // Render gallery
+        });
+        
         function renderGallery() {
             const grid = document.getElementById('gallery-grid');
-            grid.innerHTML = '';
-            
             let filtered = galleryData;
             
-            // Apply category filter
             if (currentFilter !== 'all') {
                 filtered = filtered.filter(q => q.category === currentFilter);
             }
             
-            // Apply audio filter
             if (currentAudioFilter === 'with_audio') {
                 filtered = filtered.filter(q => q.audio);
             } else if (currentAudioFilter === 'without_audio') {
                 filtered = filtered.filter(q => !q.audio);
             }
             
-            // Update audio stats
-            updateAudioStats(filtered);
+            // Sort
+            switch (currentSort) {
+                case 'date_desc': filtered.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded)); break;
+                case 'date_asc': filtered.sort((a, b) => new Date(a.dateAdded) - new Date(b.dateAdded)); break;
+                case 'votes_desc': filtered.sort((a, b) => getVoteCount(a.id) - getVoteCount(b.id)); break;
+                case 'votes_asc': filtered.sort((a, b) => getVoteCount(b.id) - getVoteCount(a.id)); break;
+                case 'name_asc': filtered.sort((a, b) => a.correctAnswer.localeCompare(b.correctAnswer, 'zh-HK')); break;
+            }
             
-            filtered.forEach(q => {
-                const item = document.createElement('div');
-                item.className = 'gallery-item';
-                item.innerHTML = `
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div class="empty-state">暫時冇符合篩選條件的地點</div>';
+                return;
+            }
+            
+            grid.innerHTML = filtered.map(q => {
+                const voteCount = getVoteCount(q.id);
+                const views = getTotalViews(q.id);
+                const userVoted = getUserVoteCount(q.id) > 0;
+                const cooldown = getCooldownRemaining(q.id);
+                const canVoteNow = canVote(q.id);
+                
+                return `
+                <div class="gallery-item">
                     <div class="gallery-image-container">
                         <img src="${q.image}" alt="${q.correctAnswer}" class="gallery-image" onclick="openImageModal(this.src)">
-                        ${q.inkImage ? `<button class="ink-toggle-btn" data-original="${q.image}" data-ink="${q.inkImage}" onclick="toggleInkImage(this)">🖌️ 水墨畫</button>` : ''}
+                        ${q.inkImage ? `<button class="ink-toggle-btn" data-original="${q.image}" data-ink="${q.inkImage}" onclick="toggleInkImage(this, event)">🖌️ 水墨畫</button>` : ''}
                     </div>
                     <div class="gallery-info">
                         <div class="gallery-name">${q.correctAnswer}</div>
                         <div class="gallery-category">${q.category}</div>
                         <div class="gallery-location">📍 ${q.extra?.location || '位置不詳'}</div>
                         <div class="gallery-date">📅 加入日期：${formatDate(q.dateAdded)}</div>
+                        <div class="gallery-stats">
+                            <div class="gallery-stat">👁️ <span>${views}</span></div>
+                            <div class="gallery-stat">❤️ <span>${voteCount}</span></div>
+                        </div>
                         <div class="action-section">
-                            <button class="vote-btn ${q.userVoted ? 'voted' : ''}" 
-                                    onclick="vote(${q.id}, this)" 
-                                    ${q.userVoted ? 'disabled' : ''}>
-                                ${q.userVoted ? '✓ 已投票' : '❤️ 投票'}
+                            <button class="vote-btn ${userVoted ? 'voted' : ''}" 
+                                    onclick="handleVote(${q.id}, '${q.correctAnswer.replace(/'/g, "\\'")}', this)" 
+                                    ${!canVoteNow ? 'disabled' : ''}>
+                                ${userVoted ? '✓ 已投票' : cooldown > 0 ? `⏳ ${Math.ceil(cooldown)}h` : '❤️ 投票'}
                             </button>
-                            <span class="vote-count ${q.userVoted ? 'voted' : ''}" id="vote-count-${q.id}">${q.votes} 票</span>
+                            <span class="vote-count ${userVoted ? 'voted' : ''}">${voteCount} 票</span>
                             <button class="details-btn" onclick="showDetails(${q.id})">📋 詳情</button>
-                            ${q.audio ? `<button class="audio-btn" onclick="playAudio(${q.id})">🎤 語音導航</button>` : ''}
+                            ${q.audio ? `<button class="audio-btn-item" onclick="playAudio(${q.id})">🎤 語音</button>` : ''}
                         </div>
                     </div>
+                </div>
                 `;
-                grid.appendChild(item);
-            });
+            }).join('');
             
             document.getElementById('total-landmarks').textContent = filtered.length;
         }
-
-        // Vote function
-        function vote(questionId, btnElement) {
-            const question = galleryData.find(q => q.id === questionId);
-            if (!question || question.userVoted) return;
-            
-            // Update vote count
-            question.votes++;
-            question.userVoted = true;
-            
-            // Save to localStorage
-            localStorage.setItem(`vote_${questionId}`, 'true');
-            
-            // Save to server (optional - for now just localStorage)
-            saveVotesToServer();
-            
-            // Update UI
-            btnElement.textContent = '✓ 已投票';
-            btnElement.classList.add('voted');
-            btnElement.disabled = true;
-            
-            const voteCountEl = document.getElementById(`vote-count-${questionId}`);
-            voteCountEl.textContent = `${question.votes} 票`;
-            voteCountEl.classList.add('voted');
-            
-            // Update stats
-            updateStats();
-        }
-
-        // Save votes to server (placeholder for future backend)
-        async function saveVotesToServer() {
-            // TODO: Implement backend API to save votes
-            // For now, just log to console
-            const votes = galleryData.map(q => ({ id: q.id, votes: q.votes }));
-            console.log('Votes to save:', votes);
-        }
-
-        // Update stats
-        function updateStats() {
-            const totalVotes = galleryData.reduce((sum, q) => sum + q.votes, 0);
-            const maxVotes = Math.max(...galleryData.map(q => q.votes), 0);
-            
-            document.getElementById('total-votes').textContent = totalVotes;
-            document.getElementById('top-voted').textContent = maxVotes;
-            
-            // Update audio stats
-            updateAudioStats(galleryData);
-        }
-
-        // Update audio stats
-        function updateAudioStats(data) {
-            const totalWithAudio = data.filter(q => q.audio).length;
-            const totalWithoutAudio = data.filter(q => !q.audio).length;
-            const totalLandmarks = data.length;
-            
-            // Update stats display if elements exist
-            const audioStatsEl = document.getElementById('audio-stats');
-            if (audioStatsEl) {
-                audioStatsEl.innerHTML = `
-                    <div class="audio-stat">
-                        <span class="stat-label">🎤 有語音：</span>
-                        <span class="stat-value">${totalWithAudio}</span>
-                    </div>
-                    <div class="audio-stat">
-                        <span class="stat-label">🔇 未有語音：</span>
-                        <span class="stat-value">${totalWithoutAudio}</span>
-                    </div>
-                    <div class="audio-stat">
-                        <span class="stat-label">📊 語音覆蓋率：</span>
-                        <span class="stat-value">${totalLandmarks > 0 ? Math.round((totalWithAudio / totalLandmarks) * 100) : 0}%</span>
-                    </div>
-                `;
+        
+        function handleVote(placeId, placeName, btn) {
+            if (castVote(placeId, placeName)) {
+                btn.classList.add('voted');
+                btn.disabled = true;
+                btn.textContent = '✓ 已投票';
+                btn.nextElementSibling.textContent = getVoteCount(placeId) + ' 票';
+                btn.nextElementSibling.classList.add('voted');
+                updateStats();
+                updateYourStats();
             }
         }
-
-        // Image modal functions
+        
+        function toggleInkImage(btn, event) {
+            event.stopPropagation();
+            const container = btn.parentElement;
+            const img = container.querySelector('img');
+            
+            if (btn.dataset.current === 'original') {
+                img.src = btn.dataset.ink;
+                btn.dataset.current = 'ink';
+                btn.textContent = '📷 原本';
+            } else {
+                img.src = btn.dataset.original;
+                btn.dataset.current = 'original';
+                btn.textContent = '🖌️ 水墨畫';
+            }
+        }
+        
+        function updateStats() {
+            const totalVotes = galleryData.reduce((sum, q) => sum + getVoteCount(q.id), 0);
+            const totalViews = galleryData.reduce((sum, q) => sum + getTotalViews(q.id), 0);
+            
+            let topPlace = galleryData.reduce((max, q) => {
+                const votes = getVoteCount(q.id);
+                const maxVotes = getVoteCount(max?.id || 0);
+                return votes > maxVotes ? q : max;
+            }, galleryData[0]);
+            
+            document.getElementById('total-votes').textContent = totalVotes;
+            document.getElementById('total-views').textContent = totalViews;
+            document.getElementById('top-voted').textContent = topPlace ? topPlace.correctAnswer : '-';
+        }
+        
+        function updateYourStats() {
+            document.getElementById('your-most-viewed').textContent = getYourMostViewed();
+            document.getElementById('your-most-liked').textContent = getYourMostLiked();
+        }
+        
         function openImageModal(imageSrc) {
+            incrementViews(imageSrc);
+            updateYourStats();
             const modal = document.getElementById('image-modal');
             const modalImg = document.getElementById('image-modal-content');
             modalImg.src = imageSrc;
             modal.classList.add('show');
             document.body.style.overflow = 'hidden';
         }
-
+        
         function closeImageModal(event) {
-            if (!event || event.target.id === 'image-modal') {
+            if (!event || event.target.id === 'image-modal' || event.target.className === 'modal-close') {
                 const modal = document.getElementById('image-modal');
                 modal.classList.remove('show');
                 document.body.style.overflow = 'auto';
             }
         }
-
-        // Handle ESC key
-        document.addEventListener('keydown', function(e) {
+        
+        function showDetails(placeId) {
+            const q = galleryData.find(item => item.id === placeId);
+            if (!q) return;
+            
+            incrementViews(placeId);
+            updateYourStats();
+            
+            const content = document.getElementById('details-content');
+            content.innerHTML = `
+                <h2>${q.correctAnswer}</h2>
+                <p><strong>📍 位置：</strong>${q.extra?.location || '位置不詳'}</p>
+                ${q.extra?.height ? `<p><strong>📏 高度：</strong>${q.extra.height}</p>` : ''}
+                ${q.extra?.features ? `<p><strong>✨ 特點：</strong></p><ul>${q.extra.features.map(f => `<li>${f}</li>`).join('')}</ul>` : ''}
+                <div class="history"><p><strong>📖 歷史：</strong>${q.extra?.history || q.fact || '無資料'}</p></div>
+                ${q.extra?.organization ? `<p><strong>🏛️ 機構：</strong>${q.extra.organization}</p>` : ''}
+            `;
+            
+            document.getElementById('details-modal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeDetailsModal() {
+            document.getElementById('details-modal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+        
+        document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeImageModal();
+                closeDetailsModal();
             }
         });
-
-        // Toggle between original and ink wash image
-        function toggleInkImage(btn) {
-            const container = btn.parentElement;
-            const img = container.querySelector('img');
-            const originalSrc = btn.dataset.original;
-            const inkSrc = btn.dataset.ink;
-            
-            if (btn.dataset.inkMode === 'true') {
-                // Switch to original
-                img.src = originalSrc;
-                btn.textContent = '🖌️ 水墨畫';
-                btn.dataset.inkMode = 'false';
-            } else {
-                // Switch to ink wash
-                img.src = inkSrc;
-                btn.textContent = '📷 原本相片';
-                btn.dataset.inkMode = 'true';
-            }
+        
+        function playAudio(placeId) {
+            const q = galleryData.find(item => item.id === placeId);
+            if (!q || !q.audio) return;
+            const audio = new Audio(q.audio);
+            audio.play();
         }
-
-        // Audio player variables
-        let currentAudio = null;
-        let currentAudioId = null;
-        let isPlaying = false;
-
-        // Audio player functions
-        function playAudio(questionId) {
-            const question = galleryData.find(q => q.id === questionId);
-            if (!question) {
-                console.error('Question not found:', questionId);
-                return;
-            }
-            
-            // Debug: log audio field
-            console.log('Audio debug for Q' + questionId + ':', {
-                id: question.id,
-                name: question.correctAnswer,
-                hasAudio: 'audio' in question,
-                audioValue: question.audio,
-                audioType: typeof question.audio,
-                questionKeys: Object.keys(question)
-            });
-            
-            // Check if audio file exists
-            if (!question.audio) {
-                alert('🚫 呢個地標暫時未有語音導航\n\n地標：' + question.correctAnswer + 
-                      '\nAudio 欄位：' + (question.audio || '空/未定義') +
-                      '\n\n師兄可以上傳語音檔案到：\nassets/audio/ 文件夾\n\n然後更新 quiz-data.json 加 audio 欄位');
-                return;
-            }
-
-            // Stop previous audio if playing
-            if (currentAudio) {
-                currentAudio.pause();
-                currentAudio.currentTime = 0;
-                updateAudioButton(currentAudioId, false);
-            }
-
-            // Create new audio element
-            currentAudio = new Audio(question.audio);
-            currentAudioId = questionId;
-
-            // Set up audio events
-            currentAudio.addEventListener('timeupdate', updateProgress);
-            currentAudio.addEventListener('loadedmetadata', updateTotalTime);
-            currentAudio.addEventListener('ended', () => {
-                isPlaying = false;
-                updateAudioButton(questionId, false);
-                document.getElementById('play-btn').textContent = '▶️';
-            });
-
-            // Show audio modal
-            const modal = document.getElementById('audio-modal');
-            const title = document.getElementById('audio-landmark');
-            
-            title.textContent = question.correctAnswer;
-            modal.classList.add('show');
-
-            // Start playing
-            currentAudio.play();
-            isPlaying = true;
-            updateAudioButton(questionId, true);
-            document.getElementById('play-btn').textContent = '⏸️';
+        
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
         }
-
-        function updateAudioButton(questionId, playing) {
-            const btn = document.querySelector(`button[onclick="playAudio(${questionId})"]`);
-            if (btn) {
-                if (playing) {
-                    btn.classList.add('playing');
-                    btn.textContent = '⏸️ 播放中';
-                } else {
-                    btn.classList.remove('playing');
-                    btn.textContent = '🎤 語音導航';
-                }
-            }
-        }
-
-        function togglePlay() {
-            if (!currentAudio) return;
-
-            if (isPlaying) {
-                currentAudio.pause();
-                document.getElementById('play-btn').textContent = '▶️';
-            } else {
-                currentAudio.play();
-                document.getElementById('play-btn').textContent = '⏸️';
-            }
-            isPlaying = !isPlaying;
-            updateAudioButton(currentAudioId, isPlaying);
-        }
-
-        function updateProgress() {
-            if (!currentAudio) return;
-
-            const progress = (currentAudio.currentTime / currentAudio.duration) * 100;
-            document.getElementById('progress-bar').style.width = progress + '%';
-
-            // Update current time
-            const currentTime = formatTime(currentAudio.currentTime);
-            document.getElementById('current-time').textContent = currentTime;
-        }
-
-        function updateTotalTime() {
-            if (!currentAudio) return;
-
-            const totalTime = formatTime(currentAudio.duration);
-            document.getElementById('total-time').textContent = totalTime;
-        }
-
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs.toString().padStart(2, '0')}`;
-        }
-
-        function skipBackward() {
-            if (!currentAudio) return;
-            currentAudio.currentTime = Math.max(0, currentAudio.currentTime - 10);
-        }
-
-        function skipForward() {
-            if (!currentAudio) return;
-            currentAudio.currentTime = Math.min(currentAudio.duration, currentAudio.currentTime + 10);
-        }
-
-        function toggleMute() {
-            if (!currentAudio) return;
-            currentAudio.muted = !currentAudio.muted;
-            document.getElementById('mute-btn').textContent = currentAudio.muted ? '🔇' : '🔊';
-        }
-
-        function changeVolume(value) {
-            if (!currentAudio) return;
-            currentAudio.volume = value / 100;
-        }
-
-        function closeAudioModal(event) {
-            if (!event || event.target.id === 'audio-modal') {
-                const modal = document.getElementById('audio-modal');
-                modal.classList.remove('show');
-                
-                // Stop audio
-                if (currentAudio) {
-                    currentAudio.pause();
-                    currentAudio.currentTime = 0;
-                    isPlaying = false;
-                    updateAudioButton(currentAudioId, false);
-                }
-            }
-        }
-
-        // Details modal functions
-        function showDetails(questionId) {
-            const question = galleryData.find(q => q.id === questionId);
-            if (!question) return;
-
-            const modal = document.getElementById('details-modal');
-            const title = document.getElementById('details-title');
-            const body = document.getElementById('details-body');
-
-            title.textContent = question.correctAnswer;
-
-            // Build details HTML
-            let html = `
-                <div class="details-section">
-                    <h3>📍 位置</h3>
-                    <p>${question.extra?.location || '位置不詳'}</p>
-                </div>
-
-                <div class="details-section">
-                    <h3>📖 簡介</h3>
-                    <p>${question.fact}</p>
-                </div>
-
-                <div class="details-section">
-                    <h3>💡 提示</h3>
-                    <p>${question.hint}</p>
-                </div>
-            `;
-
-            // Add extra info if available
-            if (question.extra) {
-                html += `<div class="details-section"><h3>📊 詳細資料</h3><ul class="details-list">`;
-                
-                if (question.extra.height) {
-                    html += `<li><strong>高度/規模：</strong>${question.extra.height}</li>`;
-                }
-                if (question.extra.features) {
-                    html += `<li><strong>特色：</strong><br>`;
-                    question.extra.features.forEach(f => {
-                        html += `<span class="details-tag">${f}</span>`;
-                    });
-                    html += `</li>`;
-                }
-                if (question.extra.history) {
-                    html += `<li><strong>歷史：</strong>${question.extra.history}</li>`;
-                }
-                if (question.extra.developer) {
-                    html += `<li><strong>發展商：</strong>${question.extra.developer}</li>`;
-                }
-                if (question.extra.architect) {
-                    html += `<li><strong>建築師：</strong>${question.extra.architect}</li>`;
-                }
-                if (question.extra.designer) {
-                    html += `<li><strong>設計師：</strong>${question.extra.designer}</li>`;
-                }
-                if (question.extra.organization) {
-                    html += `<li><strong>機構：</strong>${question.extra.organization}</li>`;
-                }
-                if (question.extra.view) {
-                    html += `<li><strong>景觀：</strong>${question.extra.view}</li>`;
-                }
-                if (question.extra.legend) {
-                    html += `<li><strong>傳說：</strong>${question.extra.legend}</li>`;
-                }
-                if (question.extra.beaches) {
-                    html += `<li><strong>海灘：</strong>${question.extra.beaches}</li>`;
-                }
-                
-                html += `</ul></div>`;
-            }
-
-            // Add category and date
-            html += `
-                <div class="details-section">
-                    <h3>🏷️ 分類</h3>
-                    <span class="details-tag">${question.category}</span>
-                </div>
-
-                <div class="details-section">
-                    <h3>📅 加入日期</h3>
-                    <p>${formatDate(question.dateAdded)}</p>
-                </div>
-            `;
-
-            body.innerHTML = html;
-            modal.classList.add('show');
-        }
-
-        function closeDetailsModal(event) {
-            if (!event || event.target.id === 'details-modal') {
-                const modal = document.getElementById('details-modal');
-                modal.classList.remove('show');
-            }
-        }
-
-        // Initialize
+        
         loadGalleryData();
     </script>
 </body>
