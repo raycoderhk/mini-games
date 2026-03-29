@@ -193,6 +193,34 @@
             transform: scale(1.05);
         }
 
+        .gallery-image-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-image-container .gallery-image {
+            width: 100%;
+            height: 250px;
+        }
+
+        .ink-toggle-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: background 0.2s;
+        }
+
+        .ink-toggle-btn:hover {
+            background: rgba(0,0,0,0.9);
+        }
+
         .gallery-info {
             padding: 20px;
         }
@@ -1002,7 +1030,10 @@
                 const item = document.createElement('div');
                 item.className = 'gallery-item';
                 item.innerHTML = `
-                    <img src="${q.image}" alt="${q.correctAnswer}" class="gallery-image" onclick="openImageModal(this.src)">
+                    <div class="gallery-image-container">
+                        <img src="${q.image}" alt="${q.correctAnswer}" class="gallery-image" onclick="openImageModal(this.src)">
+                        ${q.inkImage ? `<button class="ink-toggle-btn" onclick="toggleInkImage(this, '${q.image}', '${q.inkImage}')">🖌️ 水墨畫</button>` : ''}
+                    </div>
                     <div class="gallery-info">
                         <div class="gallery-name">${q.correctAnswer}</div>
                         <div class="gallery-category">${q.category}</div>
@@ -1120,6 +1151,27 @@
         // Handle ESC key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
+                closeImageModal();
+            }
+        });
+
+        // Toggle between original and ink wash image
+        function toggleInkImage(btn, originalSrc, inkSrc) {
+            const container = btn.parentElement;
+            const img = container.querySelector('img');
+            
+            if (btn.dataset.inkMode === 'true') {
+                // Switch to original
+                img.src = originalSrc;
+                btn.textContent = '🖌️ 水墨畫';
+                btn.dataset.inkMode = 'false';
+            } else {
+                // Switch to ink wash
+                img.src = inkSrc;
+                btn.textContent = '📷 原本相片';
+                btn.dataset.inkMode = 'true';
+            }
+        }
                 closeImageModal();
                 closeDetailsModal();
                 closeAudioModal();
