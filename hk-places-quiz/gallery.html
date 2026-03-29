@@ -575,7 +575,7 @@
                 <div class="gallery-item">
                     <div class="gallery-image-container">
                         <img src="${q.image}" alt="${q.correctAnswer}" class="gallery-image" onclick="openImageModal(this.src)">
-                        ${q.inkImage ? `<button class="ink-toggle-btn" data-original="${q.image}" data-ink="${q.inkImage}" onclick="toggleInkImage(this, event)">🖌️ 水墨畫</button>` : ''}
+                        ${q.inkImage || q.sketchImage ? `<button class="ink-toggle-btn" data-original="${q.image}" data-ink="${q.inkImage || ''}" data-sketch="${q.sketchImage || ''}" data-current="original" onclick="toggleImageStyle(this, event)">🖌️ 水墨畫</button>` : ''}
                     </div>
                     <div class="gallery-info">
                         <div class="gallery-name">${q.correctAnswer}</div>
@@ -616,12 +616,32 @@
             }
         }
         
-        function toggleInkImage(btn, event) {
+        function toggleImageStyle(btn, event) {
             event.stopPropagation();
             const container = btn.parentElement;
             const img = container.querySelector('img');
+            const hasSketch = btn.dataset.sketch && btn.dataset.sketch !== 'undefined';
+            const hasInk = btn.dataset.ink && btn.dataset.ink !== 'undefined';
             
-            if (btn.dataset.current === 'original') {
+            let current = btn.dataset.current || 'original';
+            
+            if (current === 'original' && hasInk) {
+                img.src = btn.dataset.ink;
+                btn.dataset.current = 'ink';
+                btn.textContent = '✏️ 素描';
+            } else if (current === 'original' && hasSketch) {
+                img.src = btn.dataset.sketch;
+                btn.dataset.current = 'sketch';
+                btn.textContent = '🖌️ 水墨畫';
+            } else if (current === 'ink' && hasSketch) {
+                img.src = btn.dataset.sketch;
+                btn.dataset.current = 'sketch';
+                btn.textContent = '📷 原本';
+            } else if (current === 'ink' && !hasSketch) {
+                img.src = btn.dataset.original;
+                btn.dataset.current = 'original';
+                btn.textContent = '🖌️ 水墨畫';
+            } else if (current === 'sketch' && hasInk) {
                 img.src = btn.dataset.ink;
                 btn.dataset.current = 'ink';
                 btn.textContent = '📷 原本';
