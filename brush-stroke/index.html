@@ -23,8 +23,10 @@
             gap: 10px;
             flex-wrap: wrap;
             justify-content: center;
+            align-items: center;
         }
         .controls input[type="file"] { display: none; }
+        .controls input[type="range"] { width: 150px; }
         .btn {
             padding: 10px 20px;
             border: none;
@@ -44,6 +46,7 @@
         .info { margin-top: 15px; font-size: 0.9em; color: #888; text-align: center; }
         .progress { font-size: 1.2em; color: #4a9eff; margin: 10px 0; }
         .stats { display: flex; gap: 20px; font-size: 0.85em; color: #666; }
+        .setting { display: flex; align-items: center; gap: 8px; font-size: 0.85em; color: #aaa; }
     </style>
 </head>
 <body>
@@ -58,11 +61,24 @@
         <button class="btn btn-reset" id="resetBtn" disabled>🔄 重置</button>
     </div>
     
+    <div class="controls">
+        <div class="setting">
+            <label>迭代次數:</label>
+            <input type="range" id="iterationsSlider" min="5000" max="50000" step="5000" value="20000">
+            <span id="iterationsValue">20000</span>
+        </div>
+        <div class="setting">
+            <label>筆觸大小:</label>
+            <input type="range" id="brushSlider" min="5" max="40" step="5" value="25">
+            <span id="brushValue">25</span>
+        </div>
+    </div>
+    
     <canvas id="canvas"></canvas>
     
     <div class="progress" id="progress">0%</div>
     <div class="stats">
-        <span id="iterations">0 / 5000 iterations</span>
+        <span id="iterations">0 / 20000 iterations</span>
         <span id="fps">fps: 0</span>
     </div>
     <div class="info">
@@ -78,21 +94,38 @@
         const progressEl = document.getElementById('progress');
         const iterationsEl = document.getElementById('iterations');
         const fpsEl = document.getElementById('fps');
+        const iterationsSlider = document.getElementById('iterationsSlider');
+        const iterationsValue = document.getElementById('iterationsValue');
+        const brushSlider = document.getElementById('brushSlider');
+        const brushValue = document.getElementById('brushValue');
 
         let targetImg = null;
         let targetCanvas = document.createElement('canvas');
         let targetCtx = targetCanvas.getContext('2d', { willReadFrequently: true });
         
-        const TARGET_ITERATIONS = 5000;
-        const INITIAL_BRUSH_SIZE = 20;
-        const FINAL_BRUSH_SIZE = 2;
-        const COLOR_RANDOM_STRENGTH = 15;
+        let TARGET_ITERATIONS = 20000;
+        let INITIAL_BRUSH_SIZE = 25;
+        const FINAL_BRUSH_SIZE = 1;
+        const COLOR_RANDOM_STRENGTH = 10;
         
         let currentIterations = 0;
         let isPainting = false;
         let lastFrameTime = Date.now();
         let frameCount = 0;
         let fps = 0;
+
+        // Settings listeners
+        iterationsSlider.addEventListener('input', (e) => {
+            TARGET_ITERATIONS = parseInt(e.target.value);
+            iterationsValue.textContent = TARGET_ITERATIONS;
+            iterationsEl.textContent = `${currentIterations.toLocaleString()} / ${TARGET_ITERATIONS.toLocaleString()} iterations`;
+            if (currentIterations > 0) updateUI();
+        });
+
+        brushSlider.addEventListener('input', (e) => {
+            INITIAL_BRUSH_SIZE = parseInt(e.target.value);
+            brushValue.textContent = INITIAL_BRUSH_SIZE;
+        });
 
         imageInput.addEventListener('change', (e) => {
             const file = e.target.files[0];
@@ -152,7 +185,7 @@
             if (!isPainting || currentIterations >= TARGET_ITERATIONS) {
                 if (currentIterations >= TARGET_ITERATIONS) paintBtn.disabled = true;
                 isPainting = false;
-                paintBtn.textContent = '▶️ 繼續';
+                paintBtn.textContent = '▶️ 完成!';
                 return;
             }
             const frameStart = Date.now();
@@ -174,7 +207,7 @@
                 y: Math.floor(Math.random() * (targetCanvas.height - 2)) + 1
             };
             const progress = currentIterations / TARGET_ITERATIONS;
-            const brushSize = Math.ceil(map(Math.pow(1 - progress, 3), 0, 1, INITIAL_BRUSH_SIZE, FINAL_BRUSH_SIZE));
+            const brushSize = Math.ceil(map(Math.pow(1 - progress, 2), 0, 1, INITIAL_BRUSH_SIZE, FINAL_BRUSH_SIZE));
             let sumR = 0, sumG = 0, sumB = 0, count = 0;
             const pixels = [];
             for (let x = Math.max(0, pos.x - brushSize); x < Math.min(pos.x + brushSize, targetCanvas.width); x++) {
@@ -196,7 +229,7 @@
             const scaleY = canvas.height / targetCanvas.height;
             ctx.fillStyle = `rgb(${Math.round(sumR)},${Math.round(sumG)},${Math.round(sumB)})`;
             ctx.beginPath();
-            ctx.arc(pos.x * scaleX, pos.y * scaleY, brushSize * scaleX, 0, Math.PI * 2);
+            ctx.arc(pos.x * scaleX, pos.y * scaleY, Math.max(brushSize * scaleX, 1), 0, Math.PI * 2);
             ctx.fill();
             currentIterations++;
         }
