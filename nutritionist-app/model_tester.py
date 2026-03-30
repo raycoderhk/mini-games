@@ -1,84 +1,102 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-阿里雲模型測試器 - Aliyun Model Tester
-測試不同 Qwen 模型 (turbo/plus/max) 的輸出質量、速度、成本
+多模型測試器 - Multi-Model Tester
+測試不同 AI 模型的能力：
+1. 文本處理：笑話、創意寫作
+2. 圖像理解：食物照片分析
+3. 圖像生成：根據 prompt 生成圖片
 """
 
 import os
 import json
 import time
-import hashlib
-from datetime import datetime, timedelta
-from typing import Dict, List
+import base64
+from datetime import datetime
+from typing import Dict, List, Optional
+
 import urllib.request
 import urllib.error
 
-# 阿里雲 API 配置
+# ============ API 配置 ============
+# 阿里雲 DashScope
 ALIYUN_API_KEY = os.environ.get("ALIYUN_API_KEY", "")
 ALIYUN_API_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
 
-# 測試的模型列表
-MODELS = [
-    {"id": "qwen-turbo", "name": "Qwen Turbo", "cost_per_1k": 0.002},
-    {"id": "qwen-plus", "name": "Qwen Plus", "cost_per_1k": 0.004},
-    {"id": "qwen-max", "name": "Qwen Max", "cost_per_1k": 0.012},
+# MiniMax via OpenRouter
+OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
+OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
+
+# ============ 模型列表 ============
+TEXT_MODELS = [
+    {"id": "qwen-plus", "name": "Qwen Plus", "provider": "aliyun", "vision": False},
+    {"id": "qwen-turbo", "name": "Qwen Turbo", "provider": "aliyun", "vision": False},
+    {"id": "qwen-max", "name": "Qwen Max", "provider": "aliyun", "vision": False},
+    {"id": "minimax/minimax-01", "name": "MiniMax-01", "provider": "openrouter", "vision": True},
+    {"id": "anthropic/claude-3-haiku", "name": "Claude 3 Haiku", "provider": "openrouter", "vision": True},
+    {"id": "google/gemini-pro-1.5", "name": "Gemini Pro 1.5", "provider": "openrouter", "vision": True},
 ]
 
-# 測試 prompts
-TEST_PROMPTS = [
+VISION_MODELS = [
+    {"id": "qwen-plus", "name": "Qwen Plus", "provider": "aliyun", "vision": True},
+    {"id": "minimax/minimax-01", "name": "MiniMax-01", "provider": "openrouter", "vision": True},
+    {"id": "anthropic/claude-3-haiku", "name": "Claude 3 Haiku", "provider": "openrouter", "vision": True},
+    {"id": "google/gemini-pro-1.5", "name": "Gemini Pro 1.5", "provider": "openrouter", "vision": True},
+]
+
+IMAGE_MODELS = [
+    {"id": "qwen-plus", "name": "Qwen Plus (CogView)", "provider": "aliyun", "image_gen": True},
+    {"id": "stabilityai/stable-diffusion-xl-1024-v1-0", "name": "SDXL", "provider": "openrouter", "image_gen": True},
+]
+
+# ============ 測試 Prompts ============
+TEXT_TESTS = [
     {
-        "category": "代碼生成",
-        "prompt": "寫一個 Python 函數，計算斐波那契數列的第 n 項"
+        "id": "joke",
+        "name": "講笑話",
+        "prompt": "請用廣東話講一個關於工程師的笑話",
+        "category": "text"
     },
     {
-        "category": "文本摘要",
-        "prompt": "摘要以下內容：人工智能是當今科技發展的重要方向，它正在改變我們的生活和工作方式。從自動駕駛到醫療診斷，從智能助手到金融分析，AI 的應用範圍越來越廣泛。然而，人工智能的發展也帶來了挑戰，包括就業影響、隱私問題和倫理考量。"
+        "id": "creative",
+        "name": "創意寫作",
+        "prompt": "請用繁體中文寫一首關於夏天的短詩，4-8句",
+        "category": "text"
     },
     {
-        "category": "問題回答",
-        "prompt": "為什麼天空是藍色的？請用簡單的語言解釋。"
-    },
-    {
-        "category": "翻譯",
-        "prompt": "將以下中文翻譯成英文：「今天天氣真好，我們一起去公園散步吧。」"
-    },
-    {
-        "category": "創意寫作",
-        "prompt": "寫一首關於春天的短詩，4-8 句。"
+        "id": "summarize",
+        "name": "文本摘要",
+        "prompt": "請用繁體中文摘要以下內容（50字以內）：人工智能正在改變我們的生活方式和工作模式。從醫療診斷到金融分析，從智能助手到自動駕駛，AI的應用越來越廣泛。",
+        "category": "text"
     }
 ]
 
-def call_aliyun_model(model_id: str, prompt: str) -> Dict:
-    """調用阿里雲 Qwen 模型 API"""
+# ============ API 調用函數 ============
+
+def call_aliyun(model_id: str, messages: list, image_url: str = None) -> Dict:
+    """調用阿里雲 API"""
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {ALIYUN_API_KEY}"
     }
     
+    content = messages[-1]["content"]
+    
+    # 如果有 image_url，構建視覺消息
+    if image_url:
+        content = [
+            {"type": "image_url", "image_url": {"url": image_url}},
+            {"type": "text", "text": messages[-1]["content"]}
+        ]
+    
     payload = {
         "model": model_id,
-        "input": {
-            "messages": [
-                {
-                    "role": "system",
-                    "content": "你是一個有幫助的助手。"
-                },
-                {
-                    "role": "user",
-                    "content": prompt
-                }
-            ]
-        },
-        "parameters": {
-            "max_tokens": 1024,
-            "temperature": 0.7,
-            "top_p": 0.8
-        }
+        "messages": [{"role": "user", "content": content}],
+        "max_tokens": 1024,
+        "temperature": 0.7
     }
     
     start_time = time.time()
-    
     try:
         req = urllib.request.Request(
             ALIYUN_API_URL,
@@ -87,176 +105,318 @@ def call_aliyun_model(model_id: str, prompt: str) -> Dict:
             method='POST'
         )
         
-        with urllib.request.urlopen(req, timeout=60) as response:
+        with urllib.request.urlopen(req, timeout=90) as response:
             result = json.loads(response.read().decode('utf-8'))
+        
+        response_time = time.time() - start_time
+        
+        if "choices" in result and len(result["choices"]) > 0:
+            content = result["choices"][0]["message"]["content"]
+            return {
+                "success": True,
+                "content": content,
+                "response_time": round(response_time, 2),
+                "model": model_id,
+                "provider": "aliyun"
+            }
+        else:
+            return {
+                "success": False,
+                "error": result.get("error_message", "Unknown error"),
+                "response_time": round(response_time, 2),
+                "model": model_id,
+                "provider": "aliyun"
+            }
             
-        end_time = time.time()
-        response_time = end_time - start_time
-        
-        # 提取回應內容
-        output = result.get("output", {})
-        choices = output.get("choices", [])
-        message = choices[0].get("message", {}) if choices else {}
-        content = message.get("content", "")
-        
-        # 提取 token 用量
-        usage = result.get("usage", {})
-        input_tokens = usage.get("input_tokens", 0)
-        output_tokens = usage.get("output_tokens", 0)
-        total_tokens = input_tokens + output_tokens
-        
-        # 計算成本
-        cost = (total_tokens / 1000) * next(
-            (m["cost_per_1k"] for m in MODELS if m["id"] == model_id), 0
-        )
-        
+    except urllib.error.HTTPError as e:
+        error_body = e.read().decode('utf-8') if e.fp else str(e)
         return {
-            "success": True,
-            "content": content,
-            "response_time": round(response_time, 2),
-            "input_tokens": input_tokens,
-            "output_tokens": output_tokens,
-            "total_tokens": total_tokens,
-            "cost": round(cost, 6),
-            "model": model_id
+            "success": False,
+            "error": f"HTTP {e.code}: {error_body[:200]}",
+            "response_time": round(time.time() - start_time, 2),
+            "model": model_id,
+            "provider": "aliyun"
         }
-        
     except Exception as e:
         return {
             "success": False,
-            "error": str(e),
+            "error": str(e)[:200],
+            "response_time": round(time.time() - start_time, 2),
             "model": model_id,
-            "response_time": 0
+            "provider": "aliyun"
         }
 
-def run_model_test(model_id: str, prompt: str) -> Dict:
-    """運行單個模型測試"""
-    result = call_aliyun_model(model_id, prompt)
-    return result
+def call_openrouter(model_id: str, messages: list, image_url: str = None) -> Dict:
+    """調用 OpenRouter API (MiniMax, Claude, Gemini等)"""
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+        "HTTP-Referer": "https://github.com/raycoderhk/nutrition-app",
+        "X-Title": "Model Tester"
+    }
+    
+    content = messages[-1]["content"]
+    
+    # 構建消息
+    msg_content = content
+    if image_url:
+        msg_content = [
+            {"type": "image_url", "image_url": {"url": image_url}},
+            {"type": "text", "text": content}
+        ]
+    
+    payload = {
+        "model": model_id,
+        "messages": [{"role": "user", "content": msg_content}],
+        "max_tokens": 1024
+    }
+    
+    start_time = time.time()
+    try:
+        req = urllib.request.Request(
+            OPENROUTER_API_URL,
+            data=json.dumps(payload).encode('utf-8'),
+            headers=headers,
+            method='POST'
+        )
+        
+        with urllib.request.urlopen(req, timeout=90) as response:
+            result = json.loads(response.read().decode('utf-8'))
+        
+        response_time = time.time() - start_time
+        
+        if "choices" in result and len(result["choices"]) > 0:
+            content = result["choices"][0]["message"]["content"]
+            return {
+                "success": True,
+                "content": content,
+                "response_time": round(response_time, 2),
+                "model": model_id,
+                "provider": "openrouter"
+            }
+        else:
+            return {
+                "success": False,
+                "error": "No response content",
+                "response_time": round(response_time, 2),
+                "model": model_id,
+                "provider": "openrouter"
+            }
+            
+    except urllib.error.HTTPError as e:
+        error_body = e.read().decode('utf-8') if e.fp else str(e)
+        return {
+            "success": False,
+            "error": f"HTTP {e.code}: {error_body[:200]}",
+            "response_time": round(time.time() - start_time, 2),
+            "model": model_id,
+            "provider": "openrouter"
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e)[:200],
+            "response_time": round(time.time() - start_time, 2),
+            "model": model_id,
+            "provider": "openrouter"
+        }
 
-def run_all_models_test(prompt: str) -> List[Dict]:
-    """對所有模型運行同一個 prompt 測試"""
+def call_model(model_id: str, prompt: str, image_base64: str = None) -> Dict:
+    """統一調用介面 - 自動選擇 provider"""
+    messages = [{"role": "user", "content": prompt}]
+    image_url = None
+    
+    # 如果有圖片，轉換為 data URL
+    if image_base64:
+        image_url = f"data:image/jpeg;base64,{image_base64}"
+    
+    # 選擇 provider
+    if model_id.startswith(("qwen", "glm", "llama")):
+        return call_aliyun(model_id, messages, image_url)
+    else:
+        return call_openrouter(model_id, messages, image_url)
+
+# ============ 測試函數 ============
+
+def test_text(prompt: str) -> List[Dict]:
+    """測試文本處理能力"""
     results = []
-    
-    for model in MODELS:
-        print(f"🧪 測試 {model['name']}...")
-        result = run_model_test(model["id"], prompt)
-        result["model_name"] = model["name"]
-        results.append(result)
-    
-    return results
-
-def run_full_test_suite() -> Dict:
-    """運行完整的測試套件"""
-    all_results = []
-    
-    for test_prompt in TEST_PROMPTS:
-        print(f"\n📝 測試類別：{test_prompt['category']}")
-        print(f"Prompt: {test_prompt['prompt'][:50]}...")
+    for model in TEXT_MODELS:
+        # 檢查 API key
+        if model["provider"] == "aliyun" and not ALIYUN_API_KEY:
+            results.append({
+                "model": model["id"],
+                "model_name": model["name"],
+                "provider": "aliyun",
+                "success": False,
+                "error": "ALIYUN_API_KEY not set",
+                "response_time": 0
+            })
+            continue
+        if model["provider"] == "openrouter" and not OPENROUTER_API_KEY:
+            results.append({
+                "model": model["id"],
+                "model_name": model["name"],
+                "provider": "openrouter",
+                "success": False,
+                "error": "OPENROUTER_API_KEY not set",
+                "response_time": 0
+            })
+            continue
         
-        results = run_all_models_test(test_prompt["prompt"])
-        
-        all_results.append({
-            "category": test_prompt["category"],
-            "prompt": test_prompt["prompt"],
-            "results": results
+        result = call_model(model["id"], prompt)
+        results.append({
+            "model": model["id"],
+            "model_name": model["name"],
+            "provider": model["provider"],
+            **result
         })
     
-    # 生成總結報告
-    summary = generate_summary(all_results)
-    
-    return {
-        "timestamp": datetime.now().isoformat(),
-        "tests": all_results,
-        "summary": summary
-    }
+    return results
 
-def generate_summary(all_results: List[Dict]) -> Dict:
-    """生成測試總結"""
-    model_stats = {}
-    
-    for test in all_results:
-        for result in test["results"]:
-            if not result.get("success"):
-                continue
-                
-            model_id = result["model"]
-            if model_id not in model_stats:
-                model_stats[model_id] = {
-                    "model_name": result.get("model_name", model_id),
-                    "total_tests": 0,
-                    "successful_tests": 0,
-                    "total_time": 0,
-                    "total_tokens": 0,
-                    "total_cost": 0
-                }
-            
-            stats = model_stats[model_id]
-            stats["total_tests"] += 1
-            stats["successful_tests"] += 1
-            stats["total_time"] += result.get("response_time", 0)
-            stats["total_tokens"] += result.get("total_tokens", 0)
-            stats["total_cost"] += result.get("cost", 0)
-    
-    # 計算平均值
-    summary = []
-    for model_id, stats in model_stats.items():
-        if stats["successful_tests"] > 0:
-            summary.append({
-                "model_id": model_id,
-                "model_name": stats["model_name"],
-                "avg_response_time": round(stats["total_time"] / stats["successful_tests"], 2),
-                "avg_tokens": round(stats["total_tokens"] / stats["successful_tests"], 1),
-                "total_cost": round(stats["total_cost"], 4),
-                "success_rate": 100
+def test_vision(prompt: str, image_base64: str) -> List[Dict]:
+    """測試圖像理解能力"""
+    results = []
+    for model in VISION_MODELS:
+        if model["provider"] == "aliyun" and not ALIYUN_API_KEY:
+            results.append({
+                "model": model["id"],
+                "model_name": model["name"],
+                "provider": "aliyun",
+                "success": False,
+                "error": "ALIYUN_API_KEY not set",
+                "response_time": 0
             })
-    
-    # 按響應時間排序
-    summary.sort(key=lambda x: x["avg_response_time"])
-    
-    return {
-        "model_comparison": summary,
-        "fastest_model": summary[0]["model_id"] if summary else None,
-        "cheapest_model": min(summary, key=lambda x: x["total_cost"])["model_id"] if summary else None
-    }
-
-# Flask 路由輔助函數
-def get_tester_results_from_db(db_module):
-    """從數據庫獲取測試結果"""
-    conn = db_module.get_db()
-    cursor = conn.cursor()
-    
-    cursor.execute('''
-        SELECT * FROM model_test_results 
-        ORDER BY created_at DESC 
-        LIMIT 10
-    ''')
-    
-    rows = cursor.fetchall()
-    results = [dict(row) for row in rows]
-    conn.close()
+            continue
+        if model["provider"] == "openrouter" and not OPENROUTER_API_KEY:
+            results.append({
+                "model": model["id"],
+                "model_name": model["name"],
+                "provider": "openrouter",
+                "success": False,
+                "error": "OPENROUTER_API_KEY not set",
+                "response_time": 0
+            })
+            continue
+        
+        result = call_model(model["id"], prompt, image_base64)
+        results.append({
+            "model": model["id"],
+            "model_name": model["name"],
+            "provider": model["provider"],
+            **result
+        })
     
     return results
 
-def save_test_results_to_db(db_module, test_results: Dict):
-    """保存測試結果到數據庫"""
-    conn = db_module.get_db()
-    cursor = conn.cursor()
+def test_image_generation(prompt: str) -> List[Dict]:
+    """測試圖像生成能力 (預留)"""
+    # 圖像生成需要不同的 API endpoint，這裡預留介面
+    return [{
+        "model": "coming-soon",
+        "model_name": "Image Generation",
+        "provider": "mixed",
+        "success": False,
+        "error": "Image generation test coming soon",
+        "response_time": 0
+    }]
+
+def run_all_tests(test_type: str, prompt: str = None, image_base64: str = None) -> Dict:
+    """運行所有測試"""
+    results = {
+        "timestamp": datetime.now().isoformat(),
+        "test_type": test_type,
+        "prompt": prompt,
+        "models_tested": 0,
+        "successful": 0,
+        "failed": 0,
+        "results": []
+    }
     
-    cursor.execute('''
-        INSERT INTO model_test_results (test_data, created_at)
-        VALUES (?, ?)
-    ''', (json.dumps(test_results), datetime.now().isoformat()))
+    if test_type == "text":
+        results["results"] = test_text(prompt or TEXT_TESTS[0]["prompt"])
+    elif test_type == "vision":
+        if not image_base64:
+            return {"success": False, "error": "No image provided for vision test"}
+        results["results"] = test_vision(prompt or "請描述這張圖片", image_base64)
+    elif test_type == "image":
+        results["results"] = test_image_generation(prompt)
+    else:
+        return {"success": False, "error": f"Unknown test type: {test_type}"}
     
-    conn.commit()
-    conn.close()
+    # 統計
+    for r in results["results"]:
+        results["models_tested"] += 1
+        if r.get("success"):
+            results["successful"] += 1
+        else:
+            results["failed"] += 1
+    
+    return results
+
+# ============ Flask 路由 ============
+def register_routes(app, db_module):
+    """註冊測試器路由"""
+    
+    @app.route('/api/model-test/text', methods=['POST'])
+    def test_text_api():
+        """測試文本處理"""
+        data = request.get_json() or {}
+        prompt = data.get('prompt', TEXT_TESTS[0]["prompt"])
+        
+        results = run_all_tests("text", prompt)
+        return jsonify(results)
+    
+    @app.route('/api/model-test/vision', methods=['POST'])
+    def test_vision_api():
+        """測試圖像理解"""
+        data = request.get_json() or {}
+        prompt = data.get('prompt', "請描述這張圖片")
+        image = data.get('image', '')
+        
+        # 移除 data URL 前綴
+        if ',' in image:
+            image = image.split(',')[1]
+        
+        results = run_all_tests("vision", prompt, image)
+        return jsonify(results)
+    
+    @app.route('/api/model-test/text-prompts', methods=['GET'])
+    def get_text_prompts():
+        """獲取可用的文本測試 prompts"""
+        return jsonify(TEXT_TESTS)
+    
+    @app.route('/api/model-test/models', methods=['GET'])
+    def get_models():
+        """獲取所有可用模型"""
+        return jsonify({
+            "text_models": TEXT_MODELS,
+            "vision_models": VISION_MODELS,
+            "image_models": IMAGE_MODELS
+        })
+    
+    @app.route('/api/model-test/providers', methods=['GET'])
+    def get_providers():
+        """獲取 API 配置狀態"""
+        return jsonify({
+            "aliyun": {
+                "configured": bool(ALIYUN_API_KEY),
+                "key_prefix": ALIYUN_API_KEY[:10] + "..." if ALIYUN_API_KEY else None
+            },
+            "openrouter": {
+                "configured": bool(OPENROUTER_API_KEY),
+                "key_prefix": OPENROUTER_API_KEY[:10] + "..." if OPENROUTER_API_KEY else None
+            }
+        })
 
 if __name__ == '__main__':
-    # 測試運行
-    if not ALIYUN_API_KEY:
-        print("❌ 請設置 ALIYUN_API_KEY 環境變量")
-    else:
-        print("🚀 開始運行模型測試...")
-        results = run_full_test_suite()
-        print("\n✅ 測試完成！")
-        print(json.dumps(results, indent=2, ensure_ascii=False))
+    # CLI 測試模式
+    print("🧪 Multi-Model Tester")
+    print(f"Aliyun: {'✅ Configured' if ALIYUN_API_KEY else '❌ Not set'}")
+    print(f"OpenRouter: {'✅ Configured' if OPENROUTER_API_KEY else '❌ Not set'}")
+    print("\nAvailable tests:")
+    print("1. Text processing")
+    print("2. Vision (needs image)")
+    print("\nExample - Text test:")
+    result = run_all_tests("text", "請用廣東話講一個笑話")
+    print(json.dumps(result, indent=2, ensure_ascii=False))

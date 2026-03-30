@@ -704,12 +704,14 @@ def run_model_test():
             "error": "需要管理員認證"
         }), 401
     
+    data = request.get_json() or {}
+    test_type = data.get('type', 'text')  # text, vision, image
+    prompt = data.get('prompt')
+    image = data.get('image')  # base64 encoded image for vision test
+    
     # 運行測試
     try:
-        results = mt.run_full_test_suite()
-        
-        # 保存到數據庫
-        mt.save_test_results_to_db(db, results)
+        results = mt.run_all_tests(test_type, prompt, image)
         
         return jsonify({
             "success": True,
