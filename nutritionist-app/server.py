@@ -42,9 +42,13 @@ def server_error(e):
 
 # ============ 配置 ============
 PORT = int(os.environ.get("PORT", 8080))
-# 使用 OpenRouter API (MiniMax-01)
+# 使用 OpenRouter API (MiniMax-01) — 保留備用
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
+
+# 使用阿里雲 API (Qwen-VL) — 主要使用這個
+ALIYUN_API_KEY = os.environ.get("ALIYUN_API_KEY", "")
+ALIYUN_API_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
 
 # 自動載入 .env 文件
 def load_env():
@@ -210,6 +214,113 @@ def analyze_food_minimax(image_base64):
             return {"success": False, "error": "API 無權限：API Key 可能沒有 MiniMax-01 訪問權限"}
         else:
             return {"success": False, "error": f"HTTP 錯誤 {e.code}: {e.reason}"}
+    except urllib.error.URLError as e:
+        if "timed out" in str(e).lower():
+            return {"success": False, "error": "AI 分析超時，請重試或縮小圖片"}
+        return {"success": False, "error": f"網絡錯誤：{e}"}
+    except Exception as e:
+        print(f"❌ Unexpected error: {e}")
+        import traceback
+        traceback.print_exc()
+        return {"success": False, "error": f"伺服器錯誤：{str(e)}"}
+
+def analyze_food_aliyun(image_base64):
+    """使用阿里雲 Qwen-VL 識別食物並分析營養"""
+    if not ALIYUN_API_KEY:
+        print("❌ ALIYUN_API_KEY is not set!")
+        return {"success": False, "error": "API 配置錯誤：缺少 API Key"}
+    
+    print(f"🔑 Using Aliyun API key: {ALIYUN_API_KEY[:10]}...")
+    
+    # 壓縮圖片
+    image_base64 = compress_image_base64(image_base64)
+    
+    if ',' in image_base64:
+        image_base64 = image_base64.split(',')[1]
+    
+    prompt = """請詳細分析這張食物圖片：
+
+## 任務
+1. **識別食物**: 列出圖片中所有可見的食物
+2. **營養分析**: 分析每種食物的營養成分
+3. **健康建議**: 提供 2-3 條健康飲食建議
+
+## 返回格式 (JSON)
+{
+    "foods": [
+        {
+            "name": "食物名稱（中文）",
+            "confidence": 0.95,
+            "description": "簡單描述",
+            "nutrition": {
+                "serving_size": "份量（克）",
+                "calories": 數字,
+                "protein": 數字,
+                "carbs": 數字,
+                "fat": 數字,
+                "fiber": 數字
+            }
+        }
+    ],
+    "total_nutrition": {
+        "calories": 總卡路里，
+        "protein": 總蛋白質，
+        "carbs": 總碳水，
+        "fat": 總脂肪，
+        "fiber": 總纖維
+    },
+    "health_tips": ["建議 1", "建議 2", "建議 3"],
+    "meal_rating": "優秀/良好/普通/需注意"
+}
+
+只返回 JSON，不要其他文字。"""
+
+    headers = {
+        "Authorization": f"Bearer {ALIYUN_API_KEY}",
+        "Content-Type": "application/json"
+    }
+    
+    # 使用 Qwen-VL (Aliyun)
+    payload = {
+        "model": "qwen-vl-plus",
+        "messages": [
+            {
+                "role": "user",
+                "content": [
+                    {"image": f"data:image/jpeg;base64,{image_base64}"},
+                    {"text": prompt}
+                ]
+            }
+        ]
+    }
+    
+    try:
+        req = urllib.request.Request(
+            ALIYUN_API_URL,
+            data=json.dumps(payload).encode("utf-8"),
+            headers=headers,
+            method="POST"
+        )
+        
+        with urllib.request.urlopen(req, timeout=90) as response:
+            result = json.loads(response.read().decode("utf-8"))
+        
+        content = result["choices"][0]["message"]["content"]
+        start = content.find("{")
+        end = content.rfind("}") + 1
+        if start >= 0 and end > start:
+            return {"success": True, "data": json.loads(content[start:end])}
+        return {"success": False, "error": "JSON 解析失敗"}
+            
+    except urllib.error.HTTPError as e:
+        print(f"❌ HTTP Error {e.code}: {e.reason}")
+        if e.code == 401:
+            return {"success": False, "error": "API 認證失敗：請檢查 Aliyun API Key 是否正確"}
+        elif e.code == 403:
+            return {"success": False, "error": "API 無權限：API Key 可能沒有 Qwen-VL 訪問權限"}
+        else:
+            error_body = e.read().decode("utf-8") if e.fp else ""
+            return {"success": False, "error": f"HTTP 錯誤 {e.code}: {e.reason} - {error_body}"}
     except urllib.error.URLError as e:
         if "timed out" in str(e).lower():
             return {"success": False, "error": "AI 分析超時，請重試或縮小圖片"}
@@ -433,7 +544,7 @@ def analyze():
         if not data or 'image' not in data:
             return jsonify({"success": False, "error": "缺少圖片數據"}), 400
         
-        result = analyze_food_minimax(data['image'])
+        result = analyze_food_aliyun(data['image'])
         return jsonify(result)
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
@@ -517,9 +628,10 @@ def add_progress():
 def health():
     return jsonify({
         "status": "ok",
+        "aliyun_configured": bool(ALIYUN_API_KEY),
         "openrouter_configured": bool(OPENROUTER_API_KEY),
-        "model": "minimax/minimax-01",
-        "provider": "OpenRouter",
+        "model": "qwen-vl-plus",
+        "provider": "Aliyun",
         "version": "3.0 - Personal Nutrition Advisor",
         "database": "SQLite initialized"
     })
