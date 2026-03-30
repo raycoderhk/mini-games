@@ -599,9 +599,10 @@
                     <div class="gallery-image-container">
                         <img src="${q.image}" alt="${q.correctAnswer}" class="gallery-image" id="gallery-img-${q.id}" onclick="openImageModal(this.src)">
                         <div class="style-buttons">
-                            <button class="style-btn active" data-style="original" onclick="switchStyle(${q.id}, '${q.image}', '${q.inkImage || ''}', '${q.sketchImage || ''}', 'original')">📷</button>
-                            ${q.inkImage ? `<button class="style-btn" data-style="ink" onclick="switchStyle(${q.id}, '${q.image}', '${q.inkImage}', '${q.sketchImage || ''}', 'ink')">🖌️</button>` : ''}
-                            ${q.sketchImage ? `<button class="style-btn" data-style="sketch" onclick="switchStyle(${q.id}, '${q.image}', '${q.inkImage || ''}', '${q.sketchImage}', 'sketch')">✏️</button>` : ''}
+                            <button class="style-btn active" data-style="original" onclick="switchStyle(${q.id}, '${q.image}', '${q.inkImage || ''}', '${q.sketchImage || ''}', '${q.impressionistImage || ''}', 'original')">📷</button>
+                            ${q.inkImage ? `<button class="style-btn" data-style="ink" onclick="switchStyle(${q.id}, '${q.image}', '${q.inkImage}', '${q.sketchImage || ''}', '${q.impressionistImage || ''}', 'ink')">🖌️</button>` : ''}
+                            ${q.sketchImage ? `<button class="style-btn" data-style="sketch" onclick="switchStyle(${q.id}, '${q.image}', '${q.inkImage || ''}', '${q.sketchImage}', '${q.impressionistImage || ''}', 'sketch')">✏️</button>` : ''}
+                            ${q.impressionistImage ? `<button class="style-btn" data-style="impressionist" onclick="switchStyle(${q.id}, '${q.image}', '${q.inkImage || ''}', '${q.sketchImage || ''}', '${q.impressionistImage}', 'impressionist')">🎨</button>` : ''}
                         </div>
                     </div>
                     <div class="gallery-info">
@@ -643,7 +644,7 @@
             }
         }
         
-        function switchStyle(imgId, original, ink, sketch, style) {
+        function switchStyle(imgId, original, ink, sketch, impressionist, style) {
             const img = document.getElementById('gallery-img-' + imgId);
             const container = img.parentElement;
             
@@ -651,6 +652,7 @@
             if (style === 'original') img.src = original;
             else if (style === 'ink' && ink) img.src = ink;
             else if (style === 'sketch' && sketch) img.src = sketch;
+            else if (style === 'impressionist' && impressionist) img.src = impressionist;
             
             // Update button states
             const buttons = container.querySelectorAll('.style-btn');

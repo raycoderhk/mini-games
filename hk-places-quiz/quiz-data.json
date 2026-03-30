@@ -29,7 +29,8 @@
       "dateAdded": "2026-03-20",
       "category": "自然景觀",
       "votes": 0,
-      "inkImage": "assets/ink/fishing-junk-peak.jpg"
+      "inkImage": "assets/ink/fishing-junk-peak.jpg",
+      "impressionistImage": "assets/ink/imp-fishing-junk-peak.jpg"
     },
     {
       "id": 2,
@@ -57,7 +58,8 @@
       "dateAdded": "2026-03-20",
       "category": "自然景觀",
       "votes": 0,
-      "inkImage": "assets/ink/amah-rock.jpg"
+      "inkImage": "assets/ink/amah-rock.jpg",
+      "impressionistImage": "assets/ink/imp-amah-rock.jpg"
     },
     {
       "id": 3,
@@ -86,7 +88,8 @@
       "dateAdded": "2026-03-20",
       "category": "橋樑",
       "votes": 0,
-      "inkImage": "assets/ink/ap-lei-chau-bridge.jpg"
+      "inkImage": "assets/ink/ap-lei-chau-bridge.jpg",
+      "impressionistImage": "assets/ink/imp-ap-lei-chau-bridge.jpg"
     },
     {
       "id": 4,
@@ -116,7 +119,8 @@
       "category": "建築",
       "votes": 0,
       "inkImage": "assets/ink/rainbow-village.jpg",
-      "sketchImage": "assets/ink/sketch-rainbow-village.jpg"
+      "sketchImage": "assets/ink/sketch-rainbow-village.jpg",
+      "impressionistImage": "assets/ink/imp-rainbow-village.jpg"
     },
     {
       "id": 5,
@@ -148,7 +152,8 @@
       "category": "海傍景點",
       "votes": 0,
       "inkImage": "assets/ink/golden-coast-dolphin.jpg",
-      "sketchImage": "assets/ink/sketch-goldencoast-dolphin.jpg"
+      "sketchImage": "assets/ink/sketch-goldencoast-dolphin.jpg",
+      "impressionistImage": "assets/ink/imp-golden-coast-dolphin.jpg"
     },
     {
       "id": 6,
@@ -179,7 +184,8 @@
       "category": "教育機構",
       "votes": 0,
       "inkImage": "assets/ink/harrow-school.jpg",
-      "sketchImage": "assets/ink/sketch-harrow-school.jpg"
+      "sketchImage": "assets/ink/sketch-harrow-school.jpg",
+      "impressionistImage": "assets/ink/imp-harrow-school.jpg"
     },
     {
       "id": 7,
@@ -210,7 +216,8 @@
       "category": "歷史建築",
       "votes": 0,
       "inkImage": "assets/ink/murray-house.jpg",
-      "sketchImage": "assets/ink/sketch-murray-house.jpg"
+      "sketchImage": "assets/ink/sketch-murray-house.jpg",
+      "impressionistImage": "assets/ink/imp-murray-house.jpg"
     },
     {
       "id": 8,
@@ -240,7 +247,8 @@
       "category": "交通設施",
       "votes": 0,
       "inkImage": "assets/ink/wanchai-heliport.jpg",
-      "sketchImage": "assets/ink/sketch-wanchai-heliport.jpg"
+      "sketchImage": "assets/ink/sketch-wanchai-heliport.jpg",
+      "impressionistImage": "assets/ink/imp-wanchai-heliport.jpg"
     },
     {
       "id": 9,
@@ -271,7 +279,8 @@
       "category": "軍事設施",
       "votes": 0,
       "inkImage": "assets/ink/shek-kong-airfield.jpg",
-      "sketchImage": "assets/ink/sketch-shekong-airfield.jpg"
+      "sketchImage": "assets/ink/sketch-shekong-airfield.jpg",
+      "impressionistImage": "assets/ink/imp-shek-kong-airfield.jpg"
     },
     {
       "id": 10,
@@ -302,7 +311,8 @@
       "category": "宗教場所",
       "votes": 0,
       "inkImage": "assets/ink/tsz-shan-monastery.jpg",
-      "sketchImage": "assets/ink/sketch-tszshan-monastery.jpg"
+      "sketchImage": "assets/ink/sketch-tszshan-monastery.jpg",
+      "impressionistImage": "assets/ink/imp-tsz-shan-monastery.jpg"
     },
     {
       "id": 11,
