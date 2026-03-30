@@ -16,7 +16,7 @@ import urllib.error
 
 # 阿里雲 API 配置
 ALIYUN_API_KEY = os.environ.get("ALIYUN_API_KEY", "")
-ALIYUN_API_URL = "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation"
+ALIYUN_API_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
 
 # 測試的模型列表
 MODELS = [
