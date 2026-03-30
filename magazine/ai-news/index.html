@@ -75,6 +75,61 @@
             font-size: 0.9em;
         }
         
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .filter-label {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #333;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid var(--ai-blue);
+            background: white;
+            color: var(--ai-blue);
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover {
+            background: var(--ai-blue);
+            color: white;
+        }
+        
+        .filter-btn.active {
+            background: var(--ai-blue);
+            color: white;
+        }
+        
+        .filter-btn.all {
+            border-color: var(--ai-purple);
+            color: var(--ai-purple);
+        }
+        
+        .filter-btn.all:hover,
+        .filter-btn.all.active {
+            background: var(--ai-purple);
+            color: white;
+        }
+        
+        /* News Grid */
         .news-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -97,6 +152,10 @@
         .news-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .news-card.hidden {
+            display: none;
         }
         
         .news-date {
@@ -154,12 +213,20 @@
         .tag-skills { background: #fff3e0; color: #ff9800; }
         .tag-geopolitics { background: #ffebee; color: #c62828; }
         .tag-sports { background: #e8f5e9; color: #ff5722; }
+        .tag-military { background: #eceff1; color: #455a64; }
         
         .footer {
             text-align: center;
             padding: 30px;
             color: #666;
             font-size: 0.9em;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 1.1em;
         }
         
         @media (max-width: 600px) {
@@ -177,15 +244,32 @@
             <h1 class="title">🤖 AI News</h1>
             <p class="subtitle">人工智能行業新聞、分析同洞察</p>
             <div class="stats">
-                <div class="stat-item">📰 12 篇文章</div>
+                <div class="stat-item">📰 <span id="articleCount">12</span> 篇文章</div>
                 <div class="stat-item">📅 2026 年 2-3 月</div>
                 <div class="stat-item">🔄 持續更新</div>
             </div>
         </div>
         
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <div class="filter-label">🏷️ 篩選分類：</div>
+            <div class="filter-buttons">
+                <button class="filter-btn all active" data-filter="all">全部顯示</button>
+                <button class="filter-btn" data-filter="ai">🤖 AI & Tech</button>
+                <button class="filter-btn" data-filter="geopolitics">🌍 Geopolitics</button>
+                <button class="filter-btn" data-filter="military">💣 Military</button>
+                <button class="filter-btn" data-filter="enterprise">🏢 Enterprise</button>
+                <button class="filter-btn" data-filter="markets">📊 Markets</button>
+                <button class="filter-btn" data-filter="china">🇨🇳 China</button>
+                <button class="filter-btn" data-filter="education">🎓 Education</button>
+                <button class="filter-btn" data-filter="gaming">🎮 Gaming</button>
+                <button class="filter-btn" data-filter="sports">🏓 Sports</button>
+            </div>
+        </div>
+        
         <div class="news-grid">
             <!-- News Item: Washington Post Tomahawk Iran -->
-            <a href="2026-03-27/washington-post-tomahawk-iran.html" class="news-card">
+            <a href="2026-03-27/washington-post-tomahawk-iran.html" class="news-card" data-tags="geopolitics military">
                 <div class="news-date">📅 2026 年 3 月 27 日</div>
                 <div class="news-source">📰 Washington Post</div>
                 <h3 class="news-title">💣 美伊戰爭：850枚戰斧導彈四周耗盡</h3>
@@ -196,13 +280,13 @@
                 </p>
                 <div class="news-tags">
                     <span class="tag tag-geopolitics">🌍 Geopolitics</span>
-                    <span class="tag" style="background: #eceff1; color: #455a64;">💣 Military</span>
+                    <span class="tag tag-military">💣 Military</span>
                     <span class="tag tag-new">✨ New</span>
                 </div>
             </a>
             
             <!-- News Item: Nikkei MUFG AI Employees -->
-            <a href="2026-01-27/nikkei-mufg-ai-employees.html" class="news-card">
+            <a href="2026-01-27/nikkei-mufg-ai-employees.html" class="news-card" data-tags="enterprise ai">
                 <div class="news-date">📅 2026 年 1 月 27 日</div>
                 <div class="news-source">📰 Nikkei Asia</div>
                 <h3 class="news-title">🏦 日本 MUFG 銀行部署 AI 員工寫演講稿、培訓新人</h3>
@@ -218,7 +302,7 @@
             </a>
             
             <!-- News Item: Nikkei AI Japan Game Developers -->
-            <a href="2025-07-23/nikkei-ai-japan-game-developers.html" class="news-card">
+            <a href="2025-07-23/nikkei-ai-japan-game-developers.html" class="news-card" data-tags="gaming ai tech">
                 <div class="news-date">📅 2025 年 7 月 23 日</div>
                 <div class="news-source">📰 Nikkei Asia</div>
                 <h3 class="news-title">🎮 AI 在日本遊戲開發者大會閃亮登場</h3>
@@ -234,7 +318,7 @@
             </a>
             
             <!-- News Item: SCMP OpenClaw China AI -->
-            <a href="2026-03-29/scmp-openclaw-china-ai-tokens.html" class="news-card">
+            <a href="2026-03-29/scmp-openclaw-china-ai-tokens.html" class="news-card" data-tags="ai china">
                 <div class="news-date">📅 2026 年 3 月 29 日</div>
                 <div class="news-source">📰 South China Morning Post</div>
                 <h3 class="news-title">🇨🇳 OpenClaw 效應：AI Token 用量爆炸點燃中國 AI 發展</h3>
@@ -251,7 +335,7 @@
             </a>
             
             <!-- News Item: Interesting Engineering Zuckerberg AI CEO -->
-            <a href="2026-03-29/zuckerberg-ai-ceo-assistant.html" class="news-card">
+            <a href="2026-03-29/zuckerberg-ai-ceo-assistant.html" class="news-card" data-tags="ai tech enterprise">
                 <div class="news-date">📅 2026 年 3 月 29 日</div>
                 <div class="news-source">📰 Interesting Engineering</div>
                 <h3 class="news-title">🤖 Zuckerberg 訓練 AI 助手幫自己做 CEO 工作</h3>
@@ -268,7 +352,7 @@
             </a>
             
             <!-- News Item: New Yorker AI College Writing -->
-            <a href="2025-07-07/newyorker-ai-college-writing.html" class="news-card">
+            <a href="2025-07-07/newyorker-ai-college-writing.html" class="news-card" data-tags="ai education">
                 <div class="news-date">📅 2025 年 7 月 7 日</div>
                 <div class="news-source">📰 The New Yorker</div>
                 <h3 class="news-title">🧑‍🏫 AI 摧毁大學寫作課後會發生什麼？</h3>
@@ -278,12 +362,12 @@
                 </p>
                 <div class="news-tags">
                     <span class="tag tag-ai">🤖 AI</span>
-                    <span class="tag tag-analysis">📊 Education</span>
+                    <span class="tag tag-analysis">🎓 Education</span>
                 </div>
             </a>
             
             <!-- News Item: Nikkei Pickleball Japan -->
-            <a href="2026-03-28/nikkei-pickleball-rural-japan.html" class="news-card">
+            <a href="2026-03-28/nikkei-pickleball-rural-japan.html" class="news-card" data-tags="sports">
                 <div class="news-date">📅 2026 年 3 月 28 日</div>
                 <div class="news-source">📰 Nikkei Asia</div>
                 <h3 class="news-title">🏓 前美國 Pickleball 冠軍用運動tour展示日本鄉村風光</h3>
@@ -298,7 +382,7 @@
             </a>
             
             <!-- News Item: Nikkei Copper -->
-            <a href="2026-03-27/nikkei-copper-ai-tariffs.html" class="news-card">
+            <a href="2026-03-27/nikkei-copper-ai-tariffs.html" class="news-card" data-tags="ai markets">
                 <div class="news-date">📅 2026 年 3 月 27 日</div>
                 <div class="news-source">📰 Nikkei Asia</div>
                 <h3 class="news-title">📈 銅價飆升至歷史新高：AI 需求與關稅憂慮</h3>
@@ -314,7 +398,7 @@
             </a>
             
             <!-- News Item: Guardian Iran Water -->
-            <a href="2026-03-23/guardian-iran-water-gulf.html" class="news-card">
+            <a href="2026-03-23/guardian-iran-water-gulf.html" class="news-card" data-tags="geopolitics">
                 <div class="news-date">📅 2026 年 3 月 23 日</div>
                 <div class="news-source">📰 The Guardian</div>
                 <h3 class="news-title">💧 伊朗威脅摧毀海灣國家海水化淡設施</h3>
@@ -329,7 +413,7 @@
             </a>
             
             <!-- News Item: Business Insider Alex Karp -->
-            <a href="2026-03-24/business-insider-alex-karp-ai-neurodivergent.html" class="news-card">
+            <a href="2026-03-24/business-insider-alex-karp-ai-neurodivergent.html" class="news-card" data-tags="ai">
                 <div class="news-date">📅 2026 年 3 月 24 日</div>
                 <div class="news-source">📰 Business Insider</div>
                 <h3 class="news-title">🧠 Alex Karp: AI 時代兩種人有未來</h3>
@@ -344,7 +428,7 @@
             </a>
             
             <!-- News Item: Bloomberg AI China Welfare -->
-            <a href="2026-03-06/bloomberg-ai-china-welfare.html" class="news-card">
+            <a href="2026-03-06/bloomberg-ai-china-welfare.html" class="news-card" data-tags="ai china">
                 <div class="news-date">📅 2026 年 3 月 6 日</div>
                 <div class="news-source">📰 Bloomberg Businessweek</div>
                 <h3 class="news-title">🇨🇳 AI 顛覆會否迫使習近平將中國變成福利國家？</h3>
@@ -359,7 +443,7 @@
             </a>
             
             <!-- News Item: Bloomberg Productivity Panic -->
-            <a href="2026-02-26/bloomberg-productivity-panic.html" class="news-card">
+            <a href="2026-02-26/bloomberg-productivity-panic.html" class="news-card" data-tags="ai tech">
                 <div class="news-date">📅 2026 年 2 月 26 日</div>
                 <div class="news-source">📰 Bloomberg Businessweek</div>
                 <h3 class="news-title">🤖 AI Coding Agents 引發生產力恐慌</h3>
@@ -376,8 +460,39 @@
         
         <div class="footer">
             <p>📚 Magazine Archive - AI News Collection</p>
-            <p style="margin-top: 10px;">最後更新：2026-03-29</p>
+            <p style="margin-top: 10px;">最後更新：2026-03-30</p>
         </div>
     </div>
+    
+    <script>
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const newsCards = document.querySelectorAll('.news-card');
+        const articleCount = document.getElementById('articleCount');
+        
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+                let visibleCount = 0;
+                
+                newsCards.forEach(card => {
+                    const tags = card.dataset.tags.split(' ');
+                    
+                    if (filter === 'all' || tags.includes(filter)) {
+                        card.classList.remove('hidden');
+                        visibleCount++;
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+                
+                articleCount.textContent = visibleCount;
+            });
+        });
+    </script>
 </body>
 </html>
