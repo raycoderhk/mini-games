@@ -134,26 +134,26 @@
         .gallery-image-container:hover .ink-toggle-btn { opacity: 1; }
         .style-buttons {
             position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
+            top: 10px;
+            right: 10px;
             display: flex;
-            gap: 6px;
-            opacity: 0;
-            transition: opacity 0.2s;
+            flex-direction: column;
+            gap: 4px;
+            opacity: 0.8;
         }
         .gallery-image-container:hover .style-buttons { opacity: 1; }
         .style-btn {
             padding: 6px 10px;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.75);
             color: white;
             border: none;
-            border-radius: 15px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 0.85em;
+            font-size: 0.8em;
             transition: all 0.2s;
+            white-space: nowrap;
         }
-        .style-btn:hover { background: rgba(0,0,0,0.9); }
+        .style-btn:hover { background: rgba(0,0,0,0.9); transform: scale(1.05); }
         .style-btn.active { background: #667eea; }
         .gallery-info { padding: 15px; }
         .gallery-name { font-size: 1.1em; font-weight: bold; margin-bottom: 5px; }
@@ -644,7 +644,7 @@
             }
         }
         
-        function switchImgStyle(imgId, original, ink, sketch, impressionist, style) {
+        function switchStyle(imgId, original, ink, sketch, impressionist, style) {
             const img = document.getElementById('gallery-img-' + imgId);
             const container = img.parentElement;
             
