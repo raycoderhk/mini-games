@@ -763,9 +763,9 @@ def get_providers():
             "configured": bool(mt.ALIYUN_API_KEY),
             "key_prefix": mt.ALIYUN_API_KEY[:10] + "..." if mt.ALIYUN_API_KEY else None
         },
-        "openrouter": {
-            "configured": bool(mt.OPENROUTER_API_KEY),
-            "key_prefix": mt.OPENROUTER_API_KEY[:10] + "..." if mt.OPENROUTER_API_KEY else None
+        "minimax": {
+            "configured": bool(mt.MINIMAX_API_KEY),
+            "key_prefix": mt.MINIMAX_API_KEY[:10] + "..." if mt.MINIMAX_API_KEY else None
         }
     })
 

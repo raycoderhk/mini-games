@@ -23,30 +23,25 @@ import urllib.error
 ALIYUN_API_KEY = os.environ.get("ALIYUN_API_KEY", "")
 ALIYUN_API_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
 
-# MiniMax via OpenRouter
-OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
-OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
+# MiniMax Direct API (not via OpenRouter)
+MINIMAX_API_KEY = os.environ.get("MINIMAX_API_KEY", "")
+MINIMAX_API_URL = "https://api.minimax.chat/v1/text/chatcompletion_v2"
 
 # ============ 模型列表 ============
 TEXT_MODELS = [
-    {"id": "qwen-plus", "name": "Qwen Plus", "provider": "aliyun", "vision": False},
-    {"id": "qwen-turbo", "name": "Qwen Turbo", "provider": "aliyun", "vision": False},
-    {"id": "qwen-max", "name": "Qwen Max", "provider": "aliyun", "vision": False},
-    {"id": "minimax/minimax-01", "name": "MiniMax-01", "provider": "openrouter", "vision": True},
-    {"id": "anthropic/claude-3-haiku", "name": "Claude 3 Haiku", "provider": "openrouter", "vision": True},
-    {"id": "google/gemini-pro-1.5", "name": "Gemini Pro 1.5", "provider": "openrouter", "vision": True},
+    {"id": "qwen-plus", "name": "Qwen Plus", "provider": "aliyun"},
+    {"id": "qwen-turbo", "name": "Qwen Turbo", "provider": "aliyun"},
+    {"id": "qwen-max", "name": "Qwen Max", "provider": "aliyun"},
+    {"id": "MiniMax-01", "name": "MiniMax-01 (Vision)", "provider": "minimax"},
 ]
 
 VISION_MODELS = [
-    {"id": "qwen-plus", "name": "Qwen Plus", "provider": "aliyun", "vision": True},
-    {"id": "minimax/minimax-01", "name": "MiniMax-01", "provider": "openrouter", "vision": True},
-    {"id": "anthropic/claude-3-haiku", "name": "Claude 3 Haiku", "provider": "openrouter", "vision": True},
-    {"id": "google/gemini-pro-1.5", "name": "Gemini Pro 1.5", "provider": "openrouter", "vision": True},
+    {"id": "qwen-plus", "name": "Qwen Plus", "provider": "aliyun"},
+    {"id": "qvq-72b-preview", "name": "QVQ-72B (Vision)", "provider": "minimax"},
 ]
 
 IMAGE_MODELS = [
-    {"id": "qwen-plus", "name": "Qwen Plus (CogView)", "provider": "aliyun", "image_gen": True},
-    {"id": "stabilityai/stable-diffusion-xl-1024-v1-0", "name": "SDXL", "provider": "openrouter", "image_gen": True},
+    {"id": "imgen-01", "name": "ImageGen-01 (CogView)", "provider": "aliyun"},
 ]
 
 # ============ 測試 Prompts ============
@@ -72,6 +67,79 @@ TEXT_TESTS = [
 ]
 
 # ============ API 調用函數 ============
+
+def call_minimax(model_id: str, messages: list, image_url: str = None) -> Dict:
+    """調用 MiniMax Direct API"""
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {MINIMAX_API_KEY}"
+    }
+    
+    content = messages[-1]["content"]
+    
+    # 如果有 image_url，構建視覺消息
+    if image_url:
+        content = [
+            {"type": "image_url", "image_url": {"url": image_url}},
+            {"type": "text", "text": messages[-1]["content"]}
+        ]
+    
+    payload = {
+        "model": model_id,
+        "messages": [{"role": "user", "content": content}],
+        "max_tokens": 1024,
+        "temperature": 0.7
+    }
+    
+    start_time = time.time()
+    try:
+        req = urllib.request.Request(
+            MINIMAX_API_URL,
+            data=json.dumps(payload).encode('utf-8'),
+            headers=headers,
+            method='POST'
+        )
+        
+        with urllib.request.urlopen(req, timeout=90) as response:
+            result = json.loads(response.read().decode('utf-8'))
+        
+        response_time = time.time() - start_time
+        
+        if "choices" in result and len(result["choices"]) > 0:
+            content = result["choices"][0]["message"]["content"]
+            return {
+                "success": True,
+                "content": content,
+                "response_time": round(response_time, 2),
+                "model": model_id,
+                "provider": "minimax"
+            }
+        else:
+            return {
+                "success": False,
+                "error": result.get("error_message", "Unknown error"),
+                "response_time": round(response_time, 2),
+                "model": model_id,
+                "provider": "minimax"
+            }
+            
+    except urllib.error.HTTPError as e:
+        error_body = e.read().decode('utf-8') if e.fp else str(e)
+        return {
+            "success": False,
+            "error": f"HTTP {e.code}: {error_body[:200]}",
+            "response_time": round(time.time() - start_time, 2),
+            "model": model_id,
+            "provider": "minimax"
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e)[:200],
+            "response_time": round(time.time() - start_time, 2),
+            "model": model_id,
+            "provider": "minimax"
+        }
 
 def call_aliyun(model_id: str, messages: list, image_url: str = None) -> Dict:
     """調用阿里雲 API"""
@@ -231,10 +299,10 @@ def call_model(model_id: str, prompt: str, image_base64: str = None) -> Dict:
         image_url = f"data:image/jpeg;base64,{image_base64}"
     
     # 選擇 provider
-    if model_id.startswith(("qwen", "glm", "llama")):
-        return call_aliyun(model_id, messages, image_url)
+    if model_id.startswith("MiniMax") or model_id.startswith("qvq"):
+        return call_minimax(model_id, messages, image_url)
     else:
-        return call_openrouter(model_id, messages, image_url)
+        return call_aliyun(model_id, messages, image_url)
 
 # ============ 測試函數 ============
 
@@ -253,13 +321,13 @@ def test_text(prompt: str) -> List[Dict]:
                 "response_time": 0
             })
             continue
-        if model["provider"] == "openrouter" and not OPENROUTER_API_KEY:
+        if model["provider"] == "minimax" and not MINIMAX_API_KEY:
             results.append({
                 "model": model["id"],
                 "model_name": model["name"],
-                "provider": "openrouter",
+                "provider": "minimax",
                 "success": False,
-                "error": "OPENROUTER_API_KEY not set",
+                "error": "MINIMAX_API_KEY not set",
                 "response_time": 0
             })
             continue
@@ -288,13 +356,13 @@ def test_vision(prompt: str, image_base64: str) -> List[Dict]:
                 "response_time": 0
             })
             continue
-        if model["provider"] == "openrouter" and not OPENROUTER_API_KEY:
+        if model["provider"] == "minimax" and not MINIMAX_API_KEY:
             results.append({
                 "model": model["id"],
                 "model_name": model["name"],
-                "provider": "openrouter",
+                "provider": "minimax",
                 "success": False,
-                "error": "OPENROUTER_API_KEY not set",
+                "error": "MINIMAX_API_KEY not set",
                 "response_time": 0
             })
             continue
