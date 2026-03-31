@@ -70,25 +70,26 @@ TEXT_TESTS = [
 
 def call_minimax(model_id: str, messages: list, image_url: str = None) -> Dict:
     """調用 MiniMax Direct API"""
+    if not MINIMAX_API_KEY:
+        return {
+            "success": False,
+            "error": "MINIMAX_API_KEY not set",
+            "model": model_id,
+            "provider": "minimax"
+        }
+    
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {MINIMAX_API_KEY}"
     }
     
-    content = messages[-1]["content"]
+    user_content = messages[-1]["content"] if messages else ""
     
-    # 如果有 image_url，構建視覺消息
-    if image_url:
-        content = [
-            {"type": "image_url", "image_url": {"url": image_url}},
-            {"type": "text", "text": messages[-1]["content"]}
-        ]
-    
+    # 構建消息
     payload = {
         "model": model_id,
-        "messages": [{"role": "user", "content": content}],
-        "max_tokens": 1024,
-        "temperature": 0.7
+        "messages": [{"role": "user", "content": user_content}],
+        "max_tokens": 1024
     }
     
     start_time = time.time()
@@ -105,8 +106,11 @@ def call_minimax(model_id: str, messages: list, image_url: str = None) -> Dict:
         
         response_time = time.time() - start_time
         
-        if "choices" in result and len(result["choices"]) > 0:
-            content = result["choices"][0]["message"]["content"]
+        # MiniMax API response format
+        choices = result.get("choices")
+        if choices and len(choices) > 0:
+            msg = choices[0].get("message", {})
+            content = msg.get("content", "")
             return {
                 "success": True,
                 "content": content,
@@ -115,9 +119,11 @@ def call_minimax(model_id: str, messages: list, image_url: str = None) -> Dict:
                 "provider": "minimax"
             }
         else:
+            # 沒有 choices，可能是 error
+            error_msg = result.get("base_resp", {}).get("error_msg", "Unknown error")
             return {
                 "success": False,
-                "error": result.get("error_message", "Unknown error"),
+                "error": error_msg,
                 "response_time": round(response_time, 2),
                 "model": model_id,
                 "provider": "minimax"
