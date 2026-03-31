@@ -602,7 +602,7 @@
                             <button class="style-btn active" data-style="original" onclick="switchStyle(${q.id}, '${q.image}', '${q.inkImage || ''}', '${q.sketchImage || ''}', '${q.impressionistImage || ''}', 'original')">📷</button>
                             ${q.inkImage ? `<button class="style-btn" data-style="ink" onclick="switchStyle(${q.id}, '${q.image}', '${q.inkImage}', '${q.sketchImage || ''}', '${q.impressionistImage || ''}', 'ink')">🖌️</button>` : ''}
                             ${q.sketchImage ? `<button class="style-btn" data-style="sketch" onclick="switchStyle(${q.id}, '${q.image}', '${q.inkImage || ''}', '${q.sketchImage}', '${q.impressionistImage || ''}', 'sketch')">✏️</button>` : ''}
-                            ${q.impressionistImage ? `<button class="style-btn" data-style="impressionist" onclick="switchStyle(${q.id}, '${q.image}', '${q.inkImage || ''}', '${q.sketchImage || ''}', '${q.impressionistImage}', 'impressionist')">🎨</button>` : ''}
+                            ${q.impressionistImage ? `<button class="style-btn" data-style="impressionist" onclick="switchImgStyle(${q.id}, '${q.image}', '${q.inkImage || ''}', '${q.sketchImage || ''}', '${q.impressionistImage}', 'impressionist')">🎨</button>` : ''}
                         </div>
                     </div>
                     <div class="gallery-info">
@@ -644,7 +644,7 @@
             }
         }
         
-        function switchStyle(imgId, original, ink, sketch, impressionist, style) {
+        function switchImgStyle(imgId, original, ink, sketch, impressionist, style) {
             const img = document.getElementById('gallery-img-' + imgId);
             const container = img.parentElement;
             
