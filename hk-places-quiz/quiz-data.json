@@ -89,7 +89,7 @@
       "category": "橋樑",
       "votes": 0,
       "inkImage": "assets/ink/ap-lei-chau-bridge.jpg",
-      "impressionistImage": "assets/ink/impressionist-apleichau2.jpg"
+      "impressionistImage": "assets/ink/impressionist-apleichau.jpg"
     },
     {
       "id": 4,
@@ -120,7 +120,7 @@
       "votes": 0,
       "inkImage": "assets/ink/rainbow-village.jpg",
       "sketchImage": "assets/ink/sketch-rainbow-village.jpg",
-      "impressionistImage": "assets/ink/impressionist-mawanrainbow2.jpg"
+      "impressionistImage": "assets/ink/impressionist-mawan.jpg"
     },
     {
       "id": 5,
@@ -153,7 +153,7 @@
       "votes": 0,
       "inkImage": "assets/ink/golden-coast-dolphin.jpg",
       "sketchImage": "assets/ink/sketch-goldencoast-dolphin.jpg",
-      "impressionistImage": "assets/ink/impressionist-goldcoast2.jpg"
+      "impressionistImage": "assets/ink/impressionist-goldcoast.jpg"
     },
     {
       "id": 6,
@@ -185,7 +185,7 @@
       "votes": 0,
       "inkImage": "assets/ink/harrow-school.jpg",
       "sketchImage": "assets/ink/sketch-harrow-school.jpg",
-      "impressionistImage": "assets/ink/impressionist-harrow2.jpg"
+      "impressionistImage": "assets/ink/impressionist-harrow.jpg"
     },
     {
       "id": 7,

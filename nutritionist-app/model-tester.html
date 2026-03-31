@@ -361,6 +361,15 @@
                     ? '<span class="model-status success">成功</span>'
                     : '<span class="model-status error">失敗</span>';
                 
+                let resultContent = '';
+                if (r.success) {
+                    if (r.image_url) {
+                        resultContent = `<div class="model-result"><img src="${r.image_url}" style="max-width:100%;border-radius:8px;"></div>`;
+                    } else {
+                        resultContent = `<div class="model-result">${escapeHtml(r.content || '')}</div>`;
+                    }
+                }
+                
                 card.innerHTML = `
                     <div class="model-header">
                         <div>
@@ -369,9 +378,9 @@
                         </div>
                         ${status}
                     </div>
+                    ${resultContent}
                     ${r.success 
-                        ? `<div class="model-result">${escapeHtml(r.content || '')}</div>
-                           <div class="model-meta">⏱ ${r.response_time || 0}s</div>`
+                        ? `<div class="model-meta">⏱ ${r.response_time || 0}s</div>`
                         : `<div class="model-error">${escapeHtml(r.error || 'Unknown error')}</div>`
                     }
                 `;

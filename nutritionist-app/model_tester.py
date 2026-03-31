@@ -41,7 +41,7 @@ VISION_MODELS = [
 ]
 
 IMAGE_MODELS = [
-    {"id": "imgen-01", "name": "ImageGen-01 (CogView)", "provider": "aliyun"},
+    {"id": "image-01", "name": "Image-01 (MiniMax)", "provider": "minimax"},
 ]
 
 # ============ 測試 Prompts ============
@@ -384,16 +384,82 @@ def test_vision(prompt: str, image_base64: str) -> List[Dict]:
     return results
 
 def test_image_generation(prompt: str) -> List[Dict]:
-    """測試圖像生成能力 (預留)"""
-    # 圖像生成需要不同的 API endpoint，這裡預留介面
-    return [{
-        "model": "coming-soon",
-        "model_name": "Image Generation",
-        "provider": "mixed",
-        "success": False,
-        "error": "Image generation test coming soon",
-        "response_time": 0
-    }]
+    """測試圖像生成能力"""
+    results = []
+    
+    # MiniMax Image Generation API
+    if not MINIMAX_API_KEY:
+        results.append({
+            "model": "image-01",
+            "model_name": "Image-01 (MiniMax)",
+            "provider": "minimax",
+            "success": False,
+            "error": "MINIMAX_API_KEY not set",
+            "response_time": 0
+        })
+    else:
+        result = generate_image_minimax(prompt)
+        results.append({
+            "model": "image-01",
+            "model_name": "Image-01 (MiniMax)",
+            "provider": "minimax",
+            **result
+        })
+    
+    return results
+
+def generate_image_minimax(prompt: str) -> Dict:
+    """MiniMax 圖像生成"""
+    if not MINIMAX_API_KEY:
+        return {"success": False, "error": "MINIMAX_API_KEY not set"}
+    
+    url = "https://api.minimax.chat/v1/images_gen"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {MINIMAX_API_KEY}"
+    }
+    
+    payload = {
+        "model": "image-01",
+        "prompt": prompt,
+        "num_images": 1,
+        "width": 1024,
+        "height": 1024
+    }
+    
+    start_time = time.time()
+    try:
+        req = urllib.request.Request(
+            url,
+            data=json.dumps(payload).encode('utf-8'),
+            headers=headers,
+            method='POST'
+        )
+        
+        with urllib.request.urlopen(req, timeout=60) as response:
+            result = json.loads(response.read().decode('utf-8'))
+        
+        response_time = time.time() - start_time
+        
+        if result.get("image_urls"):
+            return {
+                "success": True,
+                "image_url": result["image_urls"][0],
+                "response_time": round(response_time, 2),
+                "model": "image-01"
+            }
+        else:
+            return {
+                "success": False,
+                "error": result.get("error", "Unknown error"),
+                "response_time": round(response_time, 2)
+            }
+            
+    except urllib.error.HTTPError as e:
+        error_body = e.read().decode('utf-8') if e.fp else str(e)
+        return {"success": False, "error": f"HTTP {e.code}: {error_body[:200]}", "response_time": 0}
+    except Exception as e:
+        return {"success": False, "error": str(e)[:200], "response_time": 0}
 
 def run_all_tests(test_type: str, prompt: str = None, image_base64: str = None) -> Dict:
     """運行所有測試"""
