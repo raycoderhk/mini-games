@@ -741,6 +741,34 @@ def get_model_test_results():
         "results": results
     })
 
+@app.route('/api/model-test/text-prompts', methods=['GET'])
+def get_text_prompts():
+    """獲取可用的文本測試 prompts"""
+    return jsonify(mt.TEXT_TESTS)
+
+@app.route('/api/model-test/models', methods=['GET'])
+def get_models():
+    """獲取所有可用模型"""
+    return jsonify({
+        "text_models": mt.TEXT_MODELS,
+        "vision_models": mt.VISION_MODELS,
+        "image_models": mt.IMAGE_MODELS
+    })
+
+@app.route('/api/model-test/providers', methods=['GET'])
+def get_providers():
+    """獲取 API 配置狀態"""
+    return jsonify({
+        "aliyun": {
+            "configured": bool(mt.ALIYUN_API_KEY),
+            "key_prefix": mt.ALIYUN_API_KEY[:10] + "..." if mt.ALIYUN_API_KEY else None
+        },
+        "openrouter": {
+            "configured": bool(mt.OPENROUTER_API_KEY),
+            "key_prefix": mt.OPENROUTER_API_KEY[:10] + "..." if mt.OPENROUTER_API_KEY else None
+        }
+    })
+
 @app.route('/api/reset', methods=['POST'])
 def reset_data():
     """重置用戶數據（測試用）"""
