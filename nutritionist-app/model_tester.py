@@ -42,6 +42,7 @@ VISION_MODELS = [
 
 IMAGE_MODELS = [
     {"id": "image-01", "name": "Image-01 (MiniMax)", "provider": "minimax"},
+    {"id": "cogview-3", "name": "CogView-3 (Aliyun)", "provider": "aliyun"},
 ]
 
 # ============ 測試 Prompts ============
@@ -387,44 +388,41 @@ def test_image_generation(prompt: str) -> List[Dict]:
     """測試圖像生成能力"""
     results = []
     
-    # MiniMax Image Generation API
-    if not MINIMAX_API_KEY:
+    # Aliyun CogView
+    if not ALIYUN_API_KEY:
         results.append({
-            "model": "image-01",
-            "model_name": "Image-01 (MiniMax)",
-            "provider": "minimax",
+            "model": "cogview-3",
+            "model_name": "CogView-3 (Aliyun)",
+            "provider": "aliyun",
             "success": False,
-            "error": "MINIMAX_API_KEY not set",
+            "error": "ALIYUN_API_KEY not set",
             "response_time": 0
         })
     else:
-        result = generate_image_minimax(prompt)
+        result = generate_cogview(prompt)
         results.append({
-            "model": "image-01",
-            "model_name": "Image-01 (MiniMax)",
-            "provider": "minimax",
+            "model": "cogview-3",
+            "model_name": "CogView-3 (Aliyun)",
+            "provider": "aliyun",
             **result
         })
     
     return results
 
-def generate_image_minimax(prompt: str) -> Dict:
-    """MiniMax 圖像生成"""
-    if not MINIMAX_API_KEY:
-        return {"success": False, "error": "MINIMAX_API_KEY not set"}
+def generate_cogview(prompt: str) -> Dict:
+    """Aliyun CogView 圖像生成"""
+    if not ALIYUN_API_KEY:
+        return {"success": False, "error": "ALIYUN_API_KEY not set"}
     
-    url = "https://api.minimax.chat/v1/images_gen"
+    url = "https://dashscope.aliyuncs.com/api/v1/images/generation"
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {MINIMAX_API_KEY}"
+        "Authorization": f"Bearer {ALIYUN_API_KEY}"
     }
     
     payload = {
-        "model": "image-01",
-        "prompt": prompt,
-        "num_images": 1,
-        "width": 1024,
-        "height": 1024
+        "model": "cogview-3",
+        "prompt": prompt
     }
     
     start_time = time.time()
@@ -441,12 +439,12 @@ def generate_image_minimax(prompt: str) -> Dict:
         
         response_time = time.time() - start_time
         
-        if result.get("image_urls"):
+        if result.get("data", {}).get("image_urls"):
             return {
                 "success": True,
-                "image_url": result["image_urls"][0],
+                "image_url": result["data"]["image_urls"][0],
                 "response_time": round(response_time, 2),
-                "model": "image-01"
+                "model": "cogview-3"
             }
         else:
             return {
