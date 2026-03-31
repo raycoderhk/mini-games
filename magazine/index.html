@@ -56,132 +56,126 @@
             transform: translateY(-2px);
         }
 
-        /* Latest Covers Section */
-        .latest-covers {
-            margin-bottom: 50px;
-        }
-
-        .latest-covers h2 {
-            color: white;
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-
-        .covers-row {
+        /* Magazine Cards */
+        .magazine-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 20px;
         }
 
-        .cover-card {
+        .magazine-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
             text-decoration: none;
             color: inherit;
             transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
             display: block;
         }
 
-        .cover-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        .magazine-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
 
-        .cover-img {
-            width: 100%;
-            aspect-ratio: 3/4;
-            object-fit: cover;
+        .card-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        .cover-info {
-            padding: 15px;
-            text-align: center;
+        .card-icon {
+            font-size: 2.5em;
         }
 
-        .cover-title {
-            font-size: 1em;
+        .card-title-group {
+            flex: 1;
+        }
+
+        .card-title {
+            font-size: 1.4em;
             font-weight: bold;
             color: #333;
             margin-bottom: 5px;
         }
 
-        .cover-date {
+        .card-subtitle {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .card-arrow {
+            font-size: 1.5em;
+            color: #999;
+        }
+
+        /* Latest Covers Thumbnails */
+        .latest-covers {
+            padding: 0 20px 20px;
+        }
+
+        .covers-label {
             font-size: 0.85em;
-            color: #666;
-        }
-
-        /* Archive Grid */
-        .archive-section {
-            margin-bottom: 40px;
-        }
-
-        .archive-section h2 {
-            color: white;
-            font-size: 1.3em;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-
-        .archive-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .archive-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            display: block;
-        }
-
-        .archive-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-        }
-
-        .archive-icon {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-        }
-
-        .archive-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #333;
+            color: #888;
             margin-bottom: 10px;
+            font-weight: 600;
         }
 
-        .archive-desc {
-            font-size: 0.95em;
-            color: #666;
-            line-height: 1.5;
-            margin-bottom: 15px;
+        .covers-row {
+            display: flex;
+            gap: 10px;
         }
 
-        .archive-meta {
+        .cover-thumb {
+            flex: 1;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .cover-thumb:hover {
+            transform: scale(1.05);
+        }
+
+        .cover-placeholder {
+            flex: 1;
+            aspect-ratio: 3/4;
+            background: #f0f0f0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: #ccc;
+        }
+
+        .card-footer {
+            padding: 15px 20px;
+            background: #f9f9f9;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.85em;
-            color: #888;
         }
 
-        .archive-tag {
+        .card-tag {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 5px 12px;
             border-radius: 15px;
+            font-size: 0.8em;
             font-weight: bold;
         }
 
+        .card-meta {
+            font-size: 0.85em;
+            color: #888;
+        }
+
+        /* Footer */
         .footer {
             text-align: center;
             margin-top: 50px;
@@ -200,23 +194,12 @@
                 font-size: 2em;
             }
 
+            .magazine-grid {
+                grid-template-columns: 1fr;
+            }
+
             .covers-row {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 10px;
-            }
-
-            .cover-title {
-                font-size: 0.8em;
-            }
-
-            .cover-date {
-                font-size: 0.7em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .covers-row {
-                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
             }
         }
     </style>
@@ -229,78 +212,102 @@
             <p>技術文章、開發心得、OpenClaw 技能分享</p>
         </div>
 
-        <!-- Latest 3 Economist Covers -->
-        <div class="latest-covers">
-            <h2>📚 Latest Economist Issues</h2>
-            <div class="covers-row">
-                <a href="economist/2026-03-28/" class="cover-card">
-                    <img src="economist/2026-03-28/cover.png" alt="Advantage Iran - Mar 28, 2026" class="cover-img">
-                    <div class="cover-info">
-                        <div class="cover-title">Advantage Iran</div>
-                        <div class="cover-date">Mar 28, 2026</div>
+        <div class="magazine-grid">
+            <!-- Economist Card -->
+            <a href="economist/" class="magazine-card">
+                <div class="card-header">
+                    <div class="card-icon">📰</div>
+                    <div class="card-title-group">
+                        <div class="card-title">The Economist Archive</div>
+                        <div class="card-subtitle">每週經濟學人雜誌存檔</div>
                     </div>
-                </a>
-                <a href="economist/2026-03-21/" class="cover-card">
-                    <img src="economist/2026-03-21/cover.png" alt="Operation Blind Fury - Mar 21, 2026" class="cover-img">
-                    <div class="cover-info">
-                        <div class="cover-title">Operation Blind Fury</div>
-                        <div class="cover-date">Mar 21, 2026</div>
+                    <div class="card-arrow">→</div>
+                </div>
+                <div class="latest-covers">
+                    <div class="covers-label">📚 Latest Issues</div>
+                    <div class="covers-row">
+                        <img src="economist/2026-03-28/cover.png" alt="Mar 28, 2026" class="cover-thumb">
+                        <img src="economist/2026-03-21/cover.png" alt="Mar 21, 2026" class="cover-thumb">
+                        <img src="economist/2026-03-14/cover.jpg" alt="Mar 14, 2026" class="cover-thumb">
                     </div>
-                </a>
-                <a href="economist/2026-03-14/" class="cover-card">
-                    <img src="economist/2026-03-14/cover.jpg" alt="Mar 14, 2026" class="cover-img">
-                    <div class="cover-info">
-                        <div class="cover-title">The Economist</div>
-                        <div class="cover-date">Mar 14, 2026</div>
-                    </div>
-                </a>
-            </div>
-        </div>
+                </div>
+                <div class="card-footer">
+                    <span class="card-tag">🌍 雜誌存檔</span>
+                    <span class="card-meta">📅 每週更新</span>
+                </div>
+            </a>
 
-        <!-- Archive Sections -->
-        <div class="archive-section">
-            <h2>📖 All Archives</h2>
-            <div class="archive-grid">
-                <a href="economist/" class="archive-card">
-                    <div class="archive-icon">📰</div>
-                    <h3 class="archive-title">The Economist Archive</h3>
-                    <p class="archive-desc">每週經濟學人雜誌存檔，包含文章連結、單字學習、AI 摘要。</p>
-                    <div class="archive-meta">
-                        <span>📅 每週更新</span>
-                        <span class="archive-tag">🌍 雜誌存檔</span>
+            <!-- Bloomberg Vocab Card -->
+            <a href="bloomberg/" class="magazine-card">
+                <div class="card-header">
+                    <div class="card-icon">💼</div>
+                    <div class="card-title-group">
+                        <div class="card-title">Bloomberg Vocab</div>
+                        <div class="card-subtitle">彭博商業週刊單字學習</div>
                     </div>
-                </a>
+                    <div class="card-arrow">→</div>
+                </div>
+                <div class="latest-covers">
+                    <div class="covers-label">📚 Latest Issues</div>
+                    <div class="covers-row">
+                        <div class="cover-placeholder">📰</div>
+                        <div class="cover-placeholder">📰</div>
+                        <div class="cover-placeholder">📰</div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="card-tag">📚 英文學習</span>
+                    <span class="card-meta">📅 每日更新</span>
+                </div>
+            </a>
 
-                <a href="bloomberg/" class="archive-card">
-                    <div class="archive-icon">💼</div>
-                    <h3 class="archive-title">Bloomberg Vocab</h3>
-                    <p class="archive-desc">彭博商業週刊單字學習，AI 解釋、例句、小測驗。</p>
-                    <div class="archive-meta">
-                        <span>📅 每日更新</span>
-                        <span class="archive-tag">📚 英文學習</span>
+            <!-- AI News Card -->
+            <a href="ai-news/" class="magazine-card">
+                <div class="card-header">
+                    <div class="card-icon">🤖</div>
+                    <div class="card-title-group">
+                        <div class="card-title">AI News</div>
+                        <div class="card-subtitle">人工智能行業新聞、分析同洞察</div>
                     </div>
-                </a>
+                    <div class="card-arrow">→</div>
+                </div>
+                <div class="latest-covers">
+                    <div class="covers-label">📚 Latest Articles</div>
+                    <div class="covers-row">
+                        <div class="cover-placeholder">🤖</div>
+                        <div class="cover-placeholder">🤖</div>
+                        <div class="cover-placeholder">🤖</div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="card-tag" style="background: linear-gradient(135deg, #2196F3 0%, #9c27b0 100%);">🤖 AI / Tech</span>
+                    <span class="card-meta">📅 2026-02 起</span>
+                </div>
+            </a>
 
-                <a href="ai-news/" class="archive-card">
-                    <div class="archive-icon">🤖</div>
-                    <h3 class="archive-title">AI News</h3>
-                    <p class="archive-desc">人工智能行業新聞、技術分析、產品評測。包含 Bloomberg、TechCrunch、MIT Tech Review 等來源。</p>
-                    <div class="archive-meta">
-                        <span>📅 2026-02 起</span>
-                        <span class="archive-tag" style="background: linear-gradient(135deg, #2196F3 0%, #9c27b0 100%);">🤖 AI / Tech</span>
+            <!-- HK Economic Journal Card -->
+            <a href="hkej/" class="magazine-card">
+                <div class="card-header">
+                    <div class="card-icon">📈</div>
+                    <div class="card-title-group">
+                        <div class="card-title">香港經濟日報</div>
+                        <div class="card-subtitle">即時新聞、財經分析、科技專欄</div>
                     </div>
-                </a>
-
-                <a href="hkej/" class="archive-card">
-                    <div class="archive-icon">📈</div>
-                    <h3 class="archive-title">香港經濟日報</h3>
-                    <p class="archive-desc">即時新聞、財經分析、科技專欄。</p>
-                    <div class="archive-meta">
-                        <span>📅 每日更新</span>
-                        <span class="archive-tag">🇭🇰 本地新聞</span>
+                    <div class="card-arrow">→</div>
+                </div>
+                <div class="latest-covers">
+                    <div class="covers-label">📚 Latest Issues</div>
+                    <div class="covers-row">
+                        <div class="cover-placeholder">📰</div>
+                        <div class="cover-placeholder">📰</div>
+                        <div class="cover-placeholder">📰</div>
                     </div>
-                </a>
-            </div>
+                </div>
+                <div class="card-footer">
+                    <span class="card-tag">🇭🇰 本地新聞</span>
+                    <span class="card-meta">📅 每日更新</span>
+                </div>
+            </a>
         </div>
 
         <div class="footer">
