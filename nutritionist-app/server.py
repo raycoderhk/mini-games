@@ -48,7 +48,7 @@ OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 # 使用阿里雲 API (Qwen-VL) — 主要使用這個
 ALIYUN_API_KEY = os.environ.get("ALIYUN_API_KEY", "")
-ALIYUN_API_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
+ALIYUN_API_URL = "https://coding.dashscope.aliyuncs.com/v1/chat/completions"
 
 # 自動載入 .env 文件
 def load_env():

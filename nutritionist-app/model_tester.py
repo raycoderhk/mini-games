@@ -19,9 +19,9 @@ import urllib.request
 import urllib.error
 
 # ============ API 配置 ============
-# 阿里雲 DashScope
+# 阿里雲 DashScope (Coding Plan)
 ALIYUN_API_KEY = os.environ.get("ALIYUN_API_KEY", "")
-ALIYUN_API_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
+ALIYUN_API_URL = "https://coding.dashscope.aliyuncs.com/v1/chat/completions"
 
 # MiniMax Direct API (not via OpenRouter)
 MINIMAX_API_KEY = os.environ.get("MINIMAX_API_KEY", "")
@@ -414,7 +414,7 @@ def generate_cogview(prompt: str) -> Dict:
     if not ALIYUN_API_KEY:
         return {"success": False, "error": "ALIYUN_API_KEY not set"}
     
-    url = "https://dashscope.aliyuncs.com/api/v1/images/generation"
+    url = "https://coding.dashscope.aliyuncs.com/v1/images/generation"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {ALIYUN_API_KEY}"
