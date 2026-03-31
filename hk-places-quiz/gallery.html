@@ -654,7 +654,7 @@
             if (style === 'original') img.src = original;
             else if (style === 'ink' && ink) img.src = ink;
             else if (style === 'sketch' && sketch) img.src = sketch;
-            else if (style === 'impressionist' && impressionist) img.src = impressionist;
+            else if (style === 'impressionist' && impressionist) img.src = 'assets/ink/' + impressionist;
             
             // Update button states
             const buttons = container.querySelectorAll('.style-btn');
