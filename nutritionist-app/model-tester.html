@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🧪 阿里雲模型測試器 - Aliyun Model Tester</title>
+    <title>🧪 Multi-Model Tester</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -19,8 +19,6 @@
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
-        
-        /* Header */
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -29,14 +27,18 @@
             text-align: center;
         }
         .header h1 { font-size: 2.5em; margin-bottom: 10px; }
-        .header p { opacity: 0.9; font-size: 1.1em; }
+        .header p { opacity: 0.9; }
         
-        /* Login Screen */
+        /* Content */
+        .content { display: none; padding: 30px; }
+        .content.active { display: block; }
+        
+        /* Login */
         .login-screen {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 600px;
+            min-height: 500px;
             padding: 50px;
         }
         .login-card {
@@ -45,34 +47,12 @@
             padding: 40px;
             width: 100%;
             max-width: 400px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
-        .login-card h2 {
-            color: #667eea;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-            font-weight: 600;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e5ff;
-            border-radius: 8px;
-            font-size: 1em;
-            transition: border-color 0.3s;
-        }
-        .form-group input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
+        .login-card h2 { color: #667eea; margin-bottom: 20px; text-align: center; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #555; }
+        .form-group input { width: 100%; padding: 12px; border: 2px solid #e0e5ff; border-radius: 8px; font-size: 1em; }
+        .form-group input:focus { outline: none; border-color: #667eea; }
         .btn {
             width: 100%;
             padding: 14px;
@@ -83,304 +63,157 @@
             font-size: 1.1em;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s;
         }
         .btn:hover { transform: translateY(-2px); }
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .alert { padding: 12px; border-radius: 8px; margin-bottom: 15px; }
+        .alert-error { background: #fee; color: #c00; }
+        .alert-success { background: #efe; color: #060; }
         
-        /* Main Content */
-        .content {
-            display: none;
-            padding: 30px;
-        }
-        .content.active { display: block; }
-        
-        /* Navigation */
-        .nav {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
+        /* Nav */
+        .nav { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
         .nav-btn {
             padding: 12px 24px;
             background: #f8f9ff;
             border: 2px solid #e0e5ff;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 1em;
             font-weight: 600;
             color: #667eea;
-            transition: all 0.3s;
         }
-        .nav-btn:hover {
-            background: #eef1ff;
-        }
+        .nav-btn:hover { background: #eef1ff; }
         .nav-btn.active {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border-color: #667eea;
         }
         
-        /* Sections */
-        .section {
-            display: none;
-        }
-        .section.active {
-            display: block;
-        }
+        /* Section */
+        .section { display: none; }
+        .section.active { display: block; }
         
-        /* Cards */
-        .card {
-            background: #f8f9ff;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
-        }
-        .card-title {
-            font-size: 1.5em;
-            color: #667eea;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        /* Card */
+        .card { background: #f8f9ff; border-radius: 15px; padding: 25px; margin-bottom: 20px; }
+        .card-title { font-size: 1.3em; color: #667eea; margin-bottom: 15px; }
         
-        /* Test Results */
-        .result-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
+        /* Model Grid */
+        .model-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px; }
         .model-card {
             background: white;
-            border-radius: 12px;
-            padding: 20px;
-            border-left: 4px solid #667eea;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 2px solid #e0e5ff;
+            border-radius: 10px;
+            padding: 15px;
         }
-        .model-card h3 {
-            color: #667eea;
-            margin-bottom: 15px;
+        .model-card.success { border-color: #4c4; }
+        .model-card.error { border-color: #c44; }
+        .model-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .model-name { font-weight: 600; color: #333; }
+        .model-provider { font-size: 0.85em; color: #888; }
+        .model-status { padding: 4px 8px; border-radius: 4px; font-size: 0.85em; }
+        .model-status.success { background: #efe; color: #060; }
+        .model-status.error { background: #fee; color: #c00; }
+        .model-status.pending { background: #ffe; color: #660; }
+        .model-result {
+            background: #f5f5f5;
+            border-radius: 6px;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 0.9em;
+            max-height: 200px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
         }
-        .stat-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        .stat-row:last-child { border-bottom: none; }
-        .stat-label { color: #666; }
-        .stat-value { font-weight: 600; color: #333; }
+        .model-error { color: #c00; font-size: 0.85em; }
+        .model-meta { font-size: 0.8em; color: #888; margin-top: 8px; }
         
-        /* Progress */
-        .progress-container {
-            text-align: center;
-            padding: 50px;
-        }
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        /* Test Controls */
+        .test-controls { margin-bottom: 20px; }
+        .test-prompt { width: 100%; padding: 12px; border: 2px solid #e0e5ff; border-radius: 8px; margin-bottom: 10px; }
+        .test-prompt:focus { border-color: #667eea; outline: none; }
         
-        /* Comparison Table */
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        .comparison-table th,
-        .comparison-table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #e0e5ff;
-        }
-        .comparison-table th {
-            background: #667eea;
-            color: white;
-            font-weight: 600;
-        }
-        .comparison-table tr:hover {
-            background: #f8f9ff;
-        }
-        .best-value {
-            background: #d4edda !important;
-            color: #155724;
-            font-weight: 600;
-        }
+        /* Image Upload */
+        .image-preview { max-width: 200px; margin-top: 10px; border-radius: 8px; }
         
-        /* Alert */
-        .alert {
-            padding: 15px 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        .alert-error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header h1 { font-size: 1.8em; }
-            .result-grid { grid-template-columns: 1fr; }
-            .comparison-table { font-size: 0.9em; }
-        }
+        /* Running indicator */
+        .running { display: inline-block; width: 20px; height: 20px; border: 3px solid #667eea; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🧪 阿里雲模型測試器</h1>
-            <p>Aliyun Model Tester - Qwen 模型性能對比工具</p>
+            <h1>🧪 Multi-Model Tester</h1>
+            <p>測試不同 AI 模型 - 文本理解、圖像理解、圖像生成</p>
         </div>
         
-        <!-- Login Screen -->
+        <!-- Login -->
         <div id="loginScreen" class="login-screen">
             <div class="login-card">
                 <h2>🔐 管理員登錄</h2>
+                <div id="loginError" class="alert alert-error" style="display:none;"></div>
                 <div class="form-group">
-                    <label for="password">密碼</label>
-                    <input type="password" id="password" placeholder="輸入管理員密碼" />
+                    <label>管理員密碼</label>
+                    <input type="password" id="adminPassword" placeholder="輸入密碼" onkeypress="if(event.key==='Enter')login()">
                 </div>
-                <button class="btn" onclick="handleLogin()">登錄</button>
-                <div id="loginError" class="alert alert-error" style="display: none; margin-top: 15px;"></div>
+                <button class="btn" onclick="login()">登錄</button>
             </div>
         </div>
         
         <!-- Main Content -->
         <div id="mainContent" class="content">
+            <!-- Nav -->
             <div class="nav">
-                <button class="nav-btn active" onclick="showSection('overview')">📊 概覽</button>
-                <button class="nav-btn" onclick="showSection('run-test')">🧪 運行測試</button>
-                <button class="nav-btn" onclick="showSection('results')">📈 歷史結果</button>
-                <button class="nav-btn" onclick="handleLogout()">🚪 登出</button>
+                <button class="nav-btn active" onclick="showSection('text')">📝 文本理解</button>
+                <button class="nav-btn" onclick="showSection('vision')">🖼️ 圖像理解</button>
+                <button class="nav-btn" onclick="showSection('image')">🎨 圖像生成</button>
+                <button class="nav-btn" onclick="logout()" style="margin-left:auto;">🚪 登出</button>
             </div>
             
-            <!-- Overview Section -->
-            <div id="overview" class="section active">
+            <!-- Text Section -->
+            <div id="textSection" class="section active">
                 <div class="card">
-                    <h2 class="card-title">🎯 測試目標</h2>
-                    <p style="line-height: 1.8; color: #555;">
-                        本工具測試阿里雲 Qwen 系列模型的性能表現，包括：
-                    </p>
-                    <ul style="margin: 15px 0 15px 30px; line-height: 1.8; color: #555;">
-                        <li><strong>Qwen Turbo</strong> - 最快、最便宜</li>
-                        <li><strong>Qwen Plus</strong> - 平衡性能和成本</li>
-                        <li><strong>Qwen Max</strong> - 最佳質量、最貴</li>
-                    </ul>
-                </div>
-                
-                <div class="card">
-                    <h2 class="card-title">📝 測試類別</h2>
-                    <div class="result-grid">
-                        <div class="model-card">
-                            <h3>💻 代碼生成</h3>
-                            <p style="color: #666; margin-top: 10px;">
-                                測試模型的編程能力，例如生成算法、函數等
-                            </p>
-                        </div>
-                        <div class="model-card">
-                            <h3>📄 文本摘要</h3>
-                            <p style="color: #666; margin-top: 10px;">
-                                測試模型的理解和概括能力
-                            </p>
-                        </div>
-                        <div class="model-card">
-                            <h3>❓ 問題回答</h3>
-                            <p style="color: #666; margin-top: 10px;">
-                                測試模型的知識和解釋能力
-                            </p>
-                        </div>
-                        <div class="model-card">
-                            <h3>🌐 翻譯</h3>
-                            <p style="color: #666; margin-top: 10px;">
-                                測試模型的語言轉換能力
-                            </p>
-                        </div>
-                        <div class="model-card">
-                            <h3>✍️ 創意寫作</h3>
-                            <p style="color: #666; margin-top: 10px;">
-                                測試模型的創造性和表達能力
-                            </p>
-                        </div>
+                    <div class="card-title">📝 文本理解測試</div>
+                    <div class="test-controls">
+                        <select id="textPrompt" class="test-prompt" style="margin-bottom:10px;">
+                            <option value="">-- 選擇測試 Prompt --</option>
+                        </select>
+                        <textarea id="customPrompt" class="test-prompt" rows="2" placeholder="或輸入自定義 Prompt..."></textarea>
+                        <button class="btn" onclick="runTextTest()" style="width:auto;display:inline-block;">
+                            ▶️ 運行測試
+                        </button>
                     </div>
-                </div>
-                
-                <div class="card">
-                    <h2 class="card-title">📊 測量指標</h2>
-                    <div class="result-grid">
-                        <div class="model-card">
-                            <h3>⏱️ 響應時間</h3>
-                            <p style="color: #666; margin-top: 10px;">
-                                從發送請求到收到回應的時間（秒）
-                            </p>
-                        </div>
-                        <div class="model-card">
-                            <h3>💰 Token 用量</h3>
-                            <p style="color: #666; margin-top: 10px;">
-                                輸入 + 輸出的 token 總數
-                            </p>
-                        </div>
-                        <div class="model-card">
-                            <h3>💵 成本</h3>
-                            <p style="color: #666; margin-top: 10px;">
-                                根據 token 用量計算的實際成本
-                            </p>
-                        </div>
-                    </div>
+                    <div id="textResults" class="model-grid"></div>
                 </div>
             </div>
             
-            <!-- Run Test Section -->
-            <div id="run-test" class="section">
+            <!-- Vision Section -->
+            <div id="visionSection" class="section">
                 <div class="card">
-                    <h2 class="card-title">🧪 運行完整測試</h2>
-                    <p style="color: #666; margin-bottom: 20px;">
-                        運行所有 5 個測試類別，對比 3 個模型的性能。預計需要 2-5 分鐘。
-                    </p>
-                    <button class="btn" onclick="runTest()" id="runTestBtn">
-                        🚀 開始測試
-                    </button>
-                    
-                    <div id="testProgress" class="progress-container" style="display: none;">
-                        <div class="spinner"></div>
-                        <p style="color: #667eea; font-weight: 600;">正在運行測試...</p>
-                        <p style="color: #999; margin-top: 10px;">請勿關閉此頁面</p>
+                    <div class="card-title">🖼️ 圖像理解測試</div>
+                    <div class="test-controls">
+                        <input type="file" id="visionImage" accept="image/*" onchange="previewImage(this, 'visionPreview')">
+                        <img id="visionPreview" class="image-preview" style="display:none;">
+                        <textarea id="visionPrompt" class="test-prompt" rows="2" placeholder="描述這張圖片...">請描述這張食物圖片的內容，包括食物種類、顏色、擺盤等</textarea>
+                        <button class="btn" onclick="runVisionTest()" style="width:auto;display:inline-block;">
+                            ▶️ 運行測試
+                        </button>
                     </div>
-                    
-                    <div id="testResult" style="margin-top: 20px;"></div>
+                    <div id="visionResults" class="model-grid"></div>
                 </div>
             </div>
             
-            <!-- Results Section -->
-            <div id="results" class="section">
+            <!-- Image Section -->
+            <div id="imageSection" class="section">
                 <div class="card">
-                    <h2 class="card-title">📈 歷史測試結果</h2>
-                    <button class="btn" onclick="loadResults()" style="width: auto; margin-bottom: 20px;">
-                        🔄 刷新結果
-                    </button>
-                    <div id="resultsList"></div>
+                    <div class="card-title">🎨 圖像生成測試</div>
+                    <div class="test-controls">
+                        <textarea id="imagePrompt" class="test-prompt" rows="2" placeholder="輸入你想生成的圖像描述...">一隻可愛的小熊在森林裡吃蜂蜜</textarea>
+                        <button class="btn" onclick="runImageTest()" style="width:auto;display:inline-block;">
+                            ▶️ 運行測試
+                        </button>
+                    </div>
+                    <div id="imageResults" class="model-grid"></div>
                 </div>
             </div>
         </div>
@@ -389,194 +222,179 @@
     <script>
         let authToken = localStorage.getItem('admin_token');
         
-        // Check if already logged in
+        // Check login on load
         if (authToken) {
-            showMainContent();
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('mainContent').classList.add('active');
+            loadPrompts();
         }
         
-        // Login
-        async function handleLogin() {
-            const password = document.getElementById('password').value;
+        async function login() {
+            const password = document.getElementById('adminPassword').value;
             const errorDiv = document.getElementById('loginError');
+            errorDiv.style.display = 'none';
             
             try {
                 const response = await fetch('/api/admin/login', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ password })
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({password})
                 });
-                
                 const data = await response.json();
                 
                 if (data.success) {
                     authToken = data.token;
                     localStorage.setItem('admin_token', authToken);
-                    showMainContent();
+                    document.getElementById('loginScreen').style.display = 'none';
+                    document.getElementById('mainContent').classList.add('active');
+                    loadPrompts();
                 } else {
-                    errorDiv.textContent = data.error;
+                    errorDiv.textContent = data.error || '登錄失敗';
                     errorDiv.style.display = 'block';
                 }
-            } catch (error) {
-                errorDiv.textContent = '登錄失敗：' + error.message;
+            } catch (e) {
+                errorDiv.textContent = '網絡錯誤';
                 errorDiv.style.display = 'block';
             }
         }
         
-        // Logout
-        function handleLogout() {
+        async function logout() {
             localStorage.removeItem('admin_token');
-            authToken = null;
-            document.getElementById('loginScreen').style.display = 'flex';
-            document.getElementById('mainContent').classList.remove('active');
+            location.reload();
         }
         
-        // Show main content
-        function showMainContent() {
-            document.getElementById('loginScreen').style.display = 'none';
-            document.getElementById('mainContent').classList.add('active');
-        }
-        
-        // Show section
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
-            
-            document.getElementById(sectionId).classList.add('active');
+        function showSection(name) {
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             event.target.classList.add('active');
-            
-            if (sectionId === 'results') {
-                loadResults();
+            document.getElementById(name + 'Section').classList.add('active');
+        }
+        
+        async function loadPrompts() {
+            try {
+                const res = await fetch('/api/model-test/text-prompts');
+                const prompts = await res.json();
+                const select = document.getElementById('textPrompt');
+                prompts.forEach(p => {
+                    const opt = document.createElement('option');
+                    opt.value = p.prompt;
+                    opt.textContent = p.name + ': ' + p.prompt.substring(0, 30) + '...';
+                    select.appendChild(opt);
+                });
+            } catch (e) {
+                console.error('Failed to load prompts:', e);
             }
         }
         
-        // Run test
-        async function runTest() {
-            const btn = document.getElementById('runTestBtn');
-            const progress = document.getElementById('testProgress');
-            const resultDiv = document.getElementById('testResult');
+        async function runTextTest() {
+            const prompt = document.getElementById('customPrompt').value || document.getElementById('textPrompt').value;
+            if (!prompt) { alert('請輸入 Prompt'); return; }
+            await runTest('text', prompt);
+        }
+        
+        async function runVisionTest() {
+            const fileInput = document.getElementById('visionImage');
+            const prompt = document.getElementById('visionPrompt').value;
             
-            btn.disabled = true;
-            progress.style.display = 'block';
-            resultDiv.innerHTML = '';
+            if (!fileInput.files[0]) { alert('請上傳圖片'); return; }
+            
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                const base64 = e.target.result;
+                await runTest('vision', prompt, base64);
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+        
+        async function runImageTest() {
+            const prompt = document.getElementById('imagePrompt').value;
+            if (!prompt) { alert('請輸入 Prompt'); return; }
+            await runTest('image', prompt);
+        }
+        
+        async function runTest(type, prompt, image = null) {
+            const resultsDiv = document.getElementById(type + 'Results');
+            resultsDiv.innerHTML = '<div style="padding:20px;text-align:center;"><span class="running"></span> 運行測試中...</div>';
             
             try {
+                const body = { type, prompt };
+                if (image) body.image = image;
+                
                 const response = await fetch('/api/model-test/run', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${authToken}`
-                    }
+                        'Authorization': 'Bearer ' + authToken
+                    },
+                    body: JSON.stringify(body)
                 });
+                
+                if (response.status === 401) {
+                    logout();
+                    return;
+                }
                 
                 const data = await response.json();
                 
-                if (data.success) {
-                    resultDiv.innerHTML = `
-                        <div class="alert alert-success">
-                            <strong>✅ 測試完成！</strong><br>
-                            測試時間：${new Date(data.results.timestamp).toLocaleString('zh-HK')}<br>
-                            查看結果請切换到「歷史結果」分頁
-                        </div>
-                    `;
-                } else {
-                    resultDiv.innerHTML = `
-                        <div class="alert alert-error">
-                            <strong>❌ 測試失敗</strong><br>
-                            ${data.error}
-                        </div>
-                    `;
+                if (!data.success) {
+                    resultsDiv.innerHTML = '<div class="alert alert-error">錯誤: ' + data.error + '</div>';
+                    return;
                 }
-            } catch (error) {
-                resultDiv.innerHTML = `
-                    <div class="alert alert-error">
-                        <strong>❌ 測試失敗</strong><br>
-                        ${error.message}
+                
+                displayResults(type, data.results);
+            } catch (e) {
+                resultsDiv.innerHTML = '<div class="alert alert-error">網絡錯誤: ' + e.message + '</div>';
+            }
+        }
+        
+        function displayResults(type, results) {
+            const container = document.getElementById(type + 'Results');
+            container.innerHTML = '';
+            
+            const results_data = results.results || [];
+            
+            results_data.forEach(r => {
+                const card = document.createElement('div');
+                card.className = 'model-card ' + (r.success ? 'success' : 'error');
+                
+                const status = r.success 
+                    ? '<span class="model-status success">成功</span>'
+                    : '<span class="model-status error">失敗</span>';
+                
+                card.innerHTML = `
+                    <div class="model-header">
+                        <div>
+                            <div class="model-name">${r.model_name || r.model}</div>
+                            <div class="model-provider">${r.provider || ''}</div>
+                        </div>
+                        ${status}
                     </div>
-                `;
-            } finally {
-                btn.disabled = false;
-                progress.style.display = 'none';
-            }
-        }
-        
-        // Load results
-        async function loadResults() {
-            const resultsList = document.getElementById('resultsList');
-            resultsList.innerHTML = '<p style="text-align: center; color: #999;">載入中...</p>';
-            
-            try {
-                const response = await fetch('/api/model-test/results', {
-                    headers: {
-                        'Authorization': `Bearer ${authToken}`
+                    ${r.success 
+                        ? `<div class="model-result">${escapeHtml(r.content || '')}</div>
+                           <div class="model-meta">⏱ ${r.response_time || 0}s</div>`
+                        : `<div class="model-error">${escapeHtml(r.error || 'Unknown error')}</div>`
                     }
-                });
-                
-                const data = await response.json();
-                
-                if (data.success && data.results.length > 0) {
-                    let html = '';
-                    data.results.forEach((result, idx) => {
-                        const testData = JSON.parse(result.test_data);
-                        html += `
-                            <div class="card" style="margin-top: 20px;">
-                                <h3 style="color: #667eea; margin-bottom: 15px;">
-                                    📊 測試 #${idx + 1} - ${new Date(testData.timestamp).toLocaleString('zh-HK')}
-                                </h3>
-                                ${renderSummary(testData.summary)}
-                            </div>
-                        `;
-                    });
-                    resultsList.innerHTML = html;
-                } else {
-                    resultsList.innerHTML = '<p style="text-align: center; color: #999;">暫無測試結果</p>';
-                }
-            } catch (error) {
-                resultsList.innerHTML = `<p style="text-align: center; color: #dc3545;">載入失敗：${error.message}</p>`;
-            }
+                `;
+                container.appendChild(card);
+            });
         }
         
-        // Render summary table
-        function renderSummary(summary) {
-            if (!summary || !summary.model_comparison) return '';
-            
-            let html = `
-                <h4 style="color: #555; margin: 15px 0 10px;">📊 模型對比</h4>
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>模型</th>
-                            <th>平均響應時間 (秒)</th>
-                            <th>平均 Token</th>
-                            <th>總成本 (USD)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
-            
-            const fastestModel = summary.fastest_model;
-            
-            summary.model_comparison.forEach(model => {
-                const isBest = model.model_id === fastestModel;
-                html += `
-                    <tr class="${isBest ? 'best-value' : ''}">
-                        <td>${model.model_name}</td>
-                        <td>${model.avg_response_time}</td>
-                        <td>${model.avg_tokens}</td>
-                        <td>$${model.total_cost.toFixed(4)}</td>
-                    </tr>
-                `;
-            });
-            
-            html += `
-                    </tbody>
-                </table>
-                <p style="margin-top: 15px; color: #666;">
-                    🏆 最快模型：<strong>${summary.fastest_model}</strong> | 
-                    💰 最便宜模型：<strong>${summary.cheapest_model}</strong>
-                </p>
-            `;
-            
-            return html;
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function previewImage(input, previewId) {
+            const preview = document.getElementById(previewId);
+            if (input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
         }
     </script>
 </body>
