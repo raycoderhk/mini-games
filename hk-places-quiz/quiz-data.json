@@ -30,7 +30,7 @@
       "category": "自然景觀",
       "votes": 0,
       "inkImage": "assets/ink/fishing-junk-peak.jpg",
-      "impressionistImage": "assets/ink/imp-fishing-junk-peak.jpg"
+      "impressionistImage": "assets/ink/impressionist-sharppeak.jpg"
     },
     {
       "id": 2,
@@ -59,7 +59,7 @@
       "category": "自然景觀",
       "votes": 0,
       "inkImage": "assets/ink/amah-rock.jpg",
-      "impressionistImage": "assets/ink/imp-amah-rock.jpg"
+      "impressionistImage": "assets/ink/impressionist-amahrock2.jpg"
     },
     {
       "id": 3,
@@ -89,7 +89,7 @@
       "category": "橋樑",
       "votes": 0,
       "inkImage": "assets/ink/ap-lei-chau-bridge.jpg",
-      "impressionistImage": "assets/ink/imp-ap-lei-chau-bridge.jpg"
+      "impressionistImage": "assets/ink/impressionist-apleichau2.jpg"
     },
     {
       "id": 4,
@@ -120,7 +120,7 @@
       "votes": 0,
       "inkImage": "assets/ink/rainbow-village.jpg",
       "sketchImage": "assets/ink/sketch-rainbow-village.jpg",
-      "impressionistImage": "assets/ink/imp-rainbow-village.jpg"
+      "impressionistImage": "assets/ink/impressionist-mawanrainbow2.jpg"
     },
     {
       "id": 5,
@@ -153,7 +153,7 @@
       "votes": 0,
       "inkImage": "assets/ink/golden-coast-dolphin.jpg",
       "sketchImage": "assets/ink/sketch-goldencoast-dolphin.jpg",
-      "impressionistImage": "assets/ink/imp-golden-coast-dolphin.jpg"
+      "impressionistImage": "assets/ink/impressionist-goldcoast2.jpg"
     },
     {
       "id": 6,
@@ -185,7 +185,7 @@
       "votes": 0,
       "inkImage": "assets/ink/harrow-school.jpg",
       "sketchImage": "assets/ink/sketch-harrow-school.jpg",
-      "impressionistImage": "assets/ink/imp-harrow-school.jpg"
+      "impressionistImage": "assets/ink/impressionist-harrow2.jpg"
     },
     {
       "id": 7,
@@ -217,7 +217,7 @@
       "votes": 0,
       "inkImage": "assets/ink/murray-house.jpg",
       "sketchImage": "assets/ink/sketch-murray-house.jpg",
-      "impressionistImage": "assets/ink/imp-murray-house.jpg"
+      "impressionistImage": "assets/ink/impressionist-murrayhouse.jpg"
     },
     {
       "id": 8,
@@ -248,7 +248,7 @@
       "votes": 0,
       "inkImage": "assets/ink/wanchai-heliport.jpg",
       "sketchImage": "assets/ink/sketch-wanchai-heliport.jpg",
-      "impressionistImage": "assets/ink/imp-wanchai-heliport.jpg"
+      "impressionistImage": "assets/ink/impressionist-wanchai-heliport.jpg"
     },
     {
       "id": 9,
@@ -280,7 +280,7 @@
       "votes": 0,
       "inkImage": "assets/ink/shek-kong-airfield.jpg",
       "sketchImage": "assets/ink/sketch-shekong-airfield.jpg",
-      "impressionistImage": "assets/ink/imp-shek-kong-airfield.jpg"
+      "impressionistImage": "assets/ink/impressionist-shekkong-airfield.jpg"
     },
     {
       "id": 10,
@@ -312,7 +312,7 @@
       "votes": 0,
       "inkImage": "assets/ink/tsz-shan-monastery.jpg",
       "sketchImage": "assets/ink/sketch-tszshan-monastery.jpg",
-      "impressionistImage": "assets/ink/imp-tsz-shan-monastery.jpg"
+      "impressionistImage": "assets/ink/impressionist-tszshan.jpg"
     },
     {
       "id": 11,
@@ -342,7 +342,8 @@
       "category": "水塘",
       "votes": 0,
       "inkImage": "assets/ink/qiandao-lake.jpg",
-      "sketchImage": "assets/ink/sketch-qiandao-lake.jpg"
+      "sketchImage": "assets/ink/sketch-qiandao-lake.jpg",
+      "impressionistImage": "assets/ink/impressionist-tailam-reservoir.jpg"
     },
     {
       "id": 12,
@@ -373,7 +374,8 @@
       "category": "運動娛樂",
       "votes": 0,
       "inkImage": "assets/ink/stone-jauk-golf.jpg",
-      "sketchImage": "assets/ink/sketch-stonejauk-golf.jpg"
+      "sketchImage": "assets/ink/sketch-stonejauk-golf.jpg",
+      "impressionistImage": "assets/ink/impressionist-sheko-golf.jpg"
     },
     {
       "id": 13,
@@ -404,7 +406,8 @@
       "category": "海傍景點",
       "votes": 0,
       "inkImage": "assets/ink/avenue-of-stars.jpg",
-      "sketchImage": "assets/ink/sketch-avenue-of-stars.jpg"
+      "sketchImage": "assets/ink/sketch-avenue-of-stars.jpg",
+      "impressionistImage": "assets/ink/impressionist-avenue-of-stars.jpg"
     },
     {
       "id": 14,
@@ -434,7 +437,8 @@
       "category": "水塘",
       "votes": 0,
       "inkImage": "assets/ink/shing-mun-reservoir.jpg",
-      "sketchImage": "assets/ink/sketch-shingmun-reservoir.jpg"
+      "sketchImage": "assets/ink/sketch-shingmun-reservoir.jpg",
+      "impressionistImage": "assets/ink/impressionist-shingmun.jpg"
     },
     {
       "id": 15,
@@ -464,7 +468,8 @@
       "category": "橋樑",
       "votes": 0,
       "inkImage": "assets/ink/ting-kau-bridge.jpg",
-      "sketchImage": "assets/ink/sketch-tingkau-bridge.jpg"
+      "sketchImage": "assets/ink/sketch-tingkau-bridge.jpg",
+      "impressionistImage": "assets/ink/impressionist-tingkau.jpg"
     },
     {
       "id": 16,
@@ -495,7 +500,8 @@
       "category": "飲食老字號",
       "votes": 0,
       "inkImage": "assets/ink/garden-bakery.jpg",
-      "sketchImage": "assets/ink/sketch-garden-bakery.jpg"
+      "sketchImage": "assets/ink/sketch-garden-bakery.jpg",
+      "impressionistImage": "assets/ink/impressionist-gardenbakery.jpg"
     },
     {
       "id": 17,
@@ -527,7 +533,8 @@
       "category": "住宅屋苑",
       "votes": 0,
       "inkImage": "assets/ink/park-island.jpg",
-      "sketchImage": "assets/ink/sketch-parkisland.jpg"
+      "sketchImage": "assets/ink/sketch-parkisland.jpg",
+      "impressionistImage": "assets/ink/impressionist-parkisland.jpg"
     },
     {
       "id": 18,
@@ -562,7 +569,8 @@
       "category": "交通設施",
       "votes": 0,
       "inkImage": "assets/ink/park-island-ferry.jpg",
-      "sketchImage": "assets/ink/sketch-parkisland-ferry.jpg"
+      "sketchImage": "assets/ink/sketch-parkisland-ferry.jpg",
+      "impressionistImage": "assets/ink/impressionist-fishingpier.jpg"
     },
     {
       "id": 19,
@@ -593,7 +601,8 @@
       "category": "運動娛樂",
       "votes": 0,
       "inkImage": "assets/ink/clearwater-bay-golf.jpg",
-      "sketchImage": "assets/ink/sketch-clearwaterbay-golf.jpg"
+      "sketchImage": "assets/ink/sketch-clearwaterbay-golf.jpg",
+      "impressionistImage": "assets/ink/impressionist-clearwaterbay-golf.jpg"
     },
     {
       "id": 20,
@@ -624,7 +633,8 @@
       "category": "橋樑",
       "votes": 0,
       "inkImage": "assets/ink/tsing-ma-bridge.jpg",
-      "sketchImage": "assets/ink/sketch-tsingma-bridge.jpg"
+      "sketchImage": "assets/ink/sketch-tsingma-bridge.jpg",
+      "impressionistImage": "assets/ink/impressionist-kapshuimun.jpg"
     },
     {
       "id": 21,
@@ -715,7 +725,8 @@
       "dateAdded": "2026-03-24",
       "category": "教育機構",
       "votes": 0,
-      "inkImage": "assets/ink/diocesan-school-ink.jpg"
+      "inkImage": "assets/ink/diocesan-school-ink.jpg",
+      "impressionistImage": "assets/ink/impressionist-diocesan.jpg"
     },
     {
       "id": 24,
