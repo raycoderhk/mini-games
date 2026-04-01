@@ -29,14 +29,14 @@ MINIMAX_API_URL = "https://api.minimax.chat/v1/text/chatcompletion_v2"
 
 # ============ 模型列表 ============
 TEXT_MODELS = [
-    {"id": "qwen-plus", "name": "Qwen Plus", "provider": "aliyun"},
-    {"id": "qwen-turbo", "name": "Qwen Turbo", "provider": "aliyun"},
-    {"id": "qwen-max", "name": "Qwen Max", "provider": "aliyun"},
+    {"id": "qwen3.5-plus", "name": "Qwen 3.5 Plus", "provider": "aliyun"},
+    {"id": "qwen3.5-turbo", "name": "Qwen 3.5 Turbo", "provider": "aliyun"},
+    {"id": "qwen3.5-max", "name": "Qwen 3.5 Max", "provider": "aliyun"},
     {"id": "MiniMax-01", "name": "MiniMax-01 (Vision)", "provider": "minimax"},
 ]
 
 VISION_MODELS = [
-    {"id": "qwen-plus", "name": "Qwen Plus", "provider": "aliyun"},
+    {"id": "qwen3.5-plus", "name": "Qwen 3.5 Plus", "provider": "aliyun"},
     {"id": "qvq-72b-preview", "name": "QVQ-72B (Vision)", "provider": "minimax"},
 ]
 
