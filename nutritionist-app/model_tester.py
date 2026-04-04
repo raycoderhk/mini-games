@@ -145,7 +145,7 @@ def call_minimax(model_id: str, messages: list, image_url: str = None) -> Dict:
         }
 
 def call_aliyun(model_id: str, messages: list, image_url: str = None) -> Dict:
-    """調用阿里雲 API"""
+    """調用阿里雲 API (with retry)"""
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {ALIYUN_API_KEY}"
@@ -168,54 +168,79 @@ def call_aliyun(model_id: str, messages: list, image_url: str = None) -> Dict:
     }
     
     start_time = time.time()
-    try:
-        req = urllib.request.Request(
-            ALIYUN_API_URL,
-            data=json.dumps(payload).encode('utf-8'),
-            headers=headers,
-            method='POST'
-        )
-        
-        with urllib.request.urlopen(req, timeout=90) as response:
-            result = json.loads(response.read().decode('utf-8'))
-        
-        response_time = time.time() - start_time
-        
-        if "choices" in result and len(result["choices"]) > 0:
-            content = result["choices"][0]["message"]["content"]
-            return {
-                "success": True,
-                "content": content,
-                "response_time": round(response_time, 2),
-                "model": model_id,
-                "provider": "aliyun"
-            }
-        else:
+    max_retries = 3
+    last_error = ""
+    
+    for attempt in range(max_retries):
+        try:
+            req = urllib.request.Request(
+                ALIYUN_API_URL,
+                data=json.dumps(payload).encode('utf-8'),
+                headers=headers,
+                method='POST'
+            )
+            
+            with urllib.request.urlopen(req, timeout=90) as response:
+                result = json.loads(response.read().decode('utf-8'))
+            
+            response_time = time.time() - start_time
+            
+            if "choices" in result and len(result["choices"]) > 0:
+                content = result["choices"][0]["message"]["content"]
+                return {
+                    "success": True,
+                    "content": content,
+                    "response_time": round(response_time, 2),
+                    "model": model_id,
+                    "provider": "aliyun",
+                    "attempts": attempt + 1
+                }
+            else:
+                return {
+                    "success": False,
+                    "error": result.get("error_message", "Unknown error"),
+                    "response_time": round(response_time, 2),
+                    "model": model_id,
+                    "provider": "aliyun",
+                    "attempts": attempt + 1
+                }
+                
+        except urllib.error.HTTPError as e:
+            last_error = f"HTTP {e.code}: {e.reason}"
+            if attempt < max_retries - 1:
+                time.sleep(1)  # Wait before retry
+                continue
+            error_body = e.read().decode('utf-8') if e.fp else str(e)
             return {
                 "success": False,
-                "error": result.get("error_message", "Unknown error"),
-                "response_time": round(response_time, 2),
+                "error": f"HTTP {e.code}: {error_body[:200]}",
+                "response_time": round(time.time() - start_time, 2),
                 "model": model_id,
-                "provider": "aliyun"
+                "provider": "aliyun",
+                "attempts": attempt + 1
             }
-            
-    except urllib.error.HTTPError as e:
-        error_body = e.read().decode('utf-8') if e.fp else str(e)
-        return {
-            "success": False,
-            "error": f"HTTP {e.code}: {error_body[:200]}",
-            "response_time": round(time.time() - start_time, 2),
-            "model": model_id,
-            "provider": "aliyun"
-        }
-    except Exception as e:
-        return {
-            "success": False,
-            "error": str(e)[:200],
-            "response_time": round(time.time() - start_time, 2),
-            "model": model_id,
-            "provider": "aliyun"
-        }
+        except Exception as e:
+            last_error = str(e)
+            if attempt < max_retries - 1:
+                time.sleep(1)  # Wait before retry
+                continue
+            return {
+                "success": False,
+                "error": str(e)[:200],
+                "response_time": round(time.time() - start_time, 2),
+                "model": model_id,
+                "provider": "aliyun",
+                "attempts": attempt + 1
+            }
+    
+    return {
+        "success": False,
+        "error": f"Failed after {max_retries} attempts: {last_error[:100]}",
+        "response_time": round(time.time() - start_time, 2),
+        "model": model_id,
+        "provider": "aliyun",
+        "attempts": max_retries
+    }
 
 def call_openrouter(model_id: str, messages: list, image_url: str = None) -> Dict:
     """調用 OpenRouter API (MiniMax, Claude, Gemini等)"""
