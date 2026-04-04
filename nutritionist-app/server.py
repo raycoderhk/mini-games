@@ -630,7 +630,7 @@ def health():
         "status": "ok",
         "aliyun_configured": bool(ALIYUN_API_KEY),
         "openrouter_configured": bool(OPENROUTER_API_KEY),
-        "model": "qwen-vl-plus",
+        "model": "qwen3.5-plus",
         "provider": "Aliyun",
         "version": "3.0 - Personal Nutrition Advisor",
         "database": "SQLite initialized"
