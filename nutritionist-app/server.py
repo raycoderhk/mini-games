@@ -280,9 +280,9 @@ def analyze_food_aliyun(image_base64):
         "Content-Type": "application/json"
     }
     
-    # 使用 Qwen-VL (Aliyun)
+    # 使用 Qwen3.5-Plus (Aliyun)
     payload = {
-        "model": "qwen-vl-plus",
+        "model": "qwen3.5-plus",
         "messages": [
             {
                 "role": "user",
