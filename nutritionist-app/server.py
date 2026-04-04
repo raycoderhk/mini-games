@@ -287,8 +287,8 @@ def analyze_food_aliyun(image_base64):
             {
                 "role": "user",
                 "content": [
-                    {"image": f"data:image/jpeg;base64,{image_base64}"},
-                    {"text": prompt}
+                    {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{image_base64}"}},
+                    {"type": "text", "text": prompt}
                 ]
             }
         ]
