@@ -331,13 +331,13 @@ input[type=range] {
       <div class="param-card">
         <div class="param-label">UBI Amount (per year)</div>
         <div class="param-value">$<span id="valUbi">12,000</span><span class="unit">/yr</span></div>
-        <input type="range" id="slUbi" min="0" max="30000" step="1000" value="12000">
+        <input type="range" id="slUbi" min="0" max="30000" step="1000" value="10000">
         <div class="range-labels"><span>$0</span><span>$30,000</span></div>
       </div>
       <div class="param-card">
         <div class="param-label">Phase-Out Starts At</div>
         <div class="param-value">$<span id="valPhaseOut">25,000</span><span class="unit">income</span></div>
-        <input type="range" id="slPhaseOut" min="0" max="80000" step="5000" value="25000">
+        <input type="range" id="slPhaseOut" min="0" max="80000" step="5000" value="20000">
         <div class="range-labels"><span>$0</span><span>$80,000</span></div>
       </div>
       <div class="param-card">
@@ -377,10 +377,10 @@ input[type=range] {
 <section style="padding: 1rem 0 0; max-width: 1100px; margin: 0 auto;">
   <div class="scenario-tabs" id="scenarioTabs">
     <button class="scenario-tab active" onclick="selectScenario(0)">📊 Live Scenario</button>
-    <button class="scenario-tab" onclick="loadPreset('baseline')">Baseline (No UBI)</button>
-    <button class="scenario-tab" onclick="loadPreset('ubi12')">UBI $12k/yr</button>
-    <button class="scenario-tab" onclick="loadPreset('ubi20')">UBI $20k/yr</button>
-    <button class="scenario-tab" onclick="loadPreset('nit')">UBI + NIT Style</button>
+    <button class="scenario-tab" onclick="loadPreset('baseline')">📊 Baseline (No UBI)</button>
+    <button class="scenario-tab active" onclick="loadPreset('sweet')">🎯 Sweet Spot ($10k)</button>
+    <button class="scenario-tab" onclick="loadPreset('yang')">💰 Yang ($12k)</button>
+    <button class="scenario-tab" onclick="loadPreset('ambit')">🏛 Ambitious ($18k)</button>
   </div>
 </section>
 
@@ -769,10 +769,14 @@ let autoTimer = null;
 let simDone = false;
 
 const presets = {
-  baseline: { ubiAmount: 0, phaseOutStart: 0, phaseOutEnd: 1, elasticity: 1 },
-  ubi12:    { ubiAmount: 12000, phaseOutStart: 20000, phaseOutEnd: 60000, elasticity: 1 },
-  ubi20:    { ubiAmount: 20000, phaseOutStart: 25000, phaseOutEnd: 80000, elasticity: 1 },
-  nit:      { ubiAmount: 12000, phaseOutStart: 10000, phaseOutEnd: 40000, elasticity: 1 },
+  // Sweep-verified: low UBI + wide phase-out = most sustainable
+  baseline: { ubiAmount: 0,     phaseOutStart: 0,     phaseOutEnd: 1,      elasticity: 1 },
+  // Most sustainable: $10k UBI, $20k-$73k phase-out, low elasticity
+  sweet:    { ubiAmount: 10000, phaseOutStart: 20000, phaseOutEnd: 73000, elasticity: 0 },
+  // Yang-style: $12k UBI, moderate phase-out
+  yang:     { ubiAmount: 12000, phaseOutStart: 20000, phaseOutEnd: 60000, elasticity: 1 },
+  // Ambitious: $18k UBI, targets poverty elimination
+  ambit:    { ubiAmount: 18000, phaseOutStart: 25000, phaseOutEnd: 70000, elasticity: 1 },
 };
 
 function loadPreset(name) {
@@ -894,8 +898,8 @@ function selectScenario(idx) {
 // ═══════════════════════════════════════════════════════════════
 
 function fmt(v, dec=2) { return typeof v === 'number' ? v.toFixed(dec) : v; }
-function pct(v) { if (!v || isNaN(v)) return "—"; return (v * 100).toFixed(1) + "%"; }
-function money(v) { if (!v || isNaN(v)) return "—"; return '$' + (v >= 1e9 ? (v/1e9).toFixed(1)+'B' : (v/1e6).toFixed(1)+'M'); }
+function pct(v) { return (v * 100).toFixed(1) + '%'; }
+function money(v) { return '$' + (v >= 1e9 ? (v/1e9).toFixed(1)+'B' : (v/1e6).toFixed(1)+'M'); }
 function delta(v0, v1, inv=false) {
   const d = v1 - v0;
   if (Math.abs(d) < 0.001) return '≈ 0';
@@ -1107,7 +1111,7 @@ function showVerdict(m) {
   const dGini = m.giniNet - m0.giniNet;
   const dPov = m.povertyRate - m0.povertyRate;
   const dB50 = m.bottom50 - m0.bottom50;
-  const cfgUbi = isNaN(m.ubiCostGdpPct) ? 0 : m.ubiCostGdpPct;
+  const cfgUbi = m.ubiCostGdpPct;
 
   let icon, cls, title, text;
 
@@ -1126,7 +1130,7 @@ function showVerdict(m) {
   } else {
     icon = '❌'; cls = 'verdict-red';
     title = 'UBI is NOT fiscally sustainable at these parameters.';
-    text = `Tax revenue ($${(!isNaN(m.totalTax) && m.totalTax > 0 ? (m.totalTax/1e9).toFixed(1) : "0.0"})B) does not cover UBI expenditure ($${(!isNaN(m.totalUBI) && m.totalUBI > 0 ? (m.totalUBI/1e9).toFixed(1) : "0.0")}B). Consider raising taxes, narrowing the phase-out range, or reducing the benefit.`;
+    text = `Tax revenue ($${(m.totalTax/1e9).toFixed(1)}B) does not cover UBI expenditure ($${(m.totalUBI/1e9).toFixed(1)}B). Consider raising taxes, narrowing the phase-out range, or reducing the benefit.`;
   }
 
   document.getElementById('verdictBox').innerHTML = `
@@ -1161,7 +1165,7 @@ function updateSliderLabels() {
 window.addEventListener('load', () => {
   updateSliderLabels();
   // Load with default preset
-  loadPreset('ubi12');
+  loadPreset('sweet');
   setTimeout(() => {
     document.getElementById('loading').style.display = 'none';
     runSim();
