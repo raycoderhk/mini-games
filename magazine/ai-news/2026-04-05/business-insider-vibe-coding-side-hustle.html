@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💼 Vibe Coding 兼職熱潮 - AI News</title>
+    <style>
+        :root {
+            --ai-blue: #2196F3;
+            --ai-purple: #9c27b0;
+            --bg-color: #f5f5f5;
+            --card-bg: #fff;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg-color);
+            padding: 20px;
+            line-height: 1.7;
+        }
+        
+        .container { max-width: 800px; margin: 0 auto; }
+        
+        .article-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        
+        .back-link {
+            display: inline-block;
+            color: var(--ai-blue);
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .back-link:hover { text-decoration: underline; }
+        
+        .article-header { margin-bottom: 30px; }
+        
+        .article-source {
+            display: inline-block;
+            background: #e3f2fd;
+            color: var(--ai-blue);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .article-title {
+            font-size: 2em;
+            color: #222;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .article-date { color: #666; font-size: 0.95em; }
+        
+        .article-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+        
+        .tag {
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        
+        .tag-ai { background: #e3f2fd; color: var(--ai-blue); }
+        .tag-tech { background: #f3e5f5; color: var(--ai-purple); }
+        .tag-new { background: #ff6600; color: white; }
+        
+        .article-summary {
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid var(--ai-blue);
+        }
+        
+        .article-content { color: #444; font-size: 1em; line-height: 1.8; }
+        .article-content h2 { color: var(--ai-blue); margin: 25px 0 15px; font-size: 1.3em; }
+        .article-content p { margin-bottom: 15px; }
+        .article-content ul { margin: 15px 0; padding-left: 25px; }
+        .article-content li { margin-bottom: 8px; }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .highlight-box .number {
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+        
+        .highlight-box .label {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+        
+        .original-link {
+            display: inline-block;
+            background: var(--ai-blue);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 25px;
+            transition: all 0.3s;
+        }
+        
+        .original-link:hover {
+            background: var(--ai-purple);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="article-card">
+            <a href="../" class="back-link">← 返回 AI News</a>
+            
+            <div class="article-header">
+                <div class="article-source">📰 Business Insider</div>
+                <h1 class="article-title">💼 Vibe Coding 兼職熱潮：4小時用 Claude 開發 App</h1>
+                <p class="article-date">📅 2026 年 4 月 5 日</p>
+            </div>
+            
+            <div class="article-tags">
+                <span class="tag tag-ai">🤖 AI</span>
+                <span class="tag tag-tech">💻 Tech</span>
+                <span class="tag tag-new">✨ New</span>
+            </div>
+            
+            <div class="article-summary">
+                <strong>📋 文章摘要：</strong><br><br>
+                Business Insider 報導：Vibe Coding 令任何人都可以用自然語言開發 App。
+                Priscilla Tina 用 Claude 4 小時開發左 Postcard Press App，收費 $2/張。
+                創意和原創性而家成為最重要嘅競爭力。
+            </div>
+            
+            <div class="highlight-box">
+                <div class="number">4 小時</div>
+                <div class="label">用 Claude 開發完整 App</div>
+            </div>
+            
+            <div class="article-content">
+                <h2>🚀 任何人都可以係 App 開發者</h2>
+                <p>
+                    Priscilla Tina，28 歲嘅科技產品經理，用 Claude 僅用 4 小時就開發完成左
+                    Postcard Press App——允許用戶將照片作為明信片發送。
+                   佢喺 2025 年底上線，收費 $2/張，最近三個月約有 100 人使用。
+                </p>
+                
+                <h2>💡 Vibe Coding 的崛起</h2>
+                <p>
+                    Vibe Coding 係指使用普通英語指令 AI 工具編寫代碼。
+                    自 Andrej Karpathy 去年創造呢個術語以來，已經席捲科技界。
+                </p>
+                
+                <h2>📊 傳統 vs Vibe Coding</h2>
+                <p>
+                    傳統 App 開發成本：$15,000 - $50,000 以上<br>
+                    Vibe Coding 工具月費：$20 - $200
+                </p>
+                
+                <h2>💰 成功案例</h2>
+                <ul>
+                    <li>Jacob Klug：用 Lovable 開發 App，單月收入超過 $170,000</li>
+                    <li>Henrik Fasth：虛擬試穿工具擴展為 AI 時尚平台，月費收入超過 $800,000/年</li>
+                </ul>
+                
+                <h2>🎯 創意為王</h2>
+                <p>
+                    雖然工具變得更易用，但創意和原創性先係最重要嘅。
+                    「大家都可以輕鬆獲得工具，但創意先係最關鍵嘅。」—— 呢個時代，
+                    擁有獨特嘅想法比識寫代碼更重要。
+                </p>
+            </div>
+            
+            <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="https://www.businessinsider.com/vibe-coding-side-hustle-creativity-2026-4" 
+                   target="_blank" 
+                   class="original-link">
+                    🔗 原文 (Business Insider)
+                </a>
+                <a href="https://archive.ph/https://www.businessinsider.com/vibe-coding-side-hustle-creativity-2026-4" 
+                   target="_blank" 
+                   class="original-link" style="background: var(--ai-purple);">
+                    📦 Archive.ph
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>📚 Magazine Archive - AI News Collection</p>
+            <p>最後更新：2026-04-07</p>
+        </div>
+    </div>
+</body>
+</html>
