@@ -594,13 +594,7 @@ class Agent {
 
   _initState() {
     this.yearsEmployed = 0;
-    this.permanentIncome = this.earned;
-    this.savings = clamp(gaussian(SIM_PARAMS.initWealthMean, SIM_PARAMS.initWealthStd), 0, 500000);
-    this.wealth = this.savings;
-    this.earned = 0;
-    this.ubi = 0;
-    this.tax = 0;
-    this.netIncome = 0;
+    // Set earned BEFORE permanentIncome
     if (this.employed) {
       this.hours = clamp(gaussian(2010, 380), 520, 3000);
       this.earned = this.wage * this.hours;
@@ -608,9 +602,13 @@ class Agent {
       this.hours = 0;
       this.earned = 0;
     }
+    this.permanentIncome = Math.max(0, this.earned);
+    this.savings = clamp(gaussian(SIM_PARAMS.initWealthMean, SIM_PARAMS.initWealthStd), 0, 500000);
+    this.wealth = this.savings;
+    this.ubi = 0;
     this.tax = progressiveTax(this.earned);
-    this.ubi = 0; // baseline = no UBI
     this.netIncome = Math.max(0, this.earned + this.ubi - this.tax);
+    this.netIncome = isNaN(this.netIncome) ? 0 : this.netIncome;
   }
 
   updateYear(year, cfg, el) {
@@ -667,12 +665,13 @@ class Agent {
     if (this.permanentIncome === 0) {
       this.permanentIncome = this.earned;
     } else {
-      this.permanentIncome = 0.7 * this.permanentIncome + 0.3 * this.earned;
+      this.permanentIncome = Math.max(0, Math.min(5e6, 0.7 * this.permanentIncome + 0.3 * this.earned));
     }
 
     this.ubi = computeUBI(this.permanentIncome, cfg.ubiAmount, cfg.phaseOutStart, cfg.phaseOutEnd);
 
     this.netIncome = Math.max(0, this.earned + this.ubi - this.tax);
+    this.netIncome = isNaN(this.netIncome) ? 0 : this.netIncome;
 
     // Savings
     const mpc = clamp(0.92 - this.netIncome / 100000, 0.35, 0.92);
@@ -737,9 +736,9 @@ function collectMetrics(agents, year, cfg) {
   const earned = agents.map(a => a.earned);
   const taxes = agents.map(a => a.tax);
   const ubis = agents.map(a => a.ubi);
-  const totalTax = taxes.reduce((a, b) => a + b, 0);
-  const totalUBI = ubis.reduce((a, b) => a + b, 0);
-  const totalEarned = earned.reduce((a, b) => a + b, 0);
+  const totalTax = (() => { const s = taxes.reduce((a,b)=>a+b,0); return isNaN(s)||!isFinite(s)?0:s; })();
+  const totalUBI = (() => { const s = ubis.reduce((a,b)=>a+b,0); return isNaN(s)||!isFinite(s)?0:s; })();
+  const totalEarned = (() => { const s = earned.reduce((a,b)=>a+b,0); return isNaN(s)||!isFinite(s)?0:s; })();
   const shares = incomeShares(incomes);
   return {
     year,
@@ -750,7 +749,8 @@ function collectMetrics(agents, year, cfg) {
     meanNet: incomes.reduce((a, b) => a + b, 0) / incomes.length,
     medianNet: percentile(incomes, 50),
     meanEarned: totalEarned / earned.length,
-    totalTax, totalUBI,
+    totalTax: (() => { const s = taxes.reduce((a,b)=>a+b,0); return isNaN(s)||!isFinite(s)?0:s; })(),
+    totalUBI: (() => { const s = ubis.reduce((a,b)=>a+b,0); return isNaN(s)||!isFinite(s)?0:s; })(),
     ubiFunded: totalTax >= totalUBI,
     ubiCostGdpPct: (totalUBI / (totalEarned + totalUBI + 1e-9)) * 100,
     ...shares,
