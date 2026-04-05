@@ -6,6 +6,7 @@ on:
     paths:
       - 'games/2048-game/**'
       - 'ipo-tracker/**'
+      - 'ubi-sim/**'
       - 'index.html'
   workflow_dispatch:
 

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://zeabur.com/schema/project.json",
+  "name": "ubi-sim",
+  "description": "UBI Simulator — can Universal Basic Income work?",
+  "services": [
+    {
+      "name": "ubi-sim",
+      "type": "web",
+      "source": {
+        "provider": "github",
+        "repo": "raycoderhk/gameworld",
+        "branch": "main",
+        "rootDirectory": "ubi-sim"
+      },
+      "domains": [
+        {
+          "domain": "gameworld.zeabur.app",
+          "primary": true
+        }
+      ],
+      "settings": {
+        "outputDirectory": "."
+      }
+    }
+  ]
+}
