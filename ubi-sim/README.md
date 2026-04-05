@@ -98,3 +98,4 @@ ubi-sim/
 ## 🦦 About GameWorld
 
 Part of the **GameWorld** collection — interactive simulations and games built for education and policy exploration. All games are single HTML files, no server required.
+<!-- deployed Sun Apr  5 11:34:24 UTC 2026 -->
