@@ -894,8 +894,8 @@ function selectScenario(idx) {
 // ═══════════════════════════════════════════════════════════════
 
 function fmt(v, dec=2) { return typeof v === 'number' ? v.toFixed(dec) : v; }
-function pct(v) { return (v * 100).toFixed(1) + '%'; }
-function money(v) { return '$' + (v >= 1e9 ? (v/1e9).toFixed(1)+'B' : (v/1e6).toFixed(1)+'M'); }
+function pct(v) { if (!v || isNaN(v)) return "—"; return (v * 100).toFixed(1) + "%"; }
+function money(v) { if (!v || isNaN(v)) return "—"; return '$' + (v >= 1e9 ? (v/1e9).toFixed(1)+'B' : (v/1e6).toFixed(1)+'M'); }
 function delta(v0, v1, inv=false) {
   const d = v1 - v0;
   if (Math.abs(d) < 0.001) return '≈ 0';
@@ -1107,7 +1107,7 @@ function showVerdict(m) {
   const dGini = m.giniNet - m0.giniNet;
   const dPov = m.povertyRate - m0.povertyRate;
   const dB50 = m.bottom50 - m0.bottom50;
-  const cfgUbi = m.ubiCostGdpPct;
+  const cfgUbi = isNaN(m.ubiCostGdpPct) ? 0 : m.ubiCostGdpPct;
 
   let icon, cls, title, text;
 
@@ -1126,7 +1126,7 @@ function showVerdict(m) {
   } else {
     icon = '❌'; cls = 'verdict-red';
     title = 'UBI is NOT fiscally sustainable at these parameters.';
-    text = `Tax revenue ($${(m.totalTax/1e9).toFixed(1)}B) does not cover UBI expenditure ($${(m.totalUBI/1e9).toFixed(1)}B). Consider raising taxes, narrowing the phase-out range, or reducing the benefit.`;
+    text = `Tax revenue ($${(!isNaN(m.totalTax) && m.totalTax > 0 ? (m.totalTax/1e9).toFixed(1) : "0.0"})B) does not cover UBI expenditure ($${(!isNaN(m.totalUBI) && m.totalUBI > 0 ? (m.totalUBI/1e9).toFixed(1) : "0.0")}B). Consider raising taxes, narrowing the phase-out range, or reducing the benefit.`;
   }
 
   document.getElementById('verdictBox').innerHTML = `
